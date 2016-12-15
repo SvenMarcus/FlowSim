@@ -36,4 +36,10 @@ public class PaintableLineBuilder extends PaintableShapeBuilder {
     public boolean isObjectFinished() {
         return pointsAdded >= 2;
     }
+
+    @Override
+    public void setLastPoint(Point point) {
+        if (pointsAdded == 1) line.setFirst(point);
+        else if (pointsAdded >= 2) line.setSecond(point);
+    }
 }

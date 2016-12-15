@@ -36,4 +36,10 @@ public class PaintableRectangleBuilder extends PaintableShapeBuilder {
     public boolean isObjectFinished() {
         return pointsAdded >= 2;
     }
+
+    @Override
+    public void setLastPoint(Point point) {
+        if (pointsAdded == 1) rectangle.setFirst(point);
+        else if (pointsAdded >= 2) rectangle.setSecond(point);
+    }
 }
