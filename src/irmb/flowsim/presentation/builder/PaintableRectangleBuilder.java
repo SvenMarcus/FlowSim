@@ -42,4 +42,9 @@ public class PaintableRectangleBuilder extends PaintableShapeBuilder {
         if (pointsAdded == 1) rectangle.setFirst(point);
         else if (pointsAdded >= 2) rectangle.setSecond(point);
     }
+
+    @Override
+    public void removeLastPoint() {
+
+    }
 }

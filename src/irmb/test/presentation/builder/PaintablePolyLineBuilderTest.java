@@ -49,14 +49,14 @@ public class PaintablePolyLineBuilderTest extends PaintablePolyLine {
         assertEquals(0, getPointList().size());
     }
 
-    //    @Test
-//    public void whenRemovingLastPoint_shouldDoNothing() {
-//        sut.removeLastPoint();
-//
-//        GraphicPolyLineSpy polyLine = (GraphicPolyLineSpy) sut.getPaintable();
-//        assertEquals(0, polyLine.getPointList().size());
-//    }
-//
+    @Test
+    public void whenRemovingLastPoint_shouldDoNothing() {
+        sut.removeLastPoint();
+
+        assertEquals(0, getPointList().size());
+    }
+
+
     public class OnePointAddedContext {
 
         private final Point second = new Point(10, 5);
@@ -74,16 +74,14 @@ public class PaintablePolyLineBuilderTest extends PaintablePolyLine {
             assertExpectedPointEqualsActual(second, getPointList().get(0));
         }
 
-        //
-//        @Test
-//        public void whenRemovingLastPoint_shouldRemoveLastPointFromList() {
-//            sut.removeLastPoint();
-//
-//            GraphicPolyLineSpy polyLine = (GraphicPolyLineSpy) sut.getPaintable();
-//            List<Point> pointList = polyLine.getPointList();
-//            assertEquals(0, pointList.size());
-//        }
-//
+
+        @Test
+        public void whenRemovingLastPoint_shouldRemoveLastPointFromList() {
+            sut.removeLastPoint();
+
+            assertEquals(0, getPointList().size());
+        }
+
         public class TwoPointsAddedContext {
             @Before
             public void setUp() {

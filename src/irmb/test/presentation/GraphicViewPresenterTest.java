@@ -30,11 +30,10 @@ public class GraphicViewPresenterTest {
         PaintableFactory factory = spy(new PaintableFactoryImpl());
         shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory));
         sut = new GraphicViewPresenter(shapeBuilderFactory);
-        graphicView = new GraphicViewImplFake(sut);
+        graphicView = spy(new GraphicViewImplFake(sut));
         graphicView.setPainter(painterSpy);
         sut.setGraphicView(graphicView);
     }
-
 
 
 }

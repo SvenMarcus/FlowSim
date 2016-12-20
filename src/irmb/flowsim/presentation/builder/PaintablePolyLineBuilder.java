@@ -37,4 +37,9 @@ public class PaintablePolyLineBuilder extends PaintableShapeBuilder {
     public void setLastPoint(Point point) {
         polyLine.setLastPoint(point);
     }
+
+    @Override
+    public void removeLastPoint() {
+        polyLine.removeLastPoint();
+    }
 }

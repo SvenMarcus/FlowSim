@@ -42,4 +42,9 @@ public class PaintableLineBuilder extends PaintableShapeBuilder {
         if (pointsAdded == 1) line.setFirst(point);
         else if (pointsAdded >= 2) line.setSecond(point);
     }
+
+    @Override
+    public void removeLastPoint() {
+
+    }
 }

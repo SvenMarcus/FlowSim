@@ -4,6 +4,7 @@ import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.view.SwingPainter;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.withSettings;
 
 /**
  * Created by Sven on 15.12.2016.

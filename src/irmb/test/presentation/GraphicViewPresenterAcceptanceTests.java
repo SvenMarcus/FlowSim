@@ -4,9 +4,9 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import java.lang.reflect.InvocationTargetException;
+
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Sven on 15.12.2016.
@@ -26,6 +26,8 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
             sut.handleLeftClick(36, 12);
             sut.handleLeftClick(25, 57);
             verify(painterSpy, times(1)).paintLine(36, 12, 25, 57);
+
+            verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
         }
 
         @Test
@@ -39,6 +41,8 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
             sut.handleLeftClick(36, 12);
             sut.handleLeftClick(25, 57);
             verify(painterSpy, times(1)).paintRectangle(25, 12, 11, 45);
+
+            verify(painterSpy, times(2)).paintRectangle(13, 15, 5, 4);
         }
 
         @Test
@@ -71,6 +75,62 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
             sut.handleMouseMove(25, 57);
             verifyNoMoreInteractions(painterSpy);
+        }
+
+        @Test
+        public void livePaintingRectangleAcceptanceTest() {
+            sut.beginPaint("Rectangle");
+
+            sut.handleLeftClick(13, 15);
+            sut.handleMouseMove(18, 19);
+            verify(painterSpy).paintRectangle(13, 15, 5, 4);
+
+            sut.handleMouseMove(36, 12);
+            verify(painterSpy).paintRectangle(13, 12, 23, 3);
+
+            sut.handleLeftClick(36, 12);
+            verify(painterSpy, times(2)).paintRectangle(13, 12, 23, 3);
+
+            sut.handleMouseMove(25, 57);
+            verifyNoMoreInteractions(painterSpy);
+        }
+
+        @Test
+        public void livePaintingPolyLineAcceptanceTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+            sut.beginPaint("PolyLine");
+
+            sut.handleLeftClick(13, 15);
+            sut.handleMouseMove(18, 19);
+            verify(painterSpy, times(1)).paintLine(13, 15, 18, 19);
+
+
+            sut.handleMouseMove(36, 12);
+            verify(painterSpy, times(1)).paintLine(13, 15, 36, 12);
+
+            sut.handleLeftClick(36, 12);
+            verify(painterSpy, times(2)).paintLine(13, 15, 36, 12);
+
+            sut.handleMouseMove(24, 20);
+            verify(painterSpy, times(3)).paintLine(13, 15, 36, 12);
+            verify(painterSpy, times(1)).paintLine(36, 12, 24, 20);
+
+            sut.handleLeftClick(24, 20);
+            verify(painterSpy, times(4)).paintLine(13, 15, 36, 12);
+            verify(painterSpy, times(2)).paintLine(36, 12, 24, 20);
+
+            sut.handleMouseMove(43, 22);
+            verify(painterSpy, times(5)).paintLine(13, 15, 36, 12);
+            verify(painterSpy, times(3)).paintLine(36, 12, 24, 20);
+            verify(painterSpy, times(1)).paintLine(24, 20, 43, 22);
+
+            sut.handleRightClick();
+            verify(painterSpy, times(6)).paintLine(13, 15, 36, 12);
+            verify(painterSpy, times(4)).paintLine(36, 12, 24, 20);
+            verify(painterSpy, times(1)).paintLine(24, 20, 43, 22);
+
+            sut.handleMouseMove(35, 84);
+            sut.handleLeftClick(35, 84);
+            verify(painterSpy, never()).paintLine(43, 22, 35, 84);
         }
     }
 
