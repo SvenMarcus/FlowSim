@@ -36,6 +36,12 @@ public class GraphicViewPresenter {
                 graphicView.update();
                 resetBuilderWhenFinished();
             }
+        } else {
+            Paintable shapeToMove;
+            for (Paintable p : shapeList) {
+                if (p.isPointOnBoundary(new Point(x, y), 3))
+                    shapeToMove = p;
+            }
         }
     }
 
@@ -87,5 +93,9 @@ public class GraphicViewPresenter {
             if (pointsAdded > 0)
                 graphicView.update();
         }
+    }
+
+    public void handleMouseDrag(int x, int y) {
+
     }
 }

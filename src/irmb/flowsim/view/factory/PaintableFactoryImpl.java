@@ -1,8 +1,5 @@
 package irmb.flowsim.view.factory;
 
-import irmb.flowsim.model.Line;
-import irmb.flowsim.model.PolyLine;
-import irmb.flowsim.model.Rectangle;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.presentation.factory.PaintableFactory;
 import irmb.flowsim.view.graphics.PaintableLine;
@@ -17,11 +14,11 @@ public class PaintableFactoryImpl implements PaintableFactory {
     public Paintable makeShape(String type) {
         switch (type) {
             case "Line":
-                return new PaintableLine(new Line());
+                return new PaintableLine();
             case "Rectangle":
-                return new PaintableRectangle(new Rectangle());
+                return new PaintableRectangle();
             case "PolyLine":
-                return new PaintablePolyLine(new PolyLine());
+                return new PaintablePolyLine();
             default:
                 return null;
         }
