@@ -4,8 +4,7 @@ import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.view.GraphicViewImpl;
 import irmb.flowsim.view.SwingPainter;
-
-import java.awt.*;
+import irmb.flowsim.view.graphics.Paintable;
 
 /**
  * Created by Sven on 14.12.2016.
@@ -18,7 +17,8 @@ public class GraphicViewImplFake extends GraphicViewImpl {
 
     @Override
     public void update() {
-        presenter.getShape().paint(painter);
+        for (Paintable p : presenter.getPaintableList())
+            p.paint(painter);
     }
 
     public void setPainter(Painter painter) {

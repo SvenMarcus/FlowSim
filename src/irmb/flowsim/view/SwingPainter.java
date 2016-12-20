@@ -11,6 +11,9 @@ public class SwingPainter implements Painter {
 
     private Graphics graphics;
 
+    public SwingPainter() {
+    }
+
     public SwingPainter(Graphics graphics) {
         this.graphics = graphics;
     }
@@ -23,5 +26,9 @@ public class SwingPainter implements Painter {
     @Override
     public void paintRectangle(double x, double y, double width, double height) {
         graphics.drawRect((int) x, (int) y, (int) width, (int) height);
+    }
+
+    public void setGraphics(Graphics graphics) {
+        this.graphics = graphics;
     }
 }

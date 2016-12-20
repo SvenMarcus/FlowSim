@@ -5,6 +5,9 @@ import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Sven on 13.12.2016.
  */
@@ -13,8 +16,8 @@ public class GraphicViewPresenter {
     private GraphicView graphicView;
     private PaintableShapeBuilderFactory factory;
 
-    private int timesClicked = 0;
-    private Paintable shape;
+    private int pointsAdded = 0;
+    private List<Paintable> shapeList = new LinkedList<>();
     private PaintableShapeBuilder shapeBuilder;
 
     public GraphicViewPresenter(PaintableShapeBuilderFactory factory) {
@@ -26,28 +29,63 @@ public class GraphicViewPresenter {
     }
 
     public void handleLeftClick(int x, int y) {
-        timesClicked++;
         if (hasShapeBuilder()) {
-            shapeBuilder.addPoint(new Point(x, y));
-            if (timesClicked >= 2) {
-                shape = shapeBuilder.getShape();
+            addPointToShape(x, y);
+            addShapeToList();
+            if (pointsAdded >= 2) {
                 graphicView.update();
-                if (shapeBuilder.isObjectFinished())
-                    shapeBuilder = null;
+                resetBuilderWhenFinished();
             }
         }
+    }
+
+    private void addShapeToList() {
+        if (!shapeList.contains(shapeBuilder.getShape()))
+            shapeList.add(shapeBuilder.getShape());
+    }
+
+    private void addPointToShape(int x, int y) {
+        shapeBuilder.addPoint(new Point(x, y));
+        pointsAdded++;
     }
 
     private boolean hasShapeBuilder() {
         return shapeBuilder != null;
     }
 
-    public void beginPaint(String objectType) {
-        shapeBuilder = factory.makeShapeBuilder(objectType);
-        timesClicked = 0;
+    private void resetBuilderWhenFinished() {
+        if (shapeBuilder.isObjectFinished())
+            shapeBuilder = null;
     }
 
-    public Paintable getShape() {
-        return shape;
+    public void handleRightClick() {
+        if (hasShapeBuilder()) {
+            if (pointsAdded > 2) {
+                shapeBuilder.removeLastPoint();
+            } else
+                shapeList.remove(shapeBuilder.getShape());
+            graphicView.update();
+            shapeBuilder = null;
+        }
+    }
+
+    public void beginPaint(String objectType) {
+        shapeBuilder = factory.makeShapeBuilder(objectType);
+        pointsAdded = 0;
+    }
+
+    public List<Paintable> getPaintableList() {
+        return shapeList;
+    }
+
+    public void handleMouseMove(int x, int y) {
+        if (hasShapeBuilder()) {
+            if (pointsAdded == 1) {
+                addPointToShape(x, y);
+            } else if (pointsAdded > 1)
+                shapeBuilder.setLastPoint(new Point(x, y));
+            if (pointsAdded > 0)
+                graphicView.update();
+        }
     }
 }

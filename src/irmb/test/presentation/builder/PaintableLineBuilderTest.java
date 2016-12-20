@@ -13,6 +13,7 @@ import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -47,6 +48,13 @@ public class PaintableLineBuilderTest extends PaintableLine {
         assertFalse(sut.isObjectFinished());
     }
 
+    @Test
+    public void whenSettingLastPoint_shouldDoNothing() {
+        sut.setLastPoint(start);
+
+        assertNull(getFirst());
+    }
+
     public class OnePointAddedContext {
         @Before
         public void setUp() {
@@ -64,6 +72,12 @@ public class PaintableLineBuilderTest extends PaintableLine {
         public void whenAddingSecondPoint_isObjectFinishedShouldBeTrue() {
             sut.addPoint(end);
             assertTrue(sut.isObjectFinished());
+        }
+
+        @Test
+        public void whenSettingLastPoint_shouldAdjustFirst() {
+            sut.setLastPoint(end);
+            assertExpectedPointEqualsActual(end, getFirst());
         }
 
         public class TwoPointsAddedContext {
@@ -86,6 +100,24 @@ public class PaintableLineBuilderTest extends PaintableLine {
             public void whenAddingThirdPoint_isObjectFinishedShouldBeTrue() {
                 sut.addPoint(third);
                 assertTrue(sut.isObjectFinished());
+            }
+
+            @Test
+            public void whenSettingLastPoint_shouldAdjustSecondPoint() {
+                sut.setLastPoint(third);
+
+                assertExpectedPointEqualsActual(start, getFirst());
+                assertExpectedPointEqualsActual(third, getSecond());
+            }
+
+            @Test
+            public void whenSettingLastPointAfterAddingPoint_shouldAdjustSecondPoint() {
+                Point point = new Point(10, 11);
+
+                sut.addPoint(third);
+                sut.setLastPoint(point);
+
+                assertExpectedPointEqualsActual(point, getSecond());
             }
         }
     }

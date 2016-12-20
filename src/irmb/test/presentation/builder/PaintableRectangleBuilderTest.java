@@ -11,7 +11,9 @@ import org.junit.runner.RunWith;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -46,6 +48,14 @@ public class PaintableRectangleBuilderTest extends PaintableRectangle {
     }
 
     @Test
+    public void whenSettingLastPoint_shouldDoNothing() {
+        sut.setLastPoint(firstPoint);
+
+        assertNull(getFirst());
+        assertNull(getSecond());
+    }
+
+    @Test
     public void whenAddingOnePoint_isObjectFinishedShouldBeFalse() {
         sut.addPoint(firstPoint);
         assertFalse(sut.isObjectFinished());
@@ -70,6 +80,12 @@ public class PaintableRectangleBuilderTest extends PaintableRectangle {
             assertTrue(sut.isObjectFinished());
         }
 
+        @Test
+        public void whenSettingLastPoint_shouldAdjustFirst() {
+            sut.setLastPoint(secondPoint);
+            assertExpectedPointEqualsActual(secondPoint, getFirst());
+        }
+
         public class TwoPointsAddedContext {
             private final Point third = new Point(2, 8);
 
@@ -90,6 +106,24 @@ public class PaintableRectangleBuilderTest extends PaintableRectangle {
             public void whenAddingThirdPoint_isObjectFinishedShouldBeTrue() {
                 sut.addPoint(third);
                 assertTrue(sut.isObjectFinished());
+            }
+
+            @Test
+            public void whenSettingLastPoint_shouldAdjustSecond() {
+                sut.setLastPoint(third);
+
+                assertExpectedPointEqualsActual(firstPoint, getFirst());
+                assertExpectedPointEqualsActual(third, getSecond());
+            }
+
+            @Test
+            public void whenSettingLastPointAfterAddingPoint_shouldAdjustSecond() {
+                Point point = new Point(10, 11);
+
+                sut.addPoint(third);
+                sut.setLastPoint(point);
+
+                assertExpectedPointEqualsActual(point, getSecond());
             }
         }
     }

@@ -20,4 +20,8 @@ public abstract class PaintableShapeBuilder {
     public abstract Paintable getShape();
 
     public abstract boolean isObjectFinished();
+
+    public abstract void setLastPoint(Point lastPoint);
+
+    public abstract void removeLastPoint();
 }

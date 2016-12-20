@@ -2,13 +2,18 @@ package irmb.flowsim.view;
 
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.view.graphics.Paintable;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 /**
  * Created by Sven on 13.12.2016.
  */
-public class GraphicViewImpl extends JPanel implements GraphicView {
+public class GraphicViewImpl extends JPanel implements GraphicView, MouseListener, MouseMotionListener {
 
 
     protected GraphicViewPresenter presenter;
@@ -16,13 +21,58 @@ public class GraphicViewImpl extends JPanel implements GraphicView {
 
     public GraphicViewImpl(GraphicViewPresenter presenter) {
         this.presenter = presenter;
-        painter = new SwingPainter(getGraphics());
+        addMouseListener(this);
+        addMouseMotionListener(this);
+        painter = new SwingPainter();
     }
 
     @Override
     public void update() {
-        super.repaint();
-        presenter.getShape().paint(painter);
+        repaint();
     }
 
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        painter.setGraphics(g);
+        for (Paintable p : presenter.getPaintableList())
+            p.paint(painter);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getButton() == 1)
+            presenter.handleLeftClick(e.getX(), e.getY());
+        else if (e.getButton() == 3)
+            presenter.handleRightClick();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        presenter.handleMouseMove(e.getX(), e.getY());
+    }
 }

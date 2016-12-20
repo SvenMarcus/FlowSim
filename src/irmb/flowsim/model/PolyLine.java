@@ -17,4 +17,14 @@ public class PolyLine {
     public void addPoint(Point point) {
         pointList.add(point);
     }
+
+    public void setLastPoint(Point point) {
+        int size = pointList.size();
+        if (size > 0) pointList.set(size - 1, point);
+    }
+
+    public void removeLastPoint() {
+        if (pointList.size() > 0)
+            pointList.remove(pointList.size() - 1);
+    }
 }

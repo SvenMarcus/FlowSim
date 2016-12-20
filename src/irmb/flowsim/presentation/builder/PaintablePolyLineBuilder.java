@@ -32,4 +32,14 @@ public class PaintablePolyLineBuilder extends PaintableShapeBuilder {
     public boolean isObjectFinished() {
         return false;
     }
+
+    @Override
+    public void setLastPoint(Point point) {
+        polyLine.setLastPoint(point);
+    }
+
+    @Override
+    public void removeLastPoint() {
+        polyLine.removeLastPoint();
+    }
 }
