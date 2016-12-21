@@ -35,6 +35,16 @@ public class PaintableLine extends Line implements Paintable {
         return dist <= radius;
     }
 
+    @Override
+    public void moveBy(double dx, double dy) {
+        double firstX = getFirst().getX() + dx;
+        double firstY = getFirst().getY() + dy;
+        double secondX = getSecond().getX() + dx;
+        double secondY = getSecond().getY() + dy;
+        setFirst(new Point(firstX, firstY));
+        setSecond(new Point(secondX, secondY));
+    }
+
     private Point getIntersectionPoint(Point point) {
         double gradient = getGradient();
         double reverseGradient = -1. / gradient;
@@ -65,4 +75,5 @@ public class PaintableLine extends Line implements Paintable {
         return (getSecond().getY() - getFirst().getY()) /
                 (getSecond().getX() - getFirst().getX());
     }
+
 }

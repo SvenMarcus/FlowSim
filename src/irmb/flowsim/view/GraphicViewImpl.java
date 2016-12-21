@@ -53,7 +53,7 @@ public class GraphicViewImpl extends JPanel implements GraphicView, MouseListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        presenter.handleMouseRelease();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class GraphicViewImpl extends JPanel implements GraphicView, MouseListene
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
+        presenter.handleMouseDrag(e.getX(), e.getY());
     }
 
     @Override

@@ -135,7 +135,7 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
     }
 
     @Test
-    public void MoveShapeAcceptanceTest() {
+    public void moveShapeAcceptanceTest() {
         sut.beginPaint("Line");
 
         sut.handleLeftClick(13, 15);
@@ -146,6 +146,19 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleLeftClick(15, 18);
         sut.handleMouseDrag(20, 24);
         verify(painterSpy, atLeastOnce()).paintLine(18, 21, 23, 25);
+
+        sut.handleMouseDrag(3, 10);
+        verify(painterSpy, atLeastOnce()).paintLine(1, 7, 6, 11);
+
+        sut.handleMouseRelease();
+
+        sut.handleLeftClick(0, 0);
+        sut.handleMouseDrag(15, 18);
+        verify(painterSpy, atLeast(2)).paintLine(1, 7, 6, 11);
+    }
+
+    @Test
+    public void commandQueueAcceptanceTest() {
 
     }
 

@@ -10,4 +10,6 @@ public interface Paintable {
     void paint(Painter g);
 
     boolean isPointOnBoundary(Point point, double radius);
+
+    void moveBy(double dx, double dy);
 }

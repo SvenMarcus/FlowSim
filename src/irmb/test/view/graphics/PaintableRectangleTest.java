@@ -5,20 +5,25 @@ import irmb.flowsim.view.graphics.PaintableRectangle;
 import org.junit.Before;
 import org.junit.Test;
 
+import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
 
 /**
  * Created by Sven on 20.12.2016.
  */
-public class PaintableRectangleTest {
+public class PaintableRectangleTest extends PaintableRectangle {
     private PaintableRectangle sut;
+    private Point second;
+    private Point first;
 
     @Before
     public void setUp() throws Exception {
-        sut = new PaintableRectangle();
-        sut.setSecond(new Point(11, 12));
-        sut.setFirst(new Point(21, 22));
+        sut = this;
+        first = new Point(21, 22);
+        second = new Point(11, 12);
+        sut.setSecond(second);
+        sut.setFirst(first);
     }
 
     @Test
@@ -81,5 +86,14 @@ public class PaintableRectangleTest {
         assertTrue(sut.isPointOnBoundary(new Point(16, 15), 3));
         assertTrue(sut.isPointOnBoundary(new Point(11, 25), 3));
         assertTrue(sut.isPointOnBoundary(new Point(16, 19), 3));
+    }
+
+    @Test
+    public void whenCallingMoveBy_shouldMoveLineByDelta() {
+        sut.moveBy(5, 6);
+        Point newStart = new Point(first.getX() + 5, first.getY() + 6);
+        Point newEnd = new Point(second.getX() + 5, second.getY() + 6);
+        assertExpectedPointEqualsActual(newStart, getFirst());
+        assertExpectedPointEqualsActual(newEnd, getSecond());
     }
 }

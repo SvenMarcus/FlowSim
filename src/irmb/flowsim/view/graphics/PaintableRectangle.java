@@ -46,6 +46,16 @@ public class PaintableRectangle extends Rectangle implements Paintable {
         return isInBoundingBox(point, radius) && !isInside(point, radius);
     }
 
+    @Override
+    public void moveBy(double dx, double dy) {
+        double firstX = getFirst().getX() + dx;
+        double firstY = getFirst().getY() + dy;
+        double secondX = getSecond().getX() + dx;
+        double secondY = getSecond().getY() + dy;
+        setFirst(new Point(firstX, firstY));
+        setSecond(new Point(secondX, secondY));
+    }
+
     private boolean isInside(Point point, double radius) {
         return point.getY() > minY + radius && point.getY() < maxY - radius && point.getX() > minX + radius && point.getX() < maxX - radius;
     }

@@ -37,6 +37,14 @@ public class PaintablePolyLine extends PolyLine implements Paintable {
         return false;
     }
 
+    @Override
+    public void moveBy(double dx, double dy) {
+        for (Point p : getPointList()) {
+            p.setX(p.getX() + dx);
+            p.setY(p.getY() + dy);
+        }
+    }
+
     private Point getIntersectionPoint(Point point, int i) {
         double reverseGradient = -1. / segmentGradient;
         double YIntercept = getPointList().get(i).getY() - segmentGradient * getPointList().get(i).getX();
