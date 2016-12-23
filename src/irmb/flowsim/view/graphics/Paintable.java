@@ -1,5 +1,6 @@
 package irmb.flowsim.view.graphics;
 
+import irmb.flowsim.model.Point;
 import irmb.flowsim.presentation.Painter;
 
 /**
@@ -7,4 +8,8 @@ import irmb.flowsim.presentation.Painter;
  */
 public interface Paintable {
     void paint(Painter g);
+
+    boolean isPointOnBoundary(Point point, double radius);
+
+    void moveBy(double dx, double dy);
 }

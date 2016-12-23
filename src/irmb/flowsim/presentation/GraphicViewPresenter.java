@@ -19,6 +19,8 @@ public class GraphicViewPresenter {
     private int pointsAdded = 0;
     private List<Paintable> shapeList = new LinkedList<>();
     private PaintableShapeBuilder shapeBuilder;
+    private Point clickedPoint;
+    private Paintable shapeToMove;
 
     public GraphicViewPresenter(PaintableShapeBuilderFactory factory) {
         this.factory = factory;
@@ -35,6 +37,12 @@ public class GraphicViewPresenter {
             if (pointsAdded >= 2) {
                 graphicView.update();
                 resetBuilderWhenFinished();
+            }
+        } else {
+            for (Paintable p : shapeList) {
+                clickedPoint = new Point(x, y);
+                if (p.isPointOnBoundary(new Point(x, y), 3))
+                    shapeToMove = p;
             }
         }
     }
@@ -87,5 +95,26 @@ public class GraphicViewPresenter {
             if (pointsAdded > 0)
                 graphicView.update();
         }
+    }
+
+    public void handleMouseDrag(int x, int y) {
+        if (shapeToMove != null) {
+            moveShape(x, y);
+            graphicView.update();
+        }
+    }
+
+    private void moveShape(int x, int y) {
+        double dx = x - clickedPoint.getX();
+        double dy = y - clickedPoint.getY();
+
+        shapeToMove.moveBy(dx, dy);
+
+        clickedPoint.setX(x);
+        clickedPoint.setY(y);
+    }
+
+    public void handleMouseRelease() {
+        shapeToMove = null;
     }
 }
