@@ -22,6 +22,13 @@ public class GraphicViewPresenter {
     private Point clickedPoint;
     private Paintable shapeToMove;
 
+    private boolean moved;
+    private Point origin;
+    private double dx;
+    private double dy;
+    private Paintable lastMovedShape;
+    private boolean shapeAdded;
+
     public GraphicViewPresenter(PaintableShapeBuilderFactory factory) {
         this.factory = factory;
     }
@@ -30,7 +37,7 @@ public class GraphicViewPresenter {
         this.graphicView = graphicView;
     }
 
-    public void handleLeftClick(int x, int y) {
+    public void handleLeftClick(double x, double y) {
         if (hasShapeBuilder()) {
             addPointToShape(x, y);
             addShapeToList();
@@ -41,6 +48,7 @@ public class GraphicViewPresenter {
         } else {
             for (Paintable p : shapeList) {
                 clickedPoint = new Point(x, y);
+                origin = new Point(x, y);
                 if (p.isPointOnBoundary(new Point(x, y), 3))
                     shapeToMove = p;
             }
@@ -48,11 +56,13 @@ public class GraphicViewPresenter {
     }
 
     private void addShapeToList() {
-        if (!shapeList.contains(shapeBuilder.getShape()))
+        if (!shapeList.contains(shapeBuilder.getShape())) {
             shapeList.add(shapeBuilder.getShape());
+            moved = false;
+        }
     }
 
-    private void addPointToShape(int x, int y) {
+    private void addPointToShape(double x, double y) {
         shapeBuilder.addPoint(new Point(x, y));
         pointsAdded++;
     }
@@ -86,7 +96,7 @@ public class GraphicViewPresenter {
         return shapeList;
     }
 
-    public void handleMouseMove(int x, int y) {
+    public void handleMouseMove(double x, double y) {
         if (hasShapeBuilder()) {
             if (pointsAdded == 1) {
                 addPointToShape(x, y);
@@ -97,14 +107,15 @@ public class GraphicViewPresenter {
         }
     }
 
-    public void handleMouseDrag(int x, int y) {
+    public void handleMouseDrag(double x, double y) {
         if (shapeToMove != null) {
             moveShape(x, y);
             graphicView.update();
         }
+
     }
 
-    private void moveShape(int x, int y) {
+    private void moveShape(double x, double y) {
         double dx = x - clickedPoint.getX();
         double dy = y - clickedPoint.getY();
 
@@ -112,9 +123,29 @@ public class GraphicViewPresenter {
 
         clickedPoint.setX(x);
         clickedPoint.setY(y);
+
+        moved = true;
     }
 
-    public void handleMouseRelease() {
+    public void handleMouseRelease(double x, double y) {
+        dx = x - origin.getX();
+        dy = y - origin.getY();
+        lastMovedShape = shapeToMove;
         shapeToMove = null;
+    }
+
+    public void undo() {
+        if (moved) {
+            lastMovedShape.moveBy(-dx, -dy);
+            moved = false;
+        } else {
+            shapeList.remove(shapeList.size() - 1);
+            shapeAdded = false;
+        }
+        graphicView.update();
+    }
+
+    public void redo() {
+
     }
 }

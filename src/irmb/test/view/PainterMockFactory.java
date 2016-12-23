@@ -1,7 +1,7 @@
 package irmb.test.view;
 
 import irmb.flowsim.presentation.Painter;
-import irmb.flowsim.view.SwingPainter;
+import irmb.flowsim.view.swing.SwingPainter;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.withSettings;

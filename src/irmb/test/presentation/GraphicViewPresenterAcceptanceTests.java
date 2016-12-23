@@ -138,9 +138,7 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
     public void moveShapeAcceptanceTest() {
         sut.beginPaint("Line");
 
-        sut.handleLeftClick(13, 15);
-        sut.handleMouseMove(18, 19);
-        sut.handleLeftClick(18, 19);
+        buildLine(13, 15, 18, 19);
         verify(painterSpy, atLeastOnce()).paintLine(13, 15, 18, 19);
 
         sut.handleLeftClick(15, 18);
@@ -150,16 +148,51 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleMouseDrag(3, 10);
         verify(painterSpy, atLeastOnce()).paintLine(1, 7, 6, 11);
 
-        sut.handleMouseRelease();
+        sut.handleMouseRelease(3, 10);
 
         sut.handleLeftClick(0, 0);
         sut.handleMouseDrag(15, 18);
-        verify(painterSpy, atLeast(2)).paintLine(1, 7, 6, 11);
+        verifyNoMoreInteractions(painterSpy);
     }
 
     @Test
     public void commandQueueAcceptanceTest() {
+        sut.beginPaint("Line");
 
+        buildLine(13, 15, 18, 19);
+        verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
+
+        performMove(15, 18, 20, 24);
+        verify(painterSpy, times(1)).paintLine(18, 21, 23, 25);
+
+        sut.undo();
+        verify(painterSpy, times(3)).paintLine(13, 15, 18, 19);
+
+        sut.undo();
+        verifyNoMoreInteractions(painterSpy);
+
+        sut.undo();
+        verifyNoMoreInteractions(painterSpy);
+
+        sut.redo();
+        verify(painterSpy, times(4)).paintLine(13, 15, 18, 19);
+
+        sut.redo();
+        verify(painterSpy, times(2)).paintLine(18, 21, 23, 25);
+
+        sut.redo();
+        verifyNoMoreInteractions(painterSpy);
+
+        sut.undo();
+        verify(painterSpy, times(5)).paintLine(13, 15, 18, 19);
+
+        buildLine(35, 40, 10, 54);
+        verify(painterSpy, times(1)).paintLine(35, 40, 10, 54);
+
+        sut.redo();
+        verifyNoMoreInteractions(painterSpy);
     }
+
+
 
 }

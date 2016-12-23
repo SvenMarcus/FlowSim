@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <ButtonBar fx:id="buttonBar" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="lineButton" mnemonicParsing="false" onAction="#onLineButtonClick" text="Line" />
+            <Button fx:id="rectangleButton" mnemonicParsing="false" onAction="#onRectangleButtonClick" text="Rectangle" />
+            <Button fx:id="polyLineButton" mnemonicParsing="false" onAction="#onPolyLineButtonClick" text="PolyLine" />
+            <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onUndoButtonClick" text="Undo" />
+            <Button fx:id="redoButton" mnemonicParsing="false" onAction="#onRedoButtonClick" text="Redo" />
+        </buttons>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </ButtonBar>
+   </top>
+   <center>
+      <Pane fx:id="rootPane" BorderPane.alignment="CENTER">
+         <children>
+            <Canvas fx:id="drawPanel" height="333.0" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" width="582.0" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

@@ -6,10 +6,9 @@ import irmb.flowsim.presentation.factory.PaintableFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
 import irmb.flowsim.view.factory.PaintableFactoryImpl;
-import irmb.test.view.GraphicViewImplFake;
+import irmb.test.view.SwingGraphicViewFake;
 import irmb.test.view.PainterMockFactory;
 import org.junit.Before;
-import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
@@ -21,7 +20,7 @@ public class GraphicViewPresenterTest {
 
     protected PaintableShapeBuilderFactory shapeBuilderFactory;
     protected Painter painterSpy;
-    protected GraphicViewImplFake graphicView;
+    protected SwingGraphicViewFake graphicView;
     protected GraphicViewPresenter sut;
 
     @Before
@@ -30,10 +29,22 @@ public class GraphicViewPresenterTest {
         PaintableFactory factory = spy(new PaintableFactoryImpl());
         shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory));
         sut = new GraphicViewPresenter(shapeBuilderFactory);
-        graphicView = spy(new GraphicViewImplFake(sut));
+        graphicView = spy(new SwingGraphicViewFake(sut));
         graphicView.setPainter(painterSpy);
         sut.setGraphicView(graphicView);
     }
+    
 
+    protected void performMove(double x1, double y1, double x2, double y2) {
+        sut.handleLeftClick(x1, y1);
+        sut.handleMouseDrag(x2, y2);
+        sut.handleMouseRelease(x2, y2);
+    }
+
+    protected void buildLine(double x1, double y1, double x2, double y2) {
+        sut.handleLeftClick(x1, y1);
+        sut.handleMouseMove(x2, y2);
+        sut.handleLeftClick(x2, y2);
+    }
 
 }

@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
+import static irmb.test.util.TestUtil.makePoint;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
 
@@ -30,10 +31,6 @@ public class PaintablePolyLineTest extends PaintablePolyLine {
         sut.addPoint(second);
         third = makePoint(45, 39);
         sut.addPoint(third);
-    }
-
-    private Point makePoint(double x, double y) {
-        return new Point(x, y);
     }
 
     @Test

@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
+import static irmb.test.util.TestUtil.makePoint;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
@@ -25,10 +26,6 @@ public class PaintableLineTest extends PaintableLine {
         end = makePoint(11, 12);
         sut.setFirst(start);
         sut.setSecond(end);
-    }
-
-    private Point makePoint(double x, double y) {
-        return new Point(x, y);
     }
 
     @Test
