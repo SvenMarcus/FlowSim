@@ -2,16 +2,15 @@ package irmb.test.presentation.builder;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Point;
-import irmb.flowsim.presentation.factory.PaintableFactory;
+import irmb.flowsim.model.Rectangle;
 import irmb.flowsim.presentation.builder.PaintableRectangleBuilder;
-import irmb.flowsim.view.graphics.PaintableRectangle;
+import irmb.flowsim.presentation.factory.ShapeFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.when;
  * Created by Sven on 14.12.2016.
  */
 @RunWith(HierarchicalContextRunner.class)
-public class PaintableRectangleBuilderTest extends PaintableRectangle {
+public class PaintableRectangleBuilderTest extends Rectangle {
 
     private Point firstPoint;
     private Point secondPoint;
@@ -29,7 +28,7 @@ public class PaintableRectangleBuilderTest extends PaintableRectangle {
 
     @Before
     public void setUp() {
-        PaintableFactory factory = mock(PaintableFactory.class);
+        ShapeFactory factory = mock(ShapeFactory.class);
         when(factory.makeShape("Rectangle")).thenReturn(this);
         sut = new PaintableRectangleBuilder(factory);
         firstPoint = new Point(5, 3);

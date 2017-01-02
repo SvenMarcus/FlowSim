@@ -2,10 +2,10 @@ package irmb.test.presentation;
 
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.Painter;
-import irmb.flowsim.presentation.factory.PaintableFactory;
+import irmb.flowsim.presentation.factory.ShapeFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.view.factory.PaintableFactoryImpl;
+import irmb.flowsim.view.factory.ShapeFactoryImpl;
 import irmb.test.view.SwingGraphicViewFake;
 import irmb.test.view.PainterMockFactory;
 import org.junit.Before;
@@ -26,7 +26,7 @@ public class GraphicViewPresenterTest {
     @Before
     public void setUp() throws Exception {
         painterSpy = PainterMockFactory.makePainter("Swing");
-        PaintableFactory factory = spy(new PaintableFactoryImpl());
+        ShapeFactory factory = spy(new ShapeFactoryImpl());
         shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory));
         sut = new GraphicViewPresenter(shapeBuilderFactory);
         graphicView = spy(new SwingGraphicViewFake(sut));

@@ -5,7 +5,7 @@ package irmb.flowsim.view.javafx;/**
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.view.factory.PaintableFactoryImpl;
+import irmb.flowsim.view.factory.ShapeFactoryImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,7 +25,7 @@ public class JFXMainWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        PaintableFactoryImpl paintableFactory = new PaintableFactoryImpl();
+        ShapeFactoryImpl paintableFactory = new ShapeFactoryImpl();
         PaintableShapeBuilderFactory builderFactory = new PaintableShapeBuilderFactoryImpl(paintableFactory);
         presenter = new GraphicViewPresenter(builderFactory);
         Pane rootLayout;

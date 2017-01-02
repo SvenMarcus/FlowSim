@@ -3,7 +3,7 @@ package irmb.test.view.factory;
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.model.Rectangle;
-import irmb.flowsim.view.factory.PaintableFactoryImpl;
+import irmb.flowsim.view.factory.ShapeFactoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,13 +16,13 @@ import static org.mockito.Mockito.spy;
 /**
  * Created by Sven on 14.12.2016.
  */
-public class PaintableFactoryImplTest {
+public class ShapeFactoryImplTest {
 
-    private PaintableFactoryImpl sut;
+    private ShapeFactoryImpl sut;
 
     @Before
     public void setUp() throws Exception {
-        sut = new PaintableFactoryImpl();
+        sut = new ShapeFactoryImpl();
     }
 
     @Test

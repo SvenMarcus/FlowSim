@@ -2,7 +2,7 @@ package irmb.flowsim.view.javafx;
 
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.view.graphics.Paintable;
+import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -99,7 +99,8 @@ public class RootController implements GraphicView {
         graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
         if (painter == null)
             painter = new JavaFXPainter(graphicsContext2D);
-        for (Paintable p : presenter.getPaintableList())
+        for (PaintableShape p : presenter.getPaintableList()) {
             p.paint(painter);
+        }
     }
 }

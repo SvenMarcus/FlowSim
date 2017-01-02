@@ -3,15 +3,14 @@ package irmb.flowsim.view.swing;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.view.swing.MainWindow;
-import irmb.flowsim.view.factory.PaintableFactoryImpl;
+import irmb.flowsim.view.factory.ShapeFactoryImpl;
 
 /**
  * Created by Sven on 15.12.2016.
  */
 public class Main {
     public static void main(String[] args) {
-        PaintableFactoryImpl paintableFactory = new PaintableFactoryImpl();
+        ShapeFactoryImpl paintableFactory = new ShapeFactoryImpl();
         PaintableShapeBuilderFactory builderFactory = new PaintableShapeBuilderFactoryImpl(paintableFactory);
         GraphicViewPresenter presenter = new GraphicViewPresenter(builderFactory);
         MainWindow window = new MainWindow(presenter);

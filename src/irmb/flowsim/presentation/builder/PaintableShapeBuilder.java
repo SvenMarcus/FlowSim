@@ -1,23 +1,23 @@
 package irmb.flowsim.presentation.builder;
 
 import irmb.flowsim.model.Point;
-import irmb.flowsim.presentation.factory.PaintableFactory;
-import irmb.flowsim.view.graphics.Paintable;
+import irmb.flowsim.presentation.factory.ShapeFactory;
+import irmb.flowsim.view.graphics.PaintableShape;
 
 /**
  * Created by Sven on 14.12.2016.
  */
 public abstract class PaintableShapeBuilder {
 
-    protected final PaintableFactory factory;
+    protected final ShapeFactory factory;
 
-    public PaintableShapeBuilder(PaintableFactory factory) {
+    public PaintableShapeBuilder(ShapeFactory factory) {
         this.factory = factory;
     }
 
     public abstract void addPoint(Point point);
 
-    public abstract Paintable getShape();
+    public abstract PaintableShape getShape();
 
     public abstract boolean isObjectFinished();
 

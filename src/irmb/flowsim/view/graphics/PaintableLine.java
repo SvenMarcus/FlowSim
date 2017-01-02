@@ -2,30 +2,33 @@ package irmb.flowsim.view.graphics;
 
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
+import irmb.flowsim.model.Shape;
 import irmb.flowsim.presentation.Painter;
 
 /**
  * Created by Sven on 14.12.2016.
  */
-public class PaintableLine extends Line implements Paintable {
+public class PaintableLine extends PaintableShape {
 
 
     private Point maxPoint;
     private Point minPoint;
 
+    private Line line;
 
-    public PaintableLine() {
+    public PaintableLine(Line line) {
+        this.line = line;
     }
 
     @Override
     public void paint(Painter painter) {
-        painter.paintLine(getFirst().getX(), getFirst().getY(), getSecond().getX(), getSecond().getY());
+        painter.paintLine(line.getFirst().getX(), line.getFirst().getY(), line.getSecond().getX(), line.getSecond().getY());
     }
 
     @Override
     public boolean isPointOnBoundary(Point point, double radius) {
-        maxPoint = getFirst().getX() < getSecond().getX() ? getSecond() : getFirst();
-        minPoint = getFirst().getX() < getSecond().getX() ? getFirst() : getSecond();
+        maxPoint = line.getFirst().getX() < line.getSecond().getX() ? line.getSecond() : line.getFirst();
+        minPoint = line.getFirst().getX() < line.getSecond().getX() ? line.getFirst() : line.getSecond();
 
         if (point.getX() > maxPoint.getX())
             return getDistance(point, maxPoint) <= radius;
@@ -36,19 +39,14 @@ public class PaintableLine extends Line implements Paintable {
     }
 
     @Override
-    public void moveBy(double dx, double dy) {
-        double firstX = getFirst().getX() + dx;
-        double firstY = getFirst().getY() + dy;
-        double secondX = getSecond().getX() + dx;
-        double secondY = getSecond().getY() + dy;
-        setFirst(new Point(firstX, firstY));
-        setSecond(new Point(secondX, secondY));
+    public Shape getShape() {
+        return line;
     }
 
     private Point getIntersectionPoint(Point point) {
         double gradient = getGradient();
         double reverseGradient = -1. / gradient;
-        double YIntercept = getFirst().getY() - gradient * getFirst().getX();
+        double YIntercept = line.getFirst().getY() - gradient * line.getFirst().getX();
         double reverseYIntercept = point.getY() - reverseGradient * point.getX();
         double intersectX = (reverseYIntercept - YIntercept) / (gradient + 1 / gradient);
         double intersectY = getYCoord(intersectX);
@@ -72,8 +70,8 @@ public class PaintableLine extends Line implements Paintable {
     }
 
     private double getGradient() {
-        return (getSecond().getY() - getFirst().getY()) /
-                (getSecond().getX() - getFirst().getX());
+        return (line.getSecond().getY() - line.getFirst().getY()) /
+                (line.getSecond().getX() - line.getFirst().getX());
     }
 
 }

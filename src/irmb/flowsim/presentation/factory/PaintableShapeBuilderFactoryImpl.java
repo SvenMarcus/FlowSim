@@ -9,9 +9,9 @@ import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
  * Created by Sven on 14.12.2016.
  */
 public class PaintableShapeBuilderFactoryImpl implements PaintableShapeBuilderFactory {
-    private PaintableFactory factory;
+    private ShapeFactory factory;
 
-    public PaintableShapeBuilderFactoryImpl(PaintableFactory factory) {
+    public PaintableShapeBuilderFactoryImpl(ShapeFactory factory) {
         this.factory = factory;
     }
 

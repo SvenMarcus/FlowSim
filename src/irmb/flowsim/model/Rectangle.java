@@ -3,7 +3,7 @@ package irmb.flowsim.model;
 /**
  * Created by Sven on 14.12.2016.
  */
-public class Rectangle {
+public class Rectangle implements Shape {
 
     private Point first;
     private Point second;
@@ -19,12 +19,21 @@ public class Rectangle {
         this.second = second;
     }
 
-    protected Point getFirst() {
+    public Point getFirst() {
         return first;
     }
 
-    protected Point getSecond() {
+    public Point getSecond() {
         return second;
     }
 
+    @Override
+    public void moveBy(double dx, double dy) {
+        double firstX = getFirst().getX() + dx;
+        double firstY = getFirst().getY() + dy;
+        double secondX = getSecond().getX() + dx;
+        double secondY = getSecond().getY() + dy;
+        setFirst(new Point(firstX, firstY));
+        setSecond(new Point(secondX, secondY));
+    }
 }

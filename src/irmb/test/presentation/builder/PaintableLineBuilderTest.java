@@ -1,26 +1,26 @@
 package irmb.test.presentation.builder;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
+import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
-import irmb.flowsim.presentation.factory.PaintableFactory;
 import irmb.flowsim.presentation.builder.PaintableLineBuilder;
-import irmb.flowsim.view.graphics.PaintableLine;
+import irmb.flowsim.presentation.factory.ShapeFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Sven on 14.12.2016.
  */
 @RunWith(HierarchicalContextRunner.class)
-public class PaintableLineBuilderTest extends PaintableLine {
+public class PaintableLineBuilderTest extends Line {
 
 
     private Point start;
@@ -29,7 +29,7 @@ public class PaintableLineBuilderTest extends PaintableLine {
 
     @Before
     public void setUp() throws Exception {
-        PaintableFactory factory = mock(PaintableFactory.class);
+        ShapeFactory factory = mock(ShapeFactory.class);
         when(factory.makeShape("Line")).thenReturn(this);
         sut = new PaintableLineBuilder(factory);
         start = new Point(5, 3);

@@ -2,7 +2,7 @@ package irmb.flowsim.view.swing;
 
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.view.graphics.Paintable;
+import irmb.flowsim.view.graphics.PaintableShape;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +34,7 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         painter.setGraphics(g);
-        for (Paintable p : presenter.getPaintableList())
+        for (PaintableShape p : presenter.getPaintableList())
             p.paint(painter);
     }
 

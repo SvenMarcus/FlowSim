@@ -1,7 +1,8 @@
 package irmb.flowsim.presentation;
 
 import irmb.flowsim.model.Point;
-import irmb.flowsim.view.graphics.Paintable;
+import irmb.flowsim.model.Shape;
+import irmb.flowsim.view.graphics.PaintableShape;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 
@@ -17,16 +18,16 @@ public class GraphicViewPresenter {
     private PaintableShapeBuilderFactory factory;
 
     private int pointsAdded = 0;
-    private List<Paintable> shapeList = new LinkedList<>();
+    private List<PaintableShape> shapeList = new LinkedList<>();
     private PaintableShapeBuilder shapeBuilder;
     private Point clickedPoint;
-    private Paintable shapeToMove;
+    private Shape shapeToMove;
 
     private boolean moved;
     private Point origin;
     private double dx;
     private double dy;
-    private Paintable lastMovedShape;
+    private Shape lastMovedShape;
     private boolean shapeAdded;
 
     public GraphicViewPresenter(PaintableShapeBuilderFactory factory) {
@@ -46,11 +47,11 @@ public class GraphicViewPresenter {
                 resetBuilderWhenFinished();
             }
         } else {
-            for (Paintable p : shapeList) {
+            for (PaintableShape p : shapeList) {
                 clickedPoint = new Point(x, y);
                 origin = new Point(x, y);
                 if (p.isPointOnBoundary(new Point(x, y), 3))
-                    shapeToMove = p;
+                    shapeToMove = p.getShape();
             }
         }
     }
@@ -92,7 +93,7 @@ public class GraphicViewPresenter {
         pointsAdded = 0;
     }
 
-    public List<Paintable> getPaintableList() {
+    public List<PaintableShape> getPaintableList() {
         return shapeList;
     }
 

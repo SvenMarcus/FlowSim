@@ -1,5 +1,6 @@
 package irmb.test.view.graphics;
 
+import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.view.graphics.PaintableLine;
 import org.junit.Before;
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Sven on 20.12.2016.
  */
-public class PaintableLineTest extends PaintableLine {
+public class PaintableLineTest {
 
     private PaintableLine sut;
     private Point start;
@@ -21,11 +22,12 @@ public class PaintableLineTest extends PaintableLine {
 
     @Before
     public void setUp() throws Exception {
-        sut = this;
+        Line line = new Line();
         start = makePoint(21, 22);
         end = makePoint(11, 12);
-        sut.setFirst(start);
-        sut.setSecond(end);
+        line.setFirst(start);
+        line.setSecond(end);
+        sut = new PaintableLine(line);
     }
 
     @Test
@@ -84,13 +86,5 @@ public class PaintableLineTest extends PaintableLine {
         assertTrue(sut.isPointOnBoundary(makePoint(14, 19), 3));
     }
 
-    @Test
-    public void whenCallingMoveBy_shouldMoveLineByDelta() {
-        sut.moveBy(5, 6);
-        Point newStart = makePoint(start.getX() + 5, start.getY() + 6);
-        Point newEnd = makePoint(end.getX() + 5, end.getY() + 6);
-        assertExpectedPointEqualsActual(newStart, getFirst());
-        assertExpectedPointEqualsActual(newEnd, getSecond());
-    }
 
 }

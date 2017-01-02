@@ -1,21 +1,23 @@
 package irmb.flowsim.presentation.builder;
 
 import irmb.flowsim.model.Point;
-import irmb.flowsim.presentation.factory.PaintableFactory;
-import irmb.flowsim.view.graphics.Paintable;
+import irmb.flowsim.model.Rectangle;
+import irmb.flowsim.presentation.factory.ShapeFactory;
 import irmb.flowsim.view.graphics.PaintableRectangle;
+import irmb.flowsim.view.graphics.PaintableShape;
 
 /**
  * Created by Sven on 14.12.2016.
  */
 public class PaintableRectangleBuilder extends PaintableShapeBuilder {
 
-    private PaintableRectangle rectangle;
+    private Rectangle rectangle;
     private int pointsAdded;
+    private PaintableShape paintable;
 
-    public PaintableRectangleBuilder(PaintableFactory factory) {
+    public PaintableRectangleBuilder(ShapeFactory factory) {
         super(factory);
-        rectangle = (PaintableRectangle) factory.makeShape("Rectangle");
+        rectangle = (Rectangle) factory.makeShape("Rectangle");
     }
 
     @Override
@@ -28,8 +30,10 @@ public class PaintableRectangleBuilder extends PaintableShapeBuilder {
     }
 
     @Override
-    public Paintable getShape() {
-        return rectangle;
+    public PaintableShape getShape() {
+        if (paintable == null)
+            paintable = new PaintableRectangle(rectangle);
+        return paintable;
     }
 
     @Override
