@@ -30,6 +30,8 @@ public class GraphicViewPresenter {
     private Shape lastMovedShape;
     private boolean shapeAdded;
 
+    private CommandQueue commandQueue = new CommandQueue();
+
     public GraphicViewPresenter(PaintableShapeBuilderFactory factory) {
         this.factory = factory;
     }
