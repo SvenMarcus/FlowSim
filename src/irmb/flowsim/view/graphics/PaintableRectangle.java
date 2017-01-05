@@ -2,58 +2,58 @@ package irmb.flowsim.view.graphics;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.Rectangle;
+import irmb.flowsim.model.Shape;
 import irmb.flowsim.presentation.Painter;
 
 /**
  * Created by Sven on 14.12.2016.
  */
-public class PaintableRectangle extends Rectangle implements Paintable {
+public class PaintableRectangle extends PaintableShape {
 
     private double maxX;
     private double minX;
     private double maxY;
     private double minY;
+    private Rectangle rectangle;
 
 
-    public PaintableRectangle() {
+    public PaintableRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 
     @Override
     public void paint(Painter painter) {
-        double minX = getFirst().getX() < getSecond().getX() ? getFirst().getX() : getSecond().getX();
-        double minY = getFirst().getY() < getSecond().getY() ? getFirst().getY() : getSecond().getY();
-        double width = Math.abs(getFirst().getX() - getSecond().getX());
-        double height = Math.abs(getFirst().getY() - getSecond().getY());
+        Point first = rectangle.getFirst();
+        Point second = rectangle.getSecond();
+        double minX = first.getX() < second.getX() ? first.getX() : second.getX();
+        double minY = first.getY() < second.getY() ? first.getY() : second.getY();
+        double width = Math.abs(first.getX() - second.getX());
+        double height = Math.abs(first.getY() - second.getY());
         painter.paintRectangle(minX, minY, width, height);
     }
 
     @Override
     public boolean isPointOnBoundary(Point point, double radius) {
-        if (getFirst().getX() < getSecond().getX()) {
-            maxX = getSecond().getX();
-            minX = getFirst().getX();
+        if (rectangle.getFirst().getX() < rectangle.getSecond().getX()) {
+            maxX = rectangle.getSecond().getX();
+            minX = rectangle.getFirst().getX();
         } else {
-            maxX = getFirst().getX();
-            minX = getSecond().getX();
+            maxX = rectangle.getFirst().getX();
+            minX = rectangle.getSecond().getX();
         }
-        if (getFirst().getY() < getSecond().getY()) {
-            maxY = getSecond().getY();
-            minY = getFirst().getY();
+        if (rectangle.getFirst().getY() < rectangle.getSecond().getY()) {
+            maxY = rectangle.getSecond().getY();
+            minY = rectangle.getFirst().getY();
         } else {
-            maxY = getFirst().getY();
-            minY = getSecond().getY();
+            maxY = rectangle.getFirst().getY();
+            minY = rectangle.getSecond().getY();
         }
         return isInBoundingBox(point, radius) && !isInside(point, radius);
     }
 
     @Override
-    public void moveBy(double dx, double dy) {
-        double firstX = getFirst().getX() + dx;
-        double firstY = getFirst().getY() + dy;
-        double secondX = getSecond().getX() + dx;
-        double secondY = getSecond().getY() + dy;
-        setFirst(new Point(firstX, firstY));
-        setSecond(new Point(secondX, secondY));
+    public Shape getShape() {
+        return rectangle;
     }
 
     private boolean isInside(Point point, double radius) {

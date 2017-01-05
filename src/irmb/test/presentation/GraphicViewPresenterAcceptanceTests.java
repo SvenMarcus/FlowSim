@@ -5,7 +5,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
+
+import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
+import static irmb.mockito.verification.AtLeastThenForgetAll.atLeastThenForgetAll;
 import static org.mockito.Mockito.*;
 
 /**
@@ -138,9 +143,7 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
     public void moveShapeAcceptanceTest() {
         sut.beginPaint("Line");
 
-        sut.handleLeftClick(13, 15);
-        sut.handleMouseMove(18, 19);
-        sut.handleLeftClick(18, 19);
+        buildLine(13, 15, 18, 19);
         verify(painterSpy, atLeastOnce()).paintLine(13, 15, 18, 19);
 
         sut.handleLeftClick(15, 18);
@@ -150,16 +153,73 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleMouseDrag(3, 10);
         verify(painterSpy, atLeastOnce()).paintLine(1, 7, 6, 11);
 
-        sut.handleMouseRelease();
+        sut.handleMouseRelease(3, 10);
 
         sut.handleLeftClick(0, 0);
         sut.handleMouseDrag(15, 18);
-        verify(painterSpy, atLeast(2)).paintLine(1, 7, 6, 11);
+        verifyNoMoreInteractions(painterSpy);
     }
 
     @Test
     public void commandQueueAcceptanceTest() {
 
+        buildLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+        performMove(15, 18, 20, 24);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
+
+        sut.undo();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+        sut.undo();
+        verifyNoMoreInteractions(painterSpy);
+
+        sut.undo();
+        verifyNoMoreInteractions(painterSpy);
+
+        sut.redo();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+        sut.redo();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
+
+        sut.redo();
+        verifyNoMoreInteractions(painterSpy);
+
+        sut.undo();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+        List<Double> coordinates = makePolyLineCoordinates();
+        buildPolyLine(coordinates);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(10, 54, 65, 74);
+
+        sut.undo();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, never()).paintLine(35, 40, 10, 54);
+        verify(painterSpy, never()).paintLine(10, 54, 65, 74);
+
+        sut.redo();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
+        verify(painterSpy, atLeastThenForgetAll(1)).paintLine(10, 54, 65, 74);
+
+        sut.redo();
+        verifyNoMoreInteractions(painterSpy);
     }
+
+    private List<Double> makePolyLineCoordinates() {
+        List<Double> coordinates = new ArrayList<>();
+        coordinates.add(35.);
+        coordinates.add(40.);
+        coordinates.add(10.);
+        coordinates.add(54.);
+        coordinates.add(65.);
+        coordinates.add(74.);
+        return coordinates;
+    }
+
 
 }

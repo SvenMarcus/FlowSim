@@ -2,7 +2,7 @@ package irmb.flowsim.view;
 
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.view.graphics.Paintable;
+import irmb.flowsim.view.graphics.PaintableShape;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +34,7 @@ public class GraphicViewImpl extends JPanel implements GraphicView, MouseListene
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         painter.setGraphics(g);
-        for (Paintable p : presenter.getPaintableList())
+        for (PaintableShape p : presenter.getPaintableList())
             p.paint(painter);
     }
 
@@ -53,7 +53,7 @@ public class GraphicViewImpl extends JPanel implements GraphicView, MouseListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        presenter.handleMouseRelease();
+        presenter.handleMouseRelease(e.getX(), e.getY());
     }
 
     @Override

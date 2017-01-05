@@ -12,4 +12,8 @@ public abstract class TestUtil {
         assertEquals(expected.getX(), actual.getX(), 0.0001);
         assertEquals(expected.getY(), actual.getY(), 0.0001);
     }
+
+    public static Point makePoint(double x, double y) {
+        return new Point(x, y);
+    }
 }

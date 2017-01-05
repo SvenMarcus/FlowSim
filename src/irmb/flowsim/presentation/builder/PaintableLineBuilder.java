@@ -1,8 +1,9 @@
 package irmb.flowsim.presentation.builder;
 
+import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
-import irmb.flowsim.view.graphics.Paintable;
-import irmb.flowsim.presentation.factory.PaintableFactory;
+import irmb.flowsim.view.graphics.PaintableShape;
+import irmb.flowsim.presentation.factory.ShapeFactory;
 import irmb.flowsim.view.graphics.PaintableLine;
 
 /**
@@ -10,12 +11,13 @@ import irmb.flowsim.view.graphics.PaintableLine;
  */
 public class PaintableLineBuilder extends PaintableShapeBuilder {
 
-    private PaintableLine line;
+    private Line line;
     private int pointsAdded;
+    private PaintableShape paintable;
 
-    public PaintableLineBuilder(PaintableFactory factory) {
+    public PaintableLineBuilder(ShapeFactory factory) {
         super(factory);
-        this.line = (PaintableLine) factory.makeShape("Line");
+        this.line = (Line) factory.makeShape("Line");
     }
 
     @Override
@@ -28,8 +30,10 @@ public class PaintableLineBuilder extends PaintableShapeBuilder {
     }
 
     @Override
-    public Paintable getShape() {
-        return line;
+    public PaintableShape getShape() {
+        if (paintable == null)
+            paintable = new PaintableLine(line);
+        return paintable;
     }
 
     @Override

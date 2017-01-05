@@ -2,10 +2,10 @@ package irmb.test.presentation.builder;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Point;
+import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.presentation.builder.PaintablePolyLineBuilder;
-import irmb.flowsim.presentation.factory.PaintableFactory;
-import irmb.flowsim.view.factory.PaintableFactoryImpl;
-import irmb.flowsim.view.graphics.PaintablePolyLine;
+import irmb.flowsim.presentation.factory.ShapeFactory;
+import irmb.flowsim.view.factory.ShapeFactoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,14 +20,14 @@ import static org.mockito.Mockito.when;
  * Created by Sven on 15.12.2016.
  */
 @RunWith(HierarchicalContextRunner.class)
-public class PaintablePolyLineBuilderTest extends PaintablePolyLine {
+public class PaintablePolyLineBuilderTest extends PolyLine {
 
     private PaintablePolyLineBuilder sut;
     private final Point first = new Point(5, 3);
 
     @Before
     public void setUp() {
-        PaintableFactory factory = spy(new PaintableFactoryImpl());
+        ShapeFactory factory = spy(new ShapeFactoryImpl());
         when(factory.makeShape("PolyLine")).thenReturn(this);
         sut = new PaintablePolyLineBuilder(factory);
     }

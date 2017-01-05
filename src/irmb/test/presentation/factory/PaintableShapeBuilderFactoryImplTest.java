@@ -4,7 +4,7 @@ import irmb.flowsim.presentation.builder.PaintableLineBuilder;
 import irmb.flowsim.presentation.builder.PaintablePolyLineBuilder;
 import irmb.flowsim.presentation.builder.PaintableRectangleBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.presentation.factory.PaintableFactory;
+import irmb.flowsim.presentation.factory.ShapeFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class PaintableShapeBuilderFactoryImplTest {
 
     @Before
     public void setUp() {
-        PaintableFactory factory = mock(PaintableFactory.class);
+        ShapeFactory factory = mock(ShapeFactory.class);
         sut = new PaintableShapeBuilderFactoryImpl(factory);
     }
 

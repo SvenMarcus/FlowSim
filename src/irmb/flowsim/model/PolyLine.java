@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * Created by Sven on 14.12.2016.
  */
-public class PolyLine {
+public class PolyLine implements Shape {
 
     private List<Point> pointList = new LinkedList<>();
 
-    protected List<Point> getPointList() {
+    public List<Point> getPointList() {
         return pointList;
     }
 
@@ -26,5 +26,13 @@ public class PolyLine {
     public void removeLastPoint() {
         if (pointList.size() > 0)
             pointList.remove(pointList.size() - 1);
+    }
+
+    @Override
+    public void moveBy(double dx, double dy) {
+        for (Point p : getPointList()) {
+            p.setX(p.getX() + dx);
+            p.setY(p.getY() + dy);
+        }
     }
 }
