@@ -2,6 +2,9 @@ package irmb.flowsim.presentation;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.Shape;
+import irmb.flowsim.presentation.command.AddPaintableShapeCommand;
+import irmb.flowsim.presentation.command.Command;
+import irmb.flowsim.presentation.command.MoveShapeCommand;
 import irmb.flowsim.view.graphics.PaintableShape;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
@@ -21,16 +24,13 @@ public class GraphicViewPresenter {
     private List<PaintableShape> shapeList = new LinkedList<>();
     private PaintableShapeBuilder shapeBuilder;
     private Point clickedPoint;
-    private Shape shapeToMove;
 
-    private boolean moved;
-    private Point origin;
-    private double dx;
-    private double dy;
-    private Shape lastMovedShape;
-    private boolean shapeAdded;
+//    protected List<Command> commandList = new LinkedList<>();
+//    private int currentIndex = -1;
 
     private CommandQueue commandQueue = new CommandQueue();
+    private MoveShapeCommand moveShapeCommand;
+    private AddPaintableShapeCommand addPaintableShapeCommand;
 
     public GraphicViewPresenter(PaintableShapeBuilderFactory factory) {
         this.factory = factory;
@@ -51,18 +51,16 @@ public class GraphicViewPresenter {
         } else {
             for (PaintableShape p : shapeList) {
                 clickedPoint = new Point(x, y);
-                origin = new Point(x, y);
-                if (p.isPointOnBoundary(new Point(x, y), 3))
-                    shapeToMove = p.getShape();
+                if (p.isPointOnBoundary(new Point(x, y), 3)) {
+                    moveShapeCommand = new MoveShapeCommand(p.getShape());
+                }
             }
         }
     }
 
     private void addShapeToList() {
-        if (!shapeList.contains(shapeBuilder.getShape())) {
-            shapeList.add(shapeBuilder.getShape());
-            moved = false;
-        }
+        addPaintableShapeCommand = new AddPaintableShapeCommand(shapeBuilder.getShape(), shapeList);
+        addPaintableShapeCommand.execute();
     }
 
     private void addPointToShape(double x, double y) {
@@ -75,8 +73,10 @@ public class GraphicViewPresenter {
     }
 
     private void resetBuilderWhenFinished() {
-        if (shapeBuilder.isObjectFinished())
+        if (shapeBuilder.isObjectFinished()) {
             shapeBuilder = null;
+            addCommand(addPaintableShapeCommand);
+        }
     }
 
     public void handleRightClick() {
@@ -84,7 +84,7 @@ public class GraphicViewPresenter {
             if (pointsAdded > 2) {
                 shapeBuilder.removeLastPoint();
             } else
-                shapeList.remove(shapeBuilder.getShape());
+                addPaintableShapeCommand.undo();
             graphicView.update();
             shapeBuilder = null;
         }
@@ -111,7 +111,7 @@ public class GraphicViewPresenter {
     }
 
     public void handleMouseDrag(double x, double y) {
-        if (shapeToMove != null) {
+        if (moveShapeCommand != null) {
             moveShape(x, y);
             graphicView.update();
         }
@@ -122,33 +122,44 @@ public class GraphicViewPresenter {
         double dx = x - clickedPoint.getX();
         double dy = y - clickedPoint.getY();
 
-        shapeToMove.moveBy(dx, dy);
+        moveShapeCommand.setDelta(dx, dy);
+        moveShapeCommand.execute();
 
         clickedPoint.setX(x);
         clickedPoint.setY(y);
 
-        moved = true;
     }
 
     public void handleMouseRelease(double x, double y) {
-        dx = x - origin.getX();
-        dy = y - origin.getY();
-        lastMovedShape = shapeToMove;
-        shapeToMove = null;
+        if (moveShapeCommand != null)
+            addCommand(moveShapeCommand);
+        moveShapeCommand = null;
+    }
+
+    private void addCommand(Command command) {
+//        while (commandList.size() - 1 > currentIndex)
+//            commandList.remove(commandList.size() - 1);
+//        commandList.add(command);
+//        currentIndex++;
+        commandQueue.add(command);
     }
 
     public void undo() {
-        if (moved) {
-            lastMovedShape.moveBy(-dx, -dy);
-            moved = false;
-        } else {
-            shapeList.remove(shapeList.size() - 1);
-            shapeAdded = false;
-        }
+//        if (currentIndex > -1) {
+//            commandList.get(currentIndex--).undo();
+//            graphicView.update();
+//        }
+        commandQueue.undo();
         graphicView.update();
     }
 
     public void redo() {
-
+//        int size = commandList.size();
+//        if (currentIndex < size - 1) {
+//            commandList.get(++currentIndex).redo();
+//            graphicView.update();
+//        }
+        commandQueue.redo();
+        graphicView.update();
     }
 }

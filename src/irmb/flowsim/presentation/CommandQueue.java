@@ -26,7 +26,9 @@ public class CommandQueue {
     }
 
     public void undo() {
-        if (currentIndex > -1) commandList.get(currentIndex--).undo();
+        if (currentIndex > -1) {
+            commandList.get(currentIndex--).undo();
+        }
     }
 
     public void redo() {

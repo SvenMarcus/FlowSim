@@ -81,6 +81,31 @@ public class MoveShapeCommandTest {
             assertExpectedPointEqualsActual(makePoint(21, 22), line.getSecond());
         }
 
+
+        public class ExecutedTwiceContext {
+            @Before
+            public void setUp() {
+                sut.setDelta(5, 4);
+                sut.execute();
+            }
+
+            @Test
+            public void whenCallingExecuteAgainThenUndo_shouldMoveShapeBackToOriginalPosition() {
+                sut.undo();
+                assertExpectedPointEqualsActual(makePoint(11, 12), line.getFirst());
+                assertExpectedPointEqualsActual(makePoint(21, 22), line.getSecond());
+            }
+
+            @Test
+            public void whenCallingUndoThenRedo_shouldRedoAllMoves() {
+                sut.undo();
+                sut.redo();
+
+                assertExpectedPointEqualsActual(makePoint(19, 20), line.getFirst());
+                assertExpectedPointEqualsActual(makePoint(29, 30), line.getSecond());
+            }
+        }
+
         public class UndoCalledContext {
             @Before
             public void setUp() {

@@ -88,7 +88,7 @@ public class RootController implements GraphicView {
     }
 
     public void onRedoButtonClick(ActionEvent event) {
-
+        presenter.redo();
     }
 
     @Override

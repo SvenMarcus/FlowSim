@@ -12,6 +12,8 @@ public class MoveShapeCommand implements Command {
     private double dy;
     private boolean calledExecute;
     private boolean calledUndo;
+    private double totalDx;
+    private double totalDy;
 
     public MoveShapeCommand(Shape shape) {
         this.shape = shape;
@@ -20,13 +22,15 @@ public class MoveShapeCommand implements Command {
     @Override
     public void execute() {
         shape.moveBy(dx, dy);
+        totalDx += dx;
+        totalDy += dy;
         calledExecute = true;
     }
 
     @Override
     public void undo() {
         if (calledExecute) {
-            shape.moveBy(-dx, -dy);
+            shape.moveBy(-totalDx, -totalDy);
             calledUndo = true;
             calledExecute = false;
         }
@@ -35,7 +39,8 @@ public class MoveShapeCommand implements Command {
     @Override
     public void redo() {
         if (calledUndo) {
-            execute();
+            shape.moveBy(totalDx, totalDy);
+            calledExecute = true;
             calledUndo = false;
         }
     }
