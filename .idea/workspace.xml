@@ -23,12 +23,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GraphicViewPresenter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GraphicViewPresenter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-223">
-              <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="-1447">
+              <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+              <folding>
+                <element signature="e#4163#4164#0" expanded="true" />
+                <element signature="e#4204#4205#0" expanded="true" />
+                <element signature="e#4230#4231#0" expanded="true" />
+                <element signature="e#4265#4266#0" expanded="true" />
+                <element signature="e#4291#4292#0" expanded="true" />
+                <element signature="e#4326#4327#0" expanded="true" />
+                <element signature="e#4392#4393#0" expanded="true" />
+                <element signature="e#4428#4429#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -46,8 +55,8 @@
       <file leaf-file-name="GraphicViewPresenterAcceptanceTests.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+            <state relative-caret-position="158">
+              <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
@@ -70,12 +79,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphicViewPresenterCommandQueueTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GraphicViewPresenterCommandQueueTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterCommandQueueTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
+            <state relative-caret-position="272">
               <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandQueueTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/CommandQueueTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="56" column="53" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandQueue.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/CommandQueue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="542">
+              <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,7 +178,6 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/builder/PaintablePolyLineBuilder.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/builder/PaintableRectangleBuilder.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/command/Command.java" />
-        <option value="$PROJECT_DIR$/src/irmb/test/presentation/CommandQueueTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/command/AddShapeCommand.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/command/AddPaintableObjectCommand.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/command/AddPaintableShapeCommandTest.java" />
@@ -153,12 +185,13 @@
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/command/MoveShapeCommandTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/command/MoveShapeCommand.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/CommandQueue.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterCommandQueueTest.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/view/PainterMockFactory.java" />
+        <option value="$PROJECT_DIR$/src/irmb/test/presentation/CommandQueueTest.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/CommandQueue.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java" />
       </list>
     </option>
   </component>
@@ -847,7 +880,7 @@
       <recent name="irmb.flowsim.presentation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.irmb.test in FlowSim2">
+  <component name="RunManager" selected="Application.JFXMainWindow">
     <configuration default="false" name="irmb.test in FlowSim2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -920,7 +953,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="GraphicViewPresenterCommandQueueTest$LineAddedContext.whenMovingLineThenCallingUndoTwice_shouldUndoMoveAndRemoveLine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="CommandQueueTest$OneCommandAddedContext.whenCallingUndo_shouldNotifyObserver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="irmb.test.presentation.*" />
@@ -931,8 +964,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="irmb.test.presentation" />
-      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.GraphicViewPresenterCommandQueueTest$LineAddedContext" />
-      <option name="METHOD_NAME" value="whenMovingLineThenCallingUndoTwice_shouldUndoMoveAndRemoveLine" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.CommandQueueTest$OneCommandAddedContext" />
+      <option name="METHOD_NAME" value="whenCallingUndo_shouldNotifyObserver" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -946,7 +979,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="GraphicViewPresenterAcceptanceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="irmb.test.presentation.*" />
@@ -957,9 +990,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="irmb.test.presentation" />
-      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.GraphicViewPresenterAcceptanceTests" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.CommandQueueTest" />
+      <option name="METHOD_NAME" value="whenCallingUndo_shouldNotNotifyObserver" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -1390,16 +1423,16 @@
       <item index="0" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
       <item index="1" class="java.lang.String" itemvalue="Application.JFXMainWindow" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterCommandQueueTest$LineAddedContext.whenMovingLineThenCallingUndoTwice_shouldUndoMoveAndRemoveLine" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.CommandQueueTest$OneCommandAddedContext.whenCallingUndo_shouldNotifyObserver" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" />
-        <item index="2" class="java.lang.String" itemvalue="Application.JFXMainWindow" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterCommandQueueTest$LineAddedContext.whenMovingLineThenCallingUndoTwice_shouldUndoMoveAndRemoveLine" />
+        <item index="0" class="java.lang.String" itemvalue="Application.JFXMainWindow" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.CommandQueueTest$OneCommandAddedContext.whenCallingUndo_shouldNotifyObserver" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -1430,44 +1463,44 @@
       <workItem from="1482415017909" duration="22875000" />
       <workItem from="1483375427731" duration="11559000" />
       <workItem from="1483443536226" duration="5459000" />
-      <workItem from="1483620327388" duration="12859000" />
+      <workItem from="1483620327388" duration="15371000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 19h 05m 54s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="CommandQueueTest_whenCallingUndo_shouldNotNotifyObserver - 2017.01.05 at 21h 08m 37s.xml">
+      <configuration name="CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 19h 07m 53s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="CommandQueueTest_whenCallingUndo_shouldNotNotifyObserver - 2017.01.05 at 21h 08m 39s.xml">
+      <configuration name="CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 19h 08m 35s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="CommandQueueTest_whenCallingUndo_shouldNotNotifyObserver - 2017.01.05 at 21h 09m 01s.xml">
+      <configuration name="CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 19h 12m 07s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="CommandQueueTest_whenCallingUndo_shouldNotNotifyObserver - 2017.01.05 at 21h 10m 14s.xml">
+      <configuration name="CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 19h 13m 32s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="CommandQueueTest_whenCallingUndo_shouldNotNotifyObserver - 2017.01.05 at 21h 10m 42s.xml">
+      <configuration name="CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 20h 35m 20s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="CommandQueueTest_whenCallingUndo_shouldNotNotifyObserver - 2017.01.05 at 21h 11m 21s.xml">
+      <configuration name="CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 20h 41m 17s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="CommandQueueTest_whenCallingUndo_shouldNotNotifyObserver - 2017.01.05 at 21h 11m 35s.xml">
+      <configuration name="CommandQueueTest.whenCallingUndo_shouldNotNotifyObserver" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 20h 44m 56s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.01.05 at 21h 13m 45s.xml">
+      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GraphicViewPresenterAcceptanceTests_commandQueueAcceptanceTest - 2017.01.05 at 20h 45m 10s.xml">
-      <configuration name="GraphicViewPresenterAcceptanceTests.commandQueueAcceptanceTest" configurationId="JUnit" />
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.01.05 at 21h 15m 02s.xml">
+      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.01.05 at 20h 45m 17s.xml">
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.01.05 at 21h 21m 12s.xml">
       <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136548000" />
+    <option name="totallyTimeSpent" value="139060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -1485,7 +1518,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1988273" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19616205" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1528,27 +1561,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/view/graphics/PaintablePolyLineTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="32" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/model/PolyLineTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="36" column="50" selection-start-line="36" selection-start-column="50" selection-end-line="36" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/model/Rectangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/test/view/graphics/PaintableRectangleTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -1755,33 +1767,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/CommandQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#315#316#0" expanded="true" />
-            <element signature="e#363#364#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/irmb/mockito/verification/AtLeastAndForget.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/CommandQueueTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1783">
-          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1897,26 +1887,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintablePolyLine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-223">
-          <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1929,10 +1903,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/view/PainterMockFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Programme/Java/jdk1.8.0_45/javafx-src.zip!/javafx/beans/Observable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Programme/Java/jdk1.8.0_45/src.zip!/java/util/Observer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Programme/Java/jdk1.8.0_45/src.zip!/java/util/Observable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="152" column="23" selection-start-line="152" selection-start-column="23" selection-end-line="152" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+        <state relative-caret-position="158">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
@@ -1944,19 +1950,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/view/PainterMockFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/CommandQueueTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="340">
+          <caret line="56" column="53" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/CommandQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterCommandQueueTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="272">
           <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1447">
+          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+          <folding>
+            <element signature="e#4163#4164#0" expanded="true" />
+            <element signature="e#4204#4205#0" expanded="true" />
+            <element signature="e#4230#4231#0" expanded="true" />
+            <element signature="e#4265#4266#0" expanded="true" />
+            <element signature="e#4291#4292#0" expanded="true" />
+            <element signature="e#4326#4327#0" expanded="true" />
+            <element signature="e#4392#4393#0" expanded="true" />
+            <element signature="e#4428#4429#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

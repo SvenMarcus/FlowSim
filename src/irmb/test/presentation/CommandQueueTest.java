@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Observer;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -17,10 +19,13 @@ import static org.mockito.Mockito.*;
 public class CommandQueueTest extends CommandQueue {
 
     private CommandQueueTest sut;
+    private Observer observer;
 
     @Before
     public void setUp() throws Exception {
+        observer = mock(Observer.class);
         sut = new CommandQueueTest();
+        sut.addObserver(observer);
     }
 
     @Test
@@ -38,6 +43,18 @@ public class CommandQueueTest extends CommandQueue {
     @Test
     public void whenCallingRedo_shouldDoNothing() {
         sut.redo();
+    }
+
+    @Test
+    public void whenCallingUndo_shouldNotNotifyObserver() {
+        sut.undo();
+        verify(observer, never()).update(any(), any());
+    }
+
+    @Test
+    public void whenCallingRedo_shouldNotNotifyObserver() {
+        sut.redo();
+        verify(observer, never()).update(any(), any());
     }
 
     public class OneCommandAddedContext {
@@ -66,6 +83,12 @@ public class CommandQueueTest extends CommandQueue {
         @Test
         public void whenCallingRedo_shouldDoNothing() {
             sut.redo();
+        }
+
+        @Test
+        public void whenCallingUndo_shouldNotifyObserver() {
+            sut.undo();
+            verify(observer).update(sut, "undo");
         }
 
         public class TwoCommandsAddedContext {
@@ -115,6 +138,12 @@ public class CommandQueueTest extends CommandQueue {
                     assertFalse(sut.commandList.contains(secondCommand));
                     assertTrue(sut.commandList.contains(firstCommand));
                     assertTrue(sut.commandList.contains(thirdCommand));
+                }
+
+                @Test
+                public void whenCallingRedo_shouldNotifyObserver() {
+                    sut.redo();
+                    verify(observer).update(sut, "redo");
                 }
 
                 public class CalledUndoTwiceContext {

@@ -11,11 +11,13 @@ import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Sven on 13.12.2016.
  */
-public class GraphicViewPresenter {
+public class GraphicViewPresenter implements Observer {
 
     private GraphicView graphicView;
     private PaintableShapeBuilderFactory factory;
@@ -25,14 +27,14 @@ public class GraphicViewPresenter {
     private PaintableShapeBuilder shapeBuilder;
     private Point clickedPoint;
 
-    protected List<Command> commandList = new LinkedList<>();
-    private int currentIndex = -1;
+    CommandQueue commandQueue = new CommandQueue();
 
     private MoveShapeCommand moveShapeCommand;
     private AddPaintableShapeCommand addPaintableShapeCommand;
 
     public GraphicViewPresenter(PaintableShapeBuilderFactory factory) {
         this.factory = factory;
+        commandQueue.addObserver(this);
     }
 
     public void setGraphicView(GraphicView graphicView) {
@@ -137,24 +139,19 @@ public class GraphicViewPresenter {
     }
 
     private void addCommand(Command command) {
-        while (commandList.size() - 1 > currentIndex)
-            commandList.remove(commandList.size() - 1);
-        commandList.add(command);
-        currentIndex++;
+        commandQueue.add(command);
     }
 
     public void undo() {
-        if (currentIndex > -1) {
-            commandList.get(currentIndex--).undo();
-            graphicView.update();
-        }
+        commandQueue.undo();
     }
 
     public void redo() {
-        int size = commandList.size();
-        if (currentIndex < size - 1) {
-            commandList.get(++currentIndex).redo();
-            graphicView.update();
-        }
+        commandQueue.redo();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        graphicView.update();
     }
 }
