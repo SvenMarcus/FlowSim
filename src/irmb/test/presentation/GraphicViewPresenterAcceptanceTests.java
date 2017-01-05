@@ -5,7 +5,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
+
+import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
+import static irmb.mockito.verification.AtLeastThenForgetAll.atLeastThenForgetAll;
 import static org.mockito.Mockito.*;
 
 /**
@@ -21,13 +26,13 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
             sut.handleLeftClick(13, 15);
             sut.handleLeftClick(18, 19);
             verify(painterSpy, times(1)).paintLine(13, 15, 18, 19);
-//
-//            sut.beginPaint("Line");
-//            sut.handleLeftClick(36, 12);
-//            sut.handleLeftClick(25, 57);
-//            verify(painterSpy, times(1)).paintLine(36, 12, 25, 57);
-//
-//            verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
+
+            sut.beginPaint("Line");
+            sut.handleLeftClick(36, 12);
+            sut.handleLeftClick(25, 57);
+            verify(painterSpy, times(1)).paintLine(36, 12, 25, 57);
+
+            verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
         }
 
         @Test
@@ -157,16 +162,15 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
     @Test
     public void commandQueueAcceptanceTest() {
-        sut.beginPaint("Line");
 
         buildLine(13, 15, 18, 19);
-        verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
 
         performMove(15, 18, 20, 24);
-        verify(painterSpy, times(1)).paintLine(18, 21, 23, 25);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
 
         sut.undo();
-        verify(painterSpy, times(3)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
 
         sut.undo();
         verifyNoMoreInteractions(painterSpy);
@@ -175,24 +179,47 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         verifyNoMoreInteractions(painterSpy);
 
         sut.redo();
-        verify(painterSpy, times(4)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
 
         sut.redo();
-        verify(painterSpy, times(2)).paintLine(18, 21, 23, 25);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
 
         sut.redo();
         verifyNoMoreInteractions(painterSpy);
 
         sut.undo();
-        verify(painterSpy, times(5)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
 
-        buildLine(35, 40, 10, 54);
-        verify(painterSpy, times(1)).paintLine(35, 40, 10, 54);
+        List<Double> coordinates = makePolyLineCoordinates();
+        buildPolyLine(coordinates);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(10, 54, 65, 74);
+
+        sut.undo();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, never()).paintLine(35, 40, 10, 54);
+        verify(painterSpy, never()).paintLine(10, 54, 65, 74);
+
+        sut.redo();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
+        verify(painterSpy, atLeastThenForgetAll(1)).paintLine(10, 54, 65, 74);
 
         sut.redo();
         verifyNoMoreInteractions(painterSpy);
     }
 
+    private List<Double> makePolyLineCoordinates() {
+        List<Double> coordinates = new ArrayList<>();
+        coordinates.add(35.);
+        coordinates.add(40.);
+        coordinates.add(10.);
+        coordinates.add(54.);
+        coordinates.add(65.);
+        coordinates.add(74.);
+        return coordinates;
+    }
 
 
 }

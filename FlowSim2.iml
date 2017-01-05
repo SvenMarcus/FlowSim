@@ -29,6 +29,7 @@
     </orderEntry>
     <orderEntry type="library" name="org.mockito:mockito-core:2.2.5" level="project" />
     <orderEntry type="library" name="de.bechte.junit:junit-hierarchicalcontextrunner:4.12.1" level="project" />
+    <orderEntry type="library" name="org.mockito:mockito-core:2.4.0" level="project" />
     <orderEntry type="library" name="MockitoExtension" level="project" />
   </component>
 </module>

@@ -25,10 +25,9 @@ public class GraphicViewPresenter {
     private PaintableShapeBuilder shapeBuilder;
     private Point clickedPoint;
 
-//    protected List<Command> commandList = new LinkedList<>();
-//    private int currentIndex = -1;
+    protected List<Command> commandList = new LinkedList<>();
+    private int currentIndex = -1;
 
-    private CommandQueue commandQueue = new CommandQueue();
     private MoveShapeCommand moveShapeCommand;
     private AddPaintableShapeCommand addPaintableShapeCommand;
 
@@ -83,6 +82,7 @@ public class GraphicViewPresenter {
         if (hasShapeBuilder()) {
             if (pointsAdded > 2) {
                 shapeBuilder.removeLastPoint();
+                addCommand(addPaintableShapeCommand);
             } else
                 addPaintableShapeCommand.undo();
             graphicView.update();
@@ -137,29 +137,24 @@ public class GraphicViewPresenter {
     }
 
     private void addCommand(Command command) {
-//        while (commandList.size() - 1 > currentIndex)
-//            commandList.remove(commandList.size() - 1);
-//        commandList.add(command);
-//        currentIndex++;
-        commandQueue.add(command);
+        while (commandList.size() - 1 > currentIndex)
+            commandList.remove(commandList.size() - 1);
+        commandList.add(command);
+        currentIndex++;
     }
 
     public void undo() {
-//        if (currentIndex > -1) {
-//            commandList.get(currentIndex--).undo();
-//            graphicView.update();
-//        }
-        commandQueue.undo();
-        graphicView.update();
+        if (currentIndex > -1) {
+            commandList.get(currentIndex--).undo();
+            graphicView.update();
+        }
     }
 
     public void redo() {
-//        int size = commandList.size();
-//        if (currentIndex < size - 1) {
-//            commandList.get(++currentIndex).redo();
-//            graphicView.update();
-//        }
-        commandQueue.redo();
-        graphicView.update();
+        int size = commandList.size();
+        if (currentIndex < size - 1) {
+            commandList.get(++currentIndex).redo();
+            graphicView.update();
+        }
     }
 }

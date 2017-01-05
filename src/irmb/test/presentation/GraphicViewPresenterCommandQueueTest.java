@@ -17,8 +17,6 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
 
     @Test
     public void whenBuildingShapeThenCallingUndo_shouldRemoveShape() {
-        sut.beginPaint("Line");
-
         buildLine(13, 15, 18, 19);
         verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
 
@@ -31,7 +29,6 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
     public class LineAddedContext {
         @Before
         public void setUp() {
-            sut.beginPaint("Line");
             buildLine(13, 15, 18, 19);
             verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
         }
@@ -67,7 +64,6 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
 
             @Test
             public void whenAddingLineThenCallingUndoTwice_shouldRemoveLineThenUndoMove() {
-                sut.beginPaint("Line");
                 buildLine(34, 43, 50, 62);
                 verify(painterSpy, times(2)).paintLine(34, 43, 50, 62);
 

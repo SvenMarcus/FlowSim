@@ -10,6 +10,8 @@ import irmb.test.view.SwingGraphicViewFake;
 import irmb.test.view.PainterMockFactory;
 import org.junit.Before;
 
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 /**
@@ -33,7 +35,7 @@ public class GraphicViewPresenterTest {
         graphicView.setPainter(painterSpy);
         sut.setGraphicView(graphicView);
     }
-    
+
 
     protected void performMove(double x1, double y1, double x2, double y2) {
         sut.handleLeftClick(x1, y1);
@@ -42,9 +44,20 @@ public class GraphicViewPresenterTest {
     }
 
     protected void buildLine(double x1, double y1, double x2, double y2) {
+        sut.beginPaint("Line");
         sut.handleLeftClick(x1, y1);
         sut.handleMouseMove(x2, y2);
         sut.handleLeftClick(x2, y2);
+    }
+
+    protected void buildPolyLine(List<Double> list) {
+        sut.beginPaint("PolyLine");
+        sut.handleLeftClick(list.get(0), list.get(1));
+        for (int i = 2; i < list.size() - 1; i += 2) {
+            sut.handleMouseMove(list.get(i), list.get(i + 1));
+            sut.handleLeftClick(list.get(i), list.get(i + 1));
+        }
+        sut.handleRightClick();
     }
 
 }
