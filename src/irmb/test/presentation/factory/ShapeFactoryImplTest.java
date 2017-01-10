@@ -1,9 +1,9 @@
-package irmb.test.view.factory;
+package irmb.test.presentation.factory;
 
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.model.Rectangle;
-import irmb.flowsim.view.factory.ShapeFactoryImpl;
+import irmb.flowsim.presentation.factory.ShapeFactoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -4,7 +4,7 @@ import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.factory.*;
-import irmb.flowsim.view.factory.ShapeFactoryImpl;
+import irmb.flowsim.presentation.factory.ShapeFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 import irmb.test.view.PainterMockFactory;
 import irmb.test.view.SwingGraphicViewFake;

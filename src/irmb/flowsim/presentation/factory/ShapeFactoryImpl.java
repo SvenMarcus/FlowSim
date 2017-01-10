@@ -1,4 +1,4 @@
-package irmb.flowsim.view.factory;
+package irmb.flowsim.presentation.factory;
 
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.PolyLine;

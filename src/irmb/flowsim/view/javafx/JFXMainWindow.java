@@ -8,7 +8,7 @@ import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.factory.MouseStrategyFactoryImpl;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.view.factory.ShapeFactoryImpl;
+import irmb.flowsim.presentation.factory.ShapeFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

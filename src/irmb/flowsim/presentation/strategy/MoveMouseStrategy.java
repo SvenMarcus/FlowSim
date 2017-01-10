@@ -1,4 +1,4 @@
-package irmb.flowsim.presentation.strategies;
+package irmb.flowsim.presentation.strategy;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.presentation.CommandQueue;

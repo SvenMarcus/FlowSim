@@ -1,11 +1,9 @@
 package irmb.flowsim.presentation;
 
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
-import irmb.flowsim.presentation.strategies.BuildObjectMouseStrategy;
-import irmb.flowsim.presentation.strategies.MouseStrategy;
-import irmb.flowsim.presentation.strategies.MoveMouseStrategy;
+import irmb.flowsim.presentation.strategy.MouseStrategy;
+import irmb.flowsim.presentation.strategy.MoveMouseStrategy;
 import irmb.flowsim.view.graphics.PaintableShape;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 
 import java.util.List;
 import java.util.Observable;
