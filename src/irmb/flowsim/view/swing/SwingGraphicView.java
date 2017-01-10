@@ -19,11 +19,14 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
     protected GraphicViewPresenter presenter;
     protected SwingPainter painter;
 
-    public SwingGraphicView(GraphicViewPresenter presenter) {
-        this.presenter = presenter;
+    public SwingGraphicView() {
         addMouseListener(this);
         addMouseMotionListener(this);
         painter = new SwingPainter();
+    }
+
+    public void setPresenter(GraphicViewPresenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override

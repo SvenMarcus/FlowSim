@@ -1,5 +1,6 @@
 package irmb.flowsim.presentation;
 
+import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategies.BuildObjectMouseStrategy;
 import irmb.flowsim.presentation.strategies.MouseStrategy;
 import irmb.flowsim.presentation.strategies.MoveMouseStrategy;
@@ -16,7 +17,7 @@ import java.util.Observer;
 public class GraphicViewPresenter implements Observer {
 
     private GraphicView graphicView;
-    private PaintableShapeBuilderFactory factory;
+    private MouseStrategyFactory factory;
 
     private List<PaintableShape> shapeList;
     private CommandQueue commandQueue;
@@ -24,12 +25,12 @@ public class GraphicViewPresenter implements Observer {
 
     private MouseStrategy strategy;
 
-    public GraphicViewPresenter(PaintableShapeBuilderFactory factory, CommandQueue commandQueue, List<PaintableShape> shapeList) {
-        this.factory = factory;
+    public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList) {
+        this.factory = strategyFactory;
         this.commandQueue = commandQueue;
         this.shapeList = shapeList;
         this.commandQueue.addObserver(this);
-        strategy = makeMouseMoveStrategy();
+        strategy = factory.makeStrategy("Move");
     }
 
     private MoveMouseStrategy makeMouseMoveStrategy() {
@@ -69,8 +70,7 @@ public class GraphicViewPresenter implements Observer {
     }
 
     public void beginPaint(String objectType) {
-        strategy = new BuildObjectMouseStrategy(commandQueue, factory, graphicView, shapeList);
-        ((BuildObjectMouseStrategy) strategy).setObjectType(objectType);
+        strategy = factory.makeStrategy(objectType);
         strategy.addObserver((o, arg) -> strategy = makeMouseMoveStrategy());
     }
 

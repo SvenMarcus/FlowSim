@@ -3,9 +3,7 @@ package irmb.test.presentation;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.Painter;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.presentation.factory.ShapeFactory;
+import irmb.flowsim.presentation.factory.*;
 import irmb.flowsim.view.factory.ShapeFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 import irmb.test.view.PainterMockFactory;
@@ -36,8 +34,10 @@ public class GraphicViewPresenterTest {
         shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory));
         commandQueue = spy(new CommandQueue());
         shapeList = new LinkedList<>();
-        sut = new GraphicViewPresenter(shapeBuilderFactory, commandQueue, shapeList);
-        graphicView = spy(new SwingGraphicViewFake(sut));
+        graphicView = spy(new SwingGraphicViewFake());
+        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory);
+        sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList);
+        graphicView.setPresenter(sut);
         graphicView.setPainter(painterSpy);
         sut.setGraphicView(graphicView);
     }

@@ -4,6 +4,8 @@ package irmb.flowsim.view.javafx;/**
 
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.presentation.factory.MouseStrategyFactory;
+import irmb.flowsim.presentation.factory.MouseStrategyFactoryImpl;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
 import irmb.flowsim.view.factory.ShapeFactoryImpl;
@@ -32,8 +34,10 @@ public class JFXMainWindow extends Application {
         List<PaintableShape> shapeList = new LinkedList<>();
         CommandQueue commandQueue = new CommandQueue();
 
-        GraphicViewPresenter presenter = makePresenter(builderFactory, commandQueue, shapeList);
-        RootController rootController = new RootController(presenter);
+        RootController rootController = new RootController();
+        MouseStrategyFactoryImpl mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory);
+        GraphicViewPresenter presenter = makePresenter(commandQueue, shapeList, mouseStrategyFactory);
+        rootController.setPresenter(presenter);
 
         Pane rootLayout = makeRootLayout(rootController);
         presenter.setGraphicView(rootController);
@@ -43,8 +47,8 @@ public class JFXMainWindow extends Application {
         primaryStage.show();
     }
 
-    private GraphicViewPresenter makePresenter(PaintableShapeBuilderFactory builderFactory, CommandQueue commandQueue, List<PaintableShape> shapeList) {
-        return new GraphicViewPresenter(builderFactory, commandQueue, shapeList);
+    private GraphicViewPresenter makePresenter(CommandQueue commandQueue, List<PaintableShape> shapeList, MouseStrategyFactory strategyFactory) {
+        return new GraphicViewPresenter(strategyFactory, commandQueue, shapeList);
     }
 
     private PaintableShapeBuilderFactory makePaintableShapeBuilderFactory() {

@@ -221,5 +221,4 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         return coordinates;
     }
 
-
 }

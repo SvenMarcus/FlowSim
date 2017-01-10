@@ -25,9 +25,9 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     private AddPaintableShapeCommand addPaintableShapeCommand;
     private CommandQueue commandQueue;
 
-    public BuildObjectMouseStrategy(CommandQueue commandQueue, PaintableShapeBuilderFactory factory, GraphicView graphicView, List<PaintableShape> shapeList) {
+    public BuildObjectMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList, PaintableShapeBuilder builder) {
         this.commandQueue = commandQueue;
-        this.factory = factory;
+        shapeBuilder = builder;
         this.graphicView = graphicView;
         this.shapeList = shapeList;
     }
@@ -73,7 +73,7 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
             if (pointsAdded > 2) {
                 shapeBuilder.removeLastPoint();
                 addCommand(addPaintableShapeCommand);
-            } else
+            } else if (addPaintableShapeCommand != null)
                 addPaintableShapeCommand.undo();
             graphicView.update();
             shapeBuilder = null;

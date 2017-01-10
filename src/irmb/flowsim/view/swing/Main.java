@@ -2,6 +2,8 @@ package irmb.flowsim.view.swing;
 
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.presentation.factory.MouseStrategyFactory;
+import irmb.flowsim.presentation.factory.MouseStrategyFactoryImpl;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
 import irmb.flowsim.view.factory.ShapeFactoryImpl;
@@ -19,8 +21,10 @@ public class Main {
         PaintableShapeBuilderFactory builderFactory = new PaintableShapeBuilderFactoryImpl(paintableFactory);
         CommandQueue commandQueue = new CommandQueue();
         List<PaintableShape> shapeList = new LinkedList<>();
-        GraphicViewPresenter presenter = new GraphicViewPresenter(builderFactory, commandQueue, shapeList);
-        MainWindow window = new MainWindow(presenter);
+        MainWindow window = new MainWindow();
+        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, window.getGraphicView(), builderFactory);
+        GraphicViewPresenter presenter = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList);
+
         presenter.setGraphicView(window.getGraphicView());
         window.setVisible(true);
     }

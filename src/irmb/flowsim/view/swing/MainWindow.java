@@ -2,7 +2,6 @@ package irmb.flowsim.view.swing;
 
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.view.swing.SwingGraphicView;
 
 import javax.swing.*;
 
@@ -17,8 +16,7 @@ public class MainWindow extends JFrame {
     private JPanel contentPanel;
     private GraphicViewPresenter presenter;
 
-    public MainWindow(GraphicViewPresenter presenter) {
-        this.presenter = presenter;
+    public MainWindow() {
         setSize(800, 600);
         add(contentPanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -34,10 +32,15 @@ public class MainWindow extends JFrame {
 
 
     private void createUIComponents() {
-        drawArea = new SwingGraphicView(presenter);
     }
 
     public GraphicView getGraphicView() {
         return (GraphicView) drawArea;
+    }
+
+    public void setPresenter(GraphicViewPresenter presenter) {
+        this.presenter = presenter;
+        drawArea = new SwingGraphicView();
+        ((SwingGraphicView) drawArea).setPresenter(presenter);
     }
 }
