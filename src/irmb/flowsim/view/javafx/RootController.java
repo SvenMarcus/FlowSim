@@ -35,9 +35,11 @@ public class RootController implements GraphicView {
     private GraphicViewPresenter presenter;
     private JavaFXPainter painter;
 
-    public RootController(GraphicViewPresenter presenter) {
-        this.presenter = presenter;
+    public RootController() {
+    }
 
+    public void setPresenter(GraphicViewPresenter presenter) {
+        this.presenter = presenter;
     }
 
     @FXML
@@ -80,7 +82,7 @@ public class RootController implements GraphicView {
     }
 
     public void onMouseReleased(MouseEvent event) {
-        presenter.handleMouseRelease(event.getX(), event.getY());
+        presenter.handleMouseRelease();
     }
 
     public void onUndoButtonClick(ActionEvent event) {

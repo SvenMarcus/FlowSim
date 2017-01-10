@@ -1,15 +1,12 @@
 package irmb.flowsim.presentation;
 
-import irmb.flowsim.model.Point;
-import irmb.flowsim.model.Shape;
-import irmb.flowsim.presentation.command.AddPaintableShapeCommand;
-import irmb.flowsim.presentation.command.Command;
-import irmb.flowsim.presentation.command.MoveShapeCommand;
+import irmb.flowsim.presentation.factory.MouseStrategyFactory;
+import irmb.flowsim.presentation.strategies.BuildObjectMouseStrategy;
+import irmb.flowsim.presentation.strategies.MouseStrategy;
+import irmb.flowsim.presentation.strategies.MoveMouseStrategy;
 import irmb.flowsim.view.graphics.PaintableShape;
-import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,21 +17,24 @@ import java.util.Observer;
 public class GraphicViewPresenter implements Observer {
 
     private GraphicView graphicView;
-    private PaintableShapeBuilderFactory factory;
+    private MouseStrategyFactory factory;
 
-    private int pointsAdded = 0;
-    private List<PaintableShape> shapeList = new LinkedList<>();
-    private PaintableShapeBuilder shapeBuilder;
-    private Point clickedPoint;
+    private List<PaintableShape> shapeList;
+    private CommandQueue commandQueue;
 
-    CommandQueue commandQueue = new CommandQueue();
 
-    private MoveShapeCommand moveShapeCommand;
-    private AddPaintableShapeCommand addPaintableShapeCommand;
+    private MouseStrategy strategy;
 
-    public GraphicViewPresenter(PaintableShapeBuilderFactory factory) {
-        this.factory = factory;
-        commandQueue.addObserver(this);
+    public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList) {
+        this.factory = strategyFactory;
+        this.commandQueue = commandQueue;
+        this.shapeList = shapeList;
+        this.commandQueue.addObserver(this);
+        strategy = factory.makeStrategy("Move");
+    }
+
+    private MoveMouseStrategy makeMouseMoveStrategy() {
+        return new MoveMouseStrategy(commandQueue, graphicView, shapeList);
     }
 
     public void setGraphicView(GraphicView graphicView) {
@@ -42,104 +42,23 @@ public class GraphicViewPresenter implements Observer {
     }
 
     public void handleLeftClick(double x, double y) {
-        if (hasShapeBuilder()) {
-            addPointToShape(x, y);
-            addShapeToList();
-            if (pointsAdded >= 2) {
-                graphicView.update();
-                resetBuilderWhenFinished();
-            }
-        } else {
-            for (PaintableShape p : shapeList) {
-                clickedPoint = new Point(x, y);
-                if (p.isPointOnBoundary(new Point(x, y), 3)) {
-                    moveShapeCommand = new MoveShapeCommand(p.getShape());
-                }
-            }
-        }
-    }
-
-    private void addShapeToList() {
-        addPaintableShapeCommand = new AddPaintableShapeCommand(shapeBuilder.getShape(), shapeList);
-        addPaintableShapeCommand.execute();
-    }
-
-    private void addPointToShape(double x, double y) {
-        shapeBuilder.addPoint(new Point(x, y));
-        pointsAdded++;
-    }
-
-    private boolean hasShapeBuilder() {
-        return shapeBuilder != null;
-    }
-
-    private void resetBuilderWhenFinished() {
-        if (shapeBuilder.isObjectFinished()) {
-            shapeBuilder = null;
-            addCommand(addPaintableShapeCommand);
-        }
+        strategy.onLeftClick(x, y);
     }
 
     public void handleRightClick() {
-        if (hasShapeBuilder()) {
-            if (pointsAdded > 2) {
-                shapeBuilder.removeLastPoint();
-                addCommand(addPaintableShapeCommand);
-            } else
-                addPaintableShapeCommand.undo();
-            graphicView.update();
-            shapeBuilder = null;
-        }
-    }
-
-    public void beginPaint(String objectType) {
-        shapeBuilder = factory.makeShapeBuilder(objectType);
-        pointsAdded = 0;
-    }
-
-    public List<PaintableShape> getPaintableList() {
-        return shapeList;
+        strategy.onRightClick();
     }
 
     public void handleMouseMove(double x, double y) {
-        if (hasShapeBuilder()) {
-            if (pointsAdded == 1) {
-                addPointToShape(x, y);
-            } else if (pointsAdded > 1)
-                shapeBuilder.setLastPoint(new Point(x, y));
-            if (pointsAdded > 0)
-                graphicView.update();
-        }
+        strategy.onMouseMove(x, y);
     }
 
     public void handleMouseDrag(double x, double y) {
-        if (moveShapeCommand != null) {
-            moveShape(x, y);
-            graphicView.update();
-        }
-
+        strategy.onMouseDrag(x, y);
     }
 
-    private void moveShape(double x, double y) {
-        double dx = x - clickedPoint.getX();
-        double dy = y - clickedPoint.getY();
-
-        moveShapeCommand.setDelta(dx, dy);
-        moveShapeCommand.execute();
-
-        clickedPoint.setX(x);
-        clickedPoint.setY(y);
-
-    }
-
-    public void handleMouseRelease(double x, double y) {
-        if (moveShapeCommand != null)
-            addCommand(moveShapeCommand);
-        moveShapeCommand = null;
-    }
-
-    private void addCommand(Command command) {
-        commandQueue.add(command);
+    public void handleMouseRelease() {
+        strategy.onMouseRelease();
     }
 
     public void undo() {
@@ -148,6 +67,15 @@ public class GraphicViewPresenter implements Observer {
 
     public void redo() {
         commandQueue.redo();
+    }
+
+    public void beginPaint(String objectType) {
+        strategy = factory.makeStrategy(objectType);
+        strategy.addObserver((o, arg) -> strategy = makeMouseMoveStrategy());
+    }
+
+    public List<PaintableShape> getPaintableList() {
+        return shapeList;
     }
 
     @Override
