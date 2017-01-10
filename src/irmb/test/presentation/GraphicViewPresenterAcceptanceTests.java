@@ -221,4 +221,26 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         return coordinates;
     }
 
+    @Test
+    public void moveViewWindowAcceptanceTest() {
+        buildLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+        List<Double> coordinates = makePolyLineCoordinates();
+        buildPolyLine(coordinates);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(10, 54, 65, 74);
+
+        performMove(4, 5, 10, 10);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(19, 20, 24, 24);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(41, 45, 16, 59);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(16, 59, 71, 79);
+
+        performMove(10, 10, 3, 2);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
+    }
+
 }
