@@ -80,7 +80,7 @@ public class RootController implements GraphicView {
     }
 
     public void onMouseReleased(MouseEvent event) {
-        presenter.handleMouseRelease(event.getX(), event.getY());
+        presenter.handleMouseRelease();
     }
 
     public void onUndoButtonClick(ActionEvent event) {

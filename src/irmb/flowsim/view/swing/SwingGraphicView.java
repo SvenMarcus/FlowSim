@@ -53,7 +53,7 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        presenter.handleMouseRelease(e.getX(), e.getY());
+        presenter.handleMouseRelease();
     }
 
     @Override

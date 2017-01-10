@@ -153,7 +153,7 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleMouseDrag(3, 10);
         verify(painterSpy, atLeastOnce()).paintLine(1, 7, 6, 11);
 
-        sut.handleMouseRelease(3, 10);
+        sut.handleMouseRelease();
 
         sut.handleLeftClick(0, 0);
         sut.handleMouseDrag(15, 18);
