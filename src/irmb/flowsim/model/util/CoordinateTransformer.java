@@ -6,9 +6,9 @@ import irmb.flowsim.model.Point;
  * Created by Sven on 10.01.2017.
  */
 public interface CoordinateTransformer {
-    Point transformWorldToViewPoint(Point point);
+    Point transformToPointOnScreen(Point point);
 
-    Point transformViewToWorldPoint(Point point);
+    Point transformToWorldPoint(Point point);
 
     void setWorldBounds(double minX, double maxX, double minY, double maxY);
 

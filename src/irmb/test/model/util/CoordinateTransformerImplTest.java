@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static irmb.test.util.TestUtil.makePoint;
-import static org.junit.Assert.*;
 
 /**
  * Created by Sven on 10.01.2017.
@@ -19,9 +18,9 @@ public class CoordinateTransformerImplTest {
         CoordinateTransformer sut = new CoordinateTransformerImpl();
         sut.setWorldBounds(-15, 10, -25, 15);
         sut.setViewBounds(0, 800, 0, 600);
-        Point p = new Point(13, 18);
-        Point result = sut.transformWorldToViewPoint(p);
-        assertExpectedPointEqualsActual(makePoint(0, 0), result);
+        Point p = new Point(0, 0);
+        Point result = sut.transformToPointOnScreen(p);
+        assertExpectedPointEqualsActual(makePoint(400, 300), result);
     }
 
 }

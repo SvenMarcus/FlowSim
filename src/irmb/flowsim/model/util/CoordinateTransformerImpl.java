@@ -1,5 +1,6 @@
 package irmb.flowsim.model.util;
 
+import Jama.Matrix;
 import irmb.flowsim.model.Point;
 
 /**
@@ -7,12 +8,12 @@ import irmb.flowsim.model.Point;
  */
 public class CoordinateTransformerImpl implements CoordinateTransformer {
     @Override
-    public Point transformWorldToViewPoint(Point point) {
+    public Point transformToPointOnScreen(Point point) {
         return null;
     }
 
     @Override
-    public Point transformViewToWorldPoint(Point point) {
+    public Point transformToWorldPoint(Point point) {
         return null;
     }
 
