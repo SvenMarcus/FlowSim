@@ -36,22 +36,26 @@
           <root url="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy/1.5.5/byte-buddy-1.5.5.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy-agent/1.5.5/byte-buddy-agent-1.5.5.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/objenesis/objenesis/2.4/objenesis-2.4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-core/2.4.0/mockito-core-2.4.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy/1.5.5/byte-buddy-1.5.5.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy-agent/1.5.5/byte-buddy-agent-1.5.5.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/objenesis/objenesis/2.4/objenesis-2.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Jama" level="project" />
     <orderEntry type="module-library">
-      <library name="MockitoExtension">
+      <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/MockitoExtension.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/MockitoExtension.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Jama" level="project" />
   </component>
 </module>

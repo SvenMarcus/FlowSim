@@ -10,7 +10,7 @@ public interface CoordinateTransformer {
 
     Point transformToWorldPoint(Point point);
 
-    void setWorldBounds(double minX, double maxX, double minY, double maxY);
+    void setWorldBounds(Point topLeft, Point bottomRight);
 
-    void setViewBounds(double minX, double maxX, double minY, double maxY);
+    void setViewBounds(Point topLeft, Point bottomRight);
 }

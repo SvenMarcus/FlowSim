@@ -14,13 +14,38 @@ import static irmb.test.util.TestUtil.makePoint;
 public class CoordinateTransformerImplTest {
 
     @Test
-    public void testTransformWorldToViewPoint() {
+    public void testTransformToPointOnScreen() {
         CoordinateTransformer sut = new CoordinateTransformerImpl();
-        sut.setWorldBounds(-15, 10, -25, 15);
-        sut.setViewBounds(0, 800, 0, 600);
-        Point p = new Point(0, 0);
+        sut.setWorldBounds(makePoint(-15, 15), makePoint(10, -25));
+        sut.setViewBounds(makePoint(0, 0), makePoint(800, 600));
+
+        Point p = makePoint(0, 0);
+
         Point result = sut.transformToPointOnScreen(p);
-        assertExpectedPointEqualsActual(makePoint(400, 300), result);
+        assertExpectedPointEqualsActual(makePoint(433.75, 232.5), result);
+
+        p = makePoint(-3, 12);
+
+        result = sut.transformToPointOnScreen(p);
+        assertExpectedPointEqualsActual(makePoint(393.25, 70.5), result);
+
+        p = makePoint(-18, 20);
+
+        result = sut.transformToPointOnScreen(p);
+        assertExpectedPointEqualsActual(makePoint(190.75, -37.5), result);
+    }
+
+    @Test
+    public void testTransformToWorldPoint() {
+        CoordinateTransformer sut = new CoordinateTransformerImpl();
+        sut.setWorldBounds(makePoint(-15, 15), makePoint(10, -25));
+        sut.setViewBounds(makePoint(0, 0), makePoint(800, 600));
+
+        Point p = makePoint(433.75, 232.5);
+
+        Point result = sut.transformToWorldPoint(p);
+        assertExpectedPointEqualsActual(makePoint(0, 0), result);
+
     }
 
 }
