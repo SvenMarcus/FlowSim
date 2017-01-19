@@ -66,6 +66,10 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     }
 
     @Override
+    public void onWheelClick(double x, double y) {
+    }
+
+    @Override
     public void onRightClick() {
         setChanged();
         notifyObservers("finished");

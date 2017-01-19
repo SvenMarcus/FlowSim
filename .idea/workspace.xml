@@ -22,59 +22,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GraphicViewPresenter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
+      <file leaf-file-name="GraphicViewPresenterAcceptanceTests.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state relative-caret-position="498">
+              <caret line="258" column="82" lean-forward="false" selection-start-line="258" selection-start-column="82" selection-end-line="258" selection-end-column="82" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="method#makeMouseMoveStrategy#0;class#GraphicViewPresenter#0" expanded="false" />
-                <element signature="e#1194#1195#0" expanded="false" />
-                <element signature="e#1240#1241#0" expanded="false" />
-                <element signature="e#1295#1296#0" expanded="false" />
-                <element signature="e#1337#1338#0" expanded="false" />
-                <element signature="e#1375#1376#0" expanded="false" />
-                <element signature="e#1414#1415#0" expanded="false" />
-                <element signature="e#1566#1567#0" expanded="false" />
-                <element signature="e#1608#1609#0" expanded="false" />
-                <element signature="e#1648#1649#0" expanded="false" />
-                <element signature="e#1689#1690#0" expanded="false" />
-                <element signature="e#1715#1716#0" expanded="false" />
-                <element signature="e#1750#1751#0" expanded="false" />
-                <element signature="e#1776#1777#0" expanded="false" />
-                <element signature="e#1811#1812#0" expanded="false" />
-                <element signature="e#2051#2052#0" expanded="false" />
-                <element signature="e#2083#2084#0" expanded="false" />
-                <element signature="e#2149#2150#0" expanded="false" />
-                <element signature="e#2185#2186#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JavaFXPainter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JavaFXPainter.java">
+      <file leaf-file-name="GraphicViewPresenterWindowOperationsTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterWindowOperationsTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+            <state relative-caret-position="201">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#316#317#0" expanded="false" />
-                <element signature="e#370#371#0" expanded="false" />
-                <element signature="e#828#829#0" expanded="false" />
-                <element signature="e#882#883#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GraphicView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -82,58 +49,18 @@
       <file leaf-file-name="GraphicViewPresenterTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GraphicViewPresenterAcceptanceTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="230" column="38" lean-forward="false" selection-start-line="230" selection-start-column="38" selection-end-line="230" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CoordinateTransformer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="55" lean-forward="false" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+            <state relative-caret-position="268">
+              <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="48" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CoordinateTransformerImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformerImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="39" column="71" lean-forward="true" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="71" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2192#2193#0" expanded="true" />
-                <element signature="e#2234#2235#0" expanded="true" />
-                <element signature="e#2290#2291#0" expanded="true" />
-                <element signature="e#2328#2329#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CoordinateTransformerImplTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CoordinateTransformerImplTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/test/model/util/CoordinateTransformerImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="34" column="61" lean-forward="true" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
+            <state relative-caret-position="520">
+              <caret line="58" column="1" lean-forward="true" selection-start-line="58" selection-start-column="1" selection-end-line="58" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,7 +73,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#452#453#0" expanded="false" />
+                <element signature="e#490#491#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -158,8 +89,8 @@
       <list>
         <option value="JavaFXApplication" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit4 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -179,10 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/irmb/test/view/graphics/PaintablePolyLineTest.java" />
-        <option value="$PROJECT_DIR$/src/irmb/test/model/PolyLineTest.java" />
-        <option value="$PROJECT_DIR$/src/irmb/test/view/graphics/PaintableRectangleTest.java" />
-        <option value="$PROJECT_DIR$/src/irmb/test/model/RectangleTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintableShape.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintableLine.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintablePolyLine.java" />
@@ -216,20 +143,24 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/MouseStrategyFactory.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JFXMainWindow.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/Main.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/view/SwingGraphicViewFake.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/SwingGraphicView.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.java" />
-        <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterTest.java" />
-        <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformator.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/ShapeFactoryImpl.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/factory/ShapeFactoryImplTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JavaFXPainter.java" />
+        <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterTest.java" />
+        <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MouseStrategy.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/BuildObjectMouseStrategy.java" />
+        <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterWindowOperationsTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformer.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformerImpl.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/model/util/CoordinateTransformerImplTest.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java" />
       </list>
     </option>
   </component>
@@ -240,9 +171,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="-28" />
     <option name="width" value="1920" />
-    <option name="height" value="1108" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -260,6 +190,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -494,7 +425,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="factory" />
+              <option name="myItemId" value="strategy" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -596,9 +527,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -619,7 +549,6 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/MockitoExtension.jar!/" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -647,79 +576,7 @@
       <recent name="irmb.flowsim.presentation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CoordinateTransformerImplTest">
-    <configuration default="false" name="irmb.test in FlowSim2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="irmb.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="FlowSim2" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="irmb.test" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="JFXMainWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="irmb.flowsim.view.javafx.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="irmb.flowsim.view.javafx.JFXMainWindow" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="FlowSim2" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="GraphicViewPresenterAcceptanceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="irmb.test.presentation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="FlowSim2" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="irmb.test.presentation" />
-      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.GraphicViewPresenterAcceptanceTests" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.irmb in FlowSim2">
     <configuration default="false" name="irmb in FlowSim2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -758,6 +615,84 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="irmb.test.model.util" />
       <option name="MAIN_CLASS_NAME" value="irmb.test.model.util.CoordinateTransformerImplTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="GraphicViewPresenterAcceptanceTests.moveViewWindowAcceptanceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="irmb.test.presentation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="FlowSim2" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="irmb.test.presentation" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.GraphicViewPresenterAcceptanceTests" />
+      <option name="METHOD_NAME" value="moveViewWindowAcceptanceTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="GraphicViewPresenterWindowOperationsTest.whenDraggingMouse_shouldMoveViewWindow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="irmb.test.presentation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="FlowSim2" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="irmb.test.presentation" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.GraphicViewPresenterWindowOperationsTest" />
+      <option name="METHOD_NAME" value="whenDraggingMouse_shouldMoveViewWindow" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="GraphicViewPresenterWindowOperationsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="irmb.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="FlowSim2" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="irmb.test.presentation" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.GraphicViewPresenterWindowOperationsTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -1154,19 +1089,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
-      <item index="1" class="java.lang.String" itemvalue="Application.JFXMainWindow" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.irmb in FlowSim2" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CoordinateTransformerImplTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.irmb in FlowSim2" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.CoordinateTransformerImplTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests.moveViewWindowAcceptanceTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterWindowOperationsTest.whenDraggingMouse_shouldMoveViewWindow" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterWindowOperationsTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.CoordinateTransformerImplTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.irmb in FlowSim2" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests" />
-        <item index="3" class="java.lang.String" itemvalue="Application.JFXMainWindow" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.irmb in FlowSim2" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterWindowOperationsTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterWindowOperationsTest.whenDraggingMouse_shouldMoveViewWindow" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.GraphicViewPresenterAcceptanceTests.moveViewWindowAcceptanceTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CoordinateTransformerImplTest" />
       </list>
     </recent_temporary>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -1229,59 +1164,60 @@
       <workItem from="1484635480904" duration="208000" />
       <workItem from="1484736759764" duration="1116000" />
       <workItem from="1484739887208" duration="9538000" />
+      <workItem from="1484833389123" duration="8602000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 15h 55m 03s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 48m 21s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 15h 56m 23s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 49m 42s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 15h 56m 42s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 50m 16s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 15h 57m 15s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 50m 38s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 15h 57m 22s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 51m 15s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 15h 59m 11s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 51m 38s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 16h 09m 06s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 52m 33s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 16h 10m 02s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 53m 41s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 16h 14m 31s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 16h 57m 34s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CoordinateTransformerImplTest - 2017.01.18 at 16h 27m 32s.xml">
-      <configuration name="CoordinateTransformerImplTest" configurationId="JUnit" />
+    <history-entry file="irmb_in_FlowSim2 - 2017.01.19 at 17h 37m 42s.xml">
+      <configuration name="irmb in FlowSim2" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182189000" />
+    <option name="totallyTimeSpent" value="190791000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-28" width="1920" height="1108" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286991" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278856" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20953327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="22" y="393" width="1876" height="263" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32482123" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="22" y="393" width="1876" height="263" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1333,7 +1269,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/org/mockito/internal/debugging/LocationImpl.java" />
     <entry file="jar://$PROJECT_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/org/mockito/internal/creation/bytebuddy/InterceptedInvocation.java" />
     <entry file="jar://$PROJECT_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/org/mockito/internal/stubbing/InvocationContainerImpl.java" />
     <entry file="jar://$PROJECT_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/org/mockito/internal/handler/MockHandlerImpl.java" />
@@ -1379,13 +1314,6 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-core/2.4.0/mockito-core-2.4.0.jar!/org/mockito/internal/creation/bytebuddy/MockMethodInterceptor.class" />
     <entry file="jar://D:/Programme/Java/jdk1.8.0_45/src.zip!/java/util/Observable.java" />
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MouseStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="46" lean-forward="false" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/PaintableShapeBuilderFactoryImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1418,13 +1346,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="150" column="24" lean-forward="false" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="72" column="32" lean-forward="false" selection-start-line="72" selection-start-column="32" selection-end-line="72" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1514,16 +1435,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/factory/ShapeFactoryImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1538,69 +1449,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/BuildObjectMouseStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="788">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#makeMouseMoveStrategy#0;class#GraphicViewPresenter#0" expanded="false" />
-            <element signature="e#1194#1195#0" expanded="false" />
-            <element signature="e#1240#1241#0" expanded="false" />
-            <element signature="e#1295#1296#0" expanded="false" />
-            <element signature="e#1337#1338#0" expanded="false" />
-            <element signature="e#1375#1376#0" expanded="false" />
-            <element signature="e#1414#1415#0" expanded="false" />
-            <element signature="e#1566#1567#0" expanded="false" />
-            <element signature="e#1608#1609#0" expanded="false" />
-            <element signature="e#1648#1649#0" expanded="false" />
-            <element signature="e#1689#1690#0" expanded="false" />
-            <element signature="e#1715#1716#0" expanded="false" />
-            <element signature="e#1750#1751#0" expanded="false" />
-            <element signature="e#1776#1777#0" expanded="false" />
-            <element signature="e#1811#1812#0" expanded="false" />
-            <element signature="e#2051#2052#0" expanded="false" />
-            <element signature="e#2083#2084#0" expanded="false" />
-            <element signature="e#2149#2150#0" expanded="false" />
-            <element signature="e#2185#2186#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JavaFXPainter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#316#317#0" expanded="false" />
-            <element signature="e#370#371#0" expanded="false" />
-            <element signature="e#828#829#0" expanded="false" />
-            <element signature="e#882#883#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/MockitoExtension.jar!/irmb/mockito/verification/AtLeastThenForget.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="11" column="60" lean-forward="false" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1616,46 +1468,118 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#452#453#0" expanded="false" />
+            <element signature="e#490#491#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JavaFXPainter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MouseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="42" lean-forward="false" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/BuildObjectMouseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="829">
+          <caret line="68" column="50" lean-forward="false" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="84" column="29" lean-forward="true" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+          <folding>
+            <element signature="method#makeMouseMoveStrategy#0;class#GraphicViewPresenter#0" expanded="false" />
+            <element signature="e#1469#1470#0" expanded="true" />
+            <element signature="e#1511#1512#0" expanded="true" />
+            <element signature="e#2241#2242#0" expanded="true" />
+            <element signature="e#2284#2285#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="48" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="46" lean-forward="false" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/model/util/CoordinateTransformerImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="58" column="1" lean-forward="true" selection-start-line="58" selection-start-column="1" selection-end-line="58" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterWindowOperationsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="230" column="38" lean-forward="false" selection-start-line="230" selection-start-column="38" selection-end-line="230" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="55" lean-forward="false" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/model/util/CoordinateTransformerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="39" column="71" lean-forward="true" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2192#2193#0" expanded="true" />
-            <element signature="e#2234#2235#0" expanded="true" />
-            <element signature="e#2290#2291#0" expanded="true" />
-            <element signature="e#2328#2329#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/model/util/CoordinateTransformerImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="34" column="61" lean-forward="true" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
+        <state relative-caret-position="498">
+          <caret line="258" column="82" lean-forward="false" selection-start-line="258" selection-start-column="82" selection-end-line="258" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

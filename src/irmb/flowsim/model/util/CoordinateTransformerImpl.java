@@ -8,10 +8,10 @@ import irmb.flowsim.model.Point;
  */
 public class CoordinateTransformerImpl implements CoordinateTransformer {
 
-    private Point worldTopLeft;
-    private Point worldBottomRight;
-    private Point viewTopLeft;
-    private Point viewBottomRight;
+    protected Point worldTopLeft;
+    protected Point worldBottomRight;
+    protected Point viewTopLeft;
+    protected Point viewBottomRight;
     private double worldMidX;
     private double worldMidY;
     private double viewMidX;
@@ -115,4 +115,14 @@ public class CoordinateTransformerImpl implements CoordinateTransformer {
         this.viewTopLeft = topLeft;
         this.viewBottomRight = bottomRight;
     }
+
+    @Override
+    public void moveViewWindow(double dx, double dy) {
+        viewTopLeft.setX(viewTopLeft.getX() + dx);
+        viewTopLeft.setY(viewTopLeft.getY() + dy);
+        viewBottomRight.setX(viewBottomRight.getX() + dx);
+        viewBottomRight.setY(viewBottomRight.getY() + dy);
+    }
+
+
 }

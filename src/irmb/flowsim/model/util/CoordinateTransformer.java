@@ -13,4 +13,6 @@ public interface CoordinateTransformer {
     void setWorldBounds(Point topLeft, Point bottomRight);
 
     void setViewBounds(Point topLeft, Point bottomRight);
+
+    void moveViewWindow(double dx, double dy);
 }

@@ -80,4 +80,8 @@ public class GraphicViewPresenter implements Observer {
     public void update(Observable o, Object arg) {
         graphicView.update();
     }
+
+    public void handleWheelClick(double x, double y) {
+        strategy.onWheelClick(x, y);
+    }
 }

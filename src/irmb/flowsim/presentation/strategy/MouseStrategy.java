@@ -13,6 +13,8 @@ public abstract class MouseStrategy extends Observable {
 
     public abstract void onMouseDrag(double x, double y);
 
+    public abstract void onWheelClick(double x, double y);
+
     public abstract void onRightClick();
 
     public abstract void onMouseRelease();
