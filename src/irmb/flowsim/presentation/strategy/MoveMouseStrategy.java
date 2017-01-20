@@ -1,6 +1,8 @@
-package irmb.flowsim.presentation.strategies;
+package irmb.flowsim.presentation.strategy;
 
 import irmb.flowsim.model.Point;
+import irmb.flowsim.model.util.CoordinateTransformer;
+import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.command.Command;
@@ -20,18 +22,22 @@ public class MoveMouseStrategy extends MouseStrategy {
     private List<PaintableShape> shapeList;
     private GraphicView graphicView;
     private CommandQueue commandQueue;
+    private String mouseButton = "";
+
+    private CoordinateTransformer transformer = new CoordinateTransformerImpl();
 
     public MoveMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList) {
         this.shapeList = shapeList;
         this.graphicView = graphicView;
         this.commandQueue = commandQueue;
+        transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
     }
 
     @Override
     public void onLeftClick(double x, double y) {
+        clickedPoint = new Point(x, y);
         for (PaintableShape p : shapeList) {
-            clickedPoint = new Point(x, y);
-            if (p.isPointOnBoundary(new Point(x, y), 3)) {
+            if (p.isPointOnBoundary(clickedPoint, 3)) {
                 moveShapeCommand = new MoveShapeCommand(p.getShape());
             }
         }
@@ -47,7 +53,23 @@ public class MoveMouseStrategy extends MouseStrategy {
         if (moveShapeCommand != null) {
             moveShape(x, y);
             graphicView.update();
+        } else if (mouseButton.equals("Wheel")) {
+            moveAllShapes(x, y);
+            graphicView.update();
         }
+    }
+
+    @Override
+    public void onWheelClick(double x, double y) {
+        clickedPoint = new Point(x, y);
+        mouseButton = "Wheel";
+    }
+
+    private void moveAllShapes(double x, double y) {
+        double dx = x - clickedPoint.getX();
+        double dy = y - clickedPoint.getY();
+        for (PaintableShape p : shapeList)
+            p.getShape().moveBy(dx, dy);
     }
 
     private void moveShape(double x, double y) {

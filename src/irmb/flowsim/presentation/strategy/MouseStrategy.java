@@ -1,4 +1,4 @@
-package irmb.flowsim.presentation.strategies;
+package irmb.flowsim.presentation.strategy;
 
 import java.util.Observable;
 
@@ -12,6 +12,8 @@ public abstract class MouseStrategy extends Observable {
     public abstract void onMouseMove(double x, double y);
 
     public abstract void onMouseDrag(double x, double y);
+
+    public abstract void onWheelClick(double x, double y);
 
     public abstract void onRightClick();
 

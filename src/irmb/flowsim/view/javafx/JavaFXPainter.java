@@ -9,9 +9,6 @@ import javafx.scene.canvas.GraphicsContext;
 public class JavaFXPainter implements Painter {
     private GraphicsContext graphicsContext;
 
-    public JavaFXPainter() {
-    }
-
     public JavaFXPainter(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
     }

@@ -1,4 +1,4 @@
-package irmb.flowsim.presentation.strategies;
+package irmb.flowsim.presentation.strategy;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.presentation.CommandQueue;
@@ -63,6 +63,10 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
 
     @Override
     public void onMouseDrag(double x, double y) {
+    }
+
+    @Override
+    public void onWheelClick(double x, double y) {
     }
 
     @Override

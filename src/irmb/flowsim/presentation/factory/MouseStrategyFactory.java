@@ -1,6 +1,6 @@
 package irmb.flowsim.presentation.factory;
 
-import irmb.flowsim.presentation.strategies.MouseStrategy;
+import irmb.flowsim.presentation.strategy.MouseStrategy;
 
 /**
  * Created by Sven on 10.01.2017.

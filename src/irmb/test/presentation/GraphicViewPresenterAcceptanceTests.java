@@ -1,6 +1,9 @@
 package irmb.test.presentation;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
+import irmb.flowsim.model.Line;
+import irmb.flowsim.model.Point;
+import irmb.flowsim.model.PolyLine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -8,9 +11,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
 import static irmb.mockito.verification.AtLeastThenForgetAll.atLeastThenForgetAll;
+import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
+import static irmb.test.util.TestUtil.makePoint;
 import static org.mockito.Mockito.*;
 
 /**
@@ -220,5 +224,54 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         coordinates.add(74.);
         return coordinates;
     }
+
+    @Test
+    public void moveViewWindowAcceptanceTest() {
+        buildLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+        List<Double> coordinates = makePolyLineCoordinates();
+        buildPolyLine(coordinates);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(10, 54, 65, 74);
+
+        Line line = (Line) shapeList.get(0).getShape();
+        PolyLine polyLine = (PolyLine) shapeList.get(1).getShape();
+
+        Point lineStart = makePoint(line.getFirst().getX(), line.getFirst().getY());
+        Point lineEnd = makePoint(line.getFirst().getX(), line.getFirst().getY());
+        List<Point> pointList = copyPolyLinePoints(polyLine);
+
+        sut.handleWheelClick(4, 5);
+        sut.handleMouseDrag(10, 10);
+        sut.handleMouseRelease();
+
+        verify(painterSpy, atLeastThenForget(1)).paintLine(19, 20, 24, 24);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(41, 45, 16, 59);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(16, 59, 71, 79);
+
+        assertExpectedPointEqualsActual(lineStart, line.getFirst());
+        assertExpectedPointEqualsActual(lineEnd, line.getSecond());
+
+        assertExpectedPointEqualsActual(pointList.get(0), polyLine.getPointList().get(0));
+        assertExpectedPointEqualsActual(pointList.get(1), polyLine.getPointList().get(1));
+        assertExpectedPointEqualsActual(pointList.get(2), polyLine.getPointList().get(2));
+
+//        performMove(10, 10, 3, 2);
+//        verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
+//        verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
+//        verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
+
+
+    }
+
+    private List<Point> copyPolyLinePoints(PolyLine polyLine) {
+        List<Point> pointList = new ArrayList<>();
+        for (Point p : polyLine.getPointList())
+            pointList.add(makePoint(p.getX(), p.getY()));
+        return pointList;
+    }
+
 
 }
