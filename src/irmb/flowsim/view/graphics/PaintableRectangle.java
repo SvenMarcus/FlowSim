@@ -3,6 +3,7 @@ package irmb.flowsim.view.graphics;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.Rectangle;
 import irmb.flowsim.model.Shape;
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Painter;
 
 /**
@@ -22,7 +23,7 @@ public class PaintableRectangle extends PaintableShape {
     }
 
     @Override
-    public void paint(Painter painter) {
+    public void paint(Painter painter, CoordinateTransformer transformer) {
         Point first = rectangle.getFirst();
         Point second = rectangle.getSecond();
         double minX = first.getX() < second.getX() ? first.getX() : second.getX();

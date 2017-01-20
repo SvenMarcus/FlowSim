@@ -1,5 +1,8 @@
 package irmb.flowsim.presentation;
 
+import irmb.flowsim.model.Point;
+import irmb.flowsim.model.util.CoordinateTransformer;
+import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.MoveMouseStrategy;
@@ -22,6 +25,7 @@ public class GraphicViewPresenter implements Observer {
 
 
     private MouseStrategy strategy;
+    private CoordinateTransformer transformer = new CoordinateTransformerImpl();
 
     public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList) {
         this.factory = strategyFactory;
@@ -29,6 +33,7 @@ public class GraphicViewPresenter implements Observer {
         this.shapeList = shapeList;
         this.commandQueue.addObserver(this);
         strategy = factory.makeStrategy("Move");
+        transformer.setWorldBounds(new Point(-10, 10), new Point(10, -10));
     }
 
     private MoveMouseStrategy makeMouseMoveStrategy() {
@@ -37,10 +42,12 @@ public class GraphicViewPresenter implements Observer {
 
     public void setGraphicView(GraphicView graphicView) {
         this.graphicView = graphicView;
+        graphicView.setCoordinateTransformer(transformer);
     }
 
     public void handleLeftClick(double x, double y) {
-        strategy.onLeftClick(x, y);
+        Point p = transformer.transformToWorldPoint(new Point(x, y));
+        strategy.onLeftClick(p.getX(), p.getY());
     }
 
     public void handleRightClick() {
@@ -48,11 +55,13 @@ public class GraphicViewPresenter implements Observer {
     }
 
     public void handleMouseMove(double x, double y) {
-        strategy.onMouseMove(x, y);
+        Point p = transformer.transformToWorldPoint(new Point(x, y));
+        strategy.onMouseMove(p.getX(), p.getY());
     }
 
     public void handleMouseDrag(double x, double y) {
-        strategy.onMouseDrag(x, y);
+        Point p = transformer.transformToWorldPoint(new Point(x, y));
+        strategy.onMouseDrag(p.getX(), p.getY());
     }
 
     public void handleMouseRelease() {
@@ -82,6 +91,7 @@ public class GraphicViewPresenter implements Observer {
     }
 
     public void handleWheelClick(double x, double y) {
-        strategy.onWheelClick(x, y);
+        Point p = transformer.transformToWorldPoint(new Point(x, y));
+        strategy.onWheelClick(p.getX(), p.getY());
     }
 }

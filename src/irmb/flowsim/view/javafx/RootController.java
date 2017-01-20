@@ -1,5 +1,6 @@
 package irmb.flowsim.view.javafx;
 
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -34,6 +35,7 @@ public class RootController implements GraphicView {
 
     private GraphicViewPresenter presenter;
     private JavaFXPainter painter;
+    private CoordinateTransformer transformer;
 
     public RootController() {
     }
@@ -102,7 +104,12 @@ public class RootController implements GraphicView {
         if (painter == null)
             painter = new JavaFXPainter(graphicsContext2D);
         for (PaintableShape p : presenter.getPaintableList()) {
-            p.paint(painter);
+            p.paint(painter, null);
         }
+    }
+
+    @Override
+    public void setCoordinateTransformer(CoordinateTransformer transformer) {
+        this.transformer = transformer;
     }
 }
