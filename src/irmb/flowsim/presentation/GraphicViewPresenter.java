@@ -26,6 +26,8 @@ public class GraphicViewPresenter implements Observer {
 
     private MouseStrategy strategy;
     private CoordinateTransformer transformer = new CoordinateTransformerImpl();
+    private Point clickedPoint;
+    private MouseButton mouseButton;
 
     public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList) {
         this.factory = strategyFactory;
@@ -46,7 +48,9 @@ public class GraphicViewPresenter implements Observer {
     }
 
     public void handleLeftClick(double x, double y) {
-        Point p = transformer.transformToWorldPoint(new Point(x, y));
+        mouseButton = MouseButton.LEFT;
+        clickedPoint = new Point(x, y);
+        Point p = transformer.transformToWorldPoint(clickedPoint);
         strategy.onLeftClick(p.getX(), p.getY());
     }
 
@@ -62,6 +66,10 @@ public class GraphicViewPresenter implements Observer {
     public void handleMouseDrag(double x, double y) {
         Point p = transformer.transformToWorldPoint(new Point(x, y));
         strategy.onMouseDrag(p.getX(), p.getY());
+        if (mouseButton == MouseButton.MIDDLE) {
+            moveViewWindow(x, y);
+            graphicView.update();
+        }
     }
 
     public void handleMouseRelease() {
@@ -85,13 +93,26 @@ public class GraphicViewPresenter implements Observer {
         return shapeList;
     }
 
+    public void handleMiddleClick(double x, double y) {
+        mouseButton = MouseButton.MIDDLE;
+        clickedPoint = new Point(x, y);
+        Point p = transformer.transformToWorldPoint(clickedPoint);
+        strategy.onWheelClick(p.getX(), p.getY());
+
+    }
+
+    private void moveViewWindow(double x, double y) {
+        double dx = x - clickedPoint.getX();
+        double dy = y - clickedPoint.getY();
+
+        transformer.moveViewWindow(dx, dy);
+
+        clickedPoint.setX(x);
+        clickedPoint.setY(y);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         graphicView.update();
-    }
-
-    public void handleWheelClick(double x, double y) {
-        Point p = transformer.transformToWorldPoint(new Point(x, y));
-        strategy.onWheelClick(p.getX(), p.getY());
     }
 }

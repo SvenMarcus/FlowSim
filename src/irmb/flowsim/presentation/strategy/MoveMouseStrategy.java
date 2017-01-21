@@ -24,20 +24,18 @@ public class MoveMouseStrategy extends MouseStrategy {
     private CommandQueue commandQueue;
     private String mouseButton = "";
 
-    private CoordinateTransformer transformer = new CoordinateTransformerImpl();
 
     public MoveMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList) {
         this.shapeList = shapeList;
         this.graphicView = graphicView;
         this.commandQueue = commandQueue;
-        transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
     }
 
     @Override
     public void onLeftClick(double x, double y) {
         clickedPoint = new Point(x, y);
         for (PaintableShape p : shapeList) {
-            if (p.isPointOnBoundary(clickedPoint, 3)) {
+            if (p.isPointOnBoundary(clickedPoint, 1)) {
                 moveShapeCommand = new MoveShapeCommand(p.getShape());
             }
         }
@@ -53,16 +51,12 @@ public class MoveMouseStrategy extends MouseStrategy {
         if (moveShapeCommand != null) {
             moveShape(x, y);
             graphicView.update();
-        } else if (mouseButton.equals("Wheel")) {
-            moveAllShapes(x, y);
-            graphicView.update();
         }
     }
 
     @Override
     public void onWheelClick(double x, double y) {
-        clickedPoint = new Point(x, y);
-        mouseButton = "Wheel";
+
     }
 
     private void moveAllShapes(double x, double y) {

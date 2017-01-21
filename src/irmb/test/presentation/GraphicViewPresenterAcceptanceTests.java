@@ -148,14 +148,14 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.beginPaint("Line");
 
         buildLine(13, 15, 18, 19);
-        verify(painterSpy, atLeastOnce()).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
 
         sut.handleLeftClick(15, 18);
         sut.handleMouseDrag(20, 24);
-        verify(painterSpy, atLeastOnce()).paintLine(18, 21, 23, 25);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
 
         sut.handleMouseDrag(3, 10);
-        verify(painterSpy, atLeastOnce()).paintLine(1, 7, 6, 11);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(1, 7, 6, 11);
 
         sut.handleMouseRelease();
 
@@ -240,10 +240,11 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         PolyLine polyLine = (PolyLine) shapeList.get(1).getShape();
 
         Point lineStart = makePoint(line.getFirst().getX(), line.getFirst().getY());
-        Point lineEnd = makePoint(line.getFirst().getX(), line.getFirst().getY());
+        Point lineEnd = makePoint(line.getSecond().getX(), line.getSecond().getY());
         List<Point> pointList = copyPolyLinePoints(polyLine);
 
-        sut.handleWheelClick(4, 5);
+        sut.handleMiddleClick(4, 5);
+        sut.handleMouseDrag(-3, 1);
         sut.handleMouseDrag(10, 10);
         sut.handleMouseRelease();
 
@@ -258,10 +259,13 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         assertExpectedPointEqualsActual(pointList.get(1), polyLine.getPointList().get(1));
         assertExpectedPointEqualsActual(pointList.get(2), polyLine.getPointList().get(2));
 
-//        performMove(10, 10, 3, 2);
-//        verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
-//        verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
-//        verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
+
+        sut.handleMiddleClick(10, 10);
+        sut.handleMouseDrag(3, 2);
+        sut.handleMouseRelease();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
 
 
     }

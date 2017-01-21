@@ -19,9 +19,7 @@ public class GraphicViewPresenterWindowOperationsTest extends GraphicViewPresent
         buildLine(23, 14, 65, 48);
         verify(painterSpy, atLeastThenForget(1)).paintLine(23, 14, 65, 48);
 
-        sut.handleWheelClick(10, 10);
-        sut.handleMouseDrag(15, 17);
-        sut.handleMouseRelease();
+        performPan(10, 10, 15, 17);
 
         verify(painterSpy, atLeastThenForget(1)).paintLine(28, 21, 70, 55);
     }
@@ -35,12 +33,30 @@ public class GraphicViewPresenterWindowOperationsTest extends GraphicViewPresent
         Point lineStart = makePoint(line.getFirst().getX(), line.getFirst().getY());
         Point lineEnd = makePoint(line.getSecond().getX(), line.getSecond().getY());
 
-        sut.handleWheelClick(10, 10);
-        sut.handleMouseDrag(15, 17);
-        sut.handleMouseRelease();
+        performPan(10, 10, 15, 17);
 
         verify(painterSpy, atLeastThenForget(1)).paintLine(28, 21, 70, 55);
         assertExpectedPointEqualsActual(lineStart, line.getFirst());
         assertExpectedPointEqualsActual(lineEnd, line.getSecond());
+    }
+
+    @Test
+    public void whenDraggingMouseTwice_shouldMoveWindowTwice() {
+        buildLine(23, 14, 65, 48);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(23, 14, 65, 48);
+
+        sut.handleMiddleClick(10, 10);
+        sut.handleMouseDrag(15, 17);
+
+        verify(painterSpy, atLeastThenForget(1)).paintLine(28, 21, 70, 55);
+
+        sut.handleMouseDrag(8, 12);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(21, 16, 63, 50);
+    }
+
+    private void performPan(double x1, double y1, double x2, double y2) {
+        sut.handleMiddleClick(x1, y1);
+        sut.handleMouseDrag(x2, y2);
+        sut.handleMouseRelease();
     }
 }

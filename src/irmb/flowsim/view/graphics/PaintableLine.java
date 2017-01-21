@@ -25,7 +25,7 @@ public class PaintableLine extends PaintableShape {
     public void paint(Painter painter, CoordinateTransformer transformer) {
         Point start = transformer.transformToPointOnScreen(line.getFirst());
         Point end = transformer.transformToPointOnScreen(line.getSecond());
-        painter.paintLine(start.getX(), start.getY(), end.getX(), end.getY());
+        painter.paintLine((int) Math.round(start.getX()), (int) Math.round(start.getY()), (int) Math.round(end.getX()), (int) Math.round(end.getY()));
     }
 
     @Override
