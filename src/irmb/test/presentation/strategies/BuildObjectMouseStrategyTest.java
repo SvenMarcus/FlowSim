@@ -1,25 +1,14 @@
 package irmb.test.presentation.strategies;
 
-import irmb.flowsim.model.Line;
-import irmb.flowsim.model.Point;
-import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
-import irmb.flowsim.presentation.builder.PaintableLineBuilder;
-import irmb.flowsim.presentation.builder.PaintablePolyLineBuilder;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.presentation.factory.ShapeFactory;
 import irmb.flowsim.presentation.strategy.BuildObjectMouseStrategy;
 import irmb.flowsim.view.graphics.PaintableShape;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Observer;
 
@@ -46,11 +35,12 @@ public class BuildObjectMouseStrategyTest {
         shapeList = mock(List.class);
         observer = mock(Observer.class);
         factory = mock(PaintableShapeBuilderFactory.class);
+        when(factory.makeShapeBuilder("Line")).thenReturn(lineBuilderMock);
         lineBuilderMock = mock(PaintableShapeBuilder.class);
-        setMockBehavior();
+        setLineBuilderMockBehavior();
     }
 
-    private void setMockBehavior() {
+    private void setLineBuilderMockBehavior() {
         doAnswer(invocationOnMock -> {
             incrementPointsAdded();
             return null;
@@ -70,7 +60,7 @@ public class BuildObjectMouseStrategyTest {
 
     @Test
     public void whenFinishingTwoPointObject_shouldNotifyObserver() {
-        when(factory.makeShapeBuilder("Line")).thenReturn(lineBuilderMock);
+
 
         makeBuildObjectMouseStrategyWith("Line");
 

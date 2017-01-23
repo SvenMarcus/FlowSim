@@ -28,7 +28,7 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
 
     public BuildObjectMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList, PaintableShapeBuilder builder, CoordinateTransformer transformer) {
         this.commandQueue = commandQueue;
-        shapeBuilder = builder;
+        this.shapeBuilder = builder;
         this.graphicView = graphicView;
         this.shapeList = shapeList;
     }
