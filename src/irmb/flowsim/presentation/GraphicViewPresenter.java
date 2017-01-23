@@ -38,8 +38,8 @@ public class GraphicViewPresenter implements Observer {
         transformer.setWorldBounds(new Point(-10, 10), new Point(10, -10));
     }
 
-    private MoveMouseStrategy makeMouseMoveStrategy() {
-        return new MoveMouseStrategy(commandQueue, graphicView, shapeList);
+    private MouseStrategy makeMouseMoveStrategy() {
+        return factory.makeStrategy("Move");
     }
 
     public void setGraphicView(GraphicView graphicView) {

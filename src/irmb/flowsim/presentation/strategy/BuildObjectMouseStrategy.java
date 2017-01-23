@@ -1,6 +1,7 @@
 package irmb.flowsim.presentation.strategy;
 
 import irmb.flowsim.model.Point;
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
@@ -25,7 +26,7 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     private AddPaintableShapeCommand addPaintableShapeCommand;
     private CommandQueue commandQueue;
 
-    public BuildObjectMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList, PaintableShapeBuilder builder) {
+    public BuildObjectMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList, PaintableShapeBuilder builder, CoordinateTransformer transformer) {
         this.commandQueue = commandQueue;
         shapeBuilder = builder;
         this.graphicView = graphicView;

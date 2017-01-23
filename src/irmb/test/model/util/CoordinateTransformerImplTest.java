@@ -66,25 +66,35 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
         Point p = makePoint(0, 0);
 
         Point result = sut.transformToPointOnScreen(p);
-        assertExpectedPointEqualsActual(makePoint(437.5, 375), result);
+        assertExpectedPointEqualsActual(makePoint(437.5, 225), result);
 
-//        p = makePoint(-3, 12);
+        p = makePoint(-3, 12);
 
-//        result = sut.transformToPointOnScreen(p);
-//        assertExpectedPointEqualsActual(makePoint(393.25, 70.5), result);
-//
-//        p = makePoint(-18, 20);
-//
-//        result = sut.transformToPointOnScreen(p);
-//        assertExpectedPointEqualsActual(makePoint(190.75, -37.5), result);
+        result = sut.transformToPointOnScreen(p);
+        assertExpectedPointEqualsActual(makePoint(392.5, 45), result);
+
+        p = makePoint(-18, 20);
+
+        result = sut.transformToPointOnScreen(p);
+        assertExpectedPointEqualsActual(makePoint(167.5, -75), result);
     }
 
     @Test
     public void testTransformToWorldPoint() {
-        Point p = makePoint(433.75, 232.5);
+        Point p = makePoint(437.5, 225);
 
         Point result = sut.transformToWorldPoint(p);
         assertExpectedPointEqualsActual(makePoint(0, 0), result);
+
+        p = makePoint(392.5, 45);
+
+        result = sut.transformToWorldPoint(p);
+        assertExpectedPointEqualsActual(makePoint(-3, 12), result);
+
+        p = makePoint(167.5, -75);
+
+        result = sut.transformToWorldPoint(p);
+        assertExpectedPointEqualsActual(makePoint(-18, 20), result);
     }
 
     @Test
@@ -97,10 +107,10 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
     @Test
     public void testScaleToScreenLength() {
         double screenLength = sut.scaleToScreenLength(5);
-        assertEquals(5 * 13.5, screenLength, DELTA);
+        assertEquals(5 * 15, screenLength, DELTA);
 
         screenLength = sut.scaleToScreenLength(34);
-        assertEquals(34 * 13.5, screenLength, DELTA);
+        assertEquals(34 * 15, screenLength, DELTA);
     }
 
 

@@ -35,7 +35,7 @@ public class JFXMainWindow extends Application {
         CommandQueue commandQueue = new CommandQueue();
 
         RootController rootController = new RootController();
-        MouseStrategyFactoryImpl mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory);
+        MouseStrategyFactoryImpl mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory, null);
         GraphicViewPresenter presenter = makePresenter(commandQueue, shapeList, mouseStrategyFactory);
         rootController.setPresenter(presenter);
 

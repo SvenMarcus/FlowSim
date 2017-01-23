@@ -4,11 +4,20 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
+import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.presentation.Painter;
+import irmb.flowsim.presentation.factory.*;
+import irmb.flowsim.view.graphics.PaintableShape;
+import irmb.test.view.PainterMockFactory;
+import irmb.test.view.SwingGraphicViewFake;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
@@ -21,7 +30,7 @@ import static org.mockito.Mockito.*;
  * Created by Sven on 15.12.2016.
  */
 @RunWith(HierarchicalContextRunner.class)
-public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTest {
+public class GraphicViewPresenterAcceptanceTests extends  GraphicViewPresenterTest {
 
     public class SimplePaintingContext {
         @Test

@@ -1,9 +1,7 @@
 package irmb.test.presentation.command;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
-import irmb.flowsim.model.Line;
 import irmb.flowsim.presentation.command.AddPaintableShapeCommand;
-import irmb.flowsim.view.graphics.PaintableLine;
 import irmb.flowsim.view.graphics.PaintableShape;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by Sven on 03.01.2017.
@@ -21,20 +20,20 @@ import static org.junit.Assert.*;
 public class AddPaintableShapeCommandTest {
 
     private AddPaintableShapeCommand sut;
-    private PaintableShape line;
+    private PaintableShape shape;
     private List<PaintableShape> shapeList;
 
     @Before
     public void setUp() throws Exception {
-        line = new PaintableLine(new Line());
+        shape = mock(PaintableShape.class);
         shapeList = new LinkedList<>();
-        sut = new AddPaintableShapeCommand(line, shapeList);
+        sut = new AddPaintableShapeCommand(shape, shapeList);
     }
 
     @Test
     public void whenExecuting_shouldAddShapeToList() {
         sut.execute();
-        assertTrue(shapeList.contains(line));
+        assertTrue(shapeList.contains(shape));
     }
 
     public class CommandExecutedContext {
@@ -46,14 +45,14 @@ public class AddPaintableShapeCommandTest {
         @Test
         public void whenCallingExecute_shouldNotAddShapeAgain() {
             sut.execute();
-            assertTrue(shapeList.contains(line));
+            assertTrue(shapeList.contains(shape));
             assertEquals(1, shapeList.size());
         }
 
         @Test
         public void whenCallingUndo_shouldRemoveShapeFromList() {
             sut.undo();
-            assertFalse(shapeList.contains(line));
+            assertFalse(shapeList.contains(shape));
         }
 
         public class UndoCalledContext {
@@ -65,7 +64,7 @@ public class AddPaintableShapeCommandTest {
             @Test
             public void whenCallingRedo_shouldAddShapeToList() {
                 sut.redo();
-                assertTrue(shapeList.contains(line));
+                assertTrue(shapeList.contains(shape));
             }
         }
     }

@@ -2,7 +2,6 @@ package irmb.flowsim.presentation.strategy;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.command.Command;
@@ -25,7 +24,7 @@ public class MoveMouseStrategy extends MouseStrategy {
     private String mouseButton = "";
 
 
-    public MoveMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList) {
+    public MoveMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
         this.shapeList = shapeList;
         this.graphicView = graphicView;
         this.commandQueue = commandQueue;

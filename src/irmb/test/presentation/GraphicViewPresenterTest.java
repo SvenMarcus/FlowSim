@@ -27,6 +27,7 @@ public class GraphicViewPresenterTest {
     protected SwingGraphicViewFake graphicView;
     protected GraphicViewPresenter sut;
 
+
     @Before
     public void setUp() throws Exception {
         painterSpy = PainterMockFactory.makePainter("Swing");
@@ -35,7 +36,7 @@ public class GraphicViewPresenterTest {
         commandQueue = spy(new CommandQueue());
         shapeList = new LinkedList<>();
         graphicView = spy(new SwingGraphicViewFake());
-        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory);
+        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory, null);
         sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList);
         graphicView.setPresenter(sut);
         graphicView.setPainter(painterSpy);
