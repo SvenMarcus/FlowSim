@@ -17,4 +17,6 @@ public interface CoordinateTransformer {
     void moveViewWindow(double dx, double dy);
 
     double scaleToScreenLength(double length);
+
+    double scaleToWorldLength(double length);
 }

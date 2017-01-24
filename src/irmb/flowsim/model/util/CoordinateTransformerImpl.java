@@ -3,6 +3,8 @@ package irmb.flowsim.model.util;
 import Jama.Matrix;
 import irmb.flowsim.model.Point;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sven on 10.01.2017.
  */
@@ -129,5 +131,9 @@ public class CoordinateTransformerImpl implements CoordinateTransformer {
         return getScaleFactor() * length;
     }
 
+    @Override
+    public double scaleToWorldLength(double length) {
+        return length / getScaleFactor();
+    }
 
 }

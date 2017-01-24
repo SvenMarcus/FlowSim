@@ -23,7 +23,7 @@ public class Main {
         List<PaintableShape> shapeList = new LinkedList<>();
         MainWindow window = new MainWindow();
         MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, window.getGraphicView(), builderFactory, null);
-        GraphicViewPresenter presenter = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList);
+        GraphicViewPresenter presenter = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, null);
 
         presenter.setGraphicView(window.getGraphicView());
         window.setVisible(true);

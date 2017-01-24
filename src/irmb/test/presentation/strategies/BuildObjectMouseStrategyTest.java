@@ -1,5 +1,7 @@
 package irmb.test.presentation.strategies;
 
+import irmb.flowsim.model.Point;
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
@@ -27,6 +29,7 @@ public class BuildObjectMouseStrategyTest {
     private BuildObjectMouseStrategy sut;
     private int pointsAdded;
     private PaintableShapeBuilder lineBuilderMock;
+    private CoordinateTransformer transformer;
 
     @Before
     public void setUp() throws Exception {
@@ -34,10 +37,20 @@ public class BuildObjectMouseStrategyTest {
         graphicView = mock(GraphicView.class);
         shapeList = mock(List.class);
         observer = mock(Observer.class);
-        factory = mock(PaintableShapeBuilderFactory.class);
-        when(factory.makeShapeBuilder("Line")).thenReturn(lineBuilderMock);
+        transformer = mock(CoordinateTransformer.class);
+        setTransformerMockBehavior();
         lineBuilderMock = mock(PaintableShapeBuilder.class);
         setLineBuilderMockBehavior();
+        factory = mock(PaintableShapeBuilderFactory.class);
+        setFactoryMockBehavior();
+    }
+
+    private void setFactoryMockBehavior() {
+        when(factory.makeShapeBuilder("Line")).thenReturn(lineBuilderMock);
+    }
+
+    private void setTransformerMockBehavior() {
+        when(transformer.transformToWorldPoint(any())).thenReturn(mock(Point.class));
     }
 
     private void setLineBuilderMockBehavior() {
@@ -54,14 +67,12 @@ public class BuildObjectMouseStrategyTest {
 
     private void makeBuildObjectMouseStrategyWith(String type) {
         PaintableShapeBuilder builder = factory.makeShapeBuilder(type);
-        sut = new BuildObjectMouseStrategy(commandQueue, graphicView, shapeList, builder, null);
+        sut = new BuildObjectMouseStrategy(commandQueue, graphicView, shapeList, builder, transformer);
         sut.addObserver(observer);
     }
 
     @Test
     public void whenFinishingTwoPointObject_shouldNotifyObserver() {
-
-
         makeBuildObjectMouseStrategyWith("Line");
 
         sut.onLeftClick(3, 4);

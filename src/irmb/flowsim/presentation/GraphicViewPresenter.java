@@ -5,7 +5,6 @@ import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
-import irmb.flowsim.presentation.strategy.MoveMouseStrategy;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
@@ -29,13 +28,13 @@ public class GraphicViewPresenter implements Observer {
     private Point clickedPoint;
     private MouseButton mouseButton;
 
-    public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList) {
+    public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
         this.factory = strategyFactory;
         this.commandQueue = commandQueue;
         this.shapeList = shapeList;
         this.commandQueue.addObserver(this);
         strategy = factory.makeStrategy("Move");
-        transformer.setWorldBounds(new Point(-10, 10), new Point(10, -10));
+        this.transformer = transformer;
     }
 
     private MouseStrategy makeMouseMoveStrategy() {
@@ -50,8 +49,7 @@ public class GraphicViewPresenter implements Observer {
     public void handleLeftClick(double x, double y) {
         mouseButton = MouseButton.LEFT;
         clickedPoint = new Point(x, y);
-        Point p = transformer.transformToWorldPoint(clickedPoint);
-        strategy.onLeftClick(p.getX(), p.getY());
+        strategy.onLeftClick(x, y);
     }
 
     public void handleRightClick() {
@@ -59,13 +57,11 @@ public class GraphicViewPresenter implements Observer {
     }
 
     public void handleMouseMove(double x, double y) {
-        Point p = transformer.transformToWorldPoint(new Point(x, y));
-        strategy.onMouseMove(p.getX(), p.getY());
+        strategy.onMouseMove(x, y);
     }
 
     public void handleMouseDrag(double x, double y) {
-        Point p = transformer.transformToWorldPoint(new Point(x, y));
-        strategy.onMouseDrag(p.getX(), p.getY());
+        strategy.onMouseDrag(x, y);
         if (mouseButton == MouseButton.MIDDLE) {
             moveViewWindow(x, y);
             graphicView.update();
@@ -96,8 +92,7 @@ public class GraphicViewPresenter implements Observer {
     public void handleMiddleClick(double x, double y) {
         mouseButton = MouseButton.MIDDLE;
         clickedPoint = new Point(x, y);
-        Point p = transformer.transformToWorldPoint(clickedPoint);
-        strategy.onWheelClick(p.getX(), p.getY());
+        strategy.onWheelClick(x, y);
 
     }
 

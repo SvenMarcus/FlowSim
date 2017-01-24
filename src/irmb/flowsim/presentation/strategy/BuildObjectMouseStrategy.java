@@ -22,6 +22,7 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     private int pointsAdded = 0;
     private GraphicView graphicView;
     private List<PaintableShape> shapeList;
+    private CoordinateTransformer transformer;
     private PaintableShapeBuilder shapeBuilder;
     private AddPaintableShapeCommand addPaintableShapeCommand;
     private CommandQueue commandQueue;
@@ -31,17 +32,15 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
         this.shapeBuilder = builder;
         this.graphicView = graphicView;
         this.shapeList = shapeList;
-    }
-
-    public void setObjectType(String type) {
-        shapeBuilder = factory.makeShapeBuilder(type);
+        this.transformer = transformer;
     }
 
     @Override
     public void onLeftClick(double x, double y) {
         if (hasShapeBuilder()) {
+            Point point = transformer.transformToWorldPoint(new Point(x, y));
             setChanged();
-            addPointToShape(x, y);
+            addPointToShape(point.getX(), point.getY());
             addShapeToList();
             if (pointsAdded >= 2) {
                 graphicView.update();
@@ -52,11 +51,12 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
 
     @Override
     public void onMouseMove(double x, double y) {
+        Point point = transformer.transformToWorldPoint(new Point(x, y));
         if (hasShapeBuilder()) {
             if (pointsAdded == 1) {
-                addPointToShape(x, y);
+                addPointToShape(point.getX(), point.getY());
             } else if (pointsAdded > 1)
-                shapeBuilder.setLastPoint(new Point(x, y));
+                shapeBuilder.setLastPoint(point);
             if (pointsAdded > 0)
                 graphicView.update();
         }

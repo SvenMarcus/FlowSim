@@ -1,5 +1,7 @@
 package irmb.test.presentation;
 
+import irmb.flowsim.model.util.CoordinateTransformer;
+import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.Painter;
@@ -13,6 +15,7 @@ import org.junit.Before;
 import java.util.LinkedList;
 import java.util.List;
 
+import static irmb.test.util.TestUtil.makePoint;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -25,22 +28,30 @@ public class GraphicViewPresenterTest {
     protected PaintableShapeBuilderFactory shapeBuilderFactory;
     protected Painter painterSpy;
     protected SwingGraphicViewFake graphicView;
+    protected CoordinateTransformer transformer;
     protected GraphicViewPresenter sut;
 
 
     @Before
     public void setUp() throws Exception {
+        transformer = new CoordinateTransformerImpl();
+        setWorldAndViewBounds();
         painterSpy = PainterMockFactory.makePainter("Swing");
         ShapeFactory factory = spy(new ShapeFactoryImpl());
         shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory));
         commandQueue = spy(new CommandQueue());
         shapeList = new LinkedList<>();
         graphicView = spy(new SwingGraphicViewFake());
-        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory, null);
-        sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList);
+        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory, transformer);
+        sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer);
         graphicView.setPresenter(sut);
         graphicView.setPainter(painterSpy);
         sut.setGraphicView(graphicView);
+    }
+
+    private void setWorldAndViewBounds() {
+        transformer.setWorldBounds(makePoint(-15, 10), makePoint(10, -10));
+        transformer.setViewBounds(makePoint(0, 0), makePoint(800, 600));
     }
 
 

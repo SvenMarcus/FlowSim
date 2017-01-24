@@ -21,20 +21,23 @@ public class MoveMouseStrategy extends MouseStrategy {
     private List<PaintableShape> shapeList;
     private GraphicView graphicView;
     private CommandQueue commandQueue;
-    private String mouseButton = "";
+    private CoordinateTransformer transformer;
 
 
     public MoveMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
         this.shapeList = shapeList;
         this.graphicView = graphicView;
         this.commandQueue = commandQueue;
+        this.transformer = transformer;
     }
 
     @Override
     public void onLeftClick(double x, double y) {
         clickedPoint = new Point(x, y);
+        Point point = transformer.transformToWorldPoint(clickedPoint);
+        double tolerance = transformer.scaleToWorldLength(3);
         for (PaintableShape p : shapeList) {
-            if (p.isPointOnBoundary(clickedPoint, 1)) {
+            if (p.isPointOnBoundary(point, tolerance)) {
                 moveShapeCommand = new MoveShapeCommand(p.getShape());
             }
         }
@@ -58,18 +61,13 @@ public class MoveMouseStrategy extends MouseStrategy {
 
     }
 
-    private void moveAllShapes(double x, double y) {
-        double dx = x - clickedPoint.getX();
-        double dy = y - clickedPoint.getY();
-        for (PaintableShape p : shapeList)
-            p.getShape().moveBy(dx, dy);
-    }
-
     private void moveShape(double x, double y) {
         double dx = x - clickedPoint.getX();
         double dy = y - clickedPoint.getY();
 
-        moveShapeCommand.setDelta(dx, dy);
+        double viewDx = transformer.scaleToWorldLength(dx);
+        double viewDy = -transformer.scaleToWorldLength(dy);
+        moveShapeCommand.setDelta(viewDx, viewDy);
         moveShapeCommand.execute();
 
         clickedPoint.setX(x);

@@ -113,5 +113,21 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
         assertEquals(34 * 15, screenLength, DELTA);
     }
 
+    @Test
+    public void testScaleToWorldLength() {
+        double worldLength = sut.scaleToWorldLength(15);
+        assertEquals(1, worldLength, DELTA);
+
+        worldLength = sut.scaleToWorldLength(75);
+        assertEquals(75 / 15, worldLength, DELTA);
+
+        sut.setWorldBounds(makePoint(0, 0), makePoint(800, 600));
+        sut.setViewBounds(makePoint(-15, 15), makePoint(10, -25));
+
+        double expectedScaleFactor = 0.03125;
+        worldLength = sut.scaleToWorldLength(15);
+        assertEquals(15 / expectedScaleFactor, worldLength);
+    }
+
 
 }
