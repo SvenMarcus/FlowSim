@@ -5,9 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Sven on 22.12.2016.
@@ -53,6 +52,23 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             sut.undo();
             verify(graphicView, times(5)).update();
             verifyNoMoreInteractions(painterSpy);
+        }
+
+        public class MovedViewWindowContext {
+            @Before
+            public void setUp() {
+                clearInvocations(painterSpy);
+                sut.handleMiddleClick(10, 10);
+                sut.handleMouseDrag(20, 5);
+                sut.handleMouseRelease();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+            }
+
+            @Test
+            public void whenCallingUndo_shouldUndoPan() {
+                sut.undo();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+            }
         }
 
         public class MovedOnceContext {

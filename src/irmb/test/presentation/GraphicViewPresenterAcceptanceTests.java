@@ -30,7 +30,7 @@ import static org.mockito.Mockito.*;
  * Created by Sven on 15.12.2016.
  */
 @RunWith(HierarchicalContextRunner.class)
-public class GraphicViewPresenterAcceptanceTests extends  GraphicViewPresenterTest {
+public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTest {
 
     public class SimplePaintingContext {
         @Test
@@ -221,6 +221,7 @@ public class GraphicViewPresenterAcceptanceTests extends  GraphicViewPresenterTe
 
         sut.redo();
         verifyNoMoreInteractions(painterSpy);
+
     }
 
     private List<Double> makePolyLineCoordinates() {
