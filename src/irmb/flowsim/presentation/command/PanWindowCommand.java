@@ -12,6 +12,7 @@ public class PanWindowCommand implements Command {
     private double dy;
     private double totalDx;
     private double totalDy;
+    private boolean calledExecute;
 
     public PanWindowCommand(CoordinateTransformer transformer) {
         this.transformer = transformer;
@@ -22,17 +23,23 @@ public class PanWindowCommand implements Command {
         transformer.moveViewWindow(dx, dy);
         totalDx += dx;
         totalDy += dy;
+        calledExecute = true;
     }
 
     @Override
     public void undo() {
-        transformer.moveViewWindow(-totalDx, -totalDy);
-        totalDx = totalDy = 0;
+        if (calledExecute) {
+            transformer.moveViewWindow(-totalDx, -totalDy);
+            calledExecute = false;
+        }
     }
 
     @Override
     public void redo() {
-        transformer.moveViewWindow(dx, dy);
+        if (!calledExecute) {
+            transformer.moveViewWindow(totalDx, totalDy);
+            calledExecute = true;
+        }
     }
 
     public void setDelta(double dx, double dy) {

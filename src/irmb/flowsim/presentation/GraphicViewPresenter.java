@@ -3,6 +3,7 @@ package irmb.flowsim.presentation;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
+import irmb.flowsim.presentation.command.PanWindowCommand;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -27,6 +28,7 @@ public class GraphicViewPresenter implements Observer {
     private CoordinateTransformer transformer = new CoordinateTransformerImpl();
     private Point clickedPoint;
     private MouseButton mouseButton;
+    private PanWindowCommand panWindowCommand;
 
     public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
         this.factory = strategyFactory;
@@ -100,7 +102,9 @@ public class GraphicViewPresenter implements Observer {
         double dx = x - clickedPoint.getX();
         double dy = y - clickedPoint.getY();
 
-        transformer.moveViewWindow(dx, dy);
+        panWindowCommand = new PanWindowCommand(transformer);
+        panWindowCommand.setDelta(dx, dy);
+        panWindowCommand.execute();
 
         clickedPoint.setX(x);
         clickedPoint.setY(y);
