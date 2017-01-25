@@ -72,6 +72,9 @@ public class GraphicViewPresenter implements Observer {
 
     public void handleMouseRelease() {
         strategy.onMouseRelease();
+        if (panWindowCommand != null)
+            commandQueue.add(panWindowCommand);
+        panWindowCommand = null;
     }
 
     public void undo() {
@@ -95,14 +98,14 @@ public class GraphicViewPresenter implements Observer {
         mouseButton = MouseButton.MIDDLE;
         clickedPoint = new Point(x, y);
         strategy.onWheelClick(x, y);
-
     }
 
     private void moveViewWindow(double x, double y) {
         double dx = x - clickedPoint.getX();
         double dy = y - clickedPoint.getY();
 
-        panWindowCommand = new PanWindowCommand(transformer);
+        if (panWindowCommand == null)
+            panWindowCommand = new PanWindowCommand(transformer);
         panWindowCommand.setDelta(dx, dy);
         panWindowCommand.execute();
 

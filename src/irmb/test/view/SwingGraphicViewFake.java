@@ -15,8 +15,9 @@ public class SwingGraphicViewFake extends SwingGraphicView {
 
     @Override
     public void update() {
-        for (PaintableShape p : presenter.getPaintableList())
+        for (PaintableShape p : presenter.getPaintableList()) {
             p.paint(painter, transformer);
+        }
     }
 
     public void setPainter(Painter painter) {

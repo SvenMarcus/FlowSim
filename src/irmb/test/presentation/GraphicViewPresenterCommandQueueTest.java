@@ -24,7 +24,6 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
         verifyNoMoreInteractions(painterSpy);
     }
 
-
     public class LineAddedContext {
         @Before
         public void setUp() {
@@ -54,23 +53,6 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             verifyNoMoreInteractions(painterSpy);
         }
 
-        public class MovedViewWindowContext {
-            @Before
-            public void setUp() {
-                clearInvocations(painterSpy);
-                sut.handleMiddleClick(10, 10);
-                sut.handleMouseDrag(20, 5);
-                sut.handleMouseRelease();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
-            }
-
-            @Test
-            public void whenCallingUndo_shouldUndoPan() {
-                sut.undo();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
-            }
-        }
-
         public class MovedOnceContext {
             @Before
             public void setUp() {
@@ -93,6 +75,83 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             }
         }
 
+        @Test
+        public void whenMovingWindowAndDraggingTwiceThenUndo_shouldUndoBothPans() {
+            clearInvocations(painterSpy);
+            sut.handleMiddleClick(10, 10);
+            sut.handleMouseDrag(20, 5);
+            sut.handleMouseDrag(15, 15);
+            sut.handleMouseRelease();
+
+            sut.undo();
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        }
+
+        @Test
+        public void whenMiddleClickingWithoutDragThenUndo_shouldRemoveLine() {
+            clearInvocations(painterSpy);
+            sut.handleMiddleClick(10, 5);
+            sut.handleMouseRelease();
+
+            sut.undo();
+            graphicView.update();
+            verifyNoMoreInteractions(painterSpy);
+        }
+
+        @Test
+        public void whenMovingWindowTwiceThenUndoTwice_shouldUndoBothPans() {
+            clearInvocations(painterSpy);
+            sut.handleMiddleClick(10, 10);
+            sut.handleMouseDrag(20, 5);
+            sut.handleMouseRelease();
+            verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+
+            sut.handleMiddleClick(10, 10);
+            sut.handleMouseDrag(3, 18);
+            sut.handleMouseRelease();
+            verify(painterSpy, atLeastThenForget(1)).paintLine(16, 18, 21, 22);
+
+            sut.undo();
+            verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+
+            sut.undo();
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        }
+
+        public class MovedViewWindowContext {
+            @Before
+            public void setUp() {
+                clearInvocations(painterSpy);
+                sut.handleMiddleClick(10, 10);
+                sut.handleMouseDrag(20, 5);
+                sut.handleMouseRelease();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+            }
+
+            @Test
+            public void whenCallingUndo_shouldUndoPan() {
+                sut.undo();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+            }
+
+            @Test
+            public void whenCallingUndo_shouldOnlyUndoPan() {
+                sut.undo();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+                graphicView.update();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+            }
+
+            @Test
+            public void whenCallingUndoThenRedo_shouldRedoPan() {
+                sut.undo();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+                sut.redo();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+            }
+        }
 
     }
 }
