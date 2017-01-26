@@ -9,8 +9,6 @@ import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by Sven on 13.12.2016.
@@ -34,7 +32,7 @@ public class GraphicViewPresenter {
         this.factory = strategyFactory;
         this.commandQueue = commandQueue;
         this.shapeList = shapeList;
-        this.commandQueue.addObserver((sender, args) -> graphicView.update());
+        this.commandQueue.addObserver((args) -> graphicView.update());
         strategy = factory.makeStrategy("Move");
         this.transformer = transformer;
     }
@@ -87,7 +85,7 @@ public class GraphicViewPresenter {
 
     public void beginPaint(String objectType) {
         strategy = factory.makeStrategy(objectType);
-        strategy.addObserver((o, arg) -> strategy = makeMouseMoveStrategy());
+        strategy.addObserver((arg) -> strategy = makeMouseMoveStrategy());
     }
 
     public List<PaintableShape> getPaintableList() {

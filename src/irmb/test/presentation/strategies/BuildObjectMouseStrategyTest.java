@@ -5,6 +5,8 @@ import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
+import irmb.flowsim.presentation.command.AddPaintableShapeCommand;
+import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.strategy.BuildObjectMouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
@@ -14,11 +16,15 @@ import irmb.flowsim.view.graphics.PaintableShape;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatcher;
 
 import java.util.List;
 
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
 
 /**
@@ -36,12 +42,17 @@ public class BuildObjectMouseStrategyTest {
     private PaintableShapeBuilder lineBuilderMock;
     private CoordinateTransformer transformer;
 
+    private Command receivedCommand;
+
     @Before
     public void setUp() throws Exception {
+        pointsAdded = 0;
+        receivedCommand = null;
         commandQueue = mock(CommandQueue.class);
         graphicView = mock(GraphicView.class);
         shapeList = mock(List.class);
         observer = mock(Observer.class);
+        setObserverMockBehavior();
         transformer = mock(CoordinateTransformer.class);
         setTransformerMockBehavior();
         lineBuilderMock = mock(PaintableShapeBuilder.class);
@@ -50,8 +61,18 @@ public class BuildObjectMouseStrategyTest {
         setFactoryMockBehavior();
     }
 
+    private void setObserverMockBehavior() {
+        doAnswer(invocationOnMock -> {
+            receivedCommand = ((StrategyEventArgs) invocationOnMock.getArgument(0)).getCommand();
+            return null;
+        }).when(observer).update(any());
+    }
+
     private void setFactoryMockBehavior() {
         when(factory.makeShapeBuilder("Line")).thenReturn(lineBuilderMock);
+        PaintableShapeBuilder polyLineBuilderMock = mock(PaintableShapeBuilder.class);
+        when(polyLineBuilderMock.isObjectFinished()).thenAnswer(invocationOnMock -> false);
+        when(factory.makeShapeBuilder("PolyLine")).thenReturn(polyLineBuilderMock);
     }
 
     private void setTransformerMockBehavior() {
@@ -83,8 +104,12 @@ public class BuildObjectMouseStrategyTest {
         sut.onLeftClick(3, 4);
         sut.onLeftClick(5, 6);
 
+        assertThatObserverWasNotifiedWithFinishedAndCommand();
+    }
 
-        verify(observer).update(argThat(sender -> sender == sut), argThat((StrategyEventArgs args) -> args.getState() == STRATEGY_STATE.FINISHED));
+    private void assertThatObserverWasNotifiedWithFinishedAndCommand() {
+        verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+        assertThat(receivedCommand, is(instanceOf(AddPaintableShapeCommand.class)));
     }
 
     @Test
@@ -93,7 +118,31 @@ public class BuildObjectMouseStrategyTest {
 
         sut.onRightClick();
 
-        verify(observer).update(argThat(sender -> sender == sut), argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+        verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+    }
+
+    @Test
+    public void whenRightClickingAfterAddingOnePoint_eventArgsShouldNotContainCommand() {
+        makeBuildObjectMouseStrategyWith("Line");
+
+        sut.onLeftClick(10, 10);
+        sut.onRightClick();
+
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+        verify(observer).update(captor.capture());
+        assertNull(captor.getValue().getCommand());
+    }
+
+    @Test
+    public void whenRightClickingAfterAddingMoreThanTwoPoints_eventArgsShouldHaveAddPaintableShapeCommand() {
+        makeBuildObjectMouseStrategyWith("PolyLine");
+
+        sut.onLeftClick(10, 10);
+        sut.onLeftClick(13, 15);
+        sut.onLeftClick(35, 22);
+        sut.onRightClick();
+
+        assertThatObserverWasNotifiedWithFinishedAndCommand();
     }
 
     @Test
@@ -107,6 +156,6 @@ public class BuildObjectMouseStrategyTest {
         verifyZeroInteractions(observer);
 
         sut.onRightClick();
-        verify(observer).update(argThat(sender -> sender == sut), argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+        verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
     }
 }

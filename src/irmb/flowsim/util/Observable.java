@@ -19,6 +19,6 @@ public abstract class Observable<T> {
 
     protected void notifyObservers(T args) {
         for (Observer<T> observer : observers)
-            observer.update(this, args);
+            observer.update(args);
     }
 }

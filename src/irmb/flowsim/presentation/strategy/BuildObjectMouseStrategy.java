@@ -71,16 +71,18 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
 
     @Override
     public void onRightClick() {
-        notifyObservers(new StrategyEventArgs(STRATEGY_STATE.FINISHED));
+        StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.FINISHED);
         if (hasShapeBuilder()) {
             if (pointsAdded > 2) {
                 shapeBuilder.removeLastPoint();
                 addCommand(addPaintableShapeCommand);
+                args.setCommand(addPaintableShapeCommand);
             } else if (addPaintableShapeCommand != null)
                 addPaintableShapeCommand.undo();
             graphicView.update();
             shapeBuilder = null;
         }
+        notifyObservers(args);
     }
 
     @Override
@@ -105,8 +107,10 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     private void resetBuilderWhenFinished() {
         if (shapeBuilder.isObjectFinished()) {
             shapeBuilder = null;
+            StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.FINISHED);
+            args.setCommand(addPaintableShapeCommand);
             addCommand(addPaintableShapeCommand);
-            notifyObservers(new StrategyEventArgs(STRATEGY_STATE.FINISHED));
+            notifyObservers(args);
         }
     }
 
