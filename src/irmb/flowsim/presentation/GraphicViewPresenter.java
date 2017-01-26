@@ -15,7 +15,7 @@ import java.util.Observer;
 /**
  * Created by Sven on 13.12.2016.
  */
-public class GraphicViewPresenter implements Observer {
+public class GraphicViewPresenter {
 
     private GraphicView graphicView;
     private MouseStrategyFactory factory;
@@ -34,7 +34,7 @@ public class GraphicViewPresenter implements Observer {
         this.factory = strategyFactory;
         this.commandQueue = commandQueue;
         this.shapeList = shapeList;
-        this.commandQueue.addObserver(this);
+        this.commandQueue.addObserver((sender, args) -> graphicView.update());
         strategy = factory.makeStrategy("Move");
         this.transformer = transformer;
     }
@@ -113,8 +113,4 @@ public class GraphicViewPresenter implements Observer {
         clickedPoint.setY(y);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        graphicView.update();
-    }
 }

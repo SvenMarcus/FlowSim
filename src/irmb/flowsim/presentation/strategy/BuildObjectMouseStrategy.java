@@ -39,7 +39,6 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     public void onLeftClick(double x, double y) {
         if (hasShapeBuilder()) {
             Point point = transformer.transformToWorldPoint(new Point(x, y));
-            setChanged();
             addPointToShape(point.getX(), point.getY());
             addShapeToList();
             if (pointsAdded >= 2) {
@@ -72,8 +71,7 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
 
     @Override
     public void onRightClick() {
-        setChanged();
-        notifyObservers("finished");
+        notifyObservers(new StrategyEventArgs(STRATEGY_STATE.FINISHED));
         if (hasShapeBuilder()) {
             if (pointsAdded > 2) {
                 shapeBuilder.removeLastPoint();
@@ -108,7 +106,7 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
         if (shapeBuilder.isObjectFinished()) {
             shapeBuilder = null;
             addCommand(addPaintableShapeCommand);
-            notifyObservers("finished");
+            notifyObservers(new StrategyEventArgs(STRATEGY_STATE.FINISHED));
         }
     }
 

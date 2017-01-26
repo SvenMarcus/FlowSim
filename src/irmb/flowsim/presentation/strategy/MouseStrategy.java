@@ -1,11 +1,12 @@
 package irmb.flowsim.presentation.strategy;
 
-import java.util.Observable;
+
+import irmb.flowsim.util.Observable;
 
 /**
  * Created by Sven on 05.01.2017.
  */
-public abstract class MouseStrategy extends Observable {
+public abstract class MouseStrategy extends Observable<StrategyEventArgs> {
 
     public abstract void onLeftClick(double x, double y);
 

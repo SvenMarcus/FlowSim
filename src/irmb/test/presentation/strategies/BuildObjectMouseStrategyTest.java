@@ -7,12 +7,17 @@ import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.strategy.BuildObjectMouseStrategy;
+import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.presentation.strategy.StrategyEventArgs;
+import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.PaintableShape;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatcher;
 
 import java.util.List;
-import java.util.Observer;
+
 
 import static org.mockito.Mockito.*;
 
@@ -25,7 +30,7 @@ public class BuildObjectMouseStrategyTest {
     private PaintableShapeBuilderFactory factory;
     private GraphicView graphicView;
     private List<PaintableShape> shapeList;
-    private Observer observer;
+    private Observer<StrategyEventArgs> observer;
     private BuildObjectMouseStrategy sut;
     private int pointsAdded;
     private PaintableShapeBuilder lineBuilderMock;
@@ -78,7 +83,8 @@ public class BuildObjectMouseStrategyTest {
         sut.onLeftClick(3, 4);
         sut.onLeftClick(5, 6);
 
-        verify(observer).update(sut, "finished");
+
+        verify(observer).update(argThat(sender -> sender == sut), argThat((StrategyEventArgs args) -> args.getState() == STRATEGY_STATE.FINISHED));
     }
 
     @Test
@@ -87,7 +93,7 @@ public class BuildObjectMouseStrategyTest {
 
         sut.onRightClick();
 
-        verify(observer).update(sut, "finished");
+        verify(observer).update(argThat(sender -> sender == sut), argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
     }
 
     @Test
@@ -101,7 +107,6 @@ public class BuildObjectMouseStrategyTest {
         verifyZeroInteractions(observer);
 
         sut.onRightClick();
-        verify(observer).update(sut, "finished");
+        verify(observer).update(argThat(sender -> sender == sut), argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
     }
-
 }

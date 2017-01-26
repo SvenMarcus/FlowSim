@@ -1,16 +1,16 @@
 package irmb.flowsim.presentation;
 
 import irmb.flowsim.presentation.command.Command;
-
+import irmb.flowsim.util.Observable;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
+
 
 /**
  * Created by Sven on 12.12.2016.
  */
-public class CommandQueue extends Observable {
+public class CommandQueue extends Observable<String> {
 
     protected List<Command> commandList;
     private int currentIndex = -1;
@@ -29,17 +29,17 @@ public class CommandQueue extends Observable {
     public void undo() {
         if (currentIndex > -1) {
             commandList.get(currentIndex--).undo();
-            setChanged();
+            notifyObservers("undo");
         }
-        notifyObservers("undo");
+
     }
 
     public void redo() {
         int size = commandList.size();
         if (currentIndex < size - 1) {
             commandList.get(++currentIndex).redo();
-            setChanged();
+            notifyObservers("redo");
         }
-        notifyObservers("redo");
+
     }
 }

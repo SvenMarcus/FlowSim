@@ -3,11 +3,11 @@ package irmb.test.presentation;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.command.Command;
+import irmb.flowsim.util.Observer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Observer;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class CommandQueueTest extends CommandQueue {
 
     private CommandQueueTest sut;
-    private Observer observer;
+    private Observer<String> observer;
 
     @Before
     public void setUp() throws Exception {
