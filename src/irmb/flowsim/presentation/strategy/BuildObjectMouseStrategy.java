@@ -67,8 +67,8 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
         notifyObservers(args);
     }
 
-    private StrategyEventArgs makeStrategyEventArgs(STRATEGY_STATE finished) {
-        return new StrategyEventArgs(finished);
+    private StrategyEventArgs makeStrategyEventArgs(STRATEGY_STATE state) {
+        return new StrategyEventArgs(state);
     }
 
     @Override
@@ -86,11 +86,12 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     }
 
     private void notifyObserverWithMatchingArgs() {
+        StrategyEventArgs args;
         if (shapeBuilder.isObjectFinished()) {
-            StrategyEventArgs args = makeStrategyEventArgs(STRATEGY_STATE.FINISHED);
+            args = makeStrategyEventArgs(STRATEGY_STATE.FINISHED);
             args.setCommand(addPaintableShapeCommand);
-            notifyObservers(args);
         } else
-            notifyObservers(makeStrategyEventArgs(STRATEGY_STATE.UPDATE));
+            args = makeStrategyEventArgs(STRATEGY_STATE.UPDATE);
+        notifyObservers(args);
     }
 }

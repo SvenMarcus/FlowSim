@@ -11,7 +11,14 @@ public class StrategyEventArgs {
     private STRATEGY_STATE state;
     private Command command;
 
+    public StrategyEventArgs() {
+    }
+
     public StrategyEventArgs(STRATEGY_STATE state) {
+        this.state = state;
+    }
+
+    public void setState(STRATEGY_STATE state) {
         this.state = state;
     }
 
