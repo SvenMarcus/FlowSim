@@ -20,6 +20,7 @@ import org.mockito.ArgumentCaptor;
 import java.util.List;
 
 
+import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -93,7 +94,7 @@ public class BuildObjectMouseStrategyTest {
 
     private void makeBuildObjectMouseStrategyWith(String type) {
         PaintableShapeBuilder builder = factory.makeShapeBuilder(type);
-        sut = new BuildObjectMouseStrategy(commandQueue, graphicView, shapeList, builder, transformer);
+        sut = new BuildObjectMouseStrategy(shapeList, builder, transformer);
         sut.addObserver(observer);
     }
 
@@ -105,6 +106,41 @@ public class BuildObjectMouseStrategyTest {
         sut.onLeftClick(5, 6);
 
         assertThatObserverWasNotifiedWithFinishedAndCommand();
+    }
+
+    @Test
+    public void whenMovingMouse_shouldNotNotifyObserver() {
+        makeBuildObjectMouseStrategyWith("Line");
+
+        sut.onMouseMove(3, 5);
+        verifyZeroInteractions(observer);
+    }
+
+    @Test
+    public void whenAddingOnePointAndMovingMouse_shouldNotifyObserverWithUpdate() {
+        makeBuildObjectMouseStrategyWith("Line");
+
+        sut.onLeftClick(3, 4);
+        sut.onMouseMove(10, 45);
+
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+        verify(observer).update(captor.capture());
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertNull(receivedCommand);
+    }
+
+    @Test
+    public void whenMovingMouseTwiceAfterAddingPoint_shouldNotifyObserverWithUpdate() {
+        makeBuildObjectMouseStrategyWith("Line");
+
+        sut.onLeftClick(3, 4);
+        sut.onMouseMove(10, 45);
+        sut.onMouseMove(12, 15);
+
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+        verify(observer, times(2)).update(captor.capture());
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertNull(receivedCommand);
     }
 
     private void assertThatObserverWasNotifiedWithFinishedAndCommand() {
@@ -146,16 +182,29 @@ public class BuildObjectMouseStrategyTest {
     }
 
     @Test
-    public void whenBuildingMultiPointObject_shouldNotNotifyObserverUntilRightClick() {
+    public void whenBuildingMultiPointObject_shouldNotNotifyObserverWithUpdateAfterEachClick() {
         makeBuildObjectMouseStrategyWith("PolyLine");
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+
 
         sut.onLeftClick(3, 4);
+
         sut.onLeftClick(5, 6);
+        verify(observer, atLeastThenForget(1)).update(captor.capture());
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertNull(captor.getValue().getCommand());
+
         sut.onLeftClick(7, 8);
+        verify(observer, atLeastThenForget(1)).update(captor.capture());
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertNull(captor.getValue().getCommand());
+
         sut.onLeftClick(9, 10);
-        verifyZeroInteractions(observer);
+        verify(observer, atLeastThenForget(1)).update(captor.capture());
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertNull(captor.getValue().getCommand());
 
         sut.onRightClick();
-        verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+        verify(observer, atLeastThenForget(1)).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
     }
 }

@@ -6,6 +6,7 @@ import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.command.PanWindowCommand;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
+import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
@@ -85,7 +86,13 @@ public class GraphicViewPresenter {
 
     public void beginPaint(String objectType) {
         strategy = factory.makeStrategy(objectType);
-        strategy.addObserver((arg) -> strategy = makeMouseMoveStrategy());
+        strategy.addObserver((arg) -> {
+            if (arg.getState() == STRATEGY_STATE.FINISHED)
+                strategy = makeMouseMoveStrategy();
+            if (arg.getCommand() != null)
+                commandQueue.add(arg.getCommand());
+            graphicView.update();
+        });
     }
 
     public List<PaintableShape> getPaintableList() {
