@@ -34,12 +34,8 @@ public class GraphicViewPresenter {
         this.commandQueue = commandQueue;
         this.shapeList = shapeList;
         this.commandQueue.addObserver((args) -> graphicView.update());
-        strategy = factory.makeStrategy("Move");
+        makeStrategy("Move");
         this.transformer = transformer;
-    }
-
-    private MouseStrategy makeMouseMoveStrategy() {
-        return factory.makeStrategy("Move");
     }
 
     public void setGraphicView(GraphicView graphicView) {
@@ -85,10 +81,15 @@ public class GraphicViewPresenter {
     }
 
     public void beginPaint(String objectType) {
+        makeStrategy(objectType);
+    }
+
+    private void makeStrategy(String objectType) {
         strategy = factory.makeStrategy(objectType);
         strategy.addObserver((arg) -> {
-            if (arg.getState() == STRATEGY_STATE.FINISHED)
-                strategy = makeMouseMoveStrategy();
+            if (arg.getState() == STRATEGY_STATE.FINISHED) {
+                makeStrategy("Move");
+            }
             if (arg.getCommand() != null)
                 commandQueue.add(arg.getCommand());
             graphicView.update();

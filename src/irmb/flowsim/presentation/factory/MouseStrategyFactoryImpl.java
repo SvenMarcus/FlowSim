@@ -41,9 +41,9 @@ public class MouseStrategyFactoryImpl implements MouseStrategyFactory {
             case "PolyLine":
                 return makeBuildObjectMouseStrategy(type);
             case "Move":
-                return new MoveMouseStrategy(commandQueue, graphicView, shapeList, transformer);
+                return new MoveMouseStrategy(shapeList, transformer);
             default:
-                return new MoveMouseStrategy(commandQueue, graphicView, shapeList, transformer);
+                return new MoveMouseStrategy(shapeList, transformer);
         }
     }
 

@@ -4,7 +4,6 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
-import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.presentation.command.MoveShapeCommand;
 import irmb.flowsim.view.graphics.PaintableShape;
 
@@ -19,15 +18,11 @@ public class MoveMouseStrategy extends MouseStrategy {
     private MoveShapeCommand moveShapeCommand;
     private Point clickedPoint;
     private List<PaintableShape> shapeList;
-    private GraphicView graphicView;
-    private CommandQueue commandQueue;
     private CoordinateTransformer transformer;
 
 
-    public MoveMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
+    public MoveMouseStrategy(List<PaintableShape> shapeList, CoordinateTransformer transformer) {
         this.shapeList = shapeList;
-        this.graphicView = graphicView;
-        this.commandQueue = commandQueue;
         this.transformer = transformer;
     }
 
@@ -36,11 +31,9 @@ public class MoveMouseStrategy extends MouseStrategy {
         clickedPoint = new Point(x, y);
         Point point = transformer.transformToWorldPoint(clickedPoint);
         double tolerance = transformer.scaleToWorldLength(3);
-        for (PaintableShape p : shapeList) {
-            if (p.isPointOnBoundary(point, tolerance)) {
+        for (PaintableShape p : shapeList)
+            if (p.isPointOnBoundary(point, tolerance))
                 moveShapeCommand = new MoveShapeCommand(p.getShape());
-            }
-        }
     }
 
     @Override
@@ -52,13 +45,12 @@ public class MoveMouseStrategy extends MouseStrategy {
     public void onMouseDrag(double x, double y) {
         if (moveShapeCommand != null) {
             moveShape(x, y);
-            graphicView.update();
+            notifyObservers(new StrategyEventArgs(STRATEGY_STATE.UPDATE));
         }
     }
 
     @Override
     public void onWheelClick(double x, double y) {
-
     }
 
     private void moveShape(double x, double y) {
@@ -76,17 +68,15 @@ public class MoveMouseStrategy extends MouseStrategy {
 
     @Override
     public void onRightClick() {
-
     }
 
     @Override
     public void onMouseRelease() {
-        if (moveShapeCommand != null)
-            addCommand(moveShapeCommand);
+        if (moveShapeCommand != null) {
+            StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
+            args.setCommand(moveShapeCommand);
+            notifyObservers(args);
+        }
         moveShapeCommand = null;
-    }
-
-    private void addCommand(Command command) {
-        commandQueue.add(command);
     }
 }
