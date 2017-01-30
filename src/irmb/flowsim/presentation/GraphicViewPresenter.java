@@ -119,4 +119,8 @@ public class GraphicViewPresenter {
         clickedPoint.setY(y);
     }
 
+
+    public void handleScroll(double x, double y, int delta) {
+
+    }
 }

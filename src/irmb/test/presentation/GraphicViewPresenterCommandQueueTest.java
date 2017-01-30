@@ -17,10 +17,10 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
     @Test
     public void whenBuildingShapeThenCallingUndo_shouldRemoveShape() {
         buildLine(13, 15, 18, 19);
-        verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(2)).paintLine(13, 15, 18, 19);
 
         sut.undo();
-        verify(graphicView, times(3)).update();
+        verify(graphicView, atLeast(3)).update();
         verifyNoMoreInteractions(painterSpy);
     }
 
@@ -28,28 +28,28 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
         @Before
         public void setUp() {
             buildLine(13, 15, 18, 19);
-            verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
+            verify(painterSpy, atLeastThenForget(2)).paintLine(13, 15, 18, 19);
         }
 
         @Test
         public void whenMovingLineThenCallingUndo_shouldUndoMove() {
             performMove(13, 15, 18, 21);
-            verify(painterSpy, times(1)).paintLine(18, 21, 23, 25);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
 
             sut.undo();
-            verify(painterSpy, times(3)).paintLine(13, 15, 18, 19);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
         }
 
         @Test
         public void whenMovingLineThenCallingUndoTwice_shouldUndoMoveAndRemoveLine() {
             performMove(13, 15, 18, 21);
-            verify(painterSpy, times(1)).paintLine(18, 21, 23, 25);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
 
             sut.undo();
-            verify(painterSpy, times(3)).paintLine(13, 15, 18, 19);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
 
             sut.undo();
-            verify(graphicView, times(5)).update();
+            verify(graphicView, atLeastThenForget(5)).update();
             verifyNoMoreInteractions(painterSpy);
         }
 
@@ -57,27 +57,26 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             @Before
             public void setUp() {
                 performMove(13, 15, 18, 21);
-                verify(painterSpy, times(1)).paintLine(18, 21, 23, 25);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
             }
 
             @Test
             public void whenAddingLineThenCallingUndoTwice_shouldRemoveLineThenUndoMove() {
                 buildLine(34, 43, 50, 62);
-                verify(painterSpy, times(2)).paintLine(34, 43, 50, 62);
+                verify(painterSpy, atLeastThenForget(2)).paintLine(34, 43, 50, 62);
 
                 sut.undo();
-                verify(graphicView, times(6)).update();
-                verify(painterSpy, times(4)).paintLine(18, 21, 23, 25);
+                verify(graphicView, atLeastThenForget(6)).update();
+                verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
                 verifyNoMoreInteractions(painterSpy);
 
                 sut.undo();
-                verify(painterSpy, times(3)).paintLine(13, 15, 18, 19);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
             }
         }
 
         @Test
         public void whenMovingWindowAndDraggingTwiceThenUndo_shouldUndoBothPans() {
-            clearInvocations(painterSpy);
             sut.handleMiddleClick(10, 10);
             sut.handleMouseDrag(20, 5);
             sut.handleMouseDrag(15, 15);
@@ -89,7 +88,6 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
 
         @Test
         public void whenMiddleClickingWithoutDragThenUndo_shouldRemoveLine() {
-            clearInvocations(painterSpy);
             sut.handleMiddleClick(10, 5);
             sut.handleMouseRelease();
 
@@ -100,7 +98,6 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
 
         @Test
         public void whenMovingWindowTwiceThenUndoTwice_shouldUndoBothPans() {
-            clearInvocations(painterSpy);
             sut.handleMiddleClick(10, 10);
             sut.handleMouseDrag(20, 5);
             sut.handleMouseRelease();
@@ -121,7 +118,6 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
         public class MovedViewWindowContext {
             @Before
             public void setUp() {
-                clearInvocations(painterSpy);
                 sut.handleMiddleClick(10, 10);
                 sut.handleMouseDrag(20, 5);
                 sut.handleMouseRelease();

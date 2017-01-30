@@ -186,7 +186,6 @@ public class BuildObjectMouseStrategyTest {
         makeBuildObjectMouseStrategyWith("PolyLine");
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
 
-
         sut.onLeftClick(3, 4);
 
         sut.onLeftClick(5, 6);

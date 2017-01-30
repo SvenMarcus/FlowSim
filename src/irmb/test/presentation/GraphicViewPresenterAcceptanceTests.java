@@ -288,5 +288,28 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         return pointList;
     }
 
+    @Test
+    public void zoomAcceptanceTest() {
+        buildLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+
+
+        List<Double> coordinates = makePolyLineCoordinates();
+        buildPolyLine(coordinates);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(10, 54, 65, 74);
+
+
+        Line line = (Line) shapeList.get(0).getShape();
+        PolyLine polyLine = (PolyLine) shapeList.get(1).getShape();
+
+        Point lineStart = makePoint(line.getFirst().getX(), line.getFirst().getY());
+        Point lineEnd = makePoint(line.getSecond().getX(), line.getSecond().getY());
+        List<Point> pointList = copyPolyLinePoints(polyLine);
+
+        sut.handleScroll(12, 13, 5);
+
+    }
 
 }

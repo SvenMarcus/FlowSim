@@ -5,6 +5,8 @@ import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static irmb.test.util.TestUtil.DELTA;
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static irmb.test.util.TestUtil.makePoint;
