@@ -6,6 +6,7 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
 import static irmb.mockito.verification.AtLeastThenForgetAll.atLeastThenForgetAll;
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static irmb.test.util.TestUtil.makePoint;
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
@@ -281,15 +283,15 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
     @Test
     public void zoomAcceptanceTest() {
-        buildLine(13, 15, 18, 19);
-        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        buildLine(36, 22, 114, 76);
+//        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
 
 
         List<Double> coordinates = makePolyLineCoordinates();
         buildPolyLine(coordinates);
-        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
-        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
-        verify(painterSpy, atLeastThenForget(1)).paintLine(10, 54, 65, 74);
+//        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+//        verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 10, 54);
+//        verify(painterSpy, atLeastThenForget(1)).paintLine(10, 54, 65, 74);
 
 
         Line line = (Line) shapeList.get(0).getShape();
@@ -297,11 +299,22 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
         Point lineStart = makePoint(line.getFirst().getX(), line.getFirst().getY());
         Point lineEnd = makePoint(line.getSecond().getX(), line.getSecond().getY());
+        System.out.println(lineStart + "\n" + lineEnd);
         List<Point> pointList = copyPolyLinePoints(polyLine);
 
-        sut.handleScroll(12, 13, 1);
-        verify(painterSpy, atLeastThenForget(1)).paintLine(64, -23, 65, -19);
+        clearInvocations(painterSpy);
 
+        ArgumentCaptor<Double> doubleCaptor = ArgumentCaptor.forClass(Double.class);
+        sut.handleScroll(15, 19, -1);
+        System.out.println(transformer.transformToPointOnScreen(lineStart) + "\n" + transformer.transformToPointOnScreen(lineEnd));
+        verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
+//        verify(painterSpy).paintLine(35, 22, 109, 76);
+
+        List<Double> capturedArgs = doubleCaptor.getAllValues();
+        assertEquals(35, capturedArgs.get(0), 4);
+        assertEquals(22, capturedArgs.get(1), 4);
+        assertEquals(109, capturedArgs.get(2), 4);
+        assertEquals(76, capturedArgs.get(3), 4);
 
     }
 

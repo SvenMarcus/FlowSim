@@ -167,8 +167,8 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
         Point worldTopLeft = sut.transformToWorldPoint(topLeft);
         Point worldBottomRight = sut.transformToWorldPoint(bottomRight);
 
-        assertExpectedPointEqualsActual(makePoint(-31.0063, 15.8375), worldTopLeft, 0.05);
-        assertExpectedPointEqualsActual(makePoint(24.9938, -26.1625), worldBottomRight, 0.05);
+        assertExpectedPointEqualsActual(makePoint(-31.0063, 15.8375), worldTopLeft, 0.02);
+        assertExpectedPointEqualsActual(makePoint(24.9938, -26.1625), worldBottomRight, 0.02);
     }
 
 }
