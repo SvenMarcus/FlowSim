@@ -5,8 +5,6 @@ import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import static irmb.test.util.TestUtil.DELTA;
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static irmb.test.util.TestUtil.makePoint;
@@ -33,8 +31,7 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
 
         Point p = makePoint(0, 0);
         Point result = sut.transformToPointOnScreen(p);
-        assertExpectedPointEqualsActual(makePoint(0, 30), result, 1);
-
+        assertExpectedPointEqualsActual(makePoint(0, 30), result);
     }
 
     @Test
@@ -44,7 +41,7 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
 
         Point origin = makePoint(0, 0);
         Point result = sut.transformToPointOnScreen(origin);
-        assertExpectedPointEqualsActual(makePoint(0, 0), result, 1);
+        assertExpectedPointEqualsActual(makePoint(0, 0), result);
 
         Point topLeft = makePoint(-25, 25);
         Point bottomRight = makePoint(25, -25);
@@ -131,5 +128,47 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
         assertEquals(15 / expectedScaleFactor, worldLength);
     }
 
+    @Test
+    public void testZoomOutFromOriginWithSymmetricSystem() {
+        sut.setWorldBounds(makePoint(-10, 25), makePoint(10, -25));
+
+        Point topLeft = makePoint(0, 0);
+        Point bottomRight = makePoint(800, 600);
+        sut.zoomWindow(-0.05, 0, 0);
+
+        Point worldTopLeft = sut.transformToWorldPoint(topLeft);
+        Point worldBottomRight = sut.transformToWorldPoint(bottomRight);
+
+        assertExpectedPointEqualsActual(makePoint(-35, 26.25), worldTopLeft);
+        assertExpectedPointEqualsActual(makePoint(35, -26.25), worldBottomRight);
+    }
+
+    @Test
+    public void testZoomOutWithOffsetWithSymmetricSystem() {
+        sut.setWorldBounds(makePoint(-10, 25), makePoint(10, -25));
+
+        Point topLeft = makePoint(0, 0);
+        Point bottomRight = makePoint(800, 600);
+        sut.zoomWindow(-0.05, 5, -7);
+
+        Point worldTopLeft = sut.transformToWorldPoint(topLeft);
+        Point worldBottomRight = sut.transformToWorldPoint(bottomRight);
+
+        assertExpectedPointEqualsActual(makePoint(-35.25, 26.6), worldTopLeft);
+        assertExpectedPointEqualsActual(makePoint(34.75, -25.9), worldBottomRight);
+    }
+
+    @Test
+    public void testZoomOutWithOffsetWithAsymmetricSystem() {
+        Point topLeft = makePoint(0, 0);
+        Point bottomRight = makePoint(800, 600);
+        sut.zoomWindow(-0.05, 5, -7);
+
+        Point worldTopLeft = sut.transformToWorldPoint(topLeft);
+        Point worldBottomRight = sut.transformToWorldPoint(bottomRight);
+
+        assertExpectedPointEqualsActual(makePoint(-31.0063, 15.8375), worldTopLeft, 0.05);
+        assertExpectedPointEqualsActual(makePoint(24.9938, -26.1625), worldBottomRight, 0.05);
+    }
 
 }

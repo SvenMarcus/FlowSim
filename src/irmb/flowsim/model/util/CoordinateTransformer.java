@@ -19,4 +19,6 @@ public interface CoordinateTransformer {
     double scaleToScreenLength(double length);
 
     double scaleToWorldLength(double length);
+
+    void zoomWindow(double zoomFactor, double worldX, double worldY);
 }

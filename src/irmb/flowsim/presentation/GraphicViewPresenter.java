@@ -121,6 +121,8 @@ public class GraphicViewPresenter {
 
 
     public void handleScroll(double x, double y, int delta) {
-
+        Point worldPoint = transformer.transformToWorldPoint(new Point(x, y));
+        transformer.zoomWindow(-0.05, worldPoint.getX(), worldPoint.getY());
+        graphicView.update();
     }
 }

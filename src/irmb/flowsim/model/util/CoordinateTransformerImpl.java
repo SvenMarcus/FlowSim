@@ -136,4 +136,13 @@ public class CoordinateTransformerImpl implements CoordinateTransformer {
         return length / getScaleFactor();
     }
 
+    @Override
+    public void zoomWindow(double zoomFactor, double worldX, double worldY) {
+        calculateMiddleValues();
+        worldTopLeft.setX(worldTopLeft.getX()*(1-zoomFactor)+(worldX-worldMidX)*zoomFactor);
+        worldTopLeft.setY(worldTopLeft.getY()*(1-zoomFactor)+(worldY-worldMidY)*zoomFactor);
+        worldBottomRight.setX(worldBottomRight.getX()*(1-zoomFactor)+(worldX-worldMidX)*zoomFactor);
+        worldBottomRight.setY(worldBottomRight.getY()*(1-zoomFactor)+(worldY-worldMidY)*zoomFactor);
+    }
+
 }
