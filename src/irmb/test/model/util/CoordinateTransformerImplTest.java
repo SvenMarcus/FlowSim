@@ -16,12 +16,18 @@ import static junit.framework.TestCase.assertEquals;
 public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
 
     private CoordinateTransformerImplTest sut;
+    private Point topLeft;
+    private Point bottomRight;
+    private Point worldTopLeft;
+    private Point worldBottomRight;
 
     @Before
     public void setUp() throws Exception {
         sut = new CoordinateTransformerImplTest();
         sut.setWorldBounds(makePoint(-15, 15), makePoint(10, -25));
         sut.setViewBounds(makePoint(0, 0), makePoint(800, 600));
+        topLeft = makePoint(0, 0);
+        bottomRight = makePoint(800, 600);
     }
 
     @Test
@@ -132,12 +138,10 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
     public void testZoomOutFromOriginWithSymmetricSystem() {
         sut.setWorldBounds(makePoint(-10, 25), makePoint(10, -25));
 
-        Point topLeft = makePoint(0, 0);
-        Point bottomRight = makePoint(800, 600);
         sut.zoomWindow(-0.05, 0, 0);
 
-        Point worldTopLeft = sut.transformToWorldPoint(topLeft);
-        Point worldBottomRight = sut.transformToWorldPoint(bottomRight);
+        worldTopLeft = sut.transformToWorldPoint(topLeft);
+        worldBottomRight = sut.transformToWorldPoint(bottomRight);
 
         assertExpectedPointEqualsActual(makePoint(-35, 26.25), worldTopLeft);
         assertExpectedPointEqualsActual(makePoint(35, -26.25), worldBottomRight);
@@ -147,12 +151,10 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
     public void testZoomOutWithOffsetWithSymmetricSystem() {
         sut.setWorldBounds(makePoint(-10, 25), makePoint(10, -25));
 
-        Point topLeft = makePoint(0, 0);
-        Point bottomRight = makePoint(800, 600);
         sut.zoomWindow(-0.05, 5, -7);
 
-        Point worldTopLeft = sut.transformToWorldPoint(topLeft);
-        Point worldBottomRight = sut.transformToWorldPoint(bottomRight);
+        worldTopLeft = sut.transformToWorldPoint(topLeft);
+        worldBottomRight = sut.transformToWorldPoint(bottomRight);
 
         assertExpectedPointEqualsActual(makePoint(-35.25, 26.6), worldTopLeft);
         assertExpectedPointEqualsActual(makePoint(34.75, -25.9), worldBottomRight);
@@ -160,15 +162,26 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
 
     @Test
     public void testZoomOutWithOffsetWithAsymmetricSystem() {
-        Point topLeft = makePoint(0, 0);
-        Point bottomRight = makePoint(800, 600);
         sut.zoomWindow(-0.05, 5, -7);
 
-        Point worldTopLeft = sut.transformToWorldPoint(topLeft);
-        Point worldBottomRight = sut.transformToWorldPoint(bottomRight);
+        worldTopLeft = sut.transformToWorldPoint(topLeft);
+        worldBottomRight = sut.transformToWorldPoint(bottomRight);
 
-        assertExpectedPointEqualsActual(makePoint(-31.0063, 15.8375), worldTopLeft, 0.02);
-        assertExpectedPointEqualsActual(makePoint(24.9938, -26.1625), worldBottomRight, 0.02);
+        Point topLeftExpected = makePoint(-31.0063, 15.8375);
+        Point bottomRightExpected = makePoint(24.9938, -26.1625);
+        assertExpectedPointEqualsActual(topLeftExpected, worldTopLeft, 0.02);
+        assertExpectedPointEqualsActual(bottomRightExpected, worldBottomRight, 0.02);
     }
 
+    @Test
+    public void testZoomOutWithoutOffsetAndSymmetricSystem() {
+        sut.setWorldBounds(makePoint(-10, 25), makePoint(10, -25));
+
+        worldTopLeft = sut.transformToWorldPoint(topLeft);
+        worldBottomRight = sut.transformToWorldPoint(bottomRight);
+
+        sut.zoomWindow(0.05, 5, 7);
+
+
+    }
 }
