@@ -316,8 +316,8 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         doubleCaptor = ArgumentCaptor.forClass(Double.class);
         sut.handleScroll(15, 19, 1);
         verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
-        verifyLineCoordinatesAfterZoomIn(capturedArgs);
-        verifyPolyLineCoordinatesAfterZoomIn(capturedArgs);
+        verifyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
+        verifyPolyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
     }
 
@@ -327,7 +327,6 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         assertEquals((double) 114, capturedArgs.get(2));
         assertEquals((double) 76, capturedArgs.get(3));
     }
-
 
     private void verifyPolyLineCoordinatesAfterZoomIn(List<Double> capturedArgs) {
         assertEquals((double) 35, capturedArgs.get(4));
@@ -341,20 +340,20 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
     }
 
     private void verifyPolyLineCoordinatesAfterZoomOut(List<Double> capturedArgs) {
-        assertEquals((double) 38, capturedArgs.get(4));
+        assertEquals((double) 34, capturedArgs.get(4));
         assertEquals((double) 39, capturedArgs.get(5));
-        assertEquals((double) 14, capturedArgs.get(6));
+        assertEquals((double) 10, capturedArgs.get(6));
         assertEquals((double) 52, capturedArgs.get(7));
-        assertEquals((double) 14, capturedArgs.get(8));
+        assertEquals((double) 10, capturedArgs.get(8));
         assertEquals((double) 52, capturedArgs.get(9));
-        assertEquals((double) 66, capturedArgs.get(10));
+        assertEquals((double) 63, capturedArgs.get(10));
         assertEquals((double) 71, capturedArgs.get(11));
     }
 
     private void verifyLineCoordinatesAfterZoomOut(List<Double> capturedArgs) {
-        assertEquals((double) 39, capturedArgs.get(0));
+        assertEquals((double) 35, capturedArgs.get(0));
         assertEquals((double) 22, capturedArgs.get(1));
-        assertEquals((double) 113, capturedArgs.get(2));
+        assertEquals((double) 109, capturedArgs.get(2));
         assertEquals((double) 73, capturedArgs.get(3));
     }
 

@@ -138,10 +138,10 @@ public class CoordinateTransformerImpl implements CoordinateTransformer {
 
     @Override
     public void zoomWindow(double zoomFactor, double worldX, double worldY) {
-        calculateMiddleValues();
         double zoom = 1 - zoomFactor;
-        double deltaX = (worldX - worldMidX) * zoomFactor;
-        double deltaY = (worldY - worldMidY) * zoomFactor;
+        calculateMiddleValues();
+        double deltaX = worldX * zoomFactor;
+        double deltaY = worldY * zoomFactor;
 
         worldTopLeft.setX(worldTopLeft.getX() * zoom + deltaX);
         worldTopLeft.setY(worldTopLeft.getY() * zoom + deltaY);

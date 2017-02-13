@@ -4,6 +4,7 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.command.PanWindowCommand;
+import irmb.flowsim.presentation.command.ZoomCommand;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
@@ -122,7 +123,12 @@ public class GraphicViewPresenter {
 
     public void handleScroll(double x, double y, int delta) {
         Point worldPoint = transformer.transformToWorldPoint(new Point(x, y));
-        transformer.zoomWindow(-0.05, worldPoint.getX(), worldPoint.getY());
+        Zoom zoom = delta > 0 ? Zoom.IN : Zoom.OUT;
+        ZoomCommand command = new ZoomCommand(transformer);
+        command.setZoomFactor(0.05 * zoom.direction());
+        command.setZoomPoint(worldPoint.getX(), worldPoint.getY());
+        command.execute();
+        commandQueue.add(command);
         graphicView.update();
     }
 }

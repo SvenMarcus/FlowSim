@@ -7,6 +7,7 @@ import org.junit.Test;
 import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static irmb.test.util.TestUtil.makePoint;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -58,5 +59,23 @@ public class GraphicViewPresenterWindowOperationsTest extends GraphicViewPresent
         sut.handleMiddleClick(x1, y1);
         sut.handleMouseDrag(x2, y2);
         sut.handleMouseRelease();
+    }
+
+    @Test
+    public void whenScrollingDown_shouldZoomOut() {
+        buildLine(23, 14, 65, 48);
+        clearInvocations(painterSpy);
+
+        sut.handleScroll(55, 33, -1);
+        verify(painterSpy).paintLine(25, 15, 65, 47);
+    }
+
+    @Test
+    public void whenScrollingUp_shouldZoomIn() {
+        buildLine(23, 14, 65, 48);
+        clearInvocations(painterSpy);
+
+        sut.handleScroll(55, 33, 1);
+        verify(painterSpy).paintLine(21, 13, 66, 49);
     }
 }

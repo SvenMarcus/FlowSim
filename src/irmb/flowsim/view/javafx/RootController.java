@@ -4,9 +4,9 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.presentation.Zoom;
 import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -57,7 +56,9 @@ public class RootController implements GraphicView {
         drawPanel.widthProperty().addListener(o -> {
             update();
         });
-        drawPanel.setOnScroll(event -> presenter.handleScroll(event.getX(), event.getY(), (int)event.getDeltaY()));
+        drawPanel.setOnScroll(event -> {
+            presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
+        });
     }
 
     public void onLineButtonClick(ActionEvent event) {

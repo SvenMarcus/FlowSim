@@ -39,7 +39,7 @@ public class JFXMainWindow extends Application {
 
         RootController rootController = new RootController();
         CoordinateTransformer transformer = new CoordinateTransformerImpl();
-        transformer.setWorldBounds(new Point(-10, 10), new Point(10, -10));
+        transformer.setWorldBounds(new Point(-15, 10), new Point(10, -25));
         transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
 
         MouseStrategyFactoryImpl mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory, transformer);

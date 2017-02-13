@@ -149,5 +149,31 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             }
         }
 
+        @Test
+        public void whenZoomingThenCallingUndo_shouldUndoZoom() {
+            sut.handleScroll(55, 33, 1);
+            clearInvocations(painterSpy);
+
+            sut.undo();
+            verify(painterSpy).paintLine(13, 15, 18, 19);
+        }
+
+        public class ZoomedContext {
+            @Before
+            public void setUp() {
+                sut.handleScroll(54, 52, -2);
+                clearInvocations(painterSpy);
+            }
+
+            @Test
+            public void whenCallingUndoThenRedo_shouldRedoZoom() {
+                sut.undo();
+                clearInvocations(painterSpy);
+
+                sut.redo();
+                verify(painterSpy).paintLine(15, 17, 20, 20);
+            }
+        }
+
     }
 }

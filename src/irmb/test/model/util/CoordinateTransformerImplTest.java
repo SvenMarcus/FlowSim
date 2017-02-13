@@ -161,27 +161,53 @@ public class CoordinateTransformerImplTest extends CoordinateTransformerImpl {
     }
 
     @Test
+    public void testZoomOutWithoutOffsetWithAsymmetricSystem() {
+        sut.zoomWindow(-0.05, -2.5, -5);
+
+        worldTopLeft = sut.transformToWorldPoint(topLeft);
+        worldBottomRight = sut.transformToWorldPoint(bottomRight);
+
+        assertExpectedPointEqualsActual(makePoint(-30.5, 16), worldTopLeft);
+        assertExpectedPointEqualsActual(makePoint(25.5, -26), worldBottomRight);
+    }
+
+    @Test
     public void testZoomOutWithOffsetWithAsymmetricSystem() {
         sut.zoomWindow(-0.05, 5, -7);
 
         worldTopLeft = sut.transformToWorldPoint(topLeft);
         worldBottomRight = sut.transformToWorldPoint(bottomRight);
 
-        Point topLeftExpected = makePoint(-31.0063, 15.8375);
-        Point bottomRightExpected = makePoint(24.9938, -26.1625);
+        Point topLeftExpected = makePoint(-30.875, 16.1);
+        Point bottomRightExpected = makePoint(25.125, -25.9);
+        assertExpectedPointEqualsActual(topLeftExpected, worldTopLeft);
+        assertExpectedPointEqualsActual(bottomRightExpected, worldBottomRight);
+    }
+
+    @Test
+    public void testZoomInWithOffsetAndSymmetricSystem() {
+        sut.setWorldBounds(makePoint(-10, 25), makePoint(10, -25));
+
+        sut.zoomWindow(0.05, 5, 7);
+        worldTopLeft = sut.transformToWorldPoint(topLeft);
+        worldBottomRight = sut.transformToWorldPoint(bottomRight);
+
+        Point topLeftExpected = makePoint(-31.41666667, 24.1);
+        Point bottomRightExpected = makePoint(31.91666667, -23.4);
         assertExpectedPointEqualsActual(topLeftExpected, worldTopLeft, 0.02);
         assertExpectedPointEqualsActual(bottomRightExpected, worldBottomRight, 0.02);
     }
 
     @Test
-    public void testZoomOutWithoutOffsetAndSymmetricSystem() {
-        sut.setWorldBounds(makePoint(-10, 25), makePoint(10, -25));
+    public void testZoomInWithOffsetAndAsymmetricSystem() {
+        sut.zoomWindow(0.05, 5, -7);
 
         worldTopLeft = sut.transformToWorldPoint(topLeft);
         worldBottomRight = sut.transformToWorldPoint(bottomRight);
 
-        sut.zoomWindow(0.05, 5, 7);
-
-
+        Point topLeftExpected = makePoint(-27.45833333, 13.9);
+        Point bottomRightExpected = makePoint(23.20833333, -24.1);
+        assertExpectedPointEqualsActual(topLeftExpected, worldTopLeft, 0.02);
+        assertExpectedPointEqualsActual(bottomRightExpected, worldBottomRight, 0.02);
     }
 }
