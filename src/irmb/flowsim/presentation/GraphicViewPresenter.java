@@ -1,10 +1,6 @@
 package irmb.flowsim.presentation;
 
-import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.model.util.CoordinateTransformerImpl;
-import irmb.flowsim.presentation.command.PanWindowCommand;
-import irmb.flowsim.presentation.command.ZoomCommand;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
@@ -25,10 +21,7 @@ public class GraphicViewPresenter {
 
 
     private MouseStrategy strategy;
-    private CoordinateTransformer transformer = new CoordinateTransformerImpl();
-    private Point clickedPoint;
-    private MouseButton mouseButton;
-    private PanWindowCommand panWindowCommand;
+    private CoordinateTransformer transformer;
 
     public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
         this.factory = strategyFactory;
@@ -45,8 +38,6 @@ public class GraphicViewPresenter {
     }
 
     public void handleLeftClick(double x, double y) {
-        mouseButton = MouseButton.LEFT;
-        clickedPoint = new Point(x, y);
         strategy.onLeftClick(x, y);
     }
 
@@ -60,17 +51,10 @@ public class GraphicViewPresenter {
 
     public void handleMouseDrag(double x, double y) {
         strategy.onMouseDrag(x, y);
-        if (mouseButton == MouseButton.MIDDLE) {
-            moveViewWindow(x, y);
-            graphicView.update();
-        }
     }
 
     public void handleMouseRelease() {
         strategy.onMouseRelease();
-        if (panWindowCommand != null)
-            commandQueue.add(panWindowCommand);
-        panWindowCommand = null;
     }
 
     public void undo() {
@@ -88,9 +72,8 @@ public class GraphicViewPresenter {
     private void makeStrategy(String objectType) {
         strategy = factory.makeStrategy(objectType);
         strategy.addObserver((arg) -> {
-            if (arg.getState() == STRATEGY_STATE.FINISHED) {
+            if (arg.getState() == STRATEGY_STATE.FINISHED)
                 makeStrategy("Move");
-            }
             if (arg.getCommand() != null)
                 commandQueue.add(arg.getCommand());
             graphicView.update();
@@ -102,33 +85,10 @@ public class GraphicViewPresenter {
     }
 
     public void handleMiddleClick(double x, double y) {
-        mouseButton = MouseButton.MIDDLE;
-        clickedPoint = new Point(x, y);
-        strategy.onWheelClick(x, y);
+        strategy.onMiddleClick(x, y);
     }
-
-    private void moveViewWindow(double x, double y) {
-        double dx = x - clickedPoint.getX();
-        double dy = y - clickedPoint.getY();
-
-        if (panWindowCommand == null)
-            panWindowCommand = new PanWindowCommand(transformer);
-        panWindowCommand.setDelta(dx, dy);
-        panWindowCommand.execute();
-
-        clickedPoint.setX(x);
-        clickedPoint.setY(y);
-    }
-
 
     public void handleScroll(double x, double y, int delta) {
-        Point worldPoint = transformer.transformToWorldPoint(new Point(x, y));
-        Zoom zoom = delta > 0 ? Zoom.IN : Zoom.OUT;
-        ZoomCommand command = new ZoomCommand(transformer);
-        command.setZoomFactor(0.05 * zoom.direction());
-        command.setZoomPoint(worldPoint.getX(), worldPoint.getY());
-        command.execute();
-        commandQueue.add(command);
-        graphicView.update();
+        strategy.onScroll(x, y, delta);
     }
 }

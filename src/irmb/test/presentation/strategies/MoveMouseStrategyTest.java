@@ -1,12 +1,14 @@
 package irmb.test.presentation.strategies;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
+import irmb.flowsim.model.Point;
 import irmb.flowsim.model.Shape;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.presentation.command.MoveShapeCommand;
+import irmb.flowsim.presentation.command.PanWindowCommand;
 import irmb.flowsim.presentation.strategy.MoveMouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
 import irmb.flowsim.presentation.strategy.StrategyEventArgs;
@@ -60,9 +62,14 @@ public class MoveMouseStrategyTest {
         observer = mock(Observer.class);
         setObserverMockBehavior();
         transformer = mock(CoordinateTransformer.class);
+        setTransformerMockBehavior();
         sut = new MoveMouseStrategy(shapeList, transformer);
         sut.addObserver(observer);
 
+    }
+
+    private void setTransformerMockBehavior() {
+        when(transformer.transformToWorldPoint(any(Point.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
     }
 
     private void setObserverMockBehavior() {
@@ -129,6 +136,38 @@ public class MoveMouseStrategyTest {
     public void whenOnlyReleasingMouse_shouldNotNotifyObserver() {
         sut.onMouseRelease();
         verifyZeroInteractions(observer);
+    }
+
+    @Test
+    public void whenDraggingWithMiddleButton_shouldPanWindow() {
+        sut.onMiddleClick(52, 13);
+        sut.onMouseDrag(100, 65);
+        verify(transformer).moveViewWindow(48, 52);
+    }
+
+    @Test
+    public void whenDraggingWithMiddleButton_shouldNotifyObserverWithUpdate() {
+        sut.onMiddleClick(52, 13);
+        sut.onMouseDrag(100, 65);
+
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+        verify(observer).update(captor.capture());
+        assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertNull(captor.getValue().getCommand());
+    }
+
+    @Test
+    public void whenReleasingMouseAfterPan_shouldNotifyObserverWithCommand() {
+        sut.onMiddleClick(52, 13);
+        sut.onMouseDrag(100, 65);
+        sut.onMouseRelease();
+
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+        verify(observer, atLeast(2)).update(captor.capture());
+        assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertThat(captor.getValue().getCommand(), is(instanceOf(PanWindowCommand.class)));
     }
 
     public class NoShapeAtClickedPointContext {

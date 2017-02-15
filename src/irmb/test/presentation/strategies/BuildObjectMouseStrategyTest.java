@@ -7,6 +7,7 @@ import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.command.AddPaintableShapeCommand;
 import irmb.flowsim.presentation.command.Command;
+import irmb.flowsim.presentation.command.PanWindowCommand;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.strategy.BuildObjectMouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
@@ -77,7 +78,7 @@ public class BuildObjectMouseStrategyTest {
     }
 
     private void setTransformerMockBehavior() {
-        when(transformer.transformToWorldPoint(any())).thenReturn(mock(Point.class));
+        when(transformer.transformToWorldPoint(any(Point.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
     }
 
     private void setLineBuilderMockBehavior() {
@@ -94,7 +95,7 @@ public class BuildObjectMouseStrategyTest {
 
     private void makeBuildObjectMouseStrategyWith(String type) {
         PaintableShapeBuilder builder = factory.makeShapeBuilder(type);
-        sut = new BuildObjectMouseStrategy(shapeList, builder, transformer);
+        sut = new BuildObjectMouseStrategy(shapeList, transformer, builder);
         sut.addObserver(observer);
     }
 
@@ -205,5 +206,43 @@ public class BuildObjectMouseStrategyTest {
 
         sut.onRightClick();
         verify(observer, atLeastThenForget(1)).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+    }
+
+    @Test
+    public void whenDraggingWithMiddleButton_shouldPanWindow() {
+        makeBuildObjectMouseStrategyWith("Line");
+
+        sut.onMiddleClick(52, 13);
+        sut.onMouseDrag(100, 65);
+        verify(transformer).moveViewWindow(48, 52);
+    }
+
+    @Test
+    public void whenDraggingWithMiddleButton_shouldNotifyObserverWithUpdate() {
+        makeBuildObjectMouseStrategyWith("Line");
+
+        sut.onMiddleClick(52, 13);
+        sut.onMouseDrag(100, 65);
+
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+        verify(observer).update(captor.capture());
+        assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertNull(captor.getValue().getCommand());
+    }
+
+    @Test
+    public void whenReleasingMouseAfterPan_shouldNotifyObserverWithCommand() {
+        makeBuildObjectMouseStrategyWith("Line");
+
+        sut.onMiddleClick(52, 13);
+        sut.onMouseDrag(100, 65);
+        sut.onMouseRelease();
+
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+        verify(observer, atLeast(2)).update(captor.capture());
+        assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertThat(captor.getValue().getCommand(), is(instanceOf(PanWindowCommand.class)));
     }
 }

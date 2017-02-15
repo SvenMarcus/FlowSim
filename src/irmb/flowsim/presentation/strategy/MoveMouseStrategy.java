@@ -22,6 +22,7 @@ public class MoveMouseStrategy extends MouseStrategy {
 
 
     public MoveMouseStrategy(List<PaintableShape> shapeList, CoordinateTransformer transformer) {
+        super(shapeList, transformer);
         this.shapeList = shapeList;
         this.transformer = transformer;
     }
@@ -43,14 +44,11 @@ public class MoveMouseStrategy extends MouseStrategy {
 
     @Override
     public void onMouseDrag(double x, double y) {
+        super.onMouseDrag(x, y);
         if (moveShapeCommand != null) {
             moveShape(x, y);
             notifyObservers(new StrategyEventArgs(STRATEGY_STATE.UPDATE));
         }
-    }
-
-    @Override
-    public void onWheelClick(double x, double y) {
     }
 
     private void moveShape(double x, double y) {
@@ -72,6 +70,7 @@ public class MoveMouseStrategy extends MouseStrategy {
 
     @Override
     public void onMouseRelease() {
+        super.onMouseRelease();
         if (moveShapeCommand != null) {
             StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
             args.setCommand(moveShapeCommand);

@@ -49,6 +49,6 @@ public class MouseStrategyFactoryImpl implements MouseStrategyFactory {
 
     private BuildObjectMouseStrategy makeBuildObjectMouseStrategy(String type) {
         PaintableShapeBuilder builder = factory.makeShapeBuilder(type);
-        return new BuildObjectMouseStrategy(shapeList, builder, transformer);
+        return new BuildObjectMouseStrategy(shapeList, transformer, builder);
     }
 }

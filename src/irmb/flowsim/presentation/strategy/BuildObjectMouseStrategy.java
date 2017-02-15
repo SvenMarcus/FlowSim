@@ -14,15 +14,12 @@ import java.util.List;
 public class BuildObjectMouseStrategy extends MouseStrategy {
 
     private int pointsAdded = 0;
-    private List<PaintableShape> shapeList;
-    private CoordinateTransformer transformer;
     private PaintableShapeBuilder shapeBuilder;
     private AddPaintableShapeCommand addPaintableShapeCommand;
 
-    public BuildObjectMouseStrategy(List<PaintableShape> shapeList, PaintableShapeBuilder builder, CoordinateTransformer transformer) {
+    public BuildObjectMouseStrategy(List<PaintableShape> shapeList, CoordinateTransformer transformer, PaintableShapeBuilder builder) {
+        super(shapeList, transformer);
         this.shapeBuilder = builder;
-        this.shapeList = shapeList;
-        this.transformer = transformer;
     }
 
     @Override
@@ -46,14 +43,6 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     }
 
     @Override
-    public void onMouseDrag(double x, double y) {
-    }
-
-    @Override
-    public void onWheelClick(double x, double y) {
-    }
-
-    @Override
     public void onRightClick() {
         StrategyEventArgs args = makeStrategyEventArgs(STRATEGY_STATE.FINISHED);
         if (pointsAdded > 2) {
@@ -66,10 +55,6 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
 
     private StrategyEventArgs makeStrategyEventArgs(STRATEGY_STATE state) {
         return new StrategyEventArgs(state);
-    }
-
-    @Override
-    public void onMouseRelease() {
     }
 
     private void addShapeToList() {
