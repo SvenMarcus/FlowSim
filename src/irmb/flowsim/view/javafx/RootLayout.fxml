@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ButtonBar fx:id="buttonBar" prefHeight="40.0" prefWidth="200.0">
         <buttons>
@@ -26,7 +26,7 @@
    <center>
       <Pane fx:id="rootPane" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="drawPanel" height="333.0" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" width="582.0" />
+            <Canvas fx:id="drawPanel" height="600.0" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" width="800.0" />
          </children>
       </Pane>
    </center>

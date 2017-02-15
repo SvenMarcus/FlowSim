@@ -1,5 +1,7 @@
 package irmb.flowsim.view.swing;
 
+import irmb.flowsim.model.Point;
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -18,6 +20,7 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
 
     protected GraphicViewPresenter presenter;
     protected SwingPainter painter;
+    protected CoordinateTransformer transformer;
 
     public SwingGraphicView() {
         addMouseListener(this);
@@ -34,11 +37,17 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
         repaint();
     }
 
+    @Override
+    public void setCoordinateTransformer(CoordinateTransformer transformer) {
+        this.transformer = transformer;
+        transformer.setViewBounds(new Point(0, 0), new Point(getWidth(), getHeight()));
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         painter.setGraphics(g);
         for (PaintableShape p : presenter.getPaintableList())
-            p.paint(painter);
+            p.paint(painter, null);
     }
 
     @Override

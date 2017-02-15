@@ -85,6 +85,4 @@ public class PaintableLineTest {
         assertTrue(sut.isPointOnBoundary(makePoint(12, 16), 3));
         assertTrue(sut.isPointOnBoundary(makePoint(14, 19), 3));
     }
-
-
 }

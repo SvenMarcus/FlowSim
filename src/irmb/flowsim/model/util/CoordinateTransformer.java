@@ -15,4 +15,10 @@ public interface CoordinateTransformer {
     void setViewBounds(Point topLeft, Point bottomRight);
 
     void moveViewWindow(double dx, double dy);
+
+    double scaleToScreenLength(double length);
+
+    double scaleToWorldLength(double length);
+
+    void zoomWindow(double zoomFactor, double worldX, double worldY);
 }

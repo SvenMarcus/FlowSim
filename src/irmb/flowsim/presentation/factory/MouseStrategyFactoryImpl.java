@@ -1,5 +1,6 @@
 package irmb.flowsim.presentation.factory;
 
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
@@ -19,28 +20,35 @@ public class MouseStrategyFactoryImpl implements MouseStrategyFactory {
     private final CommandQueue commandQueue;
     private final GraphicView graphicView;
     private final PaintableShapeBuilderFactory factory;
+    private final CoordinateTransformer transformer;
 
-    public MouseStrategyFactoryImpl(List<PaintableShape> shapeList, CommandQueue commandQueue, GraphicView graphicView, PaintableShapeBuilderFactory factory) {
+
+    public MouseStrategyFactoryImpl(List<PaintableShape> shapeList, CommandQueue commandQueue, GraphicView graphicView, PaintableShapeBuilderFactory factory, CoordinateTransformer transformer) {
         this.shapeList = shapeList;
         this.commandQueue = commandQueue;
         this.graphicView = graphicView;
         this.factory = factory;
+        this.transformer = transformer;
     }
 
     @Override
     public MouseStrategy makeStrategy(String type) {
-        PaintableShapeBuilder builder = factory.makeShapeBuilder(type);
         switch (type) {
             case "Line":
-                return new BuildObjectMouseStrategy(commandQueue, graphicView, shapeList, builder);
+                return makeBuildObjectMouseStrategy(type);
             case "Rectangle":
-                return new BuildObjectMouseStrategy(commandQueue, graphicView, shapeList, builder);
+                return makeBuildObjectMouseStrategy(type);
             case "PolyLine":
-                return new BuildObjectMouseStrategy(commandQueue, graphicView, shapeList, builder);
+                return makeBuildObjectMouseStrategy(type);
             case "Move":
-                return new MoveMouseStrategy(commandQueue, graphicView, shapeList);
+                return new MoveMouseStrategy(shapeList, transformer);
             default:
-                return new MoveMouseStrategy(commandQueue, graphicView, shapeList);
+                return new MoveMouseStrategy(shapeList, transformer);
         }
+    }
+
+    private BuildObjectMouseStrategy makeBuildObjectMouseStrategy(String type) {
+        PaintableShapeBuilder builder = factory.makeShapeBuilder(type);
+        return new BuildObjectMouseStrategy(shapeList, transformer, builder);
     }
 }

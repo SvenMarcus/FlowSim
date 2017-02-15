@@ -1,7 +1,10 @@
 package irmb.flowsim.view.javafx;
 
+import irmb.flowsim.model.Point;
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.presentation.Zoom;
 import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +37,7 @@ public class RootController implements GraphicView {
 
     private GraphicViewPresenter presenter;
     private JavaFXPainter painter;
+    private CoordinateTransformer transformer;
 
     public RootController() {
     }
@@ -51,6 +55,9 @@ public class RootController implements GraphicView {
         });
         drawPanel.widthProperty().addListener(o -> {
             update();
+        });
+        drawPanel.setOnScroll(event -> {
+            presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
         });
     }
 
@@ -71,6 +78,8 @@ public class RootController implements GraphicView {
             presenter.handleLeftClick(event.getX(), event.getY());
         else if (event.getButton() == MouseButton.SECONDARY)
             presenter.handleRightClick();
+        else if (event.getButton() == MouseButton.MIDDLE)
+            presenter.handleMiddleClick(event.getX(), event.getY());
     }
 
     public void onMouseMoved(MouseEvent event) {
@@ -102,7 +111,13 @@ public class RootController implements GraphicView {
         if (painter == null)
             painter = new JavaFXPainter(graphicsContext2D);
         for (PaintableShape p : presenter.getPaintableList()) {
-            p.paint(painter);
+            p.paint(painter, transformer);
         }
+    }
+
+    @Override
+    public void setCoordinateTransformer(CoordinateTransformer transformer) {
+        this.transformer = transformer;
+        transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
     }
 }

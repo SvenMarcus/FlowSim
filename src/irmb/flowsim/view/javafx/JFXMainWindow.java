@@ -2,6 +2,9 @@ package irmb.flowsim.view.javafx;/**
  * Created by Sven on 22.12.2016.
  */
 
+import irmb.flowsim.model.Point;
+import irmb.flowsim.model.util.CoordinateTransformer;
+import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
@@ -35,8 +38,14 @@ public class JFXMainWindow extends Application {
         CommandQueue commandQueue = new CommandQueue();
 
         RootController rootController = new RootController();
-        MouseStrategyFactoryImpl mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory);
-        GraphicViewPresenter presenter = makePresenter(commandQueue, shapeList, mouseStrategyFactory);
+        CoordinateTransformer transformer = new CoordinateTransformerImpl();
+        transformer.setWorldBounds(new Point(-15, 10), new Point(10, -25));
+        transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
+
+        MouseStrategyFactoryImpl mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory, transformer);
+
+        GraphicViewPresenter presenter = makePresenter(commandQueue, shapeList, mouseStrategyFactory, transformer);
+
         rootController.setPresenter(presenter);
 
         Pane rootLayout = makeRootLayout(rootController);
@@ -47,8 +56,8 @@ public class JFXMainWindow extends Application {
         primaryStage.show();
     }
 
-    private GraphicViewPresenter makePresenter(CommandQueue commandQueue, List<PaintableShape> shapeList, MouseStrategyFactory strategyFactory) {
-        return new GraphicViewPresenter(strategyFactory, commandQueue, shapeList);
+    private GraphicViewPresenter makePresenter(CommandQueue commandQueue, List<PaintableShape> shapeList, MouseStrategyFactory strategyFactory, CoordinateTransformer transformer) {
+        return new GraphicViewPresenter(strategyFactory, commandQueue, shapeList, transformer);
     }
 
     private PaintableShapeBuilderFactory makePaintableShapeBuilderFactory() {

@@ -1,12 +1,9 @@
 package irmb.flowsim.presentation.strategy;
 
 import irmb.flowsim.model.Point;
-import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicView;
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.command.AddPaintableShapeCommand;
-import irmb.flowsim.presentation.command.Command;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
@@ -16,77 +13,48 @@ import java.util.List;
  */
 public class BuildObjectMouseStrategy extends MouseStrategy {
 
-    private PaintableShapeBuilderFactory factory;
-
     private int pointsAdded = 0;
-    private GraphicView graphicView;
-    private List<PaintableShape> shapeList;
     private PaintableShapeBuilder shapeBuilder;
     private AddPaintableShapeCommand addPaintableShapeCommand;
-    private CommandQueue commandQueue;
 
-    public BuildObjectMouseStrategy(CommandQueue commandQueue, GraphicView graphicView, List<PaintableShape> shapeList, PaintableShapeBuilder builder) {
-        this.commandQueue = commandQueue;
-        shapeBuilder = builder;
-        this.graphicView = graphicView;
-        this.shapeList = shapeList;
-    }
-
-    public void setObjectType(String type) {
-        shapeBuilder = factory.makeShapeBuilder(type);
+    public BuildObjectMouseStrategy(List<PaintableShape> shapeList, CoordinateTransformer transformer, PaintableShapeBuilder builder) {
+        super(shapeList, transformer);
+        this.shapeBuilder = builder;
     }
 
     @Override
     public void onLeftClick(double x, double y) {
-        if (hasShapeBuilder()) {
-            setChanged();
-            addPointToShape(x, y);
-            addShapeToList();
-            if (pointsAdded >= 2) {
-                graphicView.update();
-                resetBuilderWhenFinished();
-            }
-        }
+        Point point = transformer.transformToWorldPoint(new Point(x, y));
+        addPointToShape(point.getX(), point.getY());
+        addShapeToList();
+        if (pointsAdded >= 2)
+            notifyObserverWithMatchingArgs();
     }
 
     @Override
     public void onMouseMove(double x, double y) {
-        if (hasShapeBuilder()) {
-            if (pointsAdded == 1) {
-                addPointToShape(x, y);
-            } else if (pointsAdded > 1)
-                shapeBuilder.setLastPoint(new Point(x, y));
-            if (pointsAdded > 0)
-                graphicView.update();
-        }
-    }
-
-    @Override
-    public void onMouseDrag(double x, double y) {
-    }
-
-    @Override
-    public void onWheelClick(double x, double y) {
+        Point point = transformer.transformToWorldPoint(new Point(x, y));
+        if (pointsAdded == 1)
+            addPointToShape(point.getX(), point.getY());
+        else if (pointsAdded > 1)
+            shapeBuilder.setLastPoint(point);
+        if (pointsAdded > 0)
+            notifyObservers(makeStrategyEventArgs(STRATEGY_STATE.UPDATE));
     }
 
     @Override
     public void onRightClick() {
-        setChanged();
-        notifyObservers("finished");
-        if (hasShapeBuilder()) {
-            if (pointsAdded > 2) {
-                shapeBuilder.removeLastPoint();
-                addCommand(addPaintableShapeCommand);
-            } else if (addPaintableShapeCommand != null)
-                addPaintableShapeCommand.undo();
-            graphicView.update();
-            shapeBuilder = null;
-        }
+        StrategyEventArgs args = makeStrategyEventArgs(STRATEGY_STATE.FINISHED);
+        if (pointsAdded > 2) {
+            shapeBuilder.removeLastPoint();
+            args.setCommand(addPaintableShapeCommand);
+        } else if (addPaintableShapeCommand != null)
+            addPaintableShapeCommand.undo();
+        notifyObservers(args);
     }
 
-    @Override
-    public void onMouseRelease() {
-
+    private StrategyEventArgs makeStrategyEventArgs(STRATEGY_STATE state) {
+        return new StrategyEventArgs(state);
     }
 
     private void addShapeToList() {
@@ -99,19 +67,13 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
         pointsAdded++;
     }
 
-    private boolean hasShapeBuilder() {
-        return shapeBuilder != null;
-    }
-
-    private void resetBuilderWhenFinished() {
+    private void notifyObserverWithMatchingArgs() {
+        StrategyEventArgs args;
         if (shapeBuilder.isObjectFinished()) {
-            shapeBuilder = null;
-            addCommand(addPaintableShapeCommand);
-            notifyObservers("finished");
-        }
-    }
-
-    private void addCommand(Command command) {
-        commandQueue.add(command);
+            args = makeStrategyEventArgs(STRATEGY_STATE.FINISHED);
+            args.setCommand(addPaintableShapeCommand);
+        } else
+            args = makeStrategyEventArgs(STRATEGY_STATE.UPDATE);
+        notifyObservers(args);
     }
 }

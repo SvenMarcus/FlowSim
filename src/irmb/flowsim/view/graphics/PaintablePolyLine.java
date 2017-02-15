@@ -3,6 +3,7 @@ package irmb.flowsim.view.graphics;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.model.Shape;
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Painter;
 
 import java.util.List;
@@ -21,12 +22,12 @@ public class PaintablePolyLine extends PaintableShape {
     }
 
     @Override
-    public void paint(Painter painter) {
+    public void paint(Painter painter, CoordinateTransformer transformer) {
         List<Point> pointList = polyLine.getPointList();
         for (int i = 0; i < pointList.size() - 1; i++) {
-            Point current = pointList.get(i);
-            Point next = pointList.get(i + 1);
-            painter.paintLine(current.getX(), current.getY(), next.getX(), next.getY());
+            Point current = transformer.transformToPointOnScreen(pointList.get(i));
+            Point next = transformer.transformToPointOnScreen(pointList.get(i + 1));
+            painter.paintLine((int) Math.round(current.getX()), (int) Math.round(current.getY()), (int) Math.round(next.getX()), (int) Math.round(next.getY()));
         }
     }
 

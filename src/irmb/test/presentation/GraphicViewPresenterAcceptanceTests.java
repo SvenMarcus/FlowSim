@@ -6,6 +6,7 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
 import static irmb.mockito.verification.AtLeastThenForgetAll.atLeastThenForgetAll;
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static irmb.test.util.TestUtil.makePoint;
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
@@ -148,16 +150,17 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.beginPaint("Line");
 
         buildLine(13, 15, 18, 19);
-        verify(painterSpy, atLeastOnce()).paintLine(13, 15, 18, 19);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
 
         sut.handleLeftClick(15, 18);
         sut.handleMouseDrag(20, 24);
-        verify(painterSpy, atLeastOnce()).paintLine(18, 21, 23, 25);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
 
         sut.handleMouseDrag(3, 10);
-        verify(painterSpy, atLeastOnce()).paintLine(1, 7, 6, 11);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(1, 7, 6, 11);
 
         sut.handleMouseRelease();
+        clearInvocations(painterSpy);
 
         sut.handleLeftClick(0, 0);
         sut.handleMouseDrag(15, 18);
@@ -212,6 +215,7 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
         sut.redo();
         verifyNoMoreInteractions(painterSpy);
+
     }
 
     private List<Double> makePolyLineCoordinates() {
@@ -240,10 +244,11 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         PolyLine polyLine = (PolyLine) shapeList.get(1).getShape();
 
         Point lineStart = makePoint(line.getFirst().getX(), line.getFirst().getY());
-        Point lineEnd = makePoint(line.getFirst().getX(), line.getFirst().getY());
+        Point lineEnd = makePoint(line.getSecond().getX(), line.getSecond().getY());
         List<Point> pointList = copyPolyLinePoints(polyLine);
 
-        sut.handleWheelClick(4, 5);
+        sut.handleMiddleClick(4, 5);
+        sut.handleMouseDrag(-3, 1);
         sut.handleMouseDrag(10, 10);
         sut.handleMouseRelease();
 
@@ -251,19 +256,26 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         verify(painterSpy, atLeastThenForget(1)).paintLine(41, 45, 16, 59);
         verify(painterSpy, atLeastThenForget(1)).paintLine(16, 59, 71, 79);
 
+        verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
+
+
+        sut.handleMiddleClick(10, 10);
+        sut.handleMouseDrag(3, 2);
+        sut.handleMouseRelease();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
+
+
+    }
+
+    private void verifyUnchangedWorldCoordinates(Line line, PolyLine polyLine, Point lineStart, Point lineEnd, List<Point> pointList) {
         assertExpectedPointEqualsActual(lineStart, line.getFirst());
         assertExpectedPointEqualsActual(lineEnd, line.getSecond());
 
         assertExpectedPointEqualsActual(pointList.get(0), polyLine.getPointList().get(0));
         assertExpectedPointEqualsActual(pointList.get(1), polyLine.getPointList().get(1));
         assertExpectedPointEqualsActual(pointList.get(2), polyLine.getPointList().get(2));
-
-//        performMove(10, 10, 3, 2);
-//        verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
-//        verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
-//        verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
-
-
     }
 
     private List<Point> copyPolyLinePoints(PolyLine polyLine) {
@@ -273,5 +285,76 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         return pointList;
     }
 
+    @Test
+    public void zoomAcceptanceTest() {
+        buildLine(36, 22, 114, 76);
+
+        List<Double> coordinates = makePolyLineCoordinates();
+        buildPolyLine(coordinates);
+
+
+        Line line = (Line) shapeList.get(0).getShape();
+        PolyLine polyLine = (PolyLine) shapeList.get(1).getShape();
+
+        Point lineStart = makePoint(line.getFirst().getX(), line.getFirst().getY());
+        Point lineEnd = makePoint(line.getSecond().getX(), line.getSecond().getY());
+
+        List<Point> pointList = copyPolyLinePoints(polyLine);
+
+        clearInvocations(painterSpy);
+
+        ArgumentCaptor<Double> doubleCaptor = ArgumentCaptor.forClass(Double.class);
+        sut.handleScroll(15, 19, -1);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
+
+        List<Double> capturedArgs = doubleCaptor.getAllValues();
+        verifyLineCoordinatesAfterZoomOut(capturedArgs);
+        verifyPolyLineCoordinatesAfterZoomOut(capturedArgs);
+
+        verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
+
+        doubleCaptor = ArgumentCaptor.forClass(Double.class);
+        sut.handleScroll(15, 19, 1);
+        verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
+        verifyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
+        verifyPolyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
+        verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
+    }
+
+    private void verifyLineCoordinatesAfterZoomIn(List<Double> capturedArgs) {
+        assertEquals((double) 36, capturedArgs.get(0));
+        assertEquals((double) 22, capturedArgs.get(1));
+        assertEquals((double) 114, capturedArgs.get(2));
+        assertEquals((double) 76, capturedArgs.get(3));
+    }
+
+    private void verifyPolyLineCoordinatesAfterZoomIn(List<Double> capturedArgs) {
+        assertEquals((double) 35, capturedArgs.get(4));
+        assertEquals((double) 40, capturedArgs.get(5));
+        assertEquals((double) 10, capturedArgs.get(6));
+        assertEquals((double) 54, capturedArgs.get(7));
+        assertEquals((double) 10, capturedArgs.get(8));
+        assertEquals((double) 54, capturedArgs.get(9));
+        assertEquals((double) 65, capturedArgs.get(10));
+        assertEquals((double) 74, capturedArgs.get(11));
+    }
+
+    private void verifyPolyLineCoordinatesAfterZoomOut(List<Double> capturedArgs) {
+        assertEquals((double) 34, capturedArgs.get(4));
+        assertEquals((double) 39, capturedArgs.get(5));
+        assertEquals((double) 10, capturedArgs.get(6));
+        assertEquals((double) 52, capturedArgs.get(7));
+        assertEquals((double) 10, capturedArgs.get(8));
+        assertEquals((double) 52, capturedArgs.get(9));
+        assertEquals((double) 63, capturedArgs.get(10));
+        assertEquals((double) 71, capturedArgs.get(11));
+    }
+
+    private void verifyLineCoordinatesAfterZoomOut(List<Double> capturedArgs) {
+        assertEquals((double) 35, capturedArgs.get(0));
+        assertEquals((double) 22, capturedArgs.get(1));
+        assertEquals((double) 109, capturedArgs.get(2));
+        assertEquals((double) 73, capturedArgs.get(3));
+    }
 
 }

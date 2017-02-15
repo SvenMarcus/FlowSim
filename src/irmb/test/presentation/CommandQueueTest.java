@@ -3,11 +3,11 @@ package irmb.test.presentation;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.command.Command;
+import irmb.flowsim.util.Observer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Observer;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class CommandQueueTest extends CommandQueue {
 
     private CommandQueueTest sut;
-    private Observer observer;
+    private Observer<String> observer;
 
     @Before
     public void setUp() throws Exception {
@@ -48,13 +48,13 @@ public class CommandQueueTest extends CommandQueue {
     @Test
     public void whenCallingUndo_shouldNotNotifyObserver() {
         sut.undo();
-        verify(observer, never()).update(any(), any());
+        verify(observer, never()).update(any());
     }
 
     @Test
     public void whenCallingRedo_shouldNotNotifyObserver() {
         sut.redo();
-        verify(observer, never()).update(any(), any());
+        verify(observer, never()).update(any());
     }
 
     public class OneCommandAddedContext {
@@ -88,7 +88,7 @@ public class CommandQueueTest extends CommandQueue {
         @Test
         public void whenCallingUndo_shouldNotifyObserver() {
             sut.undo();
-            verify(observer).update(sut, "undo");
+            verify(observer).update("undo");
         }
 
         public class TwoCommandsAddedContext {
@@ -143,7 +143,7 @@ public class CommandQueueTest extends CommandQueue {
                 @Test
                 public void whenCallingRedo_shouldNotifyObserver() {
                     sut.redo();
-                    verify(observer).update(sut, "redo");
+                    verify(observer).update("redo");
                 }
 
                 public class CalledUndoTwiceContext {

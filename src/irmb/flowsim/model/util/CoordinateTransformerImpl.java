@@ -3,6 +3,8 @@ package irmb.flowsim.model.util;
 import Jama.Matrix;
 import irmb.flowsim.model.Point;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sven on 10.01.2017.
  */
@@ -21,7 +23,7 @@ public class CoordinateTransformerImpl implements CoordinateTransformer {
     @Override
     public Point transformToPointOnScreen(Point point) {
         calculateMiddleValues();
-        translationMatrix = makeTranslationMatrix();
+        translationMatrix = makeTransformationMatrix();
 
         Matrix pointMatrix = new Matrix(1, 3);
         pointMatrix.set(0, 0, point.getX());
@@ -39,10 +41,10 @@ public class CoordinateTransformerImpl implements CoordinateTransformer {
     private double getScaleFactor() {
         double Vx = getDelta(viewTopLeft.getX(), viewBottomRight.getX()) / getDelta(worldTopLeft.getX(), worldBottomRight.getX());
         double Vy = getDelta(viewTopLeft.getY(), viewBottomRight.getY()) / getDelta(worldTopLeft.getY(), worldBottomRight.getY());
-        return 0.9 * Math.min(Vx, Vy);
+        return Math.min(Vx, Vy);
     }
 
-    private Matrix makeTranslationMatrix() {
+    private Matrix makeTransformationMatrix() {
         double s = getScaleFactor();
         double tx = viewMidX - worldMidX;
         double ty = viewMidY - worldMidY;
@@ -81,7 +83,7 @@ public class CoordinateTransformerImpl implements CoordinateTransformer {
     @Override
     public Point transformToWorldPoint(Point point) {
         calculateMiddleValues();
-        translationMatrix = makeTranslationMatrix().inverse();
+        translationMatrix = makeTransformationMatrix().inverse();
 
         Matrix pointMatrix = new Matrix(1, 3);
         pointMatrix.set(0, 0, point.getX());
@@ -124,5 +126,27 @@ public class CoordinateTransformerImpl implements CoordinateTransformer {
         viewBottomRight.setY(viewBottomRight.getY() + dy);
     }
 
+    @Override
+    public double scaleToScreenLength(double length) {
+        return getScaleFactor() * length;
+    }
+
+    @Override
+    public double scaleToWorldLength(double length) {
+        return length / getScaleFactor();
+    }
+
+    @Override
+    public void zoomWindow(double zoomFactor, double worldX, double worldY) {
+        double zoom = 1 - zoomFactor;
+        calculateMiddleValues();
+        double deltaX = worldX * zoomFactor;
+        double deltaY = worldY * zoomFactor;
+
+        worldTopLeft.setX(worldTopLeft.getX() * zoom + deltaX);
+        worldTopLeft.setY(worldTopLeft.getY() * zoom + deltaY);
+        worldBottomRight.setX(worldBottomRight.getX() * zoom + deltaX);
+        worldBottomRight.setY(worldBottomRight.getY() * zoom + deltaY);
+    }
 
 }

@@ -1,26 +1,26 @@
 package irmb.flowsim.presentation.command;
 
-import irmb.flowsim.model.Shape;
+import irmb.flowsim.model.util.CoordinateTransformer;
 
 /**
- * Created by Sven on 02.01.2017.
+ * Created by sven on 24.01.17.
  */
-public class MoveShapeCommand implements Command {
+public class PanWindowCommand implements Command {
 
-    private final Shape shape;
+    private CoordinateTransformer transformer;
     private double dx;
     private double dy;
-    private boolean calledExecute;
     private double totalDx;
     private double totalDy;
+    private boolean calledExecute;
 
-    public MoveShapeCommand(Shape shape) {
-        this.shape = shape;
+    public PanWindowCommand(CoordinateTransformer transformer) {
+        this.transformer = transformer;
     }
 
     @Override
     public void execute() {
-        shape.moveBy(dx, dy);
+        transformer.moveViewWindow(dx, dy);
         totalDx += dx;
         totalDy += dy;
         calledExecute = true;
@@ -29,7 +29,7 @@ public class MoveShapeCommand implements Command {
     @Override
     public void undo() {
         if (calledExecute) {
-            shape.moveBy(-totalDx, -totalDy);
+            transformer.moveViewWindow(-totalDx, -totalDy);
             calledExecute = false;
         }
     }
@@ -37,7 +37,7 @@ public class MoveShapeCommand implements Command {
     @Override
     public void redo() {
         if (!calledExecute) {
-            shape.moveBy(totalDx, totalDy);
+            transformer.moveViewWindow(totalDx, totalDy);
             calledExecute = true;
         }
     }
