@@ -56,15 +56,15 @@ public abstract class MouseStrategy extends Observable<StrategyEventArgs> {
         mouseButton = MouseButton.MIDDLE;
     }
 
-    public abstract void onRightClick();
+    public abstract void onRightClick(double x, double y);
 
     public void onMouseRelease() {
         if (panWindowCommand != null) {
             StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
             args.setCommand(panWindowCommand);
             notifyObservers(args);
-            panWindowCommand = null;
         }
+        panWindowCommand = null;
     }
 
     public void onScroll(double x, double y, double delta) {

@@ -4,11 +4,10 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.Shape;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.presentation.command.MoveShapeCommand;
 import irmb.flowsim.presentation.command.PanWindowCommand;
+import irmb.flowsim.presentation.command.RemovePaintableShapeCommand;
 import irmb.flowsim.presentation.strategy.MoveMouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
 import irmb.flowsim.presentation.strategy.StrategyEventArgs;
@@ -40,8 +39,6 @@ public class MoveMouseStrategyTest {
 
     private Command receivedCommand;
     private boolean hasNext;
-    private GraphicView graphicView;
-    private CommandQueue commandQueue;
     private List<PaintableShape> shapeList;
     private PaintableShape paintableShape;
     private Observer<StrategyEventArgs> observer;
@@ -53,8 +50,6 @@ public class MoveMouseStrategyTest {
     public void setUp() throws Exception {
         receivedCommand = null;
         shape = mock(Shape.class);
-        graphicView = mock(GraphicView.class);
-        commandQueue = mock(CommandQueue.class);
         shapeList = mock(List.class);
         paintableShape = mock(PaintableShape.class);
         setAcceptingPaintableShapeMockBehavior();
@@ -168,6 +163,18 @@ public class MoveMouseStrategyTest {
         assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
         assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
         assertThat(captor.getValue().getCommand(), is(instanceOf(PanWindowCommand.class)));
+    }
+
+    @Test
+    public void whenRightClickingAtShape_shouldRemoveShape() {
+        sut.onRightClick(0, 0);
+
+        verify(shapeList).remove(paintableShape);
+
+        ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
+        verify(observer).update(captor.capture());
+        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertThat(captor.getValue().getCommand(), is(instanceOf(RemovePaintableShapeCommand.class)));
     }
 
     public class NoShapeAtClickedPointContext {

@@ -41,8 +41,8 @@ public class GraphicViewPresenter {
         strategy.onLeftClick(x, y);
     }
 
-    public void handleRightClick() {
-        strategy.onRightClick();
+    public void handleRightClick(double x, double y) {
+        strategy.onRightClick(x, y);
     }
 
     public void handleMouseMove(double x, double y) {

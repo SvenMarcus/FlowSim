@@ -153,7 +153,7 @@ public class BuildObjectMouseStrategyTest {
     public void whenRightClicking_shouldNotifyObserver() {
         makeBuildObjectMouseStrategyWith("Line");
 
-        sut.onRightClick();
+        sut.onRightClick(0, 0);
 
         verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
     }
@@ -163,7 +163,7 @@ public class BuildObjectMouseStrategyTest {
         makeBuildObjectMouseStrategyWith("Line");
 
         sut.onLeftClick(10, 10);
-        sut.onRightClick();
+        sut.onRightClick(0, 0);
 
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer).update(captor.capture());
@@ -177,7 +177,7 @@ public class BuildObjectMouseStrategyTest {
         sut.onLeftClick(10, 10);
         sut.onLeftClick(13, 15);
         sut.onLeftClick(35, 22);
-        sut.onRightClick();
+        sut.onRightClick(0, 0);
 
         assertThatObserverWasNotifiedWithFinishedAndCommand();
     }
@@ -204,7 +204,7 @@ public class BuildObjectMouseStrategyTest {
         assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
         assertNull(captor.getValue().getCommand());
 
-        sut.onRightClick();
+        sut.onRightClick(0, 0);
         verify(observer, atLeastThenForget(1)).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
     }
 

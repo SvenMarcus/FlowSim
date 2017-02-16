@@ -175,5 +175,26 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             }
         }
 
+        @Test
+        public void whenDeletingLineThenUndo_shouldRestoreLine() {
+            sut.handleRightClick(13, 15);
+            clearInvocations(graphicView);
+            clearInvocations(painterSpy);
+
+            sut.undo();
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+        }
+
+        @Test
+        public void whenDeletingLineThenUndoThenRedo_shouldRemoveLine() {
+            sut.handleRightClick(13, 15);
+            sut.undo();
+            clearInvocations(graphicView);
+            clearInvocations(painterSpy);
+
+            sut.redo();
+            verify(graphicView).update();
+            verifyZeroInteractions(painterSpy);
+        }
     }
 }
