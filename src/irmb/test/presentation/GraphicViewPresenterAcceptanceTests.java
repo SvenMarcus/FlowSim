@@ -134,7 +134,7 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
             verify(painterSpy, times(3)).paintLine(36, 12, 24, 20);
             verify(painterSpy, times(1)).paintLine(24, 20, 43, 22);
 
-            sut.handleRightClick();
+            sut.handleRightClick(0, 0);
             verify(painterSpy, times(6)).paintLine(13, 15, 36, 12);
             verify(painterSpy, times(4)).paintLine(36, 12, 24, 20);
             verify(painterSpy, times(1)).paintLine(24, 20, 43, 22);
@@ -355,6 +355,18 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         assertEquals((double) 22, capturedArgs.get(1));
         assertEquals((double) 109, capturedArgs.get(2));
         assertEquals((double) 73, capturedArgs.get(3));
+    }
+
+    @Test
+    public void deleteShapeAcceptanceTest() {
+        buildLine(52, 66, 474, 523);
+        clearInvocations(painterSpy);
+        clearInvocations(graphicView);
+
+        Point pointOnLine = new Point(119, 138.556);
+        sut.handleRightClick(pointOnLine.getX(), pointOnLine.getY());
+        verify(graphicView, atLeastOnce()).update();
+        verifyZeroInteractions(painterSpy);
     }
 
 }

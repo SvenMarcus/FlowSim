@@ -76,7 +76,7 @@ public class GraphicViewPresenterTest {
             sut.handleMouseMove(list.get(i), list.get(i + 1));
             sut.handleLeftClick(list.get(i), list.get(i + 1));
         }
-        sut.handleRightClick();
+        sut.handleRightClick(0, 0);
     }
 
 }

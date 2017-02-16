@@ -4,7 +4,6 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.presentation.Zoom;
 import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,7 +76,7 @@ public class RootController implements GraphicView {
         if (event.getButton() == MouseButton.PRIMARY)
             presenter.handleLeftClick(event.getX(), event.getY());
         else if (event.getButton() == MouseButton.SECONDARY)
-            presenter.handleRightClick();
+            presenter.handleRightClick(event.getX(), event.getY());
         else if (event.getButton() == MouseButton.MIDDLE)
             presenter.handleMiddleClick(event.getX(), event.getY());
     }

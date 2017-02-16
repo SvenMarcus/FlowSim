@@ -43,7 +43,7 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     }
 
     @Override
-    public void onRightClick() {
+    public void onRightClick(double x, double y) {
         StrategyEventArgs args = makeStrategyEventArgs(STRATEGY_STATE.FINISHED);
         if (pointsAdded > 2) {
             shapeBuilder.removeLastPoint();

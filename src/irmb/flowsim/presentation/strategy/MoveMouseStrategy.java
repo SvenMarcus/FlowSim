@@ -2,9 +2,8 @@ package irmb.flowsim.presentation.strategy;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.command.MoveShapeCommand;
+import irmb.flowsim.presentation.command.RemovePaintableShapeCommand;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
@@ -30,11 +29,9 @@ public class MoveMouseStrategy extends MouseStrategy {
     @Override
     public void onLeftClick(double x, double y) {
         clickedPoint = new Point(x, y);
-        Point point = transformer.transformToWorldPoint(clickedPoint);
-        double tolerance = transformer.scaleToWorldLength(3);
-        for (PaintableShape p : shapeList)
-            if (p.isPointOnBoundary(point, tolerance))
-                moveShapeCommand = new MoveShapeCommand(p.getShape());
+        PaintableShape paintableShape = getPaintableShapeAt(x, y);
+        if (paintableShape != null)
+            moveShapeCommand = new MoveShapeCommand(paintableShape.getShape());
     }
 
     @Override
@@ -65,7 +62,22 @@ public class MoveMouseStrategy extends MouseStrategy {
     }
 
     @Override
-    public void onRightClick() {
+    public void onRightClick(double x, double y) {
+        PaintableShape shape = getPaintableShapeAt(x, y);
+        StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
+        RemovePaintableShapeCommand command = new RemovePaintableShapeCommand(shapeList, shape);
+        command.execute();
+        args.setCommand(command);
+        notifyObservers(args);
+    }
+
+    private PaintableShape getPaintableShapeAt(double x, double y) {
+        Point point = transformer.transformToWorldPoint(new Point(x, y));
+        double tolerance = transformer.scaleToWorldLength(3);
+        for (PaintableShape p : shapeList)
+            if (p.isPointOnBoundary(point, tolerance))
+                return p;
+        return null;
     }
 
     @Override

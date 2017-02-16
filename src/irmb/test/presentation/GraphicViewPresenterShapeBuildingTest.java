@@ -1,25 +1,9 @@
 package irmb.test.presentation;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
-import irmb.flowsim.model.Line;
-import irmb.flowsim.model.Point;
-import irmb.flowsim.model.PolyLine;
-import irmb.flowsim.model.Rectangle;
-import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.presentation.builder.PaintableLineBuilder;
-import irmb.flowsim.presentation.builder.PaintablePolyLineBuilder;
-import irmb.flowsim.presentation.builder.PaintableRectangleBuilder;
-import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
-import irmb.flowsim.presentation.factory.*;
-import irmb.flowsim.view.graphics.PaintableRectangle;
-import irmb.test.view.PainterMockFactory;
-import irmb.test.view.SwingGraphicViewFake;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.LinkedList;
 
 import static org.mockito.Mockito.*;
 
@@ -38,7 +22,7 @@ public class GraphicViewPresenterShapeBuildingTest extends GraphicViewPresenterT
 
     @Test
     public void whenRightClicking_shouldDoNothing() {
-        sut.handleRightClick();
+        sut.handleRightClick(0, 0);
         verifyZeroInteractions(painterSpy);
     }
 
@@ -65,7 +49,7 @@ public class GraphicViewPresenterShapeBuildingTest extends GraphicViewPresenterT
             sut.handleLeftClick(18, 19);
             verify(painterSpy, times(1)).paintLine(13, 15, 18, 19);
 
-            sut.handleRightClick();
+            sut.handleRightClick(0, 0);
 
             sut.handleLeftClick(36, 12);
             verify(painterSpy, never()).paintLine(18, 19, 36, 12);
@@ -128,7 +112,7 @@ public class GraphicViewPresenterShapeBuildingTest extends GraphicViewPresenterT
                 sut.handleLeftClick(13, 15);
                 sut.handleMouseMove(18, 19);
 
-                sut.handleRightClick();
+                sut.handleRightClick(0, 0);
                 verify(painterSpy, times(1)).paintLine(13, 15, 18, 19);
                 verify(graphicView, times(2)).update();
             }
@@ -158,7 +142,7 @@ public class GraphicViewPresenterShapeBuildingTest extends GraphicViewPresenterT
                 sut.handleLeftClick(18, 19);
                 sut.handleMouseMove(36, 25);
 
-                sut.handleRightClick();
+                sut.handleRightClick(0, 0);
                 verify(painterSpy, times(4)).paintLine(13, 15, 18, 19);
                 verify(painterSpy, times(1)).paintLine(18, 19, 36, 25);
             }
@@ -170,7 +154,7 @@ public class GraphicViewPresenterShapeBuildingTest extends GraphicViewPresenterT
                 sut.handleLeftClick(18, 19);
                 sut.handleMouseMove(36, 25);
 
-                sut.handleRightClick();
+                sut.handleRightClick(0, 0);
 
                 graphicView.update();
                 verify(painterSpy, times(5)).paintLine(13, 15, 18, 19);
