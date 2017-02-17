@@ -30,14 +30,19 @@ public class MoveMouseStrategy extends MouseStrategy {
     public void onLeftClick(double x, double y) {
         super.onLeftClick(x, y);
         clickedPoint = new Point(x, y);
-        PaintableShape paintableShape = getPaintableShapeAt(x, y);
-        if (paintableShape != null)
-            moveShapeCommand = new MoveShapeCommand(paintableShape.getShape());
+        Point worldPoint = transformer.transformToWorldPoint(clickedPoint);
+        for (PaintableShape p : shapeList)
+            if (p.getDefinedPoint(worldPoint, 3) != null)
+                moveShapeCommand = new MoveShapeCommand(p.getDefinedPoint(worldPoint, 3));
+        if (moveShapeCommand == null) {
+            PaintableShape paintableShape = getPaintableShapeAt(x, y);
+            if (paintableShape != null)
+                moveShapeCommand = new MoveShapeCommand(paintableShape.getShape());
+        }
     }
 
     @Override
     public void onMouseMove(double x, double y) {
-
     }
 
     @Override

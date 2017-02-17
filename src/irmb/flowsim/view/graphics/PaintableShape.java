@@ -15,4 +15,6 @@ public abstract class PaintableShape {
     public abstract boolean isPointOnBoundary(Point point, double radius);
 
     public abstract Shape getShape();
+
+    public abstract Point getDefinedPoint(Point point, double radius);
 }

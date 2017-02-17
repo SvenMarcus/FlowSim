@@ -50,6 +50,11 @@ public class PaintablePolyLine extends PaintableShape {
         return polyLine;
     }
 
+    @Override
+    public Point getDefinedPoint(Point point, double radius) {
+        return null;
+    }
+
     private Point getIntersectionPoint(Point point, int i) {
         double reverseGradient = -1. / segmentGradient;
         List<Point> pointList = polyLine.getPointList();

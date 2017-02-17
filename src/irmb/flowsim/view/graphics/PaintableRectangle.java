@@ -65,6 +65,11 @@ public class PaintableRectangle extends PaintableShape {
         return rectangle;
     }
 
+    @Override
+    public Point getDefinedPoint(Point point, double radius) {
+        return null;
+    }
+
     private boolean isInside(Point point, double radius) {
         return point.getY() > minY + radius && point.getY() < maxY - radius && point.getX() > minX + radius && point.getX() < maxX - radius;
     }
