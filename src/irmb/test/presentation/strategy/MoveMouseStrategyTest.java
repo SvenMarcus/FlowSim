@@ -1,4 +1,4 @@
-package irmb.test.presentation.strategies;
+package irmb.test.presentation.strategy;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Point;
@@ -175,6 +175,20 @@ public class MoveMouseStrategyTest {
         verify(observer).update(captor.capture());
         assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
         assertThat(captor.getValue().getCommand(), is(instanceOf(RemovePaintableShapeCommand.class)));
+    }
+
+    @Test
+    public void whenPanningThenMovingShape_shouldNotPan() {
+        sut.onMiddleClick(52, 13);
+        sut.onMouseDrag(100, 65);
+        sut.onMouseRelease();
+        clearInvocations(observer);
+        clearInvocations(transformer);
+
+        sut.onLeftClick(10, 21);
+        sut.onMouseDrag(20, 31);
+        sut.onMouseRelease();
+        verify(transformer, never()).moveViewWindow(anyDouble(), anyDouble());
     }
 
     public class NoShapeAtClickedPointContext {

@@ -1,4 +1,4 @@
-package irmb.test.presentation.strategies;
+package irmb.test.presentation.strategy;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;

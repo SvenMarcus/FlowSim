@@ -28,7 +28,9 @@ public abstract class MouseStrategy extends Observable<StrategyEventArgs> {
         this.transformer = transformer;
     }
 
-    public abstract void onLeftClick(double x, double y);
+    public void onLeftClick(double x, double y) {
+        mouseButton = MouseButton.LEFT;
+    }
 
     public abstract void onMouseMove(double x, double y);
 

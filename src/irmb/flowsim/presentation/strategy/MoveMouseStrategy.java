@@ -28,6 +28,7 @@ public class MoveMouseStrategy extends MouseStrategy {
 
     @Override
     public void onLeftClick(double x, double y) {
+        super.onLeftClick(x, y);
         clickedPoint = new Point(x, y);
         PaintableShape paintableShape = getPaintableShapeAt(x, y);
         if (paintableShape != null)
