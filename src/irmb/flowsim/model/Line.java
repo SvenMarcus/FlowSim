@@ -35,5 +35,7 @@ public class Line implements Shape {
         double secondY = getSecond().getY() + dy;
         setFirst(new Point(firstX, firstY));
         setSecond(new Point(secondX, secondY));
+//        first.moveBy(dx, dy);
+//        second.moveBy(dx, dy);
     }
 }
