@@ -371,15 +371,25 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
     @Test
     public void movePointAcceptanceTest() {
-        buildLine(52, 66, 474, 523);
+        verifyMovePointForLine();
+
+        verifyMovePointForPolyLine();
+
+        verifyMovePointForRectangle();
+    }
+
+    private void verifyMovePointForRectangle() {
+        buildRectangle(6, 23, 118, 165);
         clearInvocations(painterSpy);
         clearInvocations(graphicView);
 
-        sut.handleLeftClick(52, 66);
-        sut.handleMouseDrag(65, 12);
+        sut.handleLeftClick(6, 23);
+        sut.handleMouseDrag(112, 318);
         sut.handleMouseRelease();
-        verify(painterSpy, atLeastThenForget(1)).paintLine(65, 12, 474, 523);
+        verify(painterSpy, atLeastThenForget(1)).paintRectangle(112, 165, 6, 153);
+    }
 
+    private void verifyMovePointForPolyLine() {
         List<Double> coordinates = makePolyLineCoordinates();
         buildPolyLine(coordinates);
         clearInvocations(painterSpy);
@@ -390,6 +400,16 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleMouseRelease();
         verify(painterSpy, atLeastThenForget(1)).paintLine(35, 40, 112, 318);
         verify(painterSpy, atLeastThenForget(1)).paintLine(112, 318, 65, 74);
+    }
 
+    private void verifyMovePointForLine() {
+        buildLine(52, 66, 474, 523);
+        clearInvocations(painterSpy);
+        clearInvocations(graphicView);
+
+        sut.handleLeftClick(52, 66);
+        sut.handleMouseDrag(65, 12);
+        sut.handleMouseRelease();
+        verify(painterSpy, atLeastThenForget(1)).paintLine(65, 12, 474, 523);
     }
 }

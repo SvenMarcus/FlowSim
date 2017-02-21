@@ -57,6 +57,14 @@ public class GraphicViewPresenter {
         strategy.onMouseRelease();
     }
 
+    public void handleMiddleClick(double x, double y) {
+        strategy.onMiddleClick(x, y);
+    }
+
+    public void handleScroll(double x, double y, int delta) {
+        strategy.onScroll(x, y, delta);
+    }
+
     public void undo() {
         commandQueue.undo();
     }
@@ -71,6 +79,10 @@ public class GraphicViewPresenter {
 
     private void makeStrategy(String objectType) {
         strategy = factory.makeStrategy(objectType);
+        addStrategyObserver();
+    }
+
+    private void addStrategyObserver() {
         strategy.addObserver((arg) -> {
             if (arg.getState() == STRATEGY_STATE.FINISHED)
                 makeStrategy("Move");
@@ -84,11 +96,4 @@ public class GraphicViewPresenter {
         return shapeList;
     }
 
-    public void handleMiddleClick(double x, double y) {
-        strategy.onMiddleClick(x, y);
-    }
-
-    public void handleScroll(double x, double y, int delta) {
-        strategy.onScroll(x, y, delta);
-    }
 }

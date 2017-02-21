@@ -67,6 +67,12 @@ public class PaintableRectangle extends PaintableShape {
 
     @Override
     public Point getDefinedPoint(Point point, double radius) {
+        Point first = rectangle.getFirst();
+        Point second = rectangle.getSecond();
+        if (getDistance(first, point) <= radius)
+            return first;
+        else if (getDistance(second, point) <= radius)
+            return second;
         return null;
     }
 

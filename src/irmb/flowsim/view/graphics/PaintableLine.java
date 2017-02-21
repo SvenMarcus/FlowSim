@@ -71,12 +71,6 @@ public class PaintableLine extends PaintableShape {
         return new Point(intersectX, intersectY);
     }
 
-    private double getDistance(Point point, Point pointOnLine) {
-        double dx = Math.abs(point.getX() - pointOnLine.getX());
-        double dy = Math.abs(point.getY() - pointOnLine.getY());
-        return Math.sqrt(dx * dx + dy * dy);
-    }
-
     private double getYCoord(double x) {
         double gradient = getGradient();
         double dx = getDeltaXToLineStart(x);
