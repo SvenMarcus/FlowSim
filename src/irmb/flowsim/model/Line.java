@@ -29,11 +29,9 @@ public class Line implements Shape {
 
     @Override
     public void moveBy(double dx, double dy) {
-        double firstX = getFirst().getX() + dx;
-        double firstY = getFirst().getY() + dy;
-        double secondX = getSecond().getX() + dx;
-        double secondY = getSecond().getY() + dy;
-        setFirst(new Point(firstX, firstY));
-        setSecond(new Point(secondX, secondY));
+        first.setX(first.getX() + dx);
+        first.setY(first.getY() + dy);
+        second.setX(second.getX() + dx);
+        second.setY(second.getY() + dy);
     }
 }

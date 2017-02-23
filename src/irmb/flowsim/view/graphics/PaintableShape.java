@@ -15,4 +15,12 @@ public abstract class PaintableShape {
     public abstract boolean isPointOnBoundary(Point point, double radius);
 
     public abstract Shape getShape();
+
+    public abstract Point getDefinedPoint(Point point, double radius);
+
+    protected double getDistance(Point first, Point second) {
+        double dx = Math.abs(first.getX() - second.getX());
+        double dy = Math.abs(first.getY() - second.getY());
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 }

@@ -64,4 +64,44 @@ public class PaintablePolyLineTest {
         assertTrue(sut.isPointOnBoundary(makePoint(48, 40), 3));
     }
 
+    @Test
+    public void givenPointEqualToFirst_getDefinedPointShouldReturnFirst() {
+        Point p = sut.getDefinedPoint(makePoint(11, 12), 0);
+        assertEquals(first, p);
+    }
+
+    @Test
+    public void givenPointEqualToSecond_getDefinedPointShouldReturnSecond() {
+        Point p = sut.getDefinedPoint(makePoint(21, 22), 0);
+        assertEquals(second, p);
+    }
+
+    @Test
+    public void givenPointEqualToThird_getDefinedPointShouldReturnThird() {
+        Point p = sut.getDefinedPoint(makePoint(45, 39), 0);
+        assertEquals(third, p);
+    }
+
+    @Test
+    public void givenPointNotOnDefinedPoint_getDefinedPointShouldReturnNull() {
+        Point p = sut.getDefinedPoint(makePoint(0, 0), 0);
+        assertNull(p);
+    }
+
+    @Test
+    public void givenPointWithinToleranceRadius_shouldReturnPointOnLine() {
+        Point p = sut.getDefinedPoint(makePoint(13, 10), 3);
+        assertEquals(first, p);
+
+        p = sut.getDefinedPoint(makePoint(9, 14), 3);
+        assertEquals(first, p);
+
+        p = sut.getDefinedPoint(makePoint(23, 21), 3);
+        assertEquals(second, p);
+
+        p = sut.getDefinedPoint(makePoint(43, 40), 3);
+        assertEquals(third, p);
+    }
+
+
 }

@@ -33,9 +33,10 @@ public class GraphicViewPresenterShapeBuildingTest extends GraphicViewPresenterT
 
             sut.handleLeftClick(13, 15);
             sut.handleLeftClick(18, 19);
+            clearInvocations(painterSpy);
 
             sut.handleLeftClick(99, 99);
-            verify(painterSpy, times(1)).paintLine(13, 15, 18, 19);
+            verifyZeroInteractions(painterSpy);
         }
     }
 

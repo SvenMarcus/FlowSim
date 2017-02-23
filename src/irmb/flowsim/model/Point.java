@@ -1,9 +1,11 @@
 package irmb.flowsim.model;
 
+import irmb.flowsim.view.graphics.PaintableShape;
+
 /**
  * Created by Sven on 14.12.2016.
  */
-public class Point {
+public class Point implements Shape {
     private double x;
     private double y;
 
@@ -30,5 +32,11 @@ public class Point {
 
     public String toString() {
         return "x: " + x + "; y: " + y;
+    }
+
+    @Override
+    public void moveBy(double dx, double dy) {
+        x += dx;
+        y += dy;
     }
 }

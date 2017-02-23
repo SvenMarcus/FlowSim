@@ -27,26 +27,26 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
     public class LineAddedContext {
         @Before
         public void setUp() {
-            buildLine(13, 15, 18, 19);
-            verify(painterSpy, atLeastThenForget(2)).paintLine(13, 15, 18, 19);
+            buildLine(13, 15, 25, 34);
+            verify(painterSpy, atLeastThenForget(2)).paintLine(13, 15, 25, 34);
         }
 
         @Test
         public void whenMovingLineThenCallingUndo_shouldUndoMove() {
-            performMove(13, 15, 18, 21);
-            verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
+            performMove(18, 25, 28, 65);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(23, 55, 35, 74);
 
             sut.undo();
-            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
         }
 
         @Test
         public void whenMovingLineThenCallingUndoTwice_shouldUndoMoveAndRemoveLine() {
-            performMove(13, 15, 18, 21);
-            verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
+            performMove(18, 25, 28, 65);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(23, 55, 35, 74);
 
             sut.undo();
-            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
 
             sut.undo();
             verify(graphicView, atLeastThenForget(5)).update();
@@ -56,8 +56,8 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
         public class MovedOnceContext {
             @Before
             public void setUp() {
-                performMove(13, 15, 18, 21);
-                verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
+                performMove(18, 25, 28, 65);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 55, 35, 74);
             }
 
             @Test
@@ -67,12 +67,13 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
 
                 sut.undo();
                 verify(graphicView, atLeastThenForget(6)).update();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(18, 21, 23, 25);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 55, 35, 74);
                 verifyNoMoreInteractions(painterSpy);
 
                 sut.undo();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
             }
+
         }
 
         @Test
@@ -83,7 +84,7 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             sut.handleMouseRelease();
 
             sut.undo();
-            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
         }
 
         @Test
@@ -101,18 +102,18 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             sut.handleMiddleClick(10, 10);
             sut.handleMouseDrag(20, 5);
             sut.handleMouseRelease();
-            verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 35, 29);
 
             sut.handleMiddleClick(10, 10);
             sut.handleMouseDrag(3, 18);
             sut.handleMouseRelease();
-            verify(painterSpy, atLeastThenForget(1)).paintLine(16, 18, 21, 22);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(16, 18, 28, 37);
 
             sut.undo();
-            verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 35, 29);
 
             sut.undo();
-            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
         }
 
         public class MovedViewWindowContext {
@@ -121,31 +122,31 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
                 sut.handleMiddleClick(10, 10);
                 sut.handleMouseDrag(20, 5);
                 sut.handleMouseRelease();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+                clearInvocations(painterSpy);
             }
 
             @Test
             public void whenCallingUndo_shouldUndoPan() {
                 sut.undo();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
             }
 
             @Test
             public void whenCallingUndo_shouldOnlyUndoPan() {
                 sut.undo();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
 
                 graphicView.update();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
             }
 
             @Test
             public void whenCallingUndoThenRedo_shouldRedoPan() {
                 sut.undo();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
 
                 sut.redo();
-                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 28, 14);
+                verify(painterSpy, atLeastThenForget(1)).paintLine(23, 10, 35, 29);
             }
         }
 
@@ -155,7 +156,7 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             clearInvocations(painterSpy);
 
             sut.undo();
-            verify(painterSpy).paintLine(13, 15, 18, 19);
+            verify(painterSpy).paintLine(13, 15, 25, 34);
         }
 
         public class ZoomedContext {
@@ -171,7 +172,7 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
                 clearInvocations(painterSpy);
 
                 sut.redo();
-                verify(painterSpy).paintLine(15, 17, 20, 20);
+                verify(painterSpy).paintLine(15, 17, 26, 35);
             }
         }
 
@@ -182,7 +183,7 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             clearInvocations(painterSpy);
 
             sut.undo();
-            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 18, 19);
+            verify(painterSpy, atLeastThenForget(1)).paintLine(13, 15, 25, 34);
         }
 
         @Test
@@ -195,6 +196,18 @@ public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTe
             sut.redo();
             verify(graphicView).update();
             verifyZeroInteractions(painterSpy);
+        }
+
+        @Test
+        public void whenCallingUndoTwiceAfterMovingPointThenCompleteShape_shouldUndoBothMoves() {
+            performMove(13, 15, 53, 62); //(53; 62) -> (25; 34)
+            performMove(30, 39, 36, 21);
+            clearInvocations(painterSpy);
+            clearInvocations(graphicView);
+
+            sut.undo();
+            sut.undo();
+            verify(painterSpy).paintLine(13, 15, 25, 34);
         }
     }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 public class MoveMouseStrategy extends MouseStrategy {
 
 
+    private final int radius = 3;
     private MoveShapeCommand moveShapeCommand;
     private Point clickedPoint;
     private List<PaintableShape> shapeList;
@@ -30,14 +31,20 @@ public class MoveMouseStrategy extends MouseStrategy {
     public void onLeftClick(double x, double y) {
         super.onLeftClick(x, y);
         clickedPoint = new Point(x, y);
-        PaintableShape paintableShape = getPaintableShapeAt(x, y);
-        if (paintableShape != null)
-            moveShapeCommand = new MoveShapeCommand(paintableShape.getShape());
+        Point worldPoint = transformer.transformToWorldPoint(clickedPoint);
+        PaintableShape paintableShape = getPaintableShapeAt(worldPoint);
+        if (paintableShape != null) {
+            double tolerance = transformer.scaleToWorldLength(radius);
+            Point definedPoint = paintableShape.getDefinedPoint(worldPoint, tolerance);
+            if (definedPoint != null)
+                moveShapeCommand = new MoveShapeCommand(definedPoint);
+            else
+                moveShapeCommand = new MoveShapeCommand(paintableShape.getShape());
+        }
     }
 
     @Override
     public void onMouseMove(double x, double y) {
-
     }
 
     @Override
@@ -53,9 +60,9 @@ public class MoveMouseStrategy extends MouseStrategy {
         double dx = x - clickedPoint.getX();
         double dy = y - clickedPoint.getY();
 
-        double viewDx = transformer.scaleToWorldLength(dx);
-        double viewDy = -transformer.scaleToWorldLength(dy);
-        moveShapeCommand.setDelta(viewDx, viewDy);
+        double worldDx = transformer.scaleToWorldLength(dx);
+        double worldDy = -transformer.scaleToWorldLength(dy);
+        moveShapeCommand.setDelta(worldDx, worldDy);
         moveShapeCommand.execute();
 
         clickedPoint.setX(x);
@@ -64,7 +71,8 @@ public class MoveMouseStrategy extends MouseStrategy {
 
     @Override
     public void onRightClick(double x, double y) {
-        PaintableShape shape = getPaintableShapeAt(x, y);
+        Point worldPoint = transformer.transformToWorldPoint(new Point(x, y));
+        PaintableShape shape = getPaintableShapeAt(worldPoint);
         StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
         RemovePaintableShapeCommand command = new RemovePaintableShapeCommand(shapeList, shape);
         command.execute();
@@ -72,11 +80,10 @@ public class MoveMouseStrategy extends MouseStrategy {
         notifyObservers(args);
     }
 
-    private PaintableShape getPaintableShapeAt(double x, double y) {
-        Point point = transformer.transformToWorldPoint(new Point(x, y));
-        double tolerance = transformer.scaleToWorldLength(3);
+    private PaintableShape getPaintableShapeAt(Point worldPoint) {
+        double tolerance = transformer.scaleToWorldLength(radius);
         for (PaintableShape p : shapeList)
-            if (p.isPointOnBoundary(point, tolerance))
+            if (p.isPointOnBoundary(worldPoint, tolerance))
                 return p;
         return null;
     }

@@ -85,4 +85,35 @@ public class PaintableLineTest {
         assertTrue(sut.isPointOnBoundary(makePoint(12, 16), 3));
         assertTrue(sut.isPointOnBoundary(makePoint(14, 19), 3));
     }
+
+    @Test
+    public void givenPointEqualToStart_getDefinedPointShouldReturnStart() {
+        Point p = sut.getDefinedPoint(makePoint(21, 22), 0);
+        assertEquals(start, p);
+    }
+
+    @Test
+    public void givenPointEqualToEnd_getDefinedPointShouldReturnEnd() {
+        Point p = sut.getDefinedPoint(makePoint(11, 12), 0);
+        assertEquals(end, p);
+    }
+
+    @Test
+    public void givenPointNotOnDefinedPoint_getDefinedPointShouldReturnNull() {
+        Point p = sut.getDefinedPoint(makePoint(0, 0), 0);
+        assertNull(p);
+    }
+
+    @Test
+    public void givenPointWithinToleranceRadiusToStart_shouldReturnStart() {
+        Point p = sut.getDefinedPoint(makePoint(23, 20), 3);
+        assertEquals(start, p);
+    }
+
+    @Test
+    public void givenPointWithinToleranceRadiusToEnd_shouldReturnEnd() {
+        Point p = sut.getDefinedPoint(makePoint(9, 14), 3);
+        assertEquals(end, p);
+    }
+
 }

@@ -2,6 +2,7 @@ package irmb.test.model;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.Rectangle;
+import org.junit.Before;
 import org.junit.Test;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
@@ -12,18 +13,33 @@ import static org.junit.Assert.*;
  * Created by Sven on 02.01.2017.
  */
 public class RectangleTest {
-    @Test
-    public void whenCallingMoveBy_shouldMoveLineByDelta() {
-        Rectangle sut = new Rectangle();
-        Point first = makePoint(21, 22);
-        Point second = makePoint(11, 12);
+
+    private Point first;
+    private Point second;
+    private Rectangle sut;
+
+    @Before
+    public void setUp() throws Exception {
+        first = makePoint(21, 22);
+        second = makePoint(11, 12);
+        sut = new Rectangle();
         sut.setSecond(second);
         sut.setFirst(first);
+    }
 
+    @Test
+    public void whenCallingMoveBy_shouldMoveLineByDelta() {
         sut.moveBy(5, 6);
-        Point newStart = makePoint(first.getX() + 5, first.getY() + 6);
-        Point newEnd = makePoint(second.getX() + 5, second.getY() + 6);
+        Point newStart = makePoint(21 + 5, 22 + 6);
+        Point newEnd = makePoint(11 + 5, 12 + 6);
         assertExpectedPointEqualsActual(newStart, sut.getFirst());
         assertExpectedPointEqualsActual(newEnd, sut.getSecond());
+    }
+
+    @Test
+    public void whenCallingMoveBy_shouldNotCreateNewPoints() {
+        sut.moveBy(5, 6);
+        assertTrue(sut.getFirst() == first);
+        assertTrue(sut.getSecond() == second);
     }
 }

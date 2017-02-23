@@ -50,6 +50,16 @@ public class PaintablePolyLine extends PaintableShape {
         return polyLine;
     }
 
+    @Override
+    public Point getDefinedPoint(Point point, double radius) {
+        List<Point> pointList = polyLine.getPointList();
+        for (Point p : pointList) {
+            if (getDistance(p, point) <= radius)
+                return p;
+        }
+        return null;
+    }
+
     private Point getIntersectionPoint(Point point, int i) {
         double reverseGradient = -1. / segmentGradient;
         List<Point> pointList = polyLine.getPointList();
@@ -58,12 +68,6 @@ public class PaintablePolyLine extends PaintableShape {
         double intersectX = (reverseYIntercept - YIntercept) / (segmentGradient + 1 / segmentGradient);
         double intersectY = getYCoord(intersectX);
         return new Point(intersectX, intersectY);
-    }
-
-    private double getDistance(Point point, Point pointOnLine) {
-        double dx = Math.abs(point.getX() - pointOnLine.getX());
-        double dy = Math.abs(point.getY() - pointOnLine.getY());
-        return Math.sqrt(dx * dx + dy * dy);
     }
 
     private double getYCoord(double x) {

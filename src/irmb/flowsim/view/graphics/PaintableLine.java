@@ -46,6 +46,21 @@ public class PaintableLine extends PaintableShape {
         return line;
     }
 
+    @Override
+    public Point getDefinedPoint(Point point, double radius) {
+        Point first = line.getFirst();
+        Point second = line.getSecond();
+        if (getDistance(point, first) <= radius)
+            return first;
+        else if (getDistance(point, second) <= radius)
+            return second;
+        return null;
+    }
+
+    private boolean pointsAreEqual(Point first, Point second) {
+        return first.getX() == second.getX() && first.getY() == second.getY();
+    }
+
     private Point getIntersectionPoint(Point point) {
         double gradient = getGradient();
         double reverseGradient = -1. / gradient;
@@ -54,12 +69,6 @@ public class PaintableLine extends PaintableShape {
         double intersectX = (reverseYIntercept - YIntercept) / (gradient + 1 / gradient);
         double intersectY = getYCoord(intersectX);
         return new Point(intersectX, intersectY);
-    }
-
-    private double getDistance(Point point, Point pointOnLine) {
-        double dx = Math.abs(point.getX() - pointOnLine.getX());
-        double dy = Math.abs(point.getY() - pointOnLine.getY());
-        return Math.sqrt(dx * dx + dy * dy);
     }
 
     private double getYCoord(double x) {
