@@ -3,6 +3,7 @@ package irmb.test.view;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Painter;
+import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.swing.SwingGraphicView;
 import irmb.flowsim.view.swing.SwingPainter;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -15,7 +16,7 @@ public class SwingGraphicViewFake extends SwingGraphicView {
 
     @Override
     public void update() {
-        for (PaintableShape p : presenter.getPaintableList()) {
+        for (Paintable p : presenter.getPaintableList()) {
             p.paint(painter, transformer);
         }
     }

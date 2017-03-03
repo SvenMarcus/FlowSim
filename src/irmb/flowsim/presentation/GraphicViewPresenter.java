@@ -4,8 +4,10 @@ import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +15,10 @@ import java.util.List;
  */
 public class GraphicViewPresenter {
 
-    private GraphicView graphicView;
+    protected GraphicView graphicView;
     private MouseStrategyFactory factory;
 
-    private List<PaintableShape> shapeList;
+    protected List<PaintableShape> shapeList;
     private CommandQueue commandQueue;
 
 
@@ -92,8 +94,8 @@ public class GraphicViewPresenter {
         });
     }
 
-    public List<PaintableShape> getPaintableList() {
-        return shapeList;
+    public List<Paintable> getPaintableList() {
+        return new ArrayList<Paintable>(shapeList);
     }
 
 }

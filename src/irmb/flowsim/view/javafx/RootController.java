@@ -4,6 +4,7 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -109,7 +110,7 @@ public class RootController implements GraphicView {
         graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
         if (painter == null)
             painter = new JavaFXPainter(graphicsContext2D);
-        for (PaintableShape p : presenter.getPaintableList()) {
+        for (Paintable p : presenter.getPaintableList()) {
             p.paint(painter, transformer);
         }
     }
