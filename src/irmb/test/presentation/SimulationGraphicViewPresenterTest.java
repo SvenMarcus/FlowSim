@@ -12,6 +12,7 @@ import irmb.flowsim.simulation.Simulation;
 import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
+import irmb.test.simulation.SimulationMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,7 @@ public class SimulationGraphicViewPresenterTest {
     private GraphicView graphicViewMock;
     private SimulationGraphicViewPresenter sut;
     private CoordinateTransformer transformer;
-    private Simulation simulationSpy;
+    private SimulationMock simulationSpy;
     private List<PaintableShape> shapeList;
 
     @Before
@@ -42,7 +43,7 @@ public class SimulationGraphicViewPresenterTest {
         shapeList = new ArrayList<>();
         transformer = mock(CoordinateTransformer.class);
 
-        simulationSpy = mock(Simulation.class);
+        simulationSpy = spy(new SimulationMock());
         SimulationFactory simulationFactory = mock(SimulationFactory.class);
         when(simulationFactory.makeSimulation()).thenReturn(simulationSpy);
 
@@ -89,7 +90,6 @@ public class SimulationGraphicViewPresenterTest {
         public void setUp() {
             paintableShape = mock(PaintableShape.class);
             shapeList.add(paintableShape);
-
         }
 
         @Test
@@ -105,8 +105,9 @@ public class SimulationGraphicViewPresenterTest {
         public void setUp() {
             sut.addSimulation();
             clearInvocations(simulationSpy);
+            clearInvocations(graphicViewMock);
         }
-        
+
         @Test
         public void whenCallingRunSimulation_shouldRunSimulation() {
             sut.runSimulation();
@@ -119,8 +120,19 @@ public class SimulationGraphicViewPresenterTest {
             verify(simulationSpy, only()).pause();
         }
 
-    }
+        @Test
+        public void whenCallingStopSimulation_shouldStopSimulation() {
+            sut.pauseSimulation();
+            verify(simulationSpy, only()).pause();
+        }
 
+        @Test
+        public void whenReceivingUpdateFromSimulation_shouldUpdateGraphicView() throws IllegalAccessException, InstantiationException {
+            simulationSpy.notifyObservers(null);
+            verify(graphicViewMock, atLeastOnce()).update();
+        }
+
+    }
 
 
 }

@@ -24,7 +24,8 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     }
 
     public void addSimulation() {
-        this.simulation = simulationFactory.makeSimulation();
+        simulation = simulationFactory.makeSimulation();
+        simulation.addObserver(args -> graphicView.update());
         graphicView.update();
     }
 

@@ -69,5 +69,9 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="MockitoExtension" level="project" />
+    <orderEntry type="library" name="gov.nist.math.jama:gov.nist.math.jama:1.1.1" level="project" />
+    <orderEntry type="library" name="org.mockito:mockito-core:2.4.0" level="project" />
+    <orderEntry type="library" name="LBMExtraction" level="project" />
   </component>
 </module>

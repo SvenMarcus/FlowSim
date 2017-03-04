@@ -1,11 +1,7 @@
 <component name="libraryTable">
   <library name="MockitoExtension">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../MockitoTest/out/artifacts/MockitoExtension_jar/MockitoExtension.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
