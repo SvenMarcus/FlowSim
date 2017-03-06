@@ -1,6 +1,7 @@
 package irmb.flowsim.view.swing;
 
-import irmb.flowsim.presentation.Painter;
+import irmb.flowsim.presentation.*;
+import irmb.flowsim.presentation.Color;
 
 import java.awt.*;
 
@@ -26,6 +27,11 @@ public class SwingPainter implements Painter {
     @Override
     public void paintRectangle(double x, double y, double width, double height) {
         graphics.drawRect((int) x, (int) y, (int) width, (int) height);
+    }
+
+    @Override
+    public void setColor(Color color) {
+
     }
 
     public void setGraphics(Graphics graphics) {

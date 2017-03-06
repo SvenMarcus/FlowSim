@@ -10,7 +10,8 @@ import irmb.flowsim.util.Observable;
  */
 public class SimulationMock extends Simulation {
     @Override
-    public void paint(Painter g, CoordinateTransformer transformer) {
+    public void paint(Painter painter, CoordinateTransformer transformer) {
+
     }
 
     @Override

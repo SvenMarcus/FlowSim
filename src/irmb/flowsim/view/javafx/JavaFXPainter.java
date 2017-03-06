@@ -1,5 +1,6 @@
 package irmb.flowsim.view.javafx;
 
+import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -23,6 +24,11 @@ public class JavaFXPainter implements Painter {
     public void paintRectangle(double x, double y, double width, double height) {
         graphicsContext.setLineWidth(1);
         graphicsContext.strokeRect(x, y, width, height);
+    }
+
+    @Override
+    public void setColor(Color color) {
+
     }
 
     public void setGraphicsContext(GraphicsContext graphicsContext) {
