@@ -14,15 +14,23 @@ public interface UniformGrid {
 
     double getWidth();
 
-    void setDx(double dx);
+    void setHorizontalNodes(double horizontalNodes);
 
     int getHorizontalNodes();
 
-    void setDy(double dy);
+    void setVerticalNodes(double verticalNodes);
 
     int getVerticalNodes();
 
     double getVelocityAt(int x, int y);
 
     Point getOrigin();
+
+    void setDeltaX(double deltaX);
+
+    double getDeltaX();
+
+    double getDeltaY();
+
+    void setDeltaY(double deltaY);
 }

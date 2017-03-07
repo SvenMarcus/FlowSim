@@ -34,6 +34,11 @@ public class SwingPainter implements Painter {
 
     }
 
+    @Override
+    public void fillRectangle(double x, double y, double width, double height) {
+
+    }
+
     public void setGraphics(Graphics graphics) {
         this.graphics = graphics;
     }
