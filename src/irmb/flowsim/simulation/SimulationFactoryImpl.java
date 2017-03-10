@@ -9,6 +9,7 @@ import numerics.lbm.LBMPressureBC;
 import numerics.lbm.LBMVelocityBC;
 import numerics.lbm.navierstokes.LBMNavierStokesGrid;
 import numerics.lbm.navierstokes.LBMNavierStokesSolver;
+import numerics.utilities.GridNodeType;
 
 /**
  * Created by sven on 09.03.17.
@@ -43,8 +44,13 @@ public class SimulationFactoryImpl implements SimulationFactory {
         for (int i = 0; i < grid.nx; i++) {
             for (int j = 0; j < grid.ny; j++) {
                 grid.init(i, j, 1. / 3., inflowVelo, 0.0);
+                if (i >= 40 && i <= 100 && j >= 20 && j <= 40) {
+                    grid.setType(i, j, GridNodeType.SOLID);
+                }
             }
         }
+
+
         JFlowSimNavierStokesGridAdapter gridAdapter = new JFlowSimNavierStokesGridAdapter(grid);
         return gridAdapter;
     }

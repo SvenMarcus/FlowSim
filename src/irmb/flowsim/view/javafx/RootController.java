@@ -38,8 +38,9 @@ public class RootController implements GraphicView {
 
     private SimulationGraphicViewPresenter presenter;
     private JavaFXPainter painter;
-    private CoordinateTransformer transformer;
+    private volatile CoordinateTransformer transformer;
     private GraphicsContext graphicsContext2D;
+    private Runnable runnable;
 
     public RootController() {
     }
@@ -61,6 +62,20 @@ public class RootController implements GraphicView {
         drawPanel.setOnScroll(event -> {
             presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
         });
+
+        runnable = () -> {
+            if (graphicsContext2D == null)
+                graphicsContext2D = drawPanel.getGraphicsContext2D();
+            if (painter == null)
+                painter = new JavaFXPainter();
+            painter.setGraphicsContext(graphicsContext2D);
+            graphicsContext2D.clearRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
+//            graphicsContext2D.setFill(Color.STEELBLUE);
+//            graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
+            for (Paintable p : presenter.getPaintableList()) {
+                p.paint(painter, transformer);
+            }
+        };
     }
 
     public void onLineButtonClick(ActionEvent event) {
@@ -114,19 +129,7 @@ public class RootController implements GraphicView {
 
     @Override
     public void update() {
-        Platform.runLater(() -> {
-            if (graphicsContext2D == null)
-                graphicsContext2D = drawPanel.getGraphicsContext2D();
-            if (painter == null)
-                painter = new JavaFXPainter();
-            painter.setGraphicsContext(graphicsContext2D);
-            graphicsContext2D.clearRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
-//            graphicsContext2D.setFill(Color.STEELBLUE);
-//            graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
-            for (Paintable p : presenter.getPaintableList()) {
-                p.paint(painter, transformer);
-            }
-        });
+        Platform.runLater(runnable);
     }
 
     @Override

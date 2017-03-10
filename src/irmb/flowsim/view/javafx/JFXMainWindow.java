@@ -17,6 +17,7 @@ import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.simulation.SimulationFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -61,6 +62,8 @@ public class JFXMainWindow extends Application {
 
         Pane rootLayout = makeRootLayout(rootController);
         presenter.setGraphicView(rootController);
+
+        primaryStage.setOnCloseRequest((event -> Platform.exit()));
 
         Scene root = new Scene(rootLayout);
         primaryStage.setScene(root);

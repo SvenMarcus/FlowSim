@@ -35,11 +35,11 @@ public class JavaFXPainter implements Painter {
 
     @Override
     public void setColor(Color color) {
-        int r, g, b;
-        r = color.r / 255;
-        g = color.g / 255;
-        b = color.b / 255;
-        jfxColor = javafx.scene.paint.Color.color(r, g, b, 1);
+        double r, g, b;
+        r = color.r / 255.;
+        g = color.g / 255.;
+        b = color.b / 255.;
+        jfxColor = javafx.scene.paint.Color.color(r, g, b);
     }
 
     @Override

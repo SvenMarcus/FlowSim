@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
@@ -97,6 +98,7 @@ public class SimulationGraphicViewPresenterTest {
             sut.addSimulation();
             verify(paintableShape, atLeastOnce()).paint(painterSpy, transformer);
             verify(simulationSpy, atLeastOnce()).paint(painterSpy, transformer);
+            assertEquals(sut.getPaintableList().get(0), simulationSpy);
         }
 
         @Test
