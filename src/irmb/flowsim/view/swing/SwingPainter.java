@@ -31,12 +31,17 @@ public class SwingPainter implements Painter {
 
     @Override
     public void setColor(Color color) {
-
+        int r, g, b;
+        r = color.r ;
+        g = color.g ;
+        b = color.b ;
+        java.awt.Color c = new java.awt.Color(r, g, b);
+        graphics.setColor(c);
     }
 
     @Override
     public void fillRectangle(double x, double y, double width, double height) {
-
+        graphics.fillRect((int) x, (int) y, (int) width, (int) height);
     }
 
     public void setGraphics(Graphics graphics) {

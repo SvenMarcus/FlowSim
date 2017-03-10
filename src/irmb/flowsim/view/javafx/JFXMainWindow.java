@@ -7,11 +7,14 @@ import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.presentation.factory.MouseStrategyFactory;
+import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
 import irmb.flowsim.presentation.factory.MouseStrategyFactoryImpl;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
 import irmb.flowsim.presentation.factory.ShapeFactoryImpl;
+import irmb.flowsim.simulation.Simulation;
+import irmb.flowsim.simulation.SimulationFactory;
+import irmb.flowsim.simulation.SimulationFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +29,12 @@ import java.util.List;
 public class JFXMainWindow extends Application {
 
 
+    private PaintableShapeBuilderFactory builderFactory;
+    private List<PaintableShape> shapeList;
+    private CommandQueue commandQueue;
+    private CoordinateTransformer transformer;
+    private MouseStrategyFactoryImpl mouseStrategyFactory;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -33,18 +42,20 @@ public class JFXMainWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        PaintableShapeBuilderFactory builderFactory = makePaintableShapeBuilderFactory();
-        List<PaintableShape> shapeList = new LinkedList<>();
-        CommandQueue commandQueue = new CommandQueue();
+        builderFactory = makePaintableShapeBuilderFactory();
+        shapeList = new LinkedList<>();
+        commandQueue = new CommandQueue();
 
-        RootController rootController = new RootController();
-        CoordinateTransformer transformer = new CoordinateTransformerImpl();
-        transformer.setWorldBounds(new Point(-15, 10), new Point(10, -25));
+        transformer = new CoordinateTransformerImpl();
+        transformer.setWorldBounds(new Point(0, 0.5), new Point(1, 0));
         transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
 
-        MouseStrategyFactoryImpl mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory, transformer);
+        RootController rootController = new RootController();
 
-        GraphicViewPresenter presenter = makePresenter(commandQueue, shapeList, mouseStrategyFactory, transformer);
+        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory, transformer);
+
+
+        SimulationGraphicViewPresenter presenter = makePresenter();
 
         rootController.setPresenter(presenter);
 
@@ -56,8 +67,9 @@ public class JFXMainWindow extends Application {
         primaryStage.show();
     }
 
-    private GraphicViewPresenter makePresenter(CommandQueue commandQueue, List<PaintableShape> shapeList, MouseStrategyFactory strategyFactory, CoordinateTransformer transformer) {
-        return new GraphicViewPresenter(strategyFactory, commandQueue, shapeList, transformer);
+    private SimulationGraphicViewPresenter makePresenter() {
+        SimulationFactory simulationFactory = new SimulationFactoryImpl();
+        return new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
     }
 
     private PaintableShapeBuilderFactory makePaintableShapeBuilderFactory() {

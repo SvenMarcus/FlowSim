@@ -7,7 +7,7 @@ import irmb.flowsim.presentation.MouseButton;
 import irmb.flowsim.presentation.Zoom;
 import irmb.flowsim.presentation.command.PanWindowCommand;
 import irmb.flowsim.presentation.command.ZoomCommand;
-import irmb.flowsim.util.Observable;
+import irmb.flowsim.util.ObservableImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Sven on 05.01.2017.
  */
-public abstract class MouseStrategy extends Observable<StrategyEventArgs> {
+public abstract class MouseStrategy extends ObservableImpl<StrategyEventArgs> {
 
     protected List<PaintableShape> shapeList;
     protected CoordinateTransformer transformer;

@@ -3,7 +3,6 @@ package irmb.test.simulation;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.simulation.Simulation;
-import irmb.flowsim.util.Observable;
 
 /**
  * Created by sven on 04.03.17.

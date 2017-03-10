@@ -7,10 +7,10 @@ import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.factory.ColorFactory;
 import irmb.flowsim.simulation.LBMChannelFlowSimulation;
 import irmb.flowsim.simulation.UniformGrid;
+import irmb.flowsim.util.Observer;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.InOrder;
 
 import java.util.List;
 import java.util.Random;
@@ -37,12 +37,13 @@ public class LBMChannelFlowSimulationTest {
     private double fMin;
 
     private double[][] gridValues;
+    private SolverMock solverSpy;
 
     @Before
     public void canCreateLBMChannelFlowSimulation() {
         fMax = Double.MIN_VALUE;
         fMin = Double.MAX_VALUE;
-
+        solverSpy = spy(new SolverMock());
         gridSpy = mock(UniformGrid.class);
         horizontalNodes = 4;
         verticalNodes = 3;
@@ -52,9 +53,13 @@ public class LBMChannelFlowSimulationTest {
         transformer = mock(CoordinateTransformer.class);
         ColorFactory colorFactory = mock(ColorFactory.class);
         setColorFactoryBehavior(colorFactory);
-        when(transformer.transformToPointOnScreen(any(Point.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
-        when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
-        sut = new LBMChannelFlowSimulation(gridSpy, colorFactory);
+        when(transformer.transformToPointOnScreen(any(Point.class))).thenAnswer(invocationOnMock -> {
+            Point argument = invocationOnMock.getArgument(0);
+            Point p = makePoint(argument.getX() + 1, argument.getY() + 5);
+            return p;
+        });
+        when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> (double) invocationOnMock.getArgument(0) * 7);
+        sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
     }
 
     private void setColorFactoryBehavior(ColorFactory colorFactory) {
@@ -72,10 +77,9 @@ public class LBMChannelFlowSimulationTest {
         when(gridSpy.getHeight()).thenReturn(3.);
         when(gridSpy.getHorizontalNodes()).thenReturn(horizontalNodes);
         when(gridSpy.getVerticalNodes()).thenReturn(verticalNodes);
-        when(gridSpy.getDeltaX()).thenReturn(1.);
-        when(gridSpy.getDeltaY()).thenReturn(1.);
+        when(gridSpy.getDelta()).thenReturn(1.);
         when(gridSpy.getVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
-            return gridValues[(int) invocationOnMock.getArgument(0)][(int) invocationOnMock.getArgument(1)];
+            return gridValues[(int) invocationOnMock.getArgument(1)][(int) invocationOnMock.getArgument(0)];
         });
     }
 
@@ -155,11 +159,33 @@ public class LBMChannelFlowSimulationTest {
         int index = 0;
         for (int i = 0; i < verticalNodes; i++)
             for (int j = 0; j < horizontalNodes; j++) {
-                assertEquals(0 + i, Math.round(capturedDoubles.get(index++)));
-                assertEquals(0 + j, Math.round(capturedDoubles.get(index++)));
-                assertEquals(1, Math.round(capturedDoubles.get(index++)));
-                assertEquals(1, Math.round(capturedDoubles.get(index++)));
+                assertEquals(1 + j * 7, Math.round(capturedDoubles.get(index++)));
+                assertEquals(5 + i * 7, Math.round(capturedDoubles.get(index++)));
+                assertEquals(7, Math.round(capturedDoubles.get(index++)));
+                assertEquals(7, Math.round(capturedDoubles.get(index++)));
             }
+    }
+
+    @Test
+    public void whenCallingRun_shouldStartSolver() {
+        sut.run();
+        verify(solverSpy).solve();
+    }
+
+    @Test
+    public void whenCallingPause_shouldPauseSolver() {
+        sut.pause();
+        verify(solverSpy).pause();
+    }
+
+    @Test
+    public void whenSolverNotifiesSimulation_shouldNotifyObservers() {
+        Observer<String> observerSpy = mock(Observer.class);
+        sut.addObserver(observerSpy);
+
+        solverSpy.notifyObservers("");
+
+        verify(observerSpy).update(any());
     }
 
 }

@@ -98,6 +98,13 @@ public class SimulationGraphicViewPresenterTest {
             verify(paintableShape, atLeastOnce()).paint(painterSpy, transformer);
             verify(simulationSpy, atLeastOnce()).paint(painterSpy, transformer);
         }
+
+        @Test
+        public void whenPaintingBeforeAddingSimulation_shouldDoNothing() {
+            graphicViewMock.update();
+            verifyZeroInteractions(simulationSpy);
+            verifyZeroInteractions(painterSpy);
+        }
     }
 
     public class SimulationAddedContext {

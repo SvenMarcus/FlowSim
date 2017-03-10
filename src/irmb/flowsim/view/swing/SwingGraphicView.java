@@ -5,27 +5,26 @@ import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.view.graphics.Paintable;
-import irmb.flowsim.view.graphics.PaintableShape;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 /**
  * Created by Sven on 13.12.2016.
  */
-public class SwingGraphicView extends JPanel implements GraphicView, MouseListener, MouseMotionListener {
+public class SwingGraphicView extends JPanel implements GraphicView, MouseListener, MouseMotionListener, MouseWheelListener {
 
 
     protected GraphicViewPresenter presenter;
     protected SwingPainter painter;
     protected CoordinateTransformer transformer;
 
-    public SwingGraphicView() {
+    public SwingGraphicView(CoordinateTransformer transformer) {
+        this.transformer = transformer;
         addMouseListener(this);
         addMouseMotionListener(this);
+        addMouseWheelListener(this);
         painter = new SwingPainter();
     }
 
@@ -41,14 +40,16 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
     @Override
     public void setCoordinateTransformer(CoordinateTransformer transformer) {
         this.transformer = transformer;
-        transformer.setViewBounds(new Point(0, 0), new Point(getWidth(), getHeight()));
+//        transformer.setViewBounds(new Point(0, 0), new Point(getWidth(), getHeight()));
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        painter.setGraphics(g);
-        for (Paintable p : presenter.getPaintableList())
-            p.paint(painter, null);
+        if (presenter != null) {
+            painter.setGraphics(g);
+            for (Paintable p : presenter.getPaintableList())
+                p.paint(painter, transformer);
+        }
     }
 
     @Override
@@ -62,6 +63,8 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
             presenter.handleLeftClick(e.getX(), e.getY());
         else if (e.getButton() == 3)
             presenter.handleRightClick(0, 0);
+        else if (e.getButton() == MouseEvent.BUTTON2)
+            presenter.handleMiddleClick(e.getX(), e.getY());
     }
 
     @Override
@@ -86,6 +89,12 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        presenter.handleMouseMove(e.getX(), e.getY());
+        if (presenter != null)
+            presenter.handleMouseMove(e.getX(), e.getY());
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        presenter.handleScroll(e.getX(), e.getY(), e.getWheelRotation());
     }
 }

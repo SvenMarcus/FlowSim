@@ -1,7 +1,8 @@
 package irmb.flowsim.view.swing;
 
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
-import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
 
 import javax.swing.*;
 
@@ -14,9 +15,12 @@ public class MainWindow extends JFrame {
     private JButton polyLineButton;
     private JPanel drawArea;
     private JPanel contentPanel;
-    private GraphicViewPresenter presenter;
+    private JButton addSimulationButton;
+    private SimulationGraphicViewPresenter presenter;
+    private CoordinateTransformer transformer;
 
-    public MainWindow() {
+    public MainWindow(CoordinateTransformer transformer) {
+        this.transformer = transformer;
         setSize(800, 600);
         add(contentPanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -28,19 +32,23 @@ public class MainWindow extends JFrame {
         lineButton.addActionListener(e -> presenter.beginPaint("Line"));
         rectangleButton.addActionListener(e -> presenter.beginPaint("Rectangle"));
         polyLineButton.addActionListener(e -> presenter.beginPaint("PolyLine"));
+        addSimulationButton.addActionListener(e -> {
+            presenter.addSimulation();
+            presenter.runSimulation();
+        });
     }
 
 
     private void createUIComponents() {
+        drawArea = new SwingGraphicView(transformer);
     }
 
     public GraphicView getGraphicView() {
         return (GraphicView) drawArea;
     }
 
-    public void setPresenter(GraphicViewPresenter presenter) {
+    public void setPresenter(SimulationGraphicViewPresenter presenter) {
         this.presenter = presenter;
-        drawArea = new SwingGraphicView();
         ((SwingGraphicView) drawArea).setPresenter(presenter);
     }
 }

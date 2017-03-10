@@ -14,11 +14,11 @@ public interface UniformGrid {
 
     double getWidth();
 
-    void setHorizontalNodes(double horizontalNodes);
+    void setHorizontalNodes(int horizontalNodes);
 
     int getHorizontalNodes();
 
-    void setVerticalNodes(double verticalNodes);
+    void setVerticalNodes(int verticalNodes);
 
     int getVerticalNodes();
 
@@ -26,9 +26,9 @@ public interface UniformGrid {
 
     Point getOrigin();
 
-    void setDeltaX(double deltaX);
+    void setDelta(double deltaX);
 
-    double getDeltaX();
+    double getDelta();
 
     double getDeltaY();
 

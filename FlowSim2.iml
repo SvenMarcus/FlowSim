@@ -72,6 +72,14 @@
     <orderEntry type="library" name="MockitoExtension" level="project" />
     <orderEntry type="library" name="gov.nist.math.jama:gov.nist.math.jama:1.1.1" level="project" />
     <orderEntry type="library" name="org.mockito:mockito-core:2.4.0" level="project" />
-    <orderEntry type="library" name="LBMExtraction" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library name="JFlowSimLBMKernel">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/LBMExtraction.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

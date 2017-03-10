@@ -32,7 +32,8 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     @Override
     public List<Paintable> getPaintableList() {
         ArrayList<Paintable> paintables = new ArrayList<>(shapeList);
-        paintables.add(simulation);
+        if (simulation != null)
+            paintables.add(simulation);
         return paintables;
     }
 
