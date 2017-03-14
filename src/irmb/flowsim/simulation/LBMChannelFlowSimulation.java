@@ -5,6 +5,9 @@ import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.factory.ColorFactory;
 import irmb.flowsim.util.Observer;
+import irmb.flowsim.view.graphics.PaintableShape;
+
+import java.util.List;
 
 
 /**
@@ -61,6 +64,11 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
     @Override
     public void pause() {
         solver.pause();
+    }
+
+    @Override
+    public void setShapes(List<PaintableShape> shapeList) {
+
     }
 
     @Override

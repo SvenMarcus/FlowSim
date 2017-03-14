@@ -8,8 +8,10 @@ import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
-import irmb.flowsim.simulation.Simulation;
+import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.presentation.strategy.StrategyEventArgs;
 import irmb.flowsim.simulation.SimulationFactory;
+import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 import irmb.test.simulation.SimulationMock;
@@ -35,25 +37,40 @@ public class SimulationGraphicViewPresenterTest {
     private CoordinateTransformer transformer;
     private SimulationMock simulationSpy;
     private List<PaintableShape> shapeList;
+    private MouseStrategy mouseStrategyMock;
+    private Observer<StrategyEventArgs> observer;
 
     @Before
     public void setUp() {
-        MouseStrategyFactory mouseStrategyFactory = mock(MouseStrategyFactory.class);
-        when(mouseStrategyFactory.makeStrategy(anyString())).thenReturn(mock(MouseStrategy.class));
+        makeStrategyMock();
+        MouseStrategyFactory mouseStrategyFactory = makeMouseStrategyFactory();
         CommandQueue commandQueue = mock(CommandQueue.class);
         shapeList = new ArrayList<>();
         transformer = mock(CoordinateTransformer.class);
-
         simulationSpy = spy(new SimulationMock());
         SimulationFactory simulationFactory = mock(SimulationFactory.class);
         when(simulationFactory.makeSimulation()).thenReturn(simulationSpy);
-
         sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
         painterSpy = mock(Painter.class);
         graphicViewMock = mock(GraphicView.class);
         setGraphicViewMockBehavior();
-
         sut.setGraphicView(graphicViewMock);
+    }
+
+    private MouseStrategyFactory makeMouseStrategyFactory() {
+        MouseStrategyFactory mouseStrategyFactory = mock(MouseStrategyFactory.class);
+        when(mouseStrategyFactory.makeStrategy(anyString())).thenReturn(mouseStrategyMock);
+        return mouseStrategyFactory;
+    }
+
+    private void makeStrategyMock() {
+        mouseStrategyMock = mock(MouseStrategy.class);
+        doAnswer(invocationOnMock -> observer = invocationOnMock.getArgument(0)).when(mouseStrategyMock).addObserver(any());
+        doAnswer(invocationOnMock -> {
+            StrategyEventArgs argument = invocationOnMock.getArgument(0);
+            observer.update(argument);
+            return null;
+        }).when(mouseStrategyMock).notifyObservers(any());
     }
 
     private void setGraphicViewMockBehavior() {
@@ -107,6 +124,12 @@ public class SimulationGraphicViewPresenterTest {
             verifyZeroInteractions(simulationSpy);
             verifyZeroInteractions(painterSpy);
         }
+
+        @Test
+        public void whenAddingSimulation_shouldMapShapesToGrid() {
+            sut.addSimulation();
+            verify(simulationSpy).setShapes(shapeList);
+        }
     }
 
     public class SimulationAddedContext {
@@ -141,7 +164,10 @@ public class SimulationGraphicViewPresenterTest {
             verify(graphicViewMock, atLeastOnce()).update();
         }
 
+        @Test
+        public void whenReceivingUpdateFromStrategy_shouldMapShapesToGrid() {
+            mouseStrategyMock.notifyObservers(new StrategyEventArgs(STRATEGY_STATE.UPDATE));
+            verify(simulationSpy).setShapes(shapeList);
+        }
     }
-
-
 }

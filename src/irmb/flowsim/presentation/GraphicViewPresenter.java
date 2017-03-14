@@ -19,10 +19,10 @@ public class GraphicViewPresenter {
     private MouseStrategyFactory factory;
 
     protected List<PaintableShape> shapeList;
-    private CommandQueue commandQueue;
+    protected CommandQueue commandQueue;
 
 
-    private MouseStrategy strategy;
+    protected MouseStrategy strategy;
     private CoordinateTransformer transformer;
 
     public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
@@ -79,12 +79,12 @@ public class GraphicViewPresenter {
         makeStrategy(objectType);
     }
 
-    private void makeStrategy(String objectType) {
+    protected void makeStrategy(String objectType) {
         strategy = factory.makeStrategy(objectType);
         addStrategyObserver();
     }
 
-    private void addStrategyObserver() {
+    protected void addStrategyObserver() {
         strategy.addObserver((arg) -> {
             if (arg.getState() == STRATEGY_STATE.FINISHED)
                 makeStrategy("Move");
@@ -95,7 +95,7 @@ public class GraphicViewPresenter {
     }
 
     public List<Paintable> getPaintableList() {
-        return new ArrayList<Paintable>(shapeList);
+        return new ArrayList<>(shapeList);
     }
 
 }

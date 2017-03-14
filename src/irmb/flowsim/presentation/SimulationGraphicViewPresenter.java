@@ -2,6 +2,7 @@ package irmb.flowsim.presentation;
 
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
+import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
 import irmb.flowsim.simulation.Simulation;
 import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.view.graphics.Paintable;
@@ -23,9 +24,22 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
         this.simulationFactory = simulationFactory;
     }
 
+    protected void addStrategyObserver() {
+        strategy.addObserver((arg) -> {
+            if (arg.getState() == STRATEGY_STATE.FINISHED)
+                makeStrategy("Move");
+            if (arg.getCommand() != null)
+                commandQueue.add(arg.getCommand());
+            graphicView.update();
+            if (simulation != null)
+                simulation.setShapes(shapeList);
+        });
+    }
+
     public void addSimulation() {
         simulation = simulationFactory.makeSimulation();
         simulation.addObserver(args -> graphicView.update());
+        simulation.setShapes(shapeList);
         graphicView.update();
     }
 
