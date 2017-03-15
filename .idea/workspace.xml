@@ -37,36 +37,13 @@
     <favorites_list name="FlowSim2" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file leaf-file-name="SimulationGraphicViewPresenter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="34" column="48" lean-forward="true" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+            <state relative-caret-position="91">
+              <caret line="41" column="23" lean-forward="false" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuildObjectMouseStrategy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/BuildObjectMouseStrategy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GraphicViewPresenter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-              <folding>
-                <element signature="e#1596#1597#0" expanded="true" />
-                <element signature="e#1638#1639#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -74,28 +51,54 @@
       <file leaf-file-name="SimulationGraphicViewPresenterTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-972">
+            <state relative-caret-position="-2020">
               <caret line="51" column="75" lean-forward="false" selection-start-line="51" selection-start-column="75" selection-end-line="51" selection-end-column="75" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LBMChannelFlowSimulation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LBMChannelFlowSimulation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+            <state relative-caret-position="70">
+              <caret line="57" column="43" lean-forward="true" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+              <folding>
+                <element signature="e#4235#4236#0" expanded="true" />
+                <element signature="e#4272#4273#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LBMChannelFlowSimulationTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="217">
+              <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimulationGraphicViewPresenterTestWithMouseStrategyFactory.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JFlowSimNavierStokesGridAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesGridAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="401">
+              <caret line="93" column="25" lean-forward="false" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
+              <folding>
+                <element signature="e#2179#2180#0" expanded="true" />
+                <element signature="e#2233#2234#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimulationGraphicViewPresenterTestWithMouseStrategyFactory.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTestWithMouseStrategyFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="186" column="0" lean-forward="true" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+            <state relative-caret-position="651">
+              <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -145,7 +148,6 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/Color.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/ColorFactory.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/Painter.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/UniformGrid.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/simulation/SolverMock.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/JFlowSimNavierStokesAdapter.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/CommandQueue.java" />
@@ -156,8 +158,6 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/JFlowSimNavierStokesSolverAdapter.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesGrid.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/factory/ColorFactoryImplTest.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesGridAdapter.java" />
-        <option value="$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesSolverAdapter.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/ColorFactoryImpl.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.form" />
@@ -174,11 +174,14 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/BuildObjectMouseStrategy.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/Simulation.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/simulation/SimulationMock.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTestWithMouseStrategyFactory.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/UniformGrid.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesGridAdapter.java" />
+        <option value="$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java" />
       </list>
     </option>
   </component>
@@ -532,92 +535,6 @@
               <option name="myItemId" value="flowsim" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="presentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flowsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="presentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="strategy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flowsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="presentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="factory" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flowsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -653,6 +570,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="irmb.test.simulation" />
       <recent name="irmb.test.presentation.factory" />
       <recent name="irmb.test.model" />
       <recent name="irmb.test.presentation.command" />
@@ -718,32 +636,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="SimulationGraphicViewPresenterTest$SimulationAddedContext.whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="irmb.test.presentation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="FlowSim2" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="irmb.test.presentation" />
-      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.SimulationGraphicViewPresenterTest$SimulationAddedContext" />
-      <option name="METHOD_NAME" value="whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="SimulationGraphicViewPresenterTestWithMouseStrategyFactory.whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -783,6 +675,32 @@
       <option name="PACKAGE_NAME" value="irmb.test.presentation" />
       <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.SimulationGraphicViewPresenterTest$SimulationAddedContext" />
       <option name="METHOD_NAME" value="whenAddingShape_shouldMapShapeToGrid" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="irmb.test.simulation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="FlowSim2" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="irmb.test.simulation" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.simulation.LBMChannelFlowSimulationTest" />
+      <option name="METHOD_NAME" value="whenCallingSetShapesWithLine_shouldMapToGrid" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1230,17 +1148,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest$SimulationAddedContext.whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTestWithMouseStrategyFactory.whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest$SimulationAddedContext.whenAddingShape_shouldMapShapeToGrid" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTestWithMouseStrategyFactory.whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest$SimulationAddedContext.whenAddingShape_shouldMapShapeToGrid" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest$SimulationAddedContext.whenAddingShape_shouldMapShapeToGrid" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTestWithMouseStrategyFactory.whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest$SimulationAddedContext.whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest$SimulationAddedContext.whenAddingShape_shouldMapShapeToGrid" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTestWithMouseStrategyFactory.whenUpdatingGraphicViewAfterSettingFirstPointOfShape_shouldNotPaintShape" />
       </list>
     </recent_temporary>
   </component>
@@ -1342,44 +1260,44 @@
       <workItem from="1489064254042" duration="11988000" />
       <workItem from="1489134432014" duration="21709000" />
       <workItem from="1489414472289" duration="9858000" />
-      <workItem from="1489492708374" duration="6745000" />
+      <workItem from="1489492708374" duration="22877000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 14h 56m 22s.xml">
+    <history-entry file="LBMChannelFlowSimulationTest_whenCallingSetShapesWithLine_shouldMapToGrid - 2017.03.14 at 23h 41m 15s.xml">
+      <configuration name="LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LBMChannelFlowSimulationTest_whenCallingSetShapesWithLine_shouldMapToGrid - 2017.03.14 at 23h 41m 36s.xml">
+      <configuration name="LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LBMChannelFlowSimulationTest_whenCallingSetShapesWithLine_shouldMapToGrid - 2017.03.14 at 23h 41m 44s.xml">
+      <configuration name="LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LBMChannelFlowSimulationTest_whenCallingSetShapesWithLine_shouldMapToGrid - 2017.03.14 at 23h 42m 10s.xml">
+      <configuration name="LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LBMChannelFlowSimulationTest_whenCallingSetShapesWithLine_shouldMapToGrid - 2017.03.14 at 23h 42m 55s.xml">
+      <configuration name="LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LBMChannelFlowSimulationTest_whenCallingSetShapesWithLine_shouldMapToGrid - 2017.03.14 at 23h 56m 18s.xml">
+      <configuration name="LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LBMChannelFlowSimulationTest_whenCallingSetShapesWithLine_shouldMapToGrid - 2017.03.14 at 23h 57m 05s.xml">
+      <configuration name="LBMChannelFlowSimulationTest.whenCallingSetShapesWithLine_shouldMapToGrid" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.15 at 00h 39m 19s.xml">
       <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 15h 52m 50s.xml">
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.15 at 00h 39m 52s.xml">
       <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 15h 54m 32s.xml">
-      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 15h 56m 14s.xml">
-      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 15h 56m 59s.xml">
-      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 15h 58m 20s.xml">
-      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 16h 10m 39s.xml">
-      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 16h 10m 53s.xml">
-      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 16h 53m 13s.xml">
-      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.14 at 16h 59m 19s.xml">
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.15 at 00h 57m 52s.xml">
       <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="474325000" />
+    <option name="totallyTimeSpent" value="490457000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1391,11 +1309,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="23" width="1920" height="1057" extended-state="0" />
+    <frame x="1920" y="23" width="1920" height="1057" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3211297" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1404,27 +1322,27 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22594142" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20083682" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" x="22" y="393" width="1876" height="263" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24222937" sideWeight="0.49791667" order="5" side_tool="false" content_ui="tabs" x="22" y="393" width="1876" height="263" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20052083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20522387" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32780084" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22280335" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22280335" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28411514" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32780084" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1451,10 +1369,10 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2615063" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" x="22" y="393" width="1876" height="263" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28033474" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" x="22" y="393" width="1876" height="263" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28411514" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2109375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40104166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32780084" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -1490,13 +1408,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterWindowOperationsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="73" column="16" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="80" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-713">
@@ -1629,37 +1540,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/UniformGrid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="107" column="0" lean-forward="true" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/LBMExtraction.jar!/numerics/lbm/navierstokes/LBMNavierStokesSolver.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesGridAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
-          <folding>
-            <element signature="e#1275#1276#0" expanded="false" />
-            <element signature="e#1328#1329#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1842,8 +1726,29 @@
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/Simulation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="17" column="67" lean-forward="false" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
+          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTestWithMouseStrategyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="e#1596#1597#0" expanded="false" />
+            <element signature="e#1638#1639#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1855,47 +1760,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java">
+    <entry file="jar:///opt/jdk1.8.0_121/src.zip!/java/util/LinkedList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding>
-            <element signature="e#1596#1597#0" expanded="true" />
-            <element signature="e#1638#1639#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="215">
+          <caret line="554" column="0" lean-forward="false" selection-start-line="554" selection-start-column="0" selection-end-line="554" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="34" column="48" lean-forward="true" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+        <state relative-caret-position="91">
+          <caret line="41" column="23" lean-forward="false" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/UniformGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="38" column="32" lean-forward="false" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesGridAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="93" column="25" lean-forward="false" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
+          <folding>
+            <element signature="e#2179#2180#0" expanded="true" />
+            <element signature="e#2233#2234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2020">
+          <caret line="51" column="75" lean-forward="false" selection-start-line="51" selection-start-column="75" selection-end-line="51" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-972">
-          <caret line="51" column="75" lean-forward="false" selection-start-line="51" selection-start-column="75" selection-end-line="51" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTestWithMouseStrategyFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="186" column="0" lean-forward="true" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+        <state relative-caret-position="70">
+          <caret line="57" column="43" lean-forward="true" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4235#4236#0" expanded="true" />
+            <element signature="e#4272#4273#0" expanded="true" />
           </folding>
         </state>
       </provider>

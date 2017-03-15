@@ -1,5 +1,6 @@
 package irmb.test.simulation;
 
+import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Color;
@@ -8,10 +9,13 @@ import irmb.flowsim.presentation.factory.ColorFactory;
 import irmb.flowsim.simulation.LBMChannelFlowSimulation;
 import irmb.flowsim.simulation.UniformGrid;
 import irmb.flowsim.util.Observer;
+import irmb.flowsim.view.graphics.PaintableLine;
+import irmb.flowsim.view.graphics.PaintableShape;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -73,8 +77,8 @@ public class LBMChannelFlowSimulationTest {
 
     private void setGridBehavior() {
         when(gridSpy.getOrigin()).thenReturn(makePoint(0, 0));
-        when(gridSpy.getWidth()).thenReturn(4.);
-        when(gridSpy.getHeight()).thenReturn(3.);
+        when(gridSpy.getWidth()).thenReturn(3.);
+        when(gridSpy.getHeight()).thenReturn(2.);
         when(gridSpy.getHorizontalNodes()).thenReturn(horizontalNodes);
         when(gridSpy.getVerticalNodes()).thenReturn(verticalNodes);
         when(gridSpy.getDelta()).thenReturn(1.);
@@ -144,8 +148,9 @@ public class LBMChannelFlowSimulationTest {
         sut.paint(painterSpy, transformer);
         ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
         ArgumentCaptor<Double> doubleCaptor = ArgumentCaptor.forClass(Double.class);
-        verify(painterSpy, atLeast(12)).setColor(colorCaptor.capture());
-        verify(painterSpy, atLeast(12)).fillRectangle(
+        int minNumberOfInvocations = horizontalNodes * verticalNodes;
+        verify(painterSpy, atLeast(minNumberOfInvocations)).setColor(colorCaptor.capture());
+        verify(painterSpy, atLeast(minNumberOfInvocations)).fillRectangle(
                 doubleCaptor.capture(),
                 doubleCaptor.capture(),
                 doubleCaptor.capture(),
@@ -186,6 +191,33 @@ public class LBMChannelFlowSimulationTest {
         solverSpy.notifyObservers("");
 
         verify(observerSpy).update(any());
+    }
+
+
+    @Test
+    public void whenCallingSetShapesWithLine_shouldMapToGrid() {
+        Line line = new Line();
+        line.setFirst(makePoint(0, 0));
+        line.setSecond(makePoint(3, 2));
+        PaintableLine paintableLine = new PaintableLine(line);
+        List<PaintableShape> shapeList = new ArrayList<>();
+        shapeList.add(paintableLine);
+
+        sut.setShapes(shapeList);
+        verify(gridSpy).resetSolidNodes();
+        verify(gridSpy).setSolid(0, 0);
+        verify(gridSpy).setSolid(1, 1);
+        verify(gridSpy).setSolid(2, 1);
+        verify(gridSpy).setSolid(3, 2);
+
+        clearInvocations(gridSpy);
+
+        line.setFirst(makePoint(1, 0));
+        sut.setShapes(shapeList);
+        verify(gridSpy).resetSolidNodes();
+        verify(gridSpy).setSolid(1, 0);
+        verify(gridSpy).setSolid(2, 1);
+        verify(gridSpy).setSolid(3, 2);
     }
 
 }

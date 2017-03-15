@@ -3,6 +3,7 @@ package irmb.flowsim.simulation.jflowsim.adapters;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.simulation.UniformGrid;
 import numerics.lbm.navierstokes.LBMNavierStokesGrid;
+import numerics.utilities.GridNodeType;
 import numerics.utilities.Scalar;
 
 /**
@@ -83,6 +84,22 @@ public class JFlowSimNavierStokesGridAdapter implements UniformGrid {
     @Override
     public void setDeltaY(double deltaY) {
         grid.dx = deltaY;
+    }
+
+    @Override
+    public void resetSolidNodes() {
+        for (int x = 0; x < grid.nx; x++) {
+            for (int y = 0; y < grid.ny; y++) {
+                if (grid.getType(x, y) == GridNodeType.SOLID) {
+                    grid.setType(x, y, GridNodeType.FLUID);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void setSolid(int x, int y) {
+        grid.setType(x, y, GridNodeType.SOLID);
     }
 
     public LBMNavierStokesGrid getJFlowSimGrid() {

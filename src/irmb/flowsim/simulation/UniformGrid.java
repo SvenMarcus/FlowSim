@@ -33,4 +33,8 @@ public interface UniformGrid {
     double getDeltaY();
 
     void setDeltaY(double deltaY);
+
+    void resetSolidNodes();
+
+    void setSolid(int x, int y);
 }
