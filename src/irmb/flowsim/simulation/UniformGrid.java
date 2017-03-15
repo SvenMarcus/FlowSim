@@ -5,36 +5,38 @@ import irmb.flowsim.model.Point;
 /**
  * Created by sven on 04.03.17.
  */
-public interface UniformGrid {
-    void setHeight(double length);
+public abstract class UniformGrid {
+    public abstract void setHeight(double length);
 
-    double getHeight();
+    public abstract double getHeight();
 
-    void setWidth(double width);
+    public abstract void setWidth(double width);
 
-    double getWidth();
+    public abstract double getWidth();
 
-    void setHorizontalNodes(int horizontalNodes);
+    public abstract void setHorizontalNodes(int horizontalNodes);
 
-    int getHorizontalNodes();
+    public abstract int getHorizontalNodes();
 
-    void setVerticalNodes(int verticalNodes);
+    public abstract void setVerticalNodes(int verticalNodes);
 
-    int getVerticalNodes();
+    public abstract int getVerticalNodes();
 
-    double getVelocityAt(int x, int y);
+    public abstract double getVelocityAt(int x, int y);
 
-    Point getOrigin();
+    public abstract Point getTopLeft();
 
-    void setDelta(double deltaX);
+    public abstract void setDelta(double deltaX);
 
-    double getDelta();
+    public abstract double getDelta();
 
-    double getDeltaY();
+    public abstract double getDeltaY();
 
-    void setDeltaY(double deltaY);
+    public abstract void setDeltaY(double deltaY);
 
-    void resetSolidNodes();
+    public abstract void resetSolidNodes();
 
-    void setSolid(int x, int y);
+    public abstract void setSolid(int x, int y);
+
+    public abstract boolean isPointInside(Point point);
 }

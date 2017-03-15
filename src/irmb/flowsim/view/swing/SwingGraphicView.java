@@ -62,7 +62,7 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
         if (e.getButton() == 1)
             presenter.handleLeftClick(e.getX(), e.getY());
         else if (e.getButton() == 3)
-            presenter.handleRightClick(0, 0);
+            presenter.handleRightClick(e.getX(), e.getY());
         else if (e.getButton() == MouseEvent.BUTTON2)
             presenter.handleMiddleClick(e.getX(), e.getY());
     }

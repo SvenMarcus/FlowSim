@@ -33,6 +33,7 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
             graphicView.update();
             if (simulation != null)
                 simulation.setShapes(shapeList);
+
         });
     }
 

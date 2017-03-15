@@ -9,7 +9,7 @@ import numerics.utilities.Scalar;
 /**
  * Created by sven on 09.03.17.
  */
-public class JFlowSimNavierStokesGridAdapter implements UniformGrid {
+public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
     private LBMNavierStokesGrid grid;
 
     public JFlowSimNavierStokesGridAdapter(LBMNavierStokesGrid grid) {
@@ -62,7 +62,7 @@ public class JFlowSimNavierStokesGridAdapter implements UniformGrid {
     }
 
     @Override
-    public Point getOrigin() {
+    public Point getTopLeft() {
         return new Point(grid.getMinX(), grid.getMaxY());
     }
 
@@ -100,6 +100,11 @@ public class JFlowSimNavierStokesGridAdapter implements UniformGrid {
     @Override
     public void setSolid(int x, int y) {
         grid.setType(x, y, GridNodeType.SOLID);
+    }
+
+    @Override
+    public boolean isPointInside(Point point) {
+        return !(point.getX() < grid.getMinX() || point.getX() > grid.getMaxX() || point.getY() < grid.getMinY() || point.getY() > grid.getMaxY());
     }
 
     public LBMNavierStokesGrid getJFlowSimGrid() {

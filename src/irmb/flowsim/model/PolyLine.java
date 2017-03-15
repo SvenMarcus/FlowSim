@@ -35,4 +35,9 @@ public class PolyLine implements Shape {
             p.setY(p.getY() + dy);
         }
     }
+
+    @Override
+    public void accept(ShapeVisitor visitor) {
+        visitor.visit(this);
+    }
 }
