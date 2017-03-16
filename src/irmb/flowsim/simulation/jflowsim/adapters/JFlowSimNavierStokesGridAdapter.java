@@ -107,6 +107,11 @@ public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
         return !(point.getX() < grid.getMinX() || point.getX() > grid.getMaxX() || point.getY() < grid.getMinY() || point.getY() > grid.getMaxY());
     }
 
+    @Override
+    public boolean isSolid(int x, int y) {
+        return grid.getType(x, y) == GridNodeType.SOLID;
+    }
+
     public LBMNavierStokesGrid getJFlowSimGrid() {
         return grid;
     }

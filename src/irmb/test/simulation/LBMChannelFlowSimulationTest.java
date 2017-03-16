@@ -3,6 +3,8 @@ package irmb.test.simulation;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
+import irmb.flowsim.model.PolyLine;
+import irmb.flowsim.model.Rectangle;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
@@ -11,12 +13,16 @@ import irmb.flowsim.simulation.LBMChannelFlowSimulation;
 import irmb.flowsim.simulation.UniformGrid;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.PaintableLine;
+import irmb.flowsim.view.graphics.PaintablePolyLine;
+import irmb.flowsim.view.graphics.PaintableRectangle;
 import irmb.flowsim.view.graphics.PaintableShape;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +39,9 @@ import static org.mockito.Mockito.*;
 @RunWith(HierarchicalContextRunner.class)
 public class LBMChannelFlowSimulationTest {
 
+    private final int screenLengthScale = 7;
+    private final int screenXOffset = 1;
+    private final int screenYOffset = 5;
     private UniformGrid gridSpy;
     private LBMChannelFlowSimulation sut;
     private Painter painterSpy;
@@ -58,10 +67,10 @@ public class LBMChannelFlowSimulationTest {
         setColorFactoryBehavior(colorFactory);
         when(transformer.transformToPointOnScreen(any(Point.class))).thenAnswer(invocationOnMock -> {
             Point argument = invocationOnMock.getArgument(0);
-            Point p = makePoint(argument.getX() + 1, argument.getY() + 5);
+            Point p = makePoint(argument.getX() + screenXOffset, argument.getY() + screenYOffset);
             return p;
         });
-        when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> (double) invocationOnMock.getArgument(0) * 7);
+        when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> (double) invocationOnMock.getArgument(0) * screenLengthScale);
     }
 
     private void setColorFactoryBehavior(ColorFactory colorFactory) {
@@ -243,8 +252,44 @@ public class LBMChannelFlowSimulationTest {
             verify(gridSpy).setSolid(3, 0);
         }
 
-    }
+        @Test
+        public void whenPaintingSolidNodes_shouldSetColorToBlack() {
+            when(gridSpy.isSolid(1, 2)).thenReturn(true);
+            when(gridSpy.isSolid(2, 1)).thenReturn(true);
+            when(gridSpy.isSolid(3, 0)).thenReturn(true);
 
+            sut.paint(painterSpy, transformer);
+
+            ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
+
+            InOrder inOrder = inOrder(painterSpy);
+            double width = gridSpy.getDelta() * screenLengthScale;
+            inOrder.verify(painterSpy).fillRectangle((0 * width + screenXOffset), (0 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).fillRectangle((1 * width + screenXOffset), (0 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).fillRectangle((2 * width + screenXOffset), (0 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).setColor(colorCaptor.capture());
+            inOrder.verify(painterSpy).fillRectangle((3 * width + screenXOffset), (0 * width + screenYOffset), width, width);
+
+            inOrder.verify(painterSpy).fillRectangle((0 * width + screenXOffset), (1 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).fillRectangle((1 * width + screenXOffset), (1 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).setColor(colorCaptor.capture());
+            inOrder.verify(painterSpy).fillRectangle((2 * width + screenXOffset), (1 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).fillRectangle((3 * width + screenXOffset), (1 * width + screenYOffset), width, width);
+
+            inOrder.verify(painterSpy).fillRectangle((0 * width + screenXOffset), (2 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).setColor(colorCaptor.capture());
+            inOrder.verify(painterSpy).fillRectangle((1 * width + screenXOffset), (2 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).fillRectangle((2 * width + screenXOffset), (2 * width + screenYOffset), width, width);
+            inOrder.verify(painterSpy).fillRectangle((3 * width + screenXOffset), (2 * width + screenYOffset), width, width);
+
+
+            List<Color> capturedColors = colorCaptor.getAllValues();
+            assertColorEquals(capturedColors.get(0), 0, 0, 0);
+            assertColorEquals(capturedColors.get(1), 0, 0, 0);
+            assertColorEquals(capturedColors.get(2), 0, 0, 0);
+        }
+
+    }
 
     public class GridWithOffsetContext {
 
@@ -273,7 +318,6 @@ public class LBMChannelFlowSimulationTest {
             verify(gridSpy).setSolid(4, 5);
         }
     }
-
 
     public class RealisticGridContext {
 
@@ -333,6 +377,158 @@ public class LBMChannelFlowSimulationTest {
             clearInvocations(gridSpy);
 
             shapeList = getPaintableShapeListWithLine(makePoint(2, 4), makePoint(0, 11));
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy).resetSolidNodes();
+            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+        }
+
+        @Test
+        public void whenCallingSetShapesWithRectangle_shouldMapToGrid() {
+            Rectangle rectangle = new Rectangle();
+            rectangle.setFirst(makePoint(0, 3));
+            rectangle.setSecond(makePoint(3, 5));
+            List<PaintableShape> shapeList = new ArrayList<>();
+            shapeList.add(new PaintableRectangle(rectangle));
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy).resetSolidNodes();
+            verify(gridSpy, atLeastOnce()).setSolid(2, 14);
+            verify(gridSpy).setSolid(3, 14);
+            verify(gridSpy).setSolid(4, 14);
+            verify(gridSpy).setSolid(5, 14);
+            verify(gridSpy).setSolid(6, 14);
+            verify(gridSpy).setSolid(7, 14);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 14);
+
+            verify(gridSpy, atLeastOnce()).setSolid(2, 10);
+            verify(gridSpy).setSolid(3, 10);
+            verify(gridSpy).setSolid(4, 10);
+            verify(gridSpy).setSolid(5, 10);
+            verify(gridSpy).setSolid(6, 10);
+            verify(gridSpy).setSolid(7, 10);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+
+            verify(gridSpy, atLeastOnce()).setSolid(2, 14);
+            verify(gridSpy).setSolid(2, 13);
+            verify(gridSpy).setSolid(2, 12);
+            verify(gridSpy).setSolid(2, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(2, 10);
+
+            verify(gridSpy, atLeastOnce()).setSolid(8, 14);
+            verify(gridSpy).setSolid(8, 13);
+            verify(gridSpy).setSolid(8, 12);
+            verify(gridSpy).setSolid(8, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+
+        }
+
+        @Test
+        public void whenCallingSetShapesWithRectangleOutsideGridBounds_shouldNotMapToGrid() {
+            Rectangle rectangle = new Rectangle();
+            rectangle.setFirst(makePoint(-4, 1));
+            rectangle.setSecond(makePoint(3, 5));
+            List<PaintableShape> shapeList = new ArrayList<>();
+            shapeList.add(new PaintableRectangle(rectangle));
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy).resetSolidNodes();
+            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+
+            clearInvocations(gridSpy);
+
+            rectangle.setFirst(makePoint(1, 4));
+            rectangle.setSecond(makePoint(9, 11));
+            shapeList = new ArrayList<>();
+            shapeList.add(new PaintableRectangle(rectangle));
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy).resetSolidNodes();
+            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+        }
+
+        @Test
+        public void whenCallingSetShapesWithPolyLine_shouldMapToGrid() {
+            PolyLine polyLine = new PolyLine();
+            polyLine.addPoint(makePoint(0, 3));
+            polyLine.addPoint(makePoint(3, 5));
+            polyLine.addPoint(makePoint(3, 10));
+            polyLine.addPoint(makePoint(-1, 10));
+            List<PaintableShape> shapeList = new ArrayList<>();
+            shapeList.add(new PaintablePolyLine(polyLine));
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy).resetSolidNodes();
+            verify(gridSpy).setSolid(2, 14);
+            verify(gridSpy).setSolid(3, 13);
+            verify(gridSpy).setSolid(4, 13);
+            verify(gridSpy).setSolid(5, 12);
+            verify(gridSpy).setSolid(6, 11);
+            verify(gridSpy).setSolid(7, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+
+            verify(gridSpy).setSolid(8, 9);
+            verify(gridSpy).setSolid(8, 8);
+            verify(gridSpy).setSolid(8, 7);
+            verify(gridSpy).setSolid(8, 6);
+            verify(gridSpy).setSolid(8, 5);
+            verify(gridSpy).setSolid(8, 4);
+            verify(gridSpy).setSolid(8, 3);
+            verify(gridSpy).setSolid(8, 2);
+            verify(gridSpy).setSolid(8, 1);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 0);
+
+            verify(gridSpy).setSolid(7, 0);
+            verify(gridSpy).setSolid(6, 0);
+            verify(gridSpy).setSolid(5, 0);
+            verify(gridSpy).setSolid(4, 0);
+            verify(gridSpy).setSolid(3, 0);
+            verify(gridSpy).setSolid(2, 0);
+            verify(gridSpy).setSolid(1, 0);
+            verify(gridSpy).setSolid(0, 0);
+        }
+
+        @Test
+        public void whenCallingSetShapesWithPolyLineOutsideGridBounds_shouldNotMapToGrid() {
+            PolyLine polyLine = new PolyLine();
+            polyLine.addPoint(makePoint(0, -1));
+            polyLine.addPoint(makePoint(3, 5));
+            polyLine.addPoint(makePoint(3, 10));
+            List<PaintableShape> shapeList = new ArrayList<>();
+            shapeList.add(new PaintablePolyLine(polyLine));
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy).resetSolidNodes();
+            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+
+            clearInvocations(gridSpy);
+
+            polyLine = new PolyLine();
+            polyLine.addPoint(makePoint(0, 3));
+            polyLine.addPoint(makePoint(5, 5));
+            polyLine.addPoint(makePoint(3, 10));
+            shapeList = new ArrayList<>();
+            shapeList.add(new PaintablePolyLine(polyLine));
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy).resetSolidNodes();
+            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+
+            clearInvocations(gridSpy);
+
+            polyLine = new PolyLine();
+            polyLine.addPoint(makePoint(0, 3));
+            polyLine.addPoint(makePoint(3, 5));
+            polyLine.addPoint(makePoint(3, 11));
+            shapeList = new ArrayList<>();
+            shapeList.add(new PaintablePolyLine(polyLine));
 
             sut.setShapes(shapeList);
 

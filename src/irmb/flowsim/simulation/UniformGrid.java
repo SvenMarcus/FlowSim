@@ -39,4 +39,6 @@ public abstract class UniformGrid {
     public abstract void setSolid(int x, int y);
 
     public abstract boolean isPointInside(Point point);
+
+    public abstract boolean isSolid(int x, int y);
 }

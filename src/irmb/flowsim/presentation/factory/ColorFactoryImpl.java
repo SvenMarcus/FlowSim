@@ -8,6 +8,9 @@ import irmb.flowsim.presentation.Color;
 public class ColorFactoryImpl implements ColorFactory {
     @Override
     public Color makeColorForValue(double min, double max, double value) {
+        min = value < min ? value : min;
+        max = value > max ? value : max;
+
         double scale = (value - min) / (max - min);
         int r, g, b;
         r = b = g = 0;
