@@ -3,7 +3,7 @@ package irmb.flowsim.model;
 /**
  * Created by Sven on 14.12.2016.
  */
-public class Rectangle implements Shape {
+public class Rectangle implements TwoPointShape {
 
     private Point first;
     private Point second;
