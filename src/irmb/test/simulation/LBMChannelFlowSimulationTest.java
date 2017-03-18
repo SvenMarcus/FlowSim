@@ -535,6 +535,53 @@ public class LBMChannelFlowSimulationTest {
             verify(gridSpy).resetSolidNodes();
             verify(gridSpy, never()).setSolid(anyInt(), anyInt());
         }
+
+        @Test
+        public void whenCallingSetLinesWithMultipleShapes_shouldMapAllToGrid() {
+            List<PaintableShape> shapeList = getPaintableShapeListWithLine(makePoint(-1, 7), makePoint(1, 8));
+            Rectangle rectangle = new Rectangle();
+            rectangle.setFirst(makePoint(0, 3));
+            rectangle.setSecond(makePoint(3, 5));
+            shapeList.add(new PaintableRectangle(rectangle));
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy).resetSolidNodes();
+            verify(gridSpy).setSolid(0, 6);
+            verify(gridSpy).setSolid(1, 6);
+            verify(gridSpy).setSolid(2, 5);
+            verify(gridSpy).setSolid(3, 5);
+            verify(gridSpy).setSolid(4, 4);
+
+            verify(gridSpy, atLeastOnce()).setSolid(2, 14);
+            verify(gridSpy).setSolid(3, 14);
+            verify(gridSpy).setSolid(4, 14);
+            verify(gridSpy).setSolid(5, 14);
+            verify(gridSpy).setSolid(6, 14);
+            verify(gridSpy).setSolid(7, 14);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 14);
+
+            verify(gridSpy, atLeastOnce()).setSolid(2, 10);
+            verify(gridSpy).setSolid(3, 10);
+            verify(gridSpy).setSolid(4, 10);
+            verify(gridSpy).setSolid(5, 10);
+            verify(gridSpy).setSolid(6, 10);
+            verify(gridSpy).setSolid(7, 10);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+
+            verify(gridSpy, atLeastOnce()).setSolid(2, 14);
+            verify(gridSpy).setSolid(2, 13);
+            verify(gridSpy).setSolid(2, 12);
+            verify(gridSpy).setSolid(2, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(2, 10);
+
+            verify(gridSpy, atLeastOnce()).setSolid(8, 14);
+            verify(gridSpy).setSolid(8, 13);
+            verify(gridSpy).setSolid(8, 12);
+            verify(gridSpy).setSolid(8, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+
+        }
     }
 
     private List<PaintableShape> getPaintableShapeListWithLine(Point first, Point second) {

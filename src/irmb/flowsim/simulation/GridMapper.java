@@ -18,10 +18,10 @@ public class GridMapper implements ShapeVisitor {
 
     public void mapShapes(List<PaintableShape> shapes) {
         grid.resetSolidNodes();
-        if (shapes.size() == 0)
-            return;
-        Shape shape = shapes.get(0).getShape();
-        shape.accept(this);
+        shapes.forEach(paintableShape -> {
+            Shape shape = paintableShape.getShape();
+            shape.accept(this);
+        });
     }
 
     @Override
