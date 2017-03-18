@@ -4,8 +4,10 @@ import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +15,14 @@ import java.util.List;
  */
 public class GraphicViewPresenter {
 
-    private GraphicView graphicView;
+    protected GraphicView graphicView;
     private MouseStrategyFactory factory;
 
-    private List<PaintableShape> shapeList;
-    private CommandQueue commandQueue;
+    protected List<PaintableShape> shapeList;
+    protected CommandQueue commandQueue;
 
 
-    private MouseStrategy strategy;
+    protected MouseStrategy strategy;
     private CoordinateTransformer transformer;
 
     public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
@@ -77,12 +79,12 @@ public class GraphicViewPresenter {
         makeStrategy(objectType);
     }
 
-    private void makeStrategy(String objectType) {
+    protected void makeStrategy(String objectType) {
         strategy = factory.makeStrategy(objectType);
         addStrategyObserver();
     }
 
-    private void addStrategyObserver() {
+    protected void addStrategyObserver() {
         strategy.addObserver((arg) -> {
             if (arg.getState() == STRATEGY_STATE.FINISHED)
                 makeStrategy("Move");
@@ -92,8 +94,8 @@ public class GraphicViewPresenter {
         });
     }
 
-    public List<PaintableShape> getPaintableList() {
-        return shapeList;
+    public List<Paintable> getPaintableList() {
+        return new ArrayList<>(shapeList);
     }
 
 }

@@ -1,24 +1,12 @@
 package irmb.flowsim.util;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
- * Created by sven on 26.01.17.
+ * Created by sven on 09.03.17.
  */
-public abstract class Observable<T> {
-    private List<Observer<T>> observers = new LinkedList<>();
+public interface Observable<T> {
+    void addObserver(Observer<T> observer);
 
-    public void addObserver(Observer<T> observer) {
-        observers.add(observer);
-    }
+    void removeObserver(Observer<T> observer);
 
-    public void removeObserver(Observer<T> observer) {
-        observers.remove(observer);
-    }
-
-    protected void notifyObservers(T args) {
-        for (Observer<T> observer : observers)
-            observer.update(args);
-    }
+    void notifyObservers(T args);
 }

@@ -1,12 +1,13 @@
 package irmb.flowsim.view.swing;
 
+import irmb.flowsim.model.Point;
+import irmb.flowsim.model.util.CoordinateTransformer;
+import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.presentation.factory.MouseStrategyFactory;
-import irmb.flowsim.presentation.factory.MouseStrategyFactoryImpl;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.presentation.factory.ShapeFactoryImpl;
+import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
+import irmb.flowsim.presentation.factory.*;
+import irmb.flowsim.simulation.SimulationFactory;
+import irmb.flowsim.simulation.SimulationFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.LinkedList;
@@ -21,10 +22,18 @@ public class Main {
         PaintableShapeBuilderFactory builderFactory = new PaintableShapeBuilderFactoryImpl(paintableFactory);
         CommandQueue commandQueue = new CommandQueue();
         List<PaintableShape> shapeList = new LinkedList<>();
-        MainWindow window = new MainWindow();
-        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, window.getGraphicView(), builderFactory, null);
-        GraphicViewPresenter presenter = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, null);
+        CoordinateTransformer transformer = new CoordinateTransformerImpl();
 
+        transformer.setWorldBounds(new Point(0, 0.5), new Point(1, 0));
+        transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
+
+        MainWindow window = new MainWindow(transformer);
+        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, window.getGraphicView(), builderFactory, transformer);
+        SimulationFactory simulationFactory = new SimulationFactoryImpl();
+
+
+        SimulationGraphicViewPresenter presenter = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
+        window.setPresenter(presenter);
         presenter.setGraphicView(window.getGraphicView());
         window.setVisible(true);
     }

@@ -26,17 +26,19 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
     public void onLeftClick(double x, double y) {
         Point point = transformer.transformToWorldPoint(new Point(x, y));
         addPointToShape(point.getX(), point.getY());
-        addShapeToList();
-        if (pointsAdded >= 2)
+        if (pointsAdded >= 2) {
+            addShapeToList();
             notifyObserverWithMatchingArgs();
+        }
     }
 
     @Override
     public void onMouseMove(double x, double y) {
         Point point = transformer.transformToWorldPoint(new Point(x, y));
-        if (pointsAdded == 1)
+        if (pointsAdded == 1) {
+            addShapeToList();
             addPointToShape(point.getX(), point.getY());
-        else if (pointsAdded > 1)
+        } else if (pointsAdded > 1)
             shapeBuilder.setLastPoint(point);
         if (pointsAdded > 0)
             notifyObservers(makeStrategyEventArgs(STRATEGY_STATE.UPDATE));

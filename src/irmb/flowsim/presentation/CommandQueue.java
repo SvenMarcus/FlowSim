@@ -1,7 +1,7 @@
 package irmb.flowsim.presentation;
 
 import irmb.flowsim.presentation.command.Command;
-import irmb.flowsim.util.Observable;
+import irmb.flowsim.util.ObservableImpl;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Sven on 12.12.2016.
  */
-public class CommandQueue extends Observable<String> {
+public class CommandQueue extends ObservableImpl<String> {
 
     protected List<Command> commandList;
     private int currentIndex = -1;

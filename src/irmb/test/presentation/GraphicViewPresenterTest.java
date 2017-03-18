@@ -7,6 +7,7 @@ import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.factory.*;
+import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 import org.junit.Before;
 
@@ -41,7 +42,7 @@ public class GraphicViewPresenterTest {
         shapeList = new LinkedList<>();
         graphicView = mock(GraphicView.class);
         doAnswer(invocationOnMock -> {
-            for (PaintableShape shape : sut.getPaintableList())
+            for (Paintable shape : sut.getPaintableList())
                 shape.paint(painterSpy, transformer);
             return null;
         }).when(graphicView).update();

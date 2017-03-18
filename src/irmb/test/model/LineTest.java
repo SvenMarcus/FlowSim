@@ -2,12 +2,15 @@ package irmb.test.model;
 
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
+import irmb.flowsim.model.ShapeVisitor;
 import org.junit.Before;
 import org.junit.Test;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static irmb.test.util.TestUtil.makePoint;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by Sven on 02.01.2017.
@@ -41,6 +44,13 @@ public class LineTest {
         sut.moveBy(5, 6);
         assertTrue(sut.getFirst() == start);
         assertTrue(sut.getSecond() == end);
+    }
+
+    @Test
+    public void whenCallingAccept_shouldCallVisitWithSelf() {
+        ShapeVisitor shapeVisitorSpy = mock(ShapeVisitor.class);
+        sut.accept(shapeVisitorSpy);
+        verify(shapeVisitorSpy).visit(sut);
     }
 
 }

@@ -4,7 +4,9 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.view.graphics.PaintableShape;
+import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
+import irmb.flowsim.view.graphics.Paintable;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -34,14 +36,16 @@ public class RootController implements GraphicView {
     @FXML
     private Canvas drawPanel;
 
-    private GraphicViewPresenter presenter;
+    private SimulationGraphicViewPresenter presenter;
     private JavaFXPainter painter;
-    private CoordinateTransformer transformer;
+    private volatile CoordinateTransformer transformer;
+    private GraphicsContext graphicsContext2D;
+    private Runnable runnable;
 
     public RootController() {
     }
 
-    public void setPresenter(GraphicViewPresenter presenter) {
+    public void setPresenter(SimulationGraphicViewPresenter presenter) {
         this.presenter = presenter;
     }
 
@@ -58,6 +62,20 @@ public class RootController implements GraphicView {
         drawPanel.setOnScroll(event -> {
             presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
         });
+
+        runnable = () -> {
+            if (graphicsContext2D == null)
+                graphicsContext2D = drawPanel.getGraphicsContext2D();
+            if (painter == null)
+                painter = new JavaFXPainter();
+            painter.setGraphicsContext(graphicsContext2D);
+            graphicsContext2D.clearRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
+//            graphicsContext2D.setFill(Color.STEELBLUE);
+//            graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
+            for (Paintable p : presenter.getPaintableList()) {
+                p.paint(painter, transformer);
+            }
+        };
     }
 
     public void onLineButtonClick(ActionEvent event) {
@@ -101,17 +119,17 @@ public class RootController implements GraphicView {
         presenter.redo();
     }
 
+    public void onAddSimulationButtonClick(ActionEvent event) {
+        presenter.addSimulation();
+    }
+
+    public void onRunSimulationClick(ActionEvent event) {
+        presenter.runSimulation();
+    }
+
     @Override
     public void update() {
-        GraphicsContext graphicsContext2D = drawPanel.getGraphicsContext2D();
-        graphicsContext2D.clearRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
-        graphicsContext2D.setFill(Color.STEELBLUE);
-        graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
-        if (painter == null)
-            painter = new JavaFXPainter(graphicsContext2D);
-        for (PaintableShape p : presenter.getPaintableList()) {
-            p.paint(painter, transformer);
-        }
+        Platform.runLater(runnable);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package irmb.flowsim.model;
 
-import irmb.flowsim.view.graphics.PaintableShape;
-
 /**
  * Created by Sven on 14.12.2016.
  */
@@ -38,5 +36,10 @@ public class Point implements Shape {
     public void moveBy(double dx, double dy) {
         x += dx;
         y += dy;
+    }
+
+    @Override
+    public void accept(ShapeVisitor visitor) {
+        visitor.visit(this);
     }
 }

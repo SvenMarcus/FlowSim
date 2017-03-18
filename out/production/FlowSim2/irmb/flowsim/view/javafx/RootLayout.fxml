@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ButtonBar fx:id="buttonBar" prefHeight="40.0" prefWidth="200.0">
         <buttons>
@@ -17,6 +16,8 @@
             <Button fx:id="polyLineButton" mnemonicParsing="false" onAction="#onPolyLineButtonClick" text="PolyLine" />
             <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onUndoButtonClick" text="Undo" />
             <Button fx:id="redoButton" mnemonicParsing="false" onAction="#onRedoButtonClick" text="Redo" />
+            <Button fx:id="addSimulationButton" mnemonicParsing="false" onAction="#onAddSimulationButtonClick" text="Add Simulation" />
+            <Button mnemonicParsing="false" onAction="#onRunSimulationClick" text="Run Simulation" />
         </buttons>
          <padding>
             <Insets right="10.0" />

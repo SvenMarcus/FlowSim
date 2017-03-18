@@ -5,4 +5,6 @@ package irmb.flowsim.model;
  */
 public interface Shape {
     void moveBy(double dx, double dy);
+
+    void accept(ShapeVisitor visitor);
 }
