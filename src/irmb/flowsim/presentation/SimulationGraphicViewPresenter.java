@@ -24,6 +24,13 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
         this.simulationFactory = simulationFactory;
     }
 
+    protected void attachObserverToCommandQueue() {
+        commandQueue.addObserver(args -> {
+            graphicView.update();
+            simulation.setShapes(shapeList);
+        });
+    }
+
     protected void addStrategyObserver() {
         strategy.addObserver((arg) -> {
             if (arg.getState() == STRATEGY_STATE.FINISHED)

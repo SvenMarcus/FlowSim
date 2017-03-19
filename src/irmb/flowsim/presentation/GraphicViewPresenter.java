@@ -29,9 +29,13 @@ public class GraphicViewPresenter {
         this.factory = strategyFactory;
         this.commandQueue = commandQueue;
         this.shapeList = shapeList;
-        this.commandQueue.addObserver((args) -> graphicView.update());
+        attachObserverToCommandQueue();
         makeStrategy("Move");
         this.transformer = transformer;
+    }
+
+    protected void attachObserverToCommandQueue() {
+        this.commandQueue.addObserver((args) -> graphicView.update());
     }
 
     public void setGraphicView(GraphicView graphicView) {

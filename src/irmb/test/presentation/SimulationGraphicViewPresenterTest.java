@@ -38,13 +38,15 @@ public class SimulationGraphicViewPresenterTest {
     private SimulationMock simulationSpy;
     private List<PaintableShape> shapeList;
     private MouseStrategy mouseStrategyMock;
-    private Observer<StrategyEventArgs> observer;
+    private Observer<StrategyEventArgs> mouseStrategyObserver;
+    private Observer<String> commandQueueObserver;
+    private CommandQueue commandQueue;
 
     @Before
     public void setUp() {
         makeStrategyMock();
         MouseStrategyFactory mouseStrategyFactory = makeMouseStrategyFactory();
-        CommandQueue commandQueue = mock(CommandQueue.class);
+        makeCommandQueueMock();
         shapeList = new ArrayList<>();
         transformer = mock(CoordinateTransformer.class);
         simulationSpy = spy(new SimulationMock());
@@ -65,12 +67,22 @@ public class SimulationGraphicViewPresenterTest {
 
     private void makeStrategyMock() {
         mouseStrategyMock = mock(MouseStrategy.class);
-        doAnswer(invocationOnMock -> observer = invocationOnMock.getArgument(0)).when(mouseStrategyMock).addObserver(any());
+        doAnswer(invocationOnMock -> mouseStrategyObserver = invocationOnMock.getArgument(0)).when(mouseStrategyMock).addObserver(any());
         doAnswer(invocationOnMock -> {
             StrategyEventArgs argument = invocationOnMock.getArgument(0);
-            observer.update(argument);
+            mouseStrategyObserver.update(argument);
             return null;
         }).when(mouseStrategyMock).notifyObservers(any());
+    }
+
+    private void makeCommandQueueMock() {
+        commandQueue = mock(CommandQueue.class);
+        doAnswer(invocationOnMock -> commandQueueObserver = invocationOnMock.getArgument(0)).when(commandQueue).addObserver(any());
+        doAnswer(invocationOnMock -> {
+            String argument = invocationOnMock.getArgument(0);
+            commandQueueObserver.update(argument);
+            return null;
+        }).when(commandQueue).notifyObservers(any());
     }
 
     private void setGraphicViewMockBehavior() {
@@ -167,6 +179,18 @@ public class SimulationGraphicViewPresenterTest {
         @Test
         public void whenReceivingUpdateFromStrategy_shouldMapShapesToGrid() {
             mouseStrategyMock.notifyObservers(new StrategyEventArgs(STRATEGY_STATE.UPDATE));
+            verify(simulationSpy).setShapes(shapeList);
+        }
+
+        @Test
+        public void whenReceivingUpdateFromCommandQueue_shouldMapShapesToGrid() {
+            commandQueue.notifyObservers("undo");
+            verify(simulationSpy).setShapes(shapeList);
+
+            clearInvocations(simulationSpy);
+            clearInvocations(commandQueue);
+
+            commandQueue.notifyObservers("redo");
             verify(simulationSpy).setShapes(shapeList);
         }
     }
