@@ -3,9 +3,11 @@ package irmb.test.presentation.builder;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.*;
 import irmb.flowsim.presentation.builder.TwoPointShapeBuilder;
+import irmb.flowsim.presentation.factory.PaintableShapeFactory;
 import irmb.flowsim.presentation.factory.ShapeFactory;
 import irmb.flowsim.view.graphics.PaintableLine;
 import irmb.flowsim.view.graphics.PaintableRectangle;
+import irmb.flowsim.view.graphics.PaintableShape;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,17 +27,16 @@ import static org.mockito.Mockito.*;
 @RunWith(HierarchicalContextRunner.class)
 public class TwoPointShapeBuilderTest {
 
-    private TwoPointShape shape;
+    private final Line lineMock = mock(Line.class);
+    private final Rectangle rectangleMock = mock(Rectangle.class);
     private TwoPointShapeBuilder sut;
 
     public class GeneralShapeBehaviorContext {
         @Before
         public void setUp() {
-            shape = mock(TwoPointShape.class);
             ShapeFactory shapeFactory = mock(ShapeFactory.class);
-            when(shapeFactory.makeShape(anyString())).thenReturn(shape);
-
-            sut = new TwoPointShapeBuilder(shapeFactory, "");
+            when(shapeFactory.makeShape(anyString())).thenReturn(lineMock);
+            sut = new TwoPointShapeBuilder(lineMock, mock(PaintableShapeFactory.class));
         }
 
         @Test
@@ -44,7 +45,7 @@ public class TwoPointShapeBuilderTest {
             sut.addPoint(makePoint(1, 2));
             ArgumentCaptor<Point> pointCaptor = ArgumentCaptor.forClass(Point.class);
 
-            verify(shape).setFirst(pointCaptor.capture());
+            verify(lineMock).setFirst(pointCaptor.capture());
             assertExpectedPointEqualsActual(makePoint(1, 2), pointCaptor.getValue());
         }
 
@@ -56,18 +57,18 @@ public class TwoPointShapeBuilderTest {
         @Test
         public void whenRemovingLastPoint_shouldDoNothing() {
             sut.removeLastPoint();
-            verifyZeroInteractions(shape);
+            verifyZeroInteractions(lineMock);
         }
 
         @Test
         public void whenAddingPointAfterRemovingLastPoint_shouldSetFirst() {
             sut.removeLastPoint();
-            clearInvocations(shape);
+            clearInvocations(lineMock);
 
             sut.addPoint(makePoint(4, 6));
 
             ArgumentCaptor<Point> pointCaptor = ArgumentCaptor.forClass(Point.class);
-            verify(shape).setFirst(pointCaptor.capture());
+            verify(lineMock).setFirst(pointCaptor.capture());
             assertExpectedPointEqualsActual(makePoint(4, 6), pointCaptor.getAllValues().get(0));
         }
 
@@ -82,8 +83,8 @@ public class TwoPointShapeBuilderTest {
                 sut.addPoint(makePoint(3, 4));
                 ArgumentCaptor<Point> pointCaptor = ArgumentCaptor.forClass(Point.class);
 
-                verify(shape).setFirst(pointCaptor.capture());
-                verify(shape).setSecond(pointCaptor.capture());
+                verify(lineMock).setFirst(pointCaptor.capture());
+                verify(lineMock).setSecond(pointCaptor.capture());
                 assertExpectedPointEqualsActual(makePoint(1, 2), pointCaptor.getAllValues().get(0));
                 assertExpectedPointEqualsActual(makePoint(3, 4), pointCaptor.getAllValues().get(1));
             }
@@ -95,33 +96,33 @@ public class TwoPointShapeBuilderTest {
 
             @Test
             public void whenSettingLastPoint_shouldAdjustFirst() {
-                clearInvocations(shape);
+                clearInvocations(lineMock);
                 sut.setLastPoint(makePoint(3, 4));
                 ArgumentCaptor<Point> pointCaptor = ArgumentCaptor.forClass(Point.class);
 
-                verify(shape).setFirst(pointCaptor.capture());
+                verify(lineMock).setFirst(pointCaptor.capture());
                 assertExpectedPointEqualsActual(makePoint(3, 4), pointCaptor.getAllValues().get(0));
-                verifyNoMoreInteractions(shape);
+                verifyNoMoreInteractions(lineMock);
             }
 
             @Test
             public void whenRemovingLastPoint_shouldSetFirstToNull() {
-                clearInvocations(shape);
+                clearInvocations(lineMock);
                 sut.removeLastPoint();
 
-                verify(shape).setFirst(null);
-                verifyNoMoreInteractions(shape);
+                verify(lineMock).setFirst(null);
+                verifyNoMoreInteractions(lineMock);
             }
 
             @Test
             public void whenAddingPointAfterRemovingLastPoint_shouldSetFirst() {
                 sut.removeLastPoint();
-                clearInvocations(shape);
+                clearInvocations(lineMock);
 
                 sut.addPoint(makePoint(4, 6));
 
                 ArgumentCaptor<Point> pointCaptor = ArgumentCaptor.forClass(Point.class);
-                verify(shape).setFirst(pointCaptor.capture());
+                verify(lineMock).setFirst(pointCaptor.capture());
                 assertExpectedPointEqualsActual(makePoint(4, 6), pointCaptor.getAllValues().get(0));
             }
 
@@ -136,8 +137,8 @@ public class TwoPointShapeBuilderTest {
                     sut.addPoint(makePoint(5, 6));
                     ArgumentCaptor<Point> pointCaptor = ArgumentCaptor.forClass(Point.class);
 
-                    verify(shape).setFirst(pointCaptor.capture());
-                    verify(shape).setSecond(pointCaptor.capture());
+                    verify(lineMock).setFirst(pointCaptor.capture());
+                    verify(lineMock).setSecond(pointCaptor.capture());
                     assertExpectedPointEqualsActual(makePoint(1, 2), pointCaptor.getAllValues().get(0));
                     assertExpectedPointEqualsActual(makePoint(3, 4), pointCaptor.getAllValues().get(1));
                 }
@@ -149,34 +150,41 @@ public class TwoPointShapeBuilderTest {
 
                 @Test
                 public void whenSettingLastPoint_shouldAdjustSecond() {
-                    clearInvocations(shape);
+                    clearInvocations(lineMock);
                     sut.setLastPoint(makePoint(5, 6));
                     ArgumentCaptor<Point> pointCaptor = ArgumentCaptor.forClass(Point.class);
 
-                    verify(shape).setSecond(pointCaptor.capture());
+                    verify(lineMock).setSecond(pointCaptor.capture());
                     assertExpectedPointEqualsActual(makePoint(5, 6), pointCaptor.getAllValues().get(0));
-                    verifyNoMoreInteractions(shape);
+                    verifyNoMoreInteractions(lineMock);
                 }
 
                 @Test
                 public void whenRemovingLastPoint_shouldSetSecondToNull() {
-                    clearInvocations(shape);
+                    clearInvocations(lineMock);
                     sut.removeLastPoint();
 
-                    verify(shape).setSecond(null);
-                    verifyNoMoreInteractions(shape);
+                    verify(lineMock).setSecond(null);
+                    verifyNoMoreInteractions(lineMock);
                 }
 
                 @Test
                 public void whenAddingPointAfterRemovingLastPoint_shouldSetSecond() {
                     sut.removeLastPoint();
-                    clearInvocations(shape);
+                    clearInvocations(lineMock);
 
                     sut.addPoint(makePoint(4, 6));
 
                     ArgumentCaptor<Point> pointCaptor = ArgumentCaptor.forClass(Point.class);
-                    verify(shape).setSecond(pointCaptor.capture());
+                    verify(lineMock).setSecond(pointCaptor.capture());
                     assertExpectedPointEqualsActual(makePoint(4, 6), pointCaptor.getAllValues().get(0));
+                }
+
+                @Test
+                public void whenAddingMorePointsToShape_isObjectFinishedShouldBeTrue() {
+                    sut.addPoint(makePoint(1, 8));
+
+                    assertTrue(sut.isObjectFinished());
                 }
             }
         }
@@ -184,28 +192,37 @@ public class TwoPointShapeBuilderTest {
 
     public class SpecificReturnValueContext {
 
+        private PaintableShapeFactory paintableShapeFactory;
         private ShapeFactory shapeFactory;
 
         @Before
         public void setUp() {
             shapeFactory = mock(ShapeFactory.class);
-            when(shapeFactory.makeShape("Line")).thenReturn(mock(Line.class));
-            when(shapeFactory.makeShape("Rectangle")).thenReturn(mock(Rectangle.class));
+            when(shapeFactory.makeShape("Line")).thenReturn(lineMock);
+            when(shapeFactory.makeShape("Rectangle")).thenReturn(rectangleMock);
+            paintableShapeFactory = mock(PaintableShapeFactory.class);
+            when(paintableShapeFactory.makePaintableShape(lineMock)).thenReturn(mock(PaintableLine.class));
+            when(paintableShapeFactory.makePaintableShape(rectangleMock)).thenReturn(mock(PaintableRectangle.class));
         }
 
         @Test
         public void whenCallingGetShapeForBuilderWithLine_shouldReturnPaintableLine() {
-            TwoPointShapeBuilder sut = new TwoPointShapeBuilder(shapeFactory, "Line");
+            TwoPointShapeBuilder sut = new TwoPointShapeBuilder(lineMock, paintableShapeFactory);
             assertThat(sut.getShape(), is(instanceOf(PaintableLine.class)));
+            verify(paintableShapeFactory).makePaintableShape(lineMock);
         }
 
         @Test
         public void whenCallingGetShapeForBuilderWithRectangle_shouldReturnPaintableRectangle() {
-            TwoPointShapeBuilder sut = new TwoPointShapeBuilder(shapeFactory, "Rectangle");
+            TwoPointShapeBuilder sut = new TwoPointShapeBuilder(rectangleMock, paintableShapeFactory);
             assertThat(sut.getShape(), is(instanceOf(PaintableRectangle.class)));
+            verify(paintableShapeFactory).makePaintableShape(rectangleMock);
         }
 
+        @Test
+        public void whenCallingGetShapeTwice_shouldReturnSameInstanceOfPaintableShape() {
+            TwoPointShapeBuilder sut = new TwoPointShapeBuilder(rectangleMock, paintableShapeFactory);
+            assertTrue(sut.getShape() == sut.getShape());
+        }
     }
-
-
 }

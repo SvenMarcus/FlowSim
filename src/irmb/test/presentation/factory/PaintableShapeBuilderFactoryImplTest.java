@@ -3,7 +3,9 @@ package irmb.test.presentation.factory;
 import irmb.flowsim.presentation.builder.PaintableLineBuilder;
 import irmb.flowsim.presentation.builder.PaintablePolyLineBuilder;
 import irmb.flowsim.presentation.builder.PaintableRectangleBuilder;
+import irmb.flowsim.presentation.builder.TwoPointShapeBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
+import irmb.flowsim.presentation.factory.PaintableShapeFactoryImpl;
 import irmb.flowsim.presentation.factory.ShapeFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,17 +25,17 @@ public class PaintableShapeBuilderFactoryImplTest {
     @Before
     public void setUp() {
         ShapeFactory factory = mock(ShapeFactory.class);
-        sut = new PaintableShapeBuilderFactoryImpl(factory);
+        sut = new PaintableShapeBuilderFactoryImpl(factory, new PaintableShapeFactoryImpl());
     }
 
     @Test
     public void testMakeLineBuilder() {
-        assertThat(sut.makeShapeBuilder("Line"), is(instanceOf(PaintableLineBuilder.class)));
+        assertThat(sut.makeShapeBuilder("Line"), is(instanceOf(TwoPointShapeBuilder.class)));
     }
 
     @Test
     public void testMakeRectangleBuilder() {
-        assertThat(sut.makeShapeBuilder("Rectangle"), is(instanceOf(PaintableRectangleBuilder.class)));
+        assertThat(sut.makeShapeBuilder("Rectangle"), is(instanceOf(TwoPointShapeBuilder.class)));
     }
 
     @Test

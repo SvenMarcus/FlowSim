@@ -37,7 +37,7 @@ public class GraphicViewPresenterTest {
         setWorldAndViewBounds();
         painterSpy = mock(Painter.class);
         ShapeFactory factory = spy(new ShapeFactoryImpl());
-        shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory));
+        shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory, new PaintableShapeFactoryImpl()));
         commandQueue = spy(new CommandQueue());
         shapeList = new LinkedList<>();
         graphicView = mock(GraphicView.class);

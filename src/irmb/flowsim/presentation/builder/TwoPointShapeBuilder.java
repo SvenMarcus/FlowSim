@@ -1,6 +1,7 @@
 package irmb.flowsim.presentation.builder;
 
 import irmb.flowsim.model.*;
+import irmb.flowsim.presentation.factory.PaintableShapeFactory;
 import irmb.flowsim.presentation.factory.ShapeFactory;
 import irmb.flowsim.view.graphics.PaintableLine;
 import irmb.flowsim.view.graphics.PaintableRectangle;
@@ -13,13 +14,22 @@ public class TwoPointShapeBuilder extends PaintableShapeBuilder {
 
 
     private final TwoPointShape shape;
-    private final String type;
+    private String type;
+    private final PaintableShapeFactory paintableShapeFactory;
     private int pointsAdded;
+    private PaintableShape paintableShape;
 
-    public TwoPointShapeBuilder(ShapeFactory factory, String type) {
+    public TwoPointShapeBuilder(ShapeFactory factory, String type, PaintableShapeFactory paintableShapeFactory) {
         super(factory);
         this.type = type;
+        this.paintableShapeFactory = paintableShapeFactory;
         this.shape = (TwoPointShape) factory.makeShape(type);
+    }
+
+    public TwoPointShapeBuilder(TwoPointShape shape, PaintableShapeFactory paintableShapeFactory) {
+        this.shape = shape;
+        this.paintableShapeFactory = paintableShapeFactory;
+        paintableShape = paintableShapeFactory.makePaintableShape(shape);
     }
 
     @Override
@@ -33,14 +43,12 @@ public class TwoPointShapeBuilder extends PaintableShapeBuilder {
 
     @Override
     public PaintableShape getShape() {
-        if (type.equals("Line"))
-            return new PaintableLine((Line) shape);
-        else return new PaintableRectangle((Rectangle) shape);
+        return paintableShape;
     }
 
     @Override
     public boolean isObjectFinished() {
-        return pointsAdded == 2;
+        return pointsAdded >= 2;
     }
 
     @Override

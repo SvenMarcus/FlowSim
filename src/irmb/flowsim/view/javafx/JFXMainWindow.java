@@ -6,13 +6,8 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
 import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
-import irmb.flowsim.presentation.factory.MouseStrategyFactoryImpl;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
-import irmb.flowsim.presentation.factory.ShapeFactoryImpl;
-import irmb.flowsim.simulation.Simulation;
+import irmb.flowsim.presentation.factory.*;
 import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.simulation.SimulationFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -77,7 +72,7 @@ public class JFXMainWindow extends Application {
 
     private PaintableShapeBuilderFactory makePaintableShapeBuilderFactory() {
         ShapeFactoryImpl paintableFactory = new ShapeFactoryImpl();
-        return new PaintableShapeBuilderFactoryImpl(paintableFactory);
+        return new PaintableShapeBuilderFactoryImpl(paintableFactory, new PaintableShapeFactoryImpl());
     }
 
     private Pane makeRootLayout(RootController rootController) throws IOException {

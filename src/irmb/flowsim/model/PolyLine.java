@@ -28,7 +28,7 @@ public class PolyLine implements Shape {
             pointList.remove(pointList.size() - 1);
     }
 
-    @Override
+
     public void moveBy(double dx, double dy) {
         for (Point p : getPointList()) {
             p.setX(p.getX() + dx);
@@ -36,7 +36,7 @@ public class PolyLine implements Shape {
         }
     }
 
-    @Override
+
     public void accept(ShapeVisitor visitor) {
         visitor.visit(this);
     }
