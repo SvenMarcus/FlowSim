@@ -21,6 +21,7 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
     private double min;
     private double max;
     private GridMapper gridMapper;
+    private boolean firstRun = true;
 
     public LBMChannelFlowSimulation(UniformGrid grid, LBMSolver solver, ColorFactory colorFactory) {
         this.grid = grid;
@@ -31,7 +32,13 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
 
     @Override
     public void paint(Painter painter, CoordinateTransformer transformer) {
-        getMinMax();
+        getInitialMinMax();
+        double currentMin = min;
+        double currentMax = max;
+
+        min = Double.MAX_VALUE;
+        max = -Double.MAX_VALUE;
+
         double dxScreen = transformer.scaleToScreenLength(grid.getDelta());
         double dyScreen = transformer.scaleToScreenLength(grid.getDelta());
         Point origin = transformer.transformToPointOnScreen(grid.getTopLeft());
@@ -40,19 +47,23 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
                 if (grid.isSolid(x, y)) {
                     painter.setColor(new Color(0, 0, 0));
                 } else {
+                    adjustMinMax(x, y);
                     double velocity = grid.getVelocityAt(x, y);
-                    painter.setColor(colorFactory.makeColorForValue(min, max, velocity));
+                    painter.setColor(colorFactory.makeColorForValue(currentMin, currentMax, velocity));
                 }
                 painter.fillRectangle(origin.getX() + x * dxScreen, origin.getY() - grid.getHeight() + y * dyScreen, Math.ceil(dxScreen), Math.ceil(dyScreen));
             }
     }
 
-    private void getMinMax() {
-        min = grid.getVelocityAt(0, 0);
-        max = grid.getVelocityAt(0, 0);
-        for (int y = 0; y < grid.getVerticalNodes(); y++)
-            for (int x = 0; x < grid.getHorizontalNodes(); x++)
-                adjustMinMax(x, y);
+    private void getInitialMinMax() {
+        if (firstRun) {
+            min = grid.getVelocityAt(0, 0);
+            max = grid.getVelocityAt(0, 0);
+            for (int y = 0; y < grid.getVerticalNodes(); y++)
+                for (int x = 0; x < grid.getHorizontalNodes(); x++)
+                    adjustMinMax(x, y);
+            firstRun = false;
+        }
     }
 
     private void adjustMinMax(int x, int y) {

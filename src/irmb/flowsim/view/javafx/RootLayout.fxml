@@ -51,7 +51,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" VBox.vgrow="SOMETIMES">
          <top>
             <ToolBar>
                <items>
@@ -62,6 +62,7 @@
                   <Separator orientation="VERTICAL" />
                   <Button fx:id="addSimulationButton" mnemonicParsing="false" onAction="#onAddSimulationButtonClick" text="Add Simulation" />
                   <Button mnemonicParsing="false" onAction="#onRunSimulationClick" text="Run Simulation" />
+                  <Button layoutX="425.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPauseSimulationClick" text="Pause Simulation" />
                   <Separator orientation="VERTICAL" />
                   <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onUndoButtonClick" text="Undo" />
                   <Button fx:id="redoButton" mnemonicParsing="false" onAction="#onRedoButtonClick" text="Redo" />

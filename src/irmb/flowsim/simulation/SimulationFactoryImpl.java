@@ -20,7 +20,7 @@ public class SimulationFactoryImpl implements SimulationFactory {
     public Simulation makeSimulation() {
         JFlowSimNavierStokesGridAdapter gridAdapter = makeGrid();
         LBMNavierStokesSolver solver = new LBMNavierStokesSolver(gridAdapter.getJFlowSimGrid());
-        JFlowSimNavierStokesSolverAdapter solverAdapter = new JFlowSimNavierStokesSolverAdapter(solver);
+        JFlowSimNavierStokesSolverAdapter solverAdapter = new JFlowSimNavierStokesSolverAdapter(solver, gridAdapter.getJFlowSimGrid());
         return new LBMChannelFlowSimulation(gridAdapter, solverAdapter, new ColorFactoryImpl());
     }
 

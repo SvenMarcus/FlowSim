@@ -104,6 +104,10 @@ public class RootController implements GraphicView {
         presenter.runSimulation();
     }
 
+    public void onPauseSimulationClick(ActionEvent event) {
+        presenter.pauseSimulation();
+    }
+
     public void onClearClick(ActionEvent event) {
         presenter.clearAll();
     }

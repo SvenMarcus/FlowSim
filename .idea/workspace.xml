@@ -38,11 +38,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SimulationGraphicViewPresenterTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java">
+      <file leaf-file-name="SimulationGraphicViewPresenter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1208">
-              <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+            <state relative-caret-position="341">
+              <caret line="70" column="24" lean-forward="false" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JFXMainWindow.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JFXMainWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-196">
+              <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -51,85 +61,17 @@
       <file leaf-file-name="RootController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="77" column="13" lean-forward="false" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+            <state relative-caret-position="199">
+              <caret line="107" column="19" lean-forward="true" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
               <folding>
-                <element signature="e#3309#3310#0" expanded="true" />
-                <element signature="e#3345#3346#0" expanded="true" />
-                <element signature="e#3396#3397#0" expanded="true" />
-                <element signature="e#3426#3427#0" expanded="true" />
+                <element signature="e#3319#3320#0" expanded="true" />
+                <element signature="e#3362#3363#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaintableLineTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/test/view/graphics/PaintableLineTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="123" column="63" lean-forward="false" selection-start-line="123" selection-start-column="63" selection-end-line="123" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MoveMouseStrategy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="101" column="34" lean-forward="false" selection-start-line="101" selection-start-column="34" selection-end-line="101" selection-end-column="34" />
-              <folding>
-                <element signature="e#3471#3472#0" expanded="true" />
-                <element signature="e#3507#3508#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MouseStrategyFactoryImplTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/factory/MouseStrategyFactoryImplTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MouseStrategyFactoryImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/MouseStrategyFactoryImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="62" column="31" lean-forward="false" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
-              <folding>
-                <element signature="e#2460#2461#0" expanded="true" />
-                <element signature="e#2514#2515#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JFXMainWindow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JFXMainWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PaintableLine.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintableLine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="34" column="41" lean-forward="true" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PaintablePolyLine.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PaintablePolyLine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintablePolyLine.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="840">
@@ -139,38 +81,92 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphicViewPresenterAcceptanceTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java">
+      <file leaf-file-name="LBMChannelFlowSimulation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="204" column="0" lean-forward="false" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+            <state relative-caret-position="424">
+              <caret line="83" column="11" lean-forward="false" selection-start-line="83" selection-start-column="11" selection-end-line="83" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JFlowSimNavierStokesSolverAdapter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesSolverAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="27" column="35" lean-forward="false" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimulationFactoryImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/SimulationFactoryImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="22" column="133" lean-forward="false" selection-start-line="22" selection-start-column="133" selection-end-line="22" selection-end-column="133" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ColorFactoryImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/ColorFactoryImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="36" column="34" lean-forward="false" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ColorFactoryImplTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/factory/ColorFactoryImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="45" column="23" lean-forward="true" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LBMChannelFlowSimulationTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
               <folding>
-                <element signature="docComment;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="class#SimplePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#buildLineAcceptanceTest#0;class#SimplePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#buildRectangleAcceptanceTest#0;class#SimplePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#buildPolyLineAcceptanceTest#0;class#SimplePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#buildBezierCurveAcceptanceTest#0;class#SimplePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="class#LivePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#livePaintingLineAcceptanceTest#0;class#LivePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#livePaintingRectangleAcceptanceTest#0;class#LivePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#livePaintingPolyLineAcceptanceTest#0;class#LivePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#livePaintingBezierCurveAcceptanceTest#0;class#LivePaintingContext#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#commandQueueAcceptanceTest#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#makePolyLineCoordinates#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#moveViewWindowAcceptanceTest#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#verifyUnchangedWorldCoordinates#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#copyPolyLinePoints#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#zoomAcceptanceTest#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#verifyLineCoordinatesAfterZoomIn#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#verifyPolyLineCoordinatesAfterZoomIn#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#verifyPolyLineCoordinatesAfterZoomOut#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#verifyLineCoordinatesAfterZoomOut#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#deleteShapeAcceptanceTest#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#movePointAcceptanceTest#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#verifyMovePointForRectangle#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#verifyMovePointForPolyLine#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
-                <element signature="method#verifyMovePointForLine#0;class#GraphicViewPresenterAcceptanceTests#0" expanded="false" />
+                <element signature="docComment;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#canCreateLBMChannelFlowSimulation#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#setColorFactoryBehavior#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#setGridBehavior#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#initGridValues#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#setUp#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingPaint_shouldSetCorrectColors#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingPaint_shouldPaintFilledRectanglesWithCorrectColor#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#assertCorrectRectangleValues#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingRun_shouldStartSolver#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingPause_shouldPauseSolver#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenSolverNotifiesSimulation_shouldNotifyObservers#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithEmptyList_shouldOnlyResetGrid#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithLine_shouldMapToGrid#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenPaintingSolidNodes_shouldSetColorToBlack#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="class#GridWithOffsetContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#setUp#0;class#GridWithOffsetContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithLineOnAltSetup_shouldMapToGrid#0;class#GridWithOffsetContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#setUp#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithLineOnGridWithNonIntDelta_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithLineOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithRectangle_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithRectangleOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithPolyLine_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithPolyLineOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetLinesWithMultipleShapes_shouldMapAllToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithBezierCurve_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#whenCallingSetShapesWithBezierCurveOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+                <element signature="method#getPaintableShapeListWithLine#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -201,11 +197,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/builder/PaintableShapeBuilder.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/model/TwoPointShape.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/model/Line.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/model/Rectangle.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/PaintableShapeFactory.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/PaintableShapeFactoryImplTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/PaintableShapeFactoryImpl.java" />
@@ -238,20 +229,25 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/model/BezierCurve.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintableBezierCurve.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/GridMapper.java" />
-        <option value="$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/command/ClearAllCommandTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/command/ClearAllCommand.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/GraphicViewPresenter.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/MouseStrategyFactoryImpl.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JFXMainWindow.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/view/graphics/PaintableLineTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintableLine.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintablePolyLine.java" />
+        <option value="$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java" />
+        <option value="$PROJECT_DIR$/src/irmb/test/presentation/factory/ColorFactoryImplTest.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/ColorFactoryImpl.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/SimulationFactoryImpl.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesSolverAdapter.java" />
       </list>
     </option>
   </component>
@@ -317,88 +313,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simulation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -592,6 +506,62 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlowSim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlowSim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="irmb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flowsim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapters" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlowSim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlowSim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="irmb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flowsim" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="presentation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -757,7 +727,7 @@
       <recent name="irmb.flowsim.simulation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PaintablePolyLineTest">
+  <component name="RunManager" selected="Application.JFXMain">
     <configuration default="false" name="irmb.test in FlowSim2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -784,18 +754,18 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="SimulationGraphicViewPresenterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="PaintablePolyLineTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="irmb.test.presentation.*" />
+          <option name="PATTERN" value="irmb.test.view.graphics.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="FlowSim2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="irmb.test.presentation" />
-      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.SimulationGraphicViewPresenterTest" />
+      <option name="PACKAGE_NAME" value="irmb.test.view.graphics" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.view.graphics.PaintablePolyLineTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -810,19 +780,19 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="SimulationGraphicViewPresenterTest.whenCallingClearAll_shouldNotMapToSimulation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="LBMChannelFlowSimulationTest$BasicGridContext.whenPaintingSecondTimeAfterGridExtremesChanged_shouldUseColorsBasedOnMinMaxFromPreviousTimeStep" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="irmb.test.presentation.*" />
+          <option name="PATTERN" value="irmb.test.simulation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="FlowSim2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="irmb.test.presentation" />
-      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.SimulationGraphicViewPresenterTest" />
-      <option name="METHOD_NAME" value="whenCallingClearAll_shouldNotMapToSimulation" />
+      <option name="PACKAGE_NAME" value="irmb.test.simulation" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.simulation.LBMChannelFlowSimulationTest$BasicGridContext" />
+      <option name="METHOD_NAME" value="whenPaintingSecondTimeAfterGridExtremesChanged_shouldUseColorsBasedOnMinMaxFromPreviousTimeStep" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -836,20 +806,20 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="PaintableLineTest.givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="ColorFactoryImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="irmb.test.view.graphics.*" />
+          <option name="PATTERN" value="irmb.test.presentation.factory.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="FlowSim2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="irmb.test.view.graphics" />
-      <option name="MAIN_CLASS_NAME" value="irmb.test.view.graphics.PaintableLineTest" />
-      <option name="METHOD_NAME" value="givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="irmb.test.presentation.factory" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.presentation.factory.ColorFactoryImplTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -862,18 +832,18 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="PaintablePolyLineTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="LBMChannelFlowSimulationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="irmb.test.view.graphics.*" />
+          <option name="PATTERN" value="irmb.test.simulation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="FlowSim2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="irmb.test.view.graphics" />
-      <option name="MAIN_CLASS_NAME" value="irmb.test.view.graphics.PaintablePolyLineTest" />
+      <option name="PACKAGE_NAME" value="irmb.test.simulation" />
+      <option name="MAIN_CLASS_NAME" value="irmb.test.simulation.LBMChannelFlowSimulationTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -1342,18 +1312,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.JFXMain" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest.whenCallingClearAll_shouldNotMapToSimulation" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.PaintableLineTest.givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.PaintablePolyLineTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.PaintablePolyLineTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.LBMChannelFlowSimulationTest$BasicGridContext.whenPaintingSecondTimeAfterGridExtremesChanged_shouldUseColorsBasedOnMinMaxFromPreviousTimeStep" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ColorFactoryImplTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.LBMChannelFlowSimulationTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.PaintablePolyLineTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.PaintableLineTest.givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest.whenCallingClearAll_shouldNotMapToSimulation" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.SimulationGraphicViewPresenterTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.LBMChannelFlowSimulationTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.irmb.test in FlowSim2" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ColorFactoryImplTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.LBMChannelFlowSimulationTest$BasicGridContext.whenPaintingSecondTimeAfterGridExtremesChanged_shouldUseColorsBasedOnMinMaxFromPreviousTimeStep" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.PaintablePolyLineTest" />
       </list>
     </recent_temporary>
   </component>
@@ -1464,44 +1434,44 @@
       <workItem from="1489888573630" duration="2072000" />
       <workItem from="1489890656799" duration="907000" />
       <workItem from="1489892890179" duration="1265000" />
-      <workItem from="1489936874261" duration="46261000" />
+      <workItem from="1489936874261" duration="50711000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="PaintableLineTest_givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue - 2017.03.20 at 16h 05m 49s.xml">
-      <configuration name="PaintableLineTest.givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue" configurationId="JUnit" />
+    <history-entry file="ColorFactoryImplTest - 2017.03.20 at 16h 58m 06s.xml">
+      <configuration name="ColorFactoryImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PaintableLineTest_givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue - 2017.03.20 at 16h 06m 04s.xml">
-      <configuration name="PaintableLineTest.givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue" configurationId="JUnit" />
+    <history-entry file="ColorFactoryImplTest - 2017.03.20 at 16h 58m 15s.xml">
+      <configuration name="ColorFactoryImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PaintableLineTest_givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue - 2017.03.20 at 16h 06m 11s.xml">
-      <configuration name="PaintableLineTest.givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue" configurationId="JUnit" />
+    <history-entry file="ColorFactoryImplTest - 2017.03.20 at 16h 58m 34s.xml">
+      <configuration name="ColorFactoryImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PaintablePolyLineTest - 2017.03.20 at 16h 06m 35s.xml">
-      <configuration name="PaintablePolyLineTest" configurationId="JUnit" />
+    <history-entry file="ColorFactoryImplTest - 2017.03.20 at 16h 58m 39s.xml">
+      <configuration name="ColorFactoryImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SimulationGraphicViewPresenterTest_whenCallingClearAll_shouldNotMapToSimulation - 2017.03.20 at 10h 26m 17s.xml">
-      <configuration name="SimulationGraphicViewPresenterTest.whenCallingClearAll_shouldNotMapToSimulation" configurationId="JUnit" />
+    <history-entry file="LBMChannelFlowSimulationTest - 2017.03.20 at 17h 02m 07s.xml">
+      <configuration name="LBMChannelFlowSimulationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 10h 26m 23s.xml">
+    <history-entry file="LBMChannelFlowSimulationTest - 2017.03.20 at 17h 02m 19s.xml">
+      <configuration name="LBMChannelFlowSimulationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 16h 54m 18s.xml">
       <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 15h 55m 08s.xml">
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 17h 00m 43s.xml">
       <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 15h 57m 03s.xml">
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 17h 01m 45s.xml">
       <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 16h 00m 50s.xml">
-      <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 16h 02m 36s.xml">
+    <history-entry file="irmb_test_in_FlowSim2 - 2017.03.20 at 17h 01m 57s.xml">
       <configuration name="irmb.test in FlowSim2" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="599865000" />
+    <option name="totallyTimeSpent" value="604315000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1526,7 +1496,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22403258" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.270073" sideWeight="0.49791667" order="5" side_tool="false" content_ui="tabs" x="1928" y="618" width="1876" height="263" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.270073" sideWeight="0.49791667" order="5" side_tool="false" content_ui="tabs" x="1928" y="618" width="1876" height="263" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1607,46 +1577,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="882">
-          <caret line="54" column="31" lean-forward="false" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/SimulationMock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/model/ShapeVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/PaintableShapeBuilderFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/builder/PaintablePolyLineBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="46" column="5" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="46" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/builder/PaintableLineBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
@@ -1897,14 +1827,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/graphics/PaintableBezierCurve.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -1912,41 +1834,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2919#2920#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="642" column="0" lean-forward="true" selection-start-line="642" selection-start-column="0" selection-end-line="642" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#canCreateLBMChannelFlowSimulation#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#setColorFactoryBehavior#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#initGridValues#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#setUp#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingPaint_shouldSetCorrectColors#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenPaintingSecondTimeAfterGridExtremesChanged_shouldSetCorrectColors#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#assertCorrectGridColors#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#assertColorEquals#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingPaint_shouldPaintFilledRectanglesWithCorrectColor#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#assertCorrectRectangleValues#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingRun_shouldStartSolver#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingPause_shouldPauseSolver#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenSolverNotifiesSimulation_shouldNotifyObservers#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetShapesWithEmptyList_shouldOnlyResetGrid#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetShapesWithLine_shouldMapToGrid#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenPaintingSolidNodes_shouldSetColorToBlack#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#setUp#0;class#GridWithOffsetContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetShapesWithLineOnAltSetup_shouldMapToGrid#0;class#GridWithOffsetContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetShapesWithLineOnGridWithNonIntDelta_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetShapesWithRectangle_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetShapesWithRectangleOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetShapesWithPolyLine_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetShapesWithPolyLineOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#whenCallingSetLinesWithMultipleShapes_shouldMapAllToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
-            <element signature="method#getPaintableShapeListWithLine#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1997,32 +1884,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="75" column="31" lean-forward="false" selection-start-line="75" selection-start-column="31" selection-end-line="75" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1208">
           <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="77" column="13" lean-forward="false" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
-          <folding>
-            <element signature="e#3309#3310#0" expanded="true" />
-            <element signature="e#3345#3346#0" expanded="true" />
-            <element signature="e#3396#3397#0" expanded="true" />
-            <element signature="e#3426#3427#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2080,14 +1946,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JFXMainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/test/view/graphics/PaintableLineTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="651">
@@ -2119,6 +1977,120 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/LBMChannelFlowSimulationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#canCreateLBMChannelFlowSimulation#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#setColorFactoryBehavior#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#setGridBehavior#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#initGridValues#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#setUp#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingPaint_shouldSetCorrectColors#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingPaint_shouldPaintFilledRectanglesWithCorrectColor#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#assertCorrectRectangleValues#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingRun_shouldStartSolver#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingPause_shouldPauseSolver#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenSolverNotifiesSimulation_shouldNotifyObservers#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithEmptyList_shouldOnlyResetGrid#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithLine_shouldMapToGrid#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenPaintingSolidNodes_shouldSetColorToBlack#0;class#BasicGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="class#GridWithOffsetContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#setUp#0;class#GridWithOffsetContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithLineOnAltSetup_shouldMapToGrid#0;class#GridWithOffsetContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#setUp#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithLineOnGridWithNonIntDelta_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithLineOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithRectangle_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithRectangleOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithPolyLine_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithPolyLineOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetLinesWithMultipleShapes_shouldMapAllToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithBezierCurve_shouldMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#whenCallingSetShapesWithBezierCurveOutsideGridBounds_shouldNotMapToGrid#0;class#RealisticGridContext#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+            <element signature="method#getPaintableShapeListWithLine#0;class#LBMChannelFlowSimulationTest#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/factory/ColorFactoryImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="45" column="23" lean-forward="true" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/factory/ColorFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="36" column="34" lean-forward="false" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JFXMainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-196">
+          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="107" column="19" lean-forward="true" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
+          <folding>
+            <element signature="e#3319#3320#0" expanded="true" />
+            <element signature="e#3362#3363#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/Simulation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="70" column="24" lean-forward="false" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/LBMChannelFlowSimulation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="83" column="11" lean-forward="false" selection-start-line="83" selection-start-column="11" selection-end-line="83" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/SimulationFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="22" column="133" lean-forward="false" selection-start-line="22" selection-start-column="133" selection-end-line="22" selection-end-column="133" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesSolverAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="27" column="35" lean-forward="false" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
           <folding />
         </state>
       </provider>
