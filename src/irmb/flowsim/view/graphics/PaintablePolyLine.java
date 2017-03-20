@@ -35,12 +35,15 @@ public class PaintablePolyLine extends PaintableShape {
     public boolean isPointOnBoundary(Point point, double radius) {
         List<Point> pointList = polyLine.getPointList();
         for (int i = 0; i < pointList.size() - 1; i++) {
-            minPoint = pointList.get(i).getX() < pointList.get(i + 1).getX() ? pointList.get(i) : pointList.get(i + 1);
-            segmentGradient = getGradient(i);
-            Point intersection = getIntersectionPoint(point, i);
-            double dist = getDistance(point, intersection);
-            if (dist <= radius)
-                return true;
+            Point first = pointList.get(i);
+            Point second = pointList.get(i + 1);
+            double minX = first.getX() < second.getX() ? first.getX() : second.getX();
+            double maxX = first.getX() > second.getX() ? first.getX() : second.getX();
+            if (point.getX() >= minX - radius && point.getX() <= maxX + radius) {
+                double distanceToLine = getDistanceToLine(first, second, point);
+                if (distanceToLine <= radius)
+                    return true;
+            }
         }
         return false;
     }
@@ -60,28 +63,28 @@ public class PaintablePolyLine extends PaintableShape {
         return null;
     }
 
-    private Point getIntersectionPoint(Point point, int i) {
-        double reverseGradient = -1. / segmentGradient;
-        List<Point> pointList = polyLine.getPointList();
-        double YIntercept = pointList.get(i).getY() - segmentGradient * pointList.get(i).getX();
-        double reverseYIntercept = point.getY() - reverseGradient * point.getX();
-        double intersectX = (reverseYIntercept - YIntercept) / (segmentGradient + 1 / segmentGradient);
-        double intersectY = getYCoord(intersectX);
-        return new Point(intersectX, intersectY);
-    }
-
-    private double getYCoord(double x) {
-        double dx = getDeltaXToLineStart(x);
-        return minPoint.getY() + dx * segmentGradient;
-    }
-
-    private double getDeltaXToLineStart(double x) {
-        return Math.abs(minPoint.getX() - x);
-    }
-
-    private double getGradient(int i) {
-        List<Point> pointList = polyLine.getPointList();
-        return (pointList.get(i + 1).getY() - pointList.get(i).getY()) /
-                (pointList.get(i + 1).getX() - pointList.get(i).getX());
-    }
+//    private Point getIntersectionPoint(Point point, int i) {
+//        double reverseGradient = -1. / segmentGradient;
+//        List<Point> pointList = polyLine.getPointList();
+//        double YIntercept = pointList.get(i).getY() - segmentGradient * pointList.get(i).getX();
+//        double reverseYIntercept = point.getY() - reverseGradient * point.getX();
+//        double intersectX = (reverseYIntercept - YIntercept) / (segmentGradient + 1 / segmentGradient);
+//        double intersectY = getYCoord(intersectX);
+//        return new Point(intersectX, intersectY);
+//    }
+//
+//    private double getYCoord(double x) {
+//        double dx = getDeltaXToLineStart(x);
+//        return minPoint.getY() + dx * segmentGradient;
+//    }
+//
+//    private double getDeltaXToLineStart(double x) {
+//        return Math.abs(minPoint.getX() - x);
+//    }
+//
+//    private double getGradient(int i) {
+//        List<Point> pointList = polyLine.getPointList();
+//        return (pointList.get(i + 1).getY() - pointList.get(i).getY()) /
+//                (pointList.get(i + 1).getX() - pointList.get(i).getX());
+//    }
 }

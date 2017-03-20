@@ -28,15 +28,13 @@ public class PolyLine implements Shape {
             pointList.remove(pointList.size() - 1);
     }
 
-
     public void moveBy(double dx, double dy) {
         for (Point p : getPointList()) {
             p.setX(p.getX() + dx);
             p.setY(p.getY() + dy);
         }
     }
-
-
+    
     public void accept(ShapeVisitor visitor) {
         visitor.visit(this);
     }

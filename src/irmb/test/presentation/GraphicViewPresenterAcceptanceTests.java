@@ -15,6 +15,7 @@ import java.util.List;
 import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
 import static irmb.mockito.verification.AtLeastThenForgetAll.atLeastThenForgetAll;
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
+import static irmb.test.util.TestUtil.doubleOf;
 import static irmb.test.util.TestUtil.makePoint;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
@@ -67,6 +68,20 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
             verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
             verify(painterSpy, times(1)).paintLine(18, 19, 36, 12);
         }
+
+        @Test
+        public void buildBezierCurveAcceptanceTest() {
+            sut.beginPaint("Bezier");
+            sut.handleLeftClick(14, 13);
+
+            sut.handleLeftClick(18, 16);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(16));
+
+            sut.handleLeftClick(22, 12);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(14.25));
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(18), doubleOf(14.25), doubleOf(22), doubleOf(12));
+
+        }
     }
 
     public class LivePaintingContext {
@@ -107,7 +122,7 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         }
 
         @Test
-        public void livePaintingPolyLineAcceptanceTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        public void livePaintingPolyLineAcceptanceTest() {
             sut.beginPaint("PolyLine");
 
             sut.handleLeftClick(13, 15);
@@ -143,6 +158,39 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
             sut.handleLeftClick(35, 84);
             verify(painterSpy, never()).paintLine(43, 22, 35, 84);
         }
+
+        @Test
+        public void livePaintingBezierCurveAcceptanceTest() {
+            sut.beginPaint("Bezier");
+
+            sut.handleLeftClick(14, 13);
+
+            sut.handleMouseMove(18, 16);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(16));
+
+            sut.handleLeftClick(18, 16);
+
+            sut.handleMouseMove(22, 12);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(14.25));
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(18), doubleOf(14.25), doubleOf(22), doubleOf(12));
+
+            sut.handleLeftClick(22, 12);
+
+            sut.handleMouseMove(42, 18);
+            clearInvocations(painterSpy);
+
+            sut.handleRightClick(42, 18);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(14.25));
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(18), doubleOf(14.25), doubleOf(22), doubleOf(12));
+
+            verify(painterSpy, atLeastOnce()).paintPoint(doubleOf(14), doubleOf(13));
+            verify(painterSpy, atLeastOnce()).paintPoint(doubleOf(18), doubleOf(16));
+            verify(painterSpy, atLeastOnce()).paintPoint(doubleOf(22), doubleOf(12));
+
+            sut.handleMouseMove(42, 18);
+            verifyNoMoreInteractions(painterSpy);
+        }
+
     }
 
     @Test

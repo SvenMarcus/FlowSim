@@ -21,4 +21,16 @@ public abstract class PaintableShape implements Paintable {
         double dy = Math.abs(first.getY() - second.getY());
         return Math.sqrt(dx * dx + dy * dy);
     }
+
+    protected double getDistanceToLine(Point start, Point end, Point point) {
+        double y2 = end.getY();
+        double y1 = start.getY();
+        double x0 = point.getX();
+        double x2 = end.getX();
+        double x1 = start.getX();
+        double y0 = point.getY();
+        double numerator = Math.abs((x1 - x0) * (y2 - y1) - (x1 - x2) * (y0 - y1));
+        double denominator = getDistance(start, end);
+        return numerator / denominator;
+    }
 }

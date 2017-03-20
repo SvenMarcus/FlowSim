@@ -1,9 +1,6 @@
 package irmb.flowsim.presentation.factory;
 
-import irmb.flowsim.model.Line;
-import irmb.flowsim.model.PolyLine;
-import irmb.flowsim.model.Rectangle;
-import irmb.flowsim.model.Shape;
+import irmb.flowsim.model.*;
 import irmb.flowsim.presentation.factory.ShapeFactory;
 
 /**
@@ -19,6 +16,8 @@ public class ShapeFactoryImpl implements ShapeFactory {
                 return new Rectangle();
             case "PolyLine":
                 return new PolyLine();
+            case "Bezier":
+                return new BezierCurve();
             default:
                 return null;
         }

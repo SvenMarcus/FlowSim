@@ -48,6 +48,12 @@ public class JavaFXPainter implements Painter {
         graphicsContext.fillRect(x, y, width, height);
     }
 
+    @Override
+    public void paintPoint(double x, double y) {
+        graphicsContext.strokeLine(x - 5, y - 5, x + 5, y + 5);
+        graphicsContext.strokeLine(x + 5, y - 5, x - 5, y + 5);
+    }
+
     public void setGraphicsContext(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
     }

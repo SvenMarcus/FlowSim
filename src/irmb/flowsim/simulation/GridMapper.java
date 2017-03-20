@@ -92,14 +92,30 @@ public class GridMapper implements ShapeVisitor {
 
     @Override
     public void visit(Point point) {
-
     }
 
-    private void bresenham(int xstart, int ystart, int xend, int yend) {
+    @Override
+    public void visit(BezierCurve bezierCurve) {
+        for (Point p : bezierCurve.getPointList()) {
+            if (!grid.isPointInside(p))
+                return;
+        }
+
+        for (int i = 0; i < 100 - 1; i++) {
+            double t1 = i / 100.;
+            double t2 = (i + 1) / 100.;
+
+            Point first = bezierCurve.calculatePointWithBernstein(t1);
+            Point second = bezierCurve.calculatePointWithBernstein(t2);
+            mapLineSegment(first, second);
+        }
+    }
+
+    private void bresenham(int xStart, int yStart, int xEnd, int yEnd) {
         int x, y, t, dx, dy, incx, incy, pdx, pdy, ddx, ddy, es, el, err;
 
-        dx = xend - xstart;
-        dy = yend - ystart;
+        dx = xEnd - xStart;
+        dy = yEnd - yStart;
 
         incx = dx < 0 ? -1 : 1;
         incy = dy < 0 ? -1 : 1;
@@ -122,8 +138,8 @@ public class GridMapper implements ShapeVisitor {
             el = dy;
         }
 
-        x = xstart;
-        y = ystart;
+        x = xStart;
+        y = yStart;
         err = el / 2;
         grid.setSolid(x, y);
         for (t = 0; t < el; ++t) {

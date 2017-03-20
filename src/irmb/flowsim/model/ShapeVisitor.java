@@ -11,4 +11,6 @@ public interface ShapeVisitor {
     void visit(PolyLine polyLine);
 
     void visit(Point point);
+
+    void visit(BezierCurve bezierCurve);
 }

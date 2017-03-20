@@ -63,18 +63,20 @@ public class RootController implements GraphicView {
             presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
         });
 
+
         runnable = () -> {
-            if (graphicsContext2D == null)
-                graphicsContext2D = drawPanel.getGraphicsContext2D();
+            graphicsContext2D = drawPanel.getGraphicsContext2D();
             if (painter == null)
                 painter = new JavaFXPainter();
             painter.setGraphicsContext(graphicsContext2D);
             graphicsContext2D.clearRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
-//            graphicsContext2D.setFill(Color.STEELBLUE);
-//            graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
+            graphicsContext2D.save();
+            graphicsContext2D.setFill(Color.WHITE);
+            graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
             for (Paintable p : presenter.getPaintableList()) {
                 p.paint(painter, transformer);
             }
+            graphicsContext2D.restore();
         };
     }
 
@@ -88,6 +90,22 @@ public class RootController implements GraphicView {
 
     public void onPolyLineButtonClick(ActionEvent event) {
         presenter.beginPaint("PolyLine");
+    }
+
+    public void onBezierButtonClick(ActionEvent event) {
+        presenter.beginPaint("Bezier");
+    }
+
+    public void onAddSimulationButtonClick(ActionEvent event) {
+        presenter.addSimulation();
+    }
+
+    public void onRunSimulationClick(ActionEvent event) {
+        presenter.runSimulation();
+    }
+
+    public void onCloseClick(ActionEvent event) {
+        System.exit(1);
     }
 
     public void onMousePressed(MouseEvent event) {
@@ -119,13 +137,6 @@ public class RootController implements GraphicView {
         presenter.redo();
     }
 
-    public void onAddSimulationButtonClick(ActionEvent event) {
-        presenter.addSimulation();
-    }
-
-    public void onRunSimulationClick(ActionEvent event) {
-        presenter.runSimulation();
-    }
 
     @Override
     public void update() {

@@ -11,4 +11,6 @@ public interface Painter {
     void setColor(Color color);
 
     void fillRectangle(double x, double y, double width, double height);
+
+    void paintPoint(double x, double y);
 }

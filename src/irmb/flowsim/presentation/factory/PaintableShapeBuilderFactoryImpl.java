@@ -25,6 +25,8 @@ public class PaintableShapeBuilderFactoryImpl implements PaintableShapeBuilderFa
                 return new TwoPointShapeBuilder((TwoPointShape) factory.makeShape(type), paintableShapeFactory);
             case "PolyLine":
                 return new PaintablePolyLineBuilder(factory);
+            case "Bezier":
+                return new PaintableBezierCurveBuilder(factory);
             default:
                 return null;
         }

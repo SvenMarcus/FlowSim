@@ -44,6 +44,11 @@ public class SwingPainter implements Painter {
         graphics.fillRect((int) x, (int) y, (int) width, (int) height);
     }
 
+    @Override
+    public void paintPoint(double x, double y) {
+
+    }
+
     public void setGraphics(Graphics graphics) {
         this.graphics = graphics;
     }

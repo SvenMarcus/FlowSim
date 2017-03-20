@@ -35,6 +35,12 @@
               <text value="PolyLine"/>
             </properties>
           </component>
+          <component id="21d50" class="javax.swing.JButton" binding="bezierButton">
+            <constraints/>
+            <properties>
+              <text value="Bezier Curve"/>
+            </properties>
+          </component>
           <component id="c64e0" class="javax.swing.JButton" binding="addSimulationButton">
             <constraints/>
             <properties>

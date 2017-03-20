@@ -26,9 +26,14 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
 
     protected void attachObserverToCommandQueue() {
         commandQueue.addObserver(args -> {
-            graphicView.update();
-            simulation.setShapes(shapeList);
+            updateGraphicViewAndSimulation();
         });
+    }
+
+    private void updateGraphicViewAndSimulation() {
+        graphicView.update();
+        if (simulation != null)
+            simulation.setShapes(shapeList);
     }
 
     protected void addStrategyObserver() {
@@ -37,10 +42,7 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
                 makeStrategy("Move");
             if (arg.getCommand() != null)
                 commandQueue.add(arg.getCommand());
-            graphicView.update();
-            if (simulation != null)
-                simulation.setShapes(shapeList);
-
+            updateGraphicViewAndSimulation();
         });
     }
 

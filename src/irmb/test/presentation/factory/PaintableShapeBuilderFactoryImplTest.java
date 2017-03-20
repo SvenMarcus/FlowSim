@@ -1,9 +1,6 @@
 package irmb.test.presentation.factory;
 
-import irmb.flowsim.presentation.builder.PaintableLineBuilder;
-import irmb.flowsim.presentation.builder.PaintablePolyLineBuilder;
-import irmb.flowsim.presentation.builder.PaintableRectangleBuilder;
-import irmb.flowsim.presentation.builder.TwoPointShapeBuilder;
+import irmb.flowsim.presentation.builder.*;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactoryImpl;
 import irmb.flowsim.presentation.factory.PaintableShapeFactoryImpl;
 import irmb.flowsim.presentation.factory.ShapeFactory;
@@ -41,6 +38,11 @@ public class PaintableShapeBuilderFactoryImplTest {
     @Test
     public void testMakePolyLineBuilder() {
         assertThat(sut.makeShapeBuilder("PolyLine"), is(instanceOf(PaintablePolyLineBuilder.class)));
+    }
+
+    @Test
+    public void testMakeBezierBuilder() {
+        assertThat(sut.makeShapeBuilder("Bezier"), is(instanceOf(PaintableBezierCurveBuilder.class)));
     }
 
     @Test

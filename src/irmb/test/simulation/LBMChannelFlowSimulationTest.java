@@ -1,10 +1,7 @@
 package irmb.test.simulation;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
-import irmb.flowsim.model.Line;
-import irmb.flowsim.model.Point;
-import irmb.flowsim.model.PolyLine;
-import irmb.flowsim.model.Rectangle;
+import irmb.flowsim.model.*;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
@@ -12,10 +9,7 @@ import irmb.flowsim.presentation.factory.ColorFactory;
 import irmb.flowsim.simulation.LBMChannelFlowSimulation;
 import irmb.flowsim.simulation.UniformGrid;
 import irmb.flowsim.util.Observer;
-import irmb.flowsim.view.graphics.PaintableLine;
-import irmb.flowsim.view.graphics.PaintablePolyLine;
-import irmb.flowsim.view.graphics.PaintableRectangle;
-import irmb.flowsim.view.graphics.PaintableShape;
+import irmb.flowsim.view.graphics.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -324,7 +318,7 @@ public class LBMChannelFlowSimulationTest {
         @Before
         public void setUp() {
             gridSpy = mock(UniformGrid.class);
-            horizontalNodes = 10;
+            horizontalNodes = 11;
             verticalNodes = 16;
             setGridBehavior(makePoint(-1, 10), .5);
 
@@ -358,7 +352,7 @@ public class LBMChannelFlowSimulationTest {
 
             clearInvocations(gridSpy);
 
-            shapeList = getPaintableShapeListWithLine(makePoint(3.7, 5), makePoint(0, 3));
+            shapeList = getPaintableShapeListWithLine(makePoint(4.1, 5), makePoint(0, 3));
 
             sut.setShapes(shapeList);
 
@@ -581,6 +575,78 @@ public class LBMChannelFlowSimulationTest {
             verify(gridSpy).setSolid(8, 11);
             verify(gridSpy, atLeastOnce()).setSolid(8, 10);
 
+        }
+
+        @Test
+        public void whenCallingSetShapesWithBezierCurve_shouldMapToGrid() {
+            BezierCurve bezierCurve = new BezierCurve();
+            bezierCurve.addPoint(makePoint(-1, 3));
+            bezierCurve.addPoint(makePoint(2, 5));
+            bezierCurve.addPoint(makePoint(4, 7));
+            bezierCurve.addPoint(makePoint(3, 9));
+            PaintableBezierCurve paintableBezierCurve = new PaintableBezierCurve(bezierCurve);
+            List<PaintableShape> shapeList = new ArrayList<>();
+            shapeList.add(paintableBezierCurve);
+
+            sut.setShapes(shapeList);
+
+            verify(gridSpy, atLeastOnce()).setSolid(0, 14);
+            verify(gridSpy, atLeastOnce()).setSolid(1, 14);
+            verify(gridSpy, atLeastOnce()).setSolid(1, 13);
+            verify(gridSpy, atLeastOnce()).setSolid(2, 13);
+            verify(gridSpy, atLeastOnce()).setSolid(2, 12);
+            verify(gridSpy, atLeastOnce()).setSolid(3, 12);
+            verify(gridSpy, atLeastOnce()).setSolid(3, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(4, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(5, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(5, 10);
+            verify(gridSpy, atLeastOnce()).setSolid(6, 10);
+            verify(gridSpy, atLeastOnce()).setSolid(6, 9);
+            verify(gridSpy, atLeastOnce()).setSolid(7, 9);
+            verify(gridSpy, atLeastOnce()).setSolid(7, 8);
+            verify(gridSpy, atLeastOnce()).setSolid(7, 7);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 7);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 6);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 6);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 5);
+            verify(gridSpy, atLeastOnce()).setSolid(9, 5);
+            verify(gridSpy, atLeastOnce()).setSolid(9, 4);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 4);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 2);
+        }
+
+        @Test
+        public void whenCallingSetShapesWithBezierCurveOutsideGridBounds_shouldNotMapToGrid() {
+            BezierCurve bezierCurve = new BezierCurve();
+            Point first = makePoint(-2, 3);
+            bezierCurve.addPoint(first);
+            Point second = makePoint(2, 5);
+            bezierCurve.addPoint(second);
+            Point third = makePoint(4, 7);
+            bezierCurve.addPoint(third);
+            PaintableBezierCurve paintableBezierCurve = new PaintableBezierCurve(bezierCurve);
+            List<PaintableShape> shapeList = new ArrayList<>();
+            shapeList.add(paintableBezierCurve);
+
+            sut.setShapes(shapeList);
+            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+
+            clearInvocations(gridSpy);
+
+            first.setX(-1);
+            second.setY(2);
+
+            sut.setShapes(shapeList);
+            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+
+            clearInvocations(gridSpy);
+
+            second.setY(3);
+            third.setX(4);
+            third.setY(10.1);
+
+            sut.setShapes(shapeList);
+            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
         }
     }
 

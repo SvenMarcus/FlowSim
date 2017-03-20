@@ -112,6 +112,12 @@ public class SimulationGraphicViewPresenterTest {
         verifyZeroInteractions(simulationSpy);
     }
 
+    @Test
+    public void whenReceivingUpdateFromCommandQueue_shouldNotMapToSimulation() {
+        commandQueue.notifyObservers("undo");
+        verifyZeroInteractions(simulationSpy);
+    }
+
     public class ShapeAddedContext {
 
         private PaintableShape paintableShape;

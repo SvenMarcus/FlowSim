@@ -30,16 +30,13 @@ public class PaintableLine extends PaintableShape {
 
     @Override
     public boolean isPointOnBoundary(Point point, double radius) {
-        maxPoint = line.getFirst().getX() < line.getSecond().getX() ? line.getSecond() : line.getFirst();
-        minPoint = line.getFirst().getX() < line.getSecond().getX() ? line.getFirst() : line.getSecond();
-
-        if (point.getX() > maxPoint.getX())
-            return getDistance(point, maxPoint) <= radius;
-
-        Point intersection = getIntersectionPoint(point);
-        double dist = getDistance(point, intersection);
-        return dist <= radius;
+        double maxX = line.getFirst().getX() < line.getSecond().getX() ? line.getSecond().getX() : line.getFirst().getX();
+        double minX = line.getFirst().getX() < line.getSecond().getX() ? line.getFirst().getX() : line.getSecond().getX();
+        if (point.getX() >= minX && point.getX() <= maxX)
+            return getDistanceToLine(line.getFirst(), line.getSecond(), point) <= radius;
+        return false;
     }
+
 
     @Override
     public Shape getShape() {
@@ -56,34 +53,4 @@ public class PaintableLine extends PaintableShape {
             return second;
         return null;
     }
-
-    private boolean pointsAreEqual(Point first, Point second) {
-        return first.getX() == second.getX() && first.getY() == second.getY();
-    }
-
-    private Point getIntersectionPoint(Point point) {
-        double gradient = getGradient();
-        double reverseGradient = -1. / gradient;
-        double YIntercept = line.getFirst().getY() - gradient * line.getFirst().getX();
-        double reverseYIntercept = point.getY() - reverseGradient * point.getX();
-        double intersectX = (reverseYIntercept - YIntercept) / (gradient + 1 / gradient);
-        double intersectY = getYCoord(intersectX);
-        return new Point(intersectX, intersectY);
-    }
-
-    private double getYCoord(double x) {
-        double gradient = getGradient();
-        double dx = getDeltaXToLineStart(x);
-        return minPoint.getY() + dx * gradient;
-    }
-
-    private double getDeltaXToLineStart(double x) {
-        return Math.abs(minPoint.getX() - x);
-    }
-
-    private double getGradient() {
-        return (line.getSecond().getY() - line.getFirst().getY()) /
-                (line.getSecond().getX() - line.getFirst().getX());
-    }
-
 }

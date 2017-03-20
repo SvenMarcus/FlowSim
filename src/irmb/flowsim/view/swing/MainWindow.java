@@ -20,6 +20,7 @@ public class MainWindow extends JFrame {
     private JButton undoButton;
     private JButton redoButton;
     private JToolBar mainToolBar;
+    private JButton bezierButton;
     private SimulationGraphicViewPresenter presenter;
     private CoordinateTransformer transformer;
 
@@ -37,6 +38,7 @@ public class MainWindow extends JFrame {
         lineButton.addActionListener(e -> presenter.beginPaint("Line"));
         rectangleButton.addActionListener(e -> presenter.beginPaint("Rectangle"));
         polyLineButton.addActionListener(e -> presenter.beginPaint("PolyLine"));
+        bezierButton.addActionListener(e -> presenter.beginPaint("Bezier"));
         addSimulationButton.addActionListener(e -> {
             presenter.addSimulation();
             presenter.runSimulation();
@@ -83,6 +85,9 @@ public class MainWindow extends JFrame {
         polyLineButton = new JButton();
         polyLineButton.setText("PolyLine");
         mainToolBar.add(polyLineButton);
+        bezierButton = new JButton();
+        bezierButton.setText("Bezier Curve");
+        mainToolBar.add(bezierButton);
         addSimulationButton = new JButton();
         addSimulationButton.setText("Add Simulation");
         mainToolBar.add(addSimulationButton);

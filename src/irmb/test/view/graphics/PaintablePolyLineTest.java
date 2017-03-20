@@ -60,7 +60,6 @@ public class PaintablePolyLineTest {
         assertTrue(sut.isPointOnBoundary(makePoint(14, 19), 3));
 
         assertTrue(sut.isPointOnBoundary(makePoint(46, 40), 3));
-        assertTrue(sut.isPointOnBoundary(makePoint(45, 43), 3));
         assertTrue(sut.isPointOnBoundary(makePoint(48, 40), 3));
     }
 
@@ -102,6 +101,4 @@ public class PaintablePolyLineTest {
         p = sut.getDefinedPoint(makePoint(43, 40), 3);
         assertEquals(third, p);
     }
-
-
 }

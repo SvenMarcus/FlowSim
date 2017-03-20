@@ -58,7 +58,7 @@ public class JFXMainWindow extends Application {
         Pane rootLayout = makeRootLayout(rootController);
         presenter.setGraphicView(rootController);
 
-        primaryStage.setOnCloseRequest((event -> Platform.exit()));
+        primaryStage.setOnCloseRequest((event -> System.exit(1)));
 
         Scene root = new Scene(rootLayout);
         primaryStage.setScene(root);
