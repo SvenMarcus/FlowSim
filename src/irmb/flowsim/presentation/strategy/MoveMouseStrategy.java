@@ -14,7 +14,7 @@ import java.util.List;
 public class MoveMouseStrategy extends MouseStrategy {
 
 
-    private final int radius = 3;
+    private int radius = 3;
     private MoveShapeCommand moveShapeCommand;
     private Point clickedPoint;
     private List<PaintableShape> shapeList;
@@ -97,5 +97,9 @@ public class MoveMouseStrategy extends MouseStrategy {
             notifyObservers(args);
         }
         moveShapeCommand = null;
+    }
+
+    public void setToleranceRadius(int radius) {
+        this.radius = radius;
     }
 }

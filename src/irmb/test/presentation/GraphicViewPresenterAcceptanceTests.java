@@ -460,4 +460,30 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleMouseRelease();
         verify(painterSpy, atLeastThenForget(1)).paintLine(65, 12, 474, 523);
     }
+
+    @Test
+    public void clearAllAcceptanceTest() {
+        buildRectangle(15, 14, 80, 20);
+        buildLine(74, 18, 65, 10);
+        clearInvocations(painterSpy);
+        clearInvocations(graphicView);
+
+        sut.clearAll();
+        verify(graphicView).update();
+        verifyZeroInteractions(painterSpy);
+
+        clearInvocations(graphicView);
+        clearInvocations(painterSpy);
+
+        sut.undo();
+        verify(painterSpy, atLeastOnce()).paintLine(74, 18, 65, 10);
+        verify(painterSpy, atLeastOnce()).paintRectangle(15, 14, 65, 6);
+
+        clearInvocations(graphicView);
+        clearInvocations(painterSpy);
+
+        sut.redo();
+        verify(graphicView).update();
+        verifyZeroInteractions(painterSpy);
+    }
 }

@@ -49,7 +49,7 @@ public class JFXMainWindow extends Application {
         RootController rootController = new RootController();
 
         mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory, transformer);
-
+        mouseStrategyFactory.setMoveStrategyToleranceRadius(5);
 
         SimulationGraphicViewPresenter presenter = makePresenter();
 

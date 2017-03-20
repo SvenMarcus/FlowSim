@@ -1,6 +1,8 @@
 package irmb.flowsim.presentation;
 
 import irmb.flowsim.model.util.CoordinateTransformer;
+import irmb.flowsim.presentation.command.ClearAllCommand;
+import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
@@ -102,4 +104,10 @@ public class GraphicViewPresenter {
         return new ArrayList<>(shapeList);
     }
 
+    public void clearAll() {
+        Command clearAllCommand = new ClearAllCommand(shapeList);
+        clearAllCommand.execute();
+        commandQueue.add(clearAllCommand);
+        graphicView.update();
+    }
 }

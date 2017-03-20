@@ -118,6 +118,12 @@ public class SimulationGraphicViewPresenterTest {
         verifyZeroInteractions(simulationSpy);
     }
 
+    @Test
+    public void whenCallingClearAll_shouldNotMapToSimulation() {
+        sut.clearAll();
+        verifyZeroInteractions(simulationSpy);
+    }
+
     public class ShapeAddedContext {
 
         private PaintableShape paintableShape;
@@ -197,6 +203,12 @@ public class SimulationGraphicViewPresenterTest {
             clearInvocations(commandQueue);
 
             commandQueue.notifyObservers("redo");
+            verify(simulationSpy).setShapes(shapeList);
+        }
+
+        @Test
+        public void whenCallingClearAll_shouldSetShapes() {
+            sut.clearAll();
             verify(simulationSpy).setShapes(shapeList);
         }
     }

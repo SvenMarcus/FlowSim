@@ -34,6 +34,11 @@
                         <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onClearClick" text="Clear">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Shapes">
@@ -60,6 +65,8 @@
                   <Separator orientation="VERTICAL" />
                   <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onUndoButtonClick" text="Undo" />
                   <Button fx:id="redoButton" mnemonicParsing="false" onAction="#onRedoButtonClick" text="Redo" />
+                  <Separator layoutX="536.0" layoutY="10.0" orientation="VERTICAL" />
+                  <Button mnemonicParsing="false" onAction="#onClearClick" text="Clear" />
                </items>
             </ToolBar>
          </top>

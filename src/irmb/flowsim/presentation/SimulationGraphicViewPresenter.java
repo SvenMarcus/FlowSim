@@ -70,4 +70,10 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
         if (simulation != null)
             simulation.pause();
     }
+
+    public void clearAll() {
+        super.clearAll();
+        if (simulation != null)
+            simulation.setShapes(shapeList);
+    }
 }

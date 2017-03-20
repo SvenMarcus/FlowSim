@@ -19,10 +19,11 @@ public class PaintableLineTest {
     private PaintableLine sut;
     private Point start;
     private Point end;
+    private Line line;
 
     @Before
     public void setUp() throws Exception {
-        Line line = new Line();
+        line = new Line();
         start = makePoint(21, 22);
         end = makePoint(11, 12);
         line.setFirst(start);
@@ -114,6 +115,13 @@ public class PaintableLineTest {
     public void givenPointWithinToleranceRadiusToEnd_shouldReturnEnd() {
         Point p = sut.getDefinedPoint(makePoint(9, 14), 3);
         assertEquals(end, p);
+    }
+
+    @Test
+    public void givenPointWithinToleranceRadiusForVerticalLine_isPointOnBoundaryShouldReturnTrue() {
+        line.setFirst(makePoint(10, 60));
+        line.setSecond(makePoint(10, 15));
+        assertTrue(sut.isPointOnBoundary(makePoint(15, 30), 5));
     }
 
 }
