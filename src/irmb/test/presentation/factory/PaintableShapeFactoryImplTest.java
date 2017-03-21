@@ -1,18 +1,17 @@
-package irmb.flowsim.presentation.factory;
+package irmb.test.presentation.factory;
 
+import irmb.flowsim.model.BezierCurve;
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.model.Rectangle;
-import irmb.flowsim.view.graphics.PaintableLine;
-import irmb.flowsim.view.graphics.PaintablePolyLine;
-import irmb.flowsim.view.graphics.PaintableRectangle;
-import irmb.flowsim.view.graphics.PaintableShape;
+import irmb.flowsim.presentation.factory.PaintableShapeFactoryImpl;
+import irmb.flowsim.view.graphics.*;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -20,7 +19,7 @@ import static org.mockito.Mockito.mock;
  */
 public class PaintableShapeFactoryImplTest {
 
-    private PaintableShapeFactory sut;
+    private PaintableShapeFactoryImpl sut;
 
     @Before
     public void setUp() throws Exception {
@@ -43,6 +42,12 @@ public class PaintableShapeFactoryImplTest {
     public void testMakePaintablePolyLine() {
         PaintableShape shape = sut.makePaintableShape(mock(PolyLine.class));
         assertThat(shape, is(instanceOf(PaintablePolyLine.class)));
+    }
+
+    @Test
+    public void testMakePaintableBezierCurve() {
+        PaintableShape shape = sut.makePaintableShape(mock(BezierCurve.class));
+        assertThat(shape, is(instanceOf(PaintableBezierCurve.class)));
     }
 
 }

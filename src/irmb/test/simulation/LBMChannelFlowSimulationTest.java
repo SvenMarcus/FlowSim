@@ -129,21 +129,6 @@ public class LBMChannelFlowSimulationTest {
             assertCorrectGridColors(colorCaptor.getAllValues());
         }
 
-
-        @Test
-        public void whenPaintingSecondTimeAfterGridExtremesChanged_shouldUseColorsBasedOnMinMaxFromPreviousTimeStep() {
-            sut.paint(painterSpy, transformer);
-            clearInvocations(painterSpy);
-
-            gridValues[2][1] = -50;
-            gridValues[0][2] = 1001;
-
-            sut.paint(painterSpy, transformer);
-            ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
-            verify(painterSpy, times(verticalNodes * horizontalNodes)).setColor(colorCaptor.capture());
-            assertCorrectGridColors(colorCaptor.getAllValues());
-        }
-
         @Test
         public void whenPaintingThirdTime_shouldUseColorsBaseOnMinMaxFromSecondPaint() {
             sut.paint(painterSpy, transformer);

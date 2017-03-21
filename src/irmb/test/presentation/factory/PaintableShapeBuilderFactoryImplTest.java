@@ -37,12 +37,12 @@ public class PaintableShapeBuilderFactoryImplTest {
 
     @Test
     public void testMakePolyLineBuilder() {
-        assertThat(sut.makeShapeBuilder("PolyLine"), is(instanceOf(PaintablePolyLineBuilder.class)));
+        assertThat(sut.makeShapeBuilder("PolyLine"), is(instanceOf(MultiPointShapeBuilder.class)));
     }
 
     @Test
     public void testMakeBezierBuilder() {
-        assertThat(sut.makeShapeBuilder("Bezier"), is(instanceOf(PaintableBezierCurveBuilder.class)));
+        assertThat(sut.makeShapeBuilder("Bezier"), is(instanceOf(MultiPointShapeBuilder.class)));
     }
 
     @Test
