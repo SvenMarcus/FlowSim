@@ -37,4 +37,8 @@ public abstract class UniformGrid {
     public abstract boolean isPointInside(Point point);
 
     public abstract boolean isSolid(int x, int y);
+
+    public abstract double getHorizontalVelocityAt(int x, int y);
+
+    public abstract double getVerticalVelocityAt(int x, int y);
 }

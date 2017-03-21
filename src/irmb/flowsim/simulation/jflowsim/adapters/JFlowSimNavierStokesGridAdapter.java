@@ -108,6 +108,16 @@ public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
         return grid.getType(x, y) == GridNodeType.SOLID;
     }
 
+    @Override
+    public double getHorizontalVelocityAt(int x, int y) {
+        return grid.getScalar(x, y, Scalar.V_X);
+    }
+
+    @Override
+    public double getVerticalVelocityAt(int x, int y) {
+        return grid.getScalar(x, y, Scalar.V_Y);
+    }
+
     public LBMNavierStokesGrid getJFlowSimGrid() {
         return grid;
     }

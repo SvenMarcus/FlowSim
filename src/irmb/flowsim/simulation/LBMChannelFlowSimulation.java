@@ -96,4 +96,7 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
         notifyObservers(null);
     }
 
+    public void addPlotStyle(String style) {
+
+    }
 }

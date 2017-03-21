@@ -16,7 +16,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -47,6 +46,8 @@ public class LBMChannelFlowSimulationTest {
     private double fMin;
 
     private double[][] gridValues;
+    private double[][] gridVxValues;
+    private double[][] gridVyValues;
     private SolverMock solverSpy;
     private ColorFactory colorFactory;
 
@@ -89,6 +90,13 @@ public class LBMChannelFlowSimulationTest {
         when(gridSpy.getVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
             return gridValues[(int) invocationOnMock.getArgument(1)][(int) invocationOnMock.getArgument(0)];
         });
+        when(gridSpy.getHorizontalVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
+            return gridVxValues[(int) invocationOnMock.getArgument(0)][(int) invocationOnMock.getArgument(1)];
+        });
+        when(gridSpy.getVerticalVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
+            return gridVxValues[(int) invocationOnMock.getArgument(0)][(int) invocationOnMock.getArgument(1)];
+        });
+
         when(gridSpy.isPointInside(any(Point.class))).thenAnswer(invocationOnMock -> {
             Point point = invocationOnMock.getArgument(0);
             return !(point.getX() < origin.getX() || point.getX() > origin.getX() + width || point.getY() < origin.getY() - height || point.getY() > origin.getY());
@@ -98,6 +106,8 @@ public class LBMChannelFlowSimulationTest {
     private void initGridValues() {
         Random rnd = new Random();
         gridValues = new double[verticalNodes][horizontalNodes];
+        gridVxValues = new double[verticalNodes][horizontalNodes];
+        gridVyValues = new double[verticalNodes][horizontalNodes];
         for (int i = 0; i < verticalNodes; i++)
             for (int j = 0; j < horizontalNodes; j++) {
                 int value = rnd.nextInt(1000);
@@ -107,6 +117,33 @@ public class LBMChannelFlowSimulationTest {
                     fMin = value;
                 gridValues[i][j] = value;
             }
+    }
+
+    public class SingleCellGridContext {
+        @Before
+        public void setUp() {
+            gridSpy = mock(UniformGrid.class);
+            horizontalNodes = 2;
+            verticalNodes = 1;
+            setGridBehavior(makePoint(0, 0), 1.);
+            gridValues[0][0] = 1;
+            gridValues[0][1] = 5;
+            gridVxValues[0][0] = 0;
+            gridVyValues[0][0] = 1;
+            gridVxValues[0][1] = 3;
+            gridVyValues[0][1] = 4;
+            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+        }
+
+        @Test
+        public void whenAddingArrowStyleThenPainting_shouldPaintVerticalArrow() {
+            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
+            sut.addPlotStyle("Arrow");
+            sut.paint(painterSpy, transformer);
+            verify(painterSpy).paintLine(0.0, 0.25, 0.0, -0.25);
+            verify(painterSpy).paintLine(0.0, -0.25, 0.125, -0.125);
+            verify(painterSpy).paintLine(0.0, -0.25, -0.125, -0.125);
+        }
     }
 
     public class BasicGridContext {
