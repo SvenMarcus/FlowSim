@@ -38,10 +38,10 @@ public class GridMapper implements ShapeVisitor {
         double startY = (grid.getTopLeft().getY() - first.getY()) / grid.getDelta();
         double endX = (second.getX() - grid.getTopLeft().getX()) / grid.getDelta();
         double endY = (grid.getTopLeft().getY() - second.getY()) / grid.getDelta();
-        int x0 = (int) Math.round(startX);
-        int y0 = (int) Math.round(startY);
-        int x1 = (int) Math.round(endX);
-        int y1 = (int) Math.round(endY);
+        int x0 = (int) Math.floor(startX);
+        int y0 = (int) Math.floor(startY);
+        int x1 = (int) Math.floor(endX);
+        int y1 = (int) Math.floor(endY);
         bresenham(x0, y0, x1, y1);
     }
 
@@ -100,7 +100,6 @@ public class GridMapper implements ShapeVisitor {
             if (!grid.isPointInside(p))
                 return;
         }
-
         for (int i = 0; i < 100 - 1; i++) {
             double t1 = i / 100.;
             double t2 = (i + 1) / 100.;

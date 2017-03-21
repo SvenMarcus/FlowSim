@@ -17,6 +17,13 @@ public class JFlowSimNavierStokesGridAdapterTest {
     @Test
     public void whenCallingIsPointInsideWithPointWithinGridBounds_shouldReturnTrue() {
         LBMNavierStokesGrid gridMock = createGridMock();
+        when(gridMock.getMinX()).thenReturn(0.);
+        when(gridMock.getMaxX()).thenReturn(0.5);
+        when(gridMock.getMinY()).thenReturn(0.);
+        when(gridMock.getMaxY()).thenReturn(0.2);
+        when(gridMock.getWidth()).thenReturn(0.2);
+        when(gridMock.getLength()).thenReturn(0.5);
+        
         JFlowSimNavierStokesGridAdapter sut = new JFlowSimNavierStokesGridAdapter(gridMock);
 
         boolean result = sut.isPointInside(makePoint(0, 0));

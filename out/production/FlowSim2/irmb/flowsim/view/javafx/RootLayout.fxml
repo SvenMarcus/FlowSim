@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar>
@@ -34,19 +33,27 @@
                         <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#onClearClick" text="Clear">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onClearClick" text="Clear" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Shapes">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#onLineButtonClick" text="Line" />
-                  <MenuItem mnemonicParsing="false" onAction="#onRectangleButtonClick" text="Rectangle" />
-                  <MenuItem mnemonicParsing="false" onAction="#onPolyLineButtonClick" text="PolyLine" />
-                  <MenuItem mnemonicParsing="false" onAction="#onBezierButtonClick" text="Bezier" />
+              <MenuItem mnemonicParsing="false" onAction="#onLineButtonClick" text="Line">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onRectangleButtonClick" text="Rectangle">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onPolyLineButtonClick" text="PolyLine">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onBezierButtonClick" text="Bezier">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
         </menus>

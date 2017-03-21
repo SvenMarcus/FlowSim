@@ -1,5 +1,6 @@
 package irmb.flowsim.simulation;
 
+import irmb.flowsim.model.Point;
 import irmb.flowsim.presentation.factory.ColorFactoryImpl;
 import irmb.flowsim.simulation.jflowsim.adapters.JFlowSimNavierStokesGridAdapter;
 import irmb.flowsim.simulation.jflowsim.adapters.JFlowSimNavierStokesSolverAdapter;
@@ -49,6 +50,7 @@ public class SimulationFactoryImpl implements SimulationFactory {
 
 
         JFlowSimNavierStokesGridAdapter gridAdapter = new JFlowSimNavierStokesGridAdapter(grid);
+        gridAdapter.setTopLeft(new Point(0.25, 0.35));
         System.out.println(gridAdapter.getTopLeft());
         return gridAdapter;
     }

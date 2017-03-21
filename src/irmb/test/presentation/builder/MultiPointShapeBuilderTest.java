@@ -6,22 +6,17 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.presentation.builder.MultiPointShapeBuilder;
 import irmb.flowsim.presentation.factory.PaintableShapeFactory;
-import irmb.flowsim.view.graphics.PaintableBezierCurve;
 import irmb.flowsim.view.graphics.PaintablePolyLine;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Sven on 15.12.2016.

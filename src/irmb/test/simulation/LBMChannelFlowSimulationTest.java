@@ -594,27 +594,25 @@ public class LBMChannelFlowSimulationTest {
             sut.setShapes(shapeList);
 
             verify(gridSpy, atLeastOnce()).setSolid(0, 14);
-            verify(gridSpy, atLeastOnce()).setSolid(1, 14);
+            verify(gridSpy, atLeastOnce()).setSolid(0, 13);
             verify(gridSpy, atLeastOnce()).setSolid(1, 13);
-            verify(gridSpy, atLeastOnce()).setSolid(2, 13);
+            verify(gridSpy, atLeastOnce()).setSolid(1, 12);
             verify(gridSpy, atLeastOnce()).setSolid(2, 12);
-            verify(gridSpy, atLeastOnce()).setSolid(3, 12);
+            verify(gridSpy, atLeastOnce()).setSolid(2, 11);
             verify(gridSpy, atLeastOnce()).setSolid(3, 11);
             verify(gridSpy, atLeastOnce()).setSolid(4, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(5, 11);
+            verify(gridSpy, atLeastOnce()).setSolid(4, 10);
             verify(gridSpy, atLeastOnce()).setSolid(5, 10);
-            verify(gridSpy, atLeastOnce()).setSolid(6, 10);
+            verify(gridSpy, atLeastOnce()).setSolid(5, 9);
             verify(gridSpy, atLeastOnce()).setSolid(6, 9);
-            verify(gridSpy, atLeastOnce()).setSolid(7, 9);
+            verify(gridSpy, atLeastOnce()).setSolid(6, 8);
             verify(gridSpy, atLeastOnce()).setSolid(7, 8);
             verify(gridSpy, atLeastOnce()).setSolid(7, 7);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 7);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 6);
+            verify(gridSpy, atLeastOnce()).setSolid(7, 6);
             verify(gridSpy, atLeastOnce()).setSolid(8, 6);
             verify(gridSpy, atLeastOnce()).setSolid(8, 5);
-            verify(gridSpy, atLeastOnce()).setSolid(9, 5);
-            verify(gridSpy, atLeastOnce()).setSolid(9, 4);
             verify(gridSpy, atLeastOnce()).setSolid(8, 4);
+            verify(gridSpy, atLeastOnce()).setSolid(8, 3);
             verify(gridSpy, atLeastOnce()).setSolid(8, 2);
         }
 

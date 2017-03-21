@@ -30,10 +30,6 @@ public abstract class UniformGrid {
 
     public abstract double getDelta();
 
-    public abstract double getDeltaY();
-
-    public abstract void setDeltaY(double deltaY);
-
     public abstract void resetSolidNodes();
 
     public abstract void setSolid(int x, int y);
