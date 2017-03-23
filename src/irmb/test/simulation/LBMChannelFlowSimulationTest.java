@@ -120,7 +120,7 @@ public class LBMChannelFlowSimulationTest {
             }
     }
 
-    public class TwoCellGridContext {
+    public class ArrowPlotStyleContext {
         @Before
         public void setUp() {
             gridSpy = mock(UniformGrid.class);
@@ -136,7 +136,7 @@ public class LBMChannelFlowSimulationTest {
         public void whenMinEqualsMax_shouldNotPaint() {
             gridValues[0][0] = 1;
             gridValues[0][1] = 1;
-            sut.addPlotStyle("Arrow");
+            sut.addPlotStyle("Arrow", 1);
             sut.paint(painterSpy, transformer);
             verifyZeroInteractions(painterSpy);
         }
@@ -145,11 +145,11 @@ public class LBMChannelFlowSimulationTest {
         public void whenAddingArrowStyleThenPainting_shouldPaintVerticalArrow() {
             when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeVerticalArrowSetup();
-            sut.addPlotStyle("Arrow");
+            sut.addPlotStyle("Arrow", 1);
             sut.paint(painterSpy, transformer);
-            verify(painterSpy).paintLine(0.0, 0.25, 0.0, -0.25);
-            verify(painterSpy).paintLine(0.0, -0.25, 0.125, -0.125);
-            verify(painterSpy).paintLine(0.0, -0.25, -0.125, -0.125);
+            verify(painterSpy).paintLine(0.0d, -0.25d, 0.0d, 0.25d);
+            verify(painterSpy).paintLine(0.0, 0.25, -0.125, 0.125);
+            verify(painterSpy).paintLine(0.0, 0.25, 0.125, 0.125);
         }
 
         private void makeVerticalArrowSetup() {
@@ -165,7 +165,7 @@ public class LBMChannelFlowSimulationTest {
         public void whenAddingArrowStyleThenPainting_shouldPaintHorizontalArrow() {
             when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeHorizontalArrowSetup();
-            sut.addPlotStyle("Arrow");
+            sut.addPlotStyle("Arrow", 1);
             sut.paint(painterSpy, transformer);
             verify(painterSpy).paintLine(-0.25, 0.0, 0.25, 0.0);
             verify(painterSpy).paintLine(0.25, 0.0, 0.125, 0.125);
@@ -185,31 +185,15 @@ public class LBMChannelFlowSimulationTest {
         public void whenAddingArrowStyleThenPainting_shouldPaintBothCells() {
             when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeHorizontalArrowSetup();
-            sut.addPlotStyle("Arrow");
+            sut.addPlotStyle("Arrow", 1);
             sut.paint(painterSpy, transformer);
             verify(painterSpy).paintLine(-0.25, 0.0, 0.25, 0.0);
             verify(painterSpy).paintLine(0.25, 0.0, 0.125, 0.125);
             verify(painterSpy).paintLine(0.25, 0.0, 0.125, -0.125);
 
-            verify(painterSpy).paintLine(0.25, 1.0, 1.75, -1.0);
-            verify(painterSpy).paintLine(1.75, -1.0, 1.875, -0.125);
-            verify(painterSpy).paintLine(1.75, -1.0, 0.875, -0.875);
-        }
-
-        @Test
-        public void whenPaintingWithDifferentScreenScale_shouldPaintBothCells() {
-            makeHorizontalArrowSetup();
-
-            sut.addPlotStyle("Arrow");
-            sut.paint(painterSpy, transformer);
-
-            verify(painterSpy).paintLine(-1.75, 0.0, 1.75, 0.0);
-            verify(painterSpy).paintLine(1.75, 0.0, 0.875, 0.875);
-            verify(painterSpy).paintLine(1.75, 0.0, 0.875, -0.875);
-
-            verify(painterSpy).paintLine(-4.25, 7.0, 6.25, -7.0);
-            verify(painterSpy).paintLine(6.25, -7.0, 7.125, -0.875);
-            verify(painterSpy).paintLine(6.25, -7.0, 0.125, -6.125);
+            verify(painterSpy).paintLine(0.25, -1.0, 1.75, 1.0);
+            verify(painterSpy).paintLine(1.75, 1.0, 0.875, 0.875);
+            verify(painterSpy).paintLine(1.75, 1.0, 1.875, 0.125);
         }
 
         @Test
@@ -222,16 +206,16 @@ public class LBMChannelFlowSimulationTest {
             gridVxValues[0][1] = 6;
             gridVyValues[0][1] = 5;
 
-            sut.addPlotStyle("Arrow");
+            sut.addPlotStyle("Arrow", 1);
             sut.paint(painterSpy, transformer);
 
             verify(painterSpy).paintLine(doubleOf(-0.1468), doubleOf(0.0), doubleOf(0.1468), doubleOf(0.0));
             verify(painterSpy).paintLine(doubleOf(0.1468), doubleOf(0.0), doubleOf(0.0734), doubleOf(0.0734));
             verify(painterSpy).paintLine(doubleOf(0.1468), doubleOf(0.0), doubleOf(0.0734), doubleOf(-0.0734));
 
-            verify(painterSpy).paintLine(doubleOf(0.1189), doubleOf(0.7341), doubleOf(1.881), doubleOf(-0.7341));
-            verify(painterSpy).paintLine(doubleOf(1.881), doubleOf(-0.7341), doubleOf(1.8076), doubleOf(0.0734));
-            verify(painterSpy).paintLine(doubleOf(1.881), doubleOf(-0.7341), doubleOf(1.0734), doubleOf(-0.8076));
+            verify(painterSpy).paintLine(doubleOf(0.1189), doubleOf(-0.7341), doubleOf(1.881), doubleOf(0.7341));
+            verify(painterSpy).paintLine(doubleOf(1.881), doubleOf(0.7341), doubleOf(1.8076), doubleOf(-0.0734));
+            verify(painterSpy).paintLine(doubleOf(1.881), doubleOf(0.7341), doubleOf(1.0734), doubleOf(0.8076));
         }
 
         @Test
@@ -243,35 +227,84 @@ public class LBMChannelFlowSimulationTest {
             when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeVerticalArrowSetup();
 
-            sut.addPlotStyle("Arrow");
+            sut.addPlotStyle("Arrow", 1);
             sut.paint(painterSpy, transformer);
 
-            verify(painterSpy).paintLine(9.0, 10.25, 9.0, 9.75);
-            verify(painterSpy).paintLine(9.0, 9.75, 9.125, 9.875);
-            verify(painterSpy).paintLine(9.0, 9.75, 8.875, 9.875);
+            verify(painterSpy).paintLine(9.0, 9.75, 9.0, 10.25);
+            verify(painterSpy).paintLine(9.0, 10.25, 8.875, 10.125);
+            verify(painterSpy).paintLine(9.0, 10.25, 9.125, 10.125);
 
-            verify(painterSpy).paintLine(9.25, 11.0, 10.75, 9.0);
-            verify(painterSpy).paintLine(10.75, 9.0, 10.875, 9.875);
-            verify(painterSpy).paintLine(10.75, 9.0, 9.875, 9.125);
+            verify(painterSpy).paintLine(9.25, 9.0, 10.75, 11.0);
+            verify(painterSpy).paintLine(10.75, 11.0, 9.875, 10.875);
+            verify(painterSpy).paintLine(10.75, 11.0, 10.875, 10.125);
         }
 
         @Test
-        public void whenPaintingWithDifferentGridDelta_shouldPaintBothCells() {
-            setGridBehavior(makePoint(0, 0), 5);
+        public void whenPaintingWithOffset_shouldOnlyPaintTwoCellsDivisibleByOffset() {
+            horizontalNodes = 3;
+            setGridBehavior(makePoint(0, 0), 1);
+            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
+            makeVerticalArrowSetup();
+            gridValues[0][2] = Math.sqrt(5 * 5 + 4 * 4);
+            gridVxValues[0][2] = 5;
+            gridVyValues[0][2] = 4;
+
+            sut.addPlotStyle("Arrow", 2);
+            sut.paint(painterSpy, transformer);
+
+            verify(painterSpy).paintLine(doubleOf(0.0), doubleOf(-0.1850), doubleOf(0.0), doubleOf(0.1850));
+            verify(painterSpy).paintLine(doubleOf(0.0), doubleOf(0.1850), doubleOf(0.0925), doubleOf(0.0925));
+            verify(painterSpy).paintLine(doubleOf(0.0), doubleOf(0.1850), doubleOf(-0.0925), doubleOf(0.0925));
+
+            verify(painterSpy).paintLine(doubleOf(1.0746), doubleOf(-0.7403), doubleOf(2.9253), doubleOf(0.7403));
+            verify(painterSpy).paintLine(doubleOf(2.9253), doubleOf(0.7403), doubleOf(2.8328), doubleOf(-0.0925));
+            verify(painterSpy).paintLine(doubleOf(2.9253), doubleOf(0.7403), doubleOf(2.0925), doubleOf(0.8328));
+        }
+
+        @Test
+        public void whenPaintingWithScreenScale_shouldPaintBothCells() {
+            setGridBehavior(makePoint(0, 0), 1);
+            makeVerticalArrowSetup();
+
+            sut.addPlotStyle("Arrow", 1);
+            sut.paint(painterSpy, transformer);
+
+            verify(painterSpy).paintLine(0.0, -1.75, 0.0, 1.75);
+            verify(painterSpy).paintLine(0.0, 1.75, 0.875, 0.875);
+            verify(painterSpy).paintLine(0.0, 1.75, -0.875, 0.875);
+
+            verify(painterSpy).paintLine(1.75, -7.0, 12.25, 7.0);
+            verify(painterSpy).paintLine(12.25, 7.0, 13.125, 0.875);
+            verify(painterSpy).paintLine(12.25, 7.0, 6.125, 6.125);
+        }
+
+        @Test
+        public void whenPaintingThreeTimesAndGridChanged_shouldUseMinMaxFromPreviousTimeStep() {
+            setGridBehavior(makePoint(0, 0), 1);
             when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeVerticalArrowSetup();
 
-            sut.addPlotStyle("Arrow");
+            sut.addPlotStyle("Arrow", 1);
             sut.paint(painterSpy, transformer);
+            clearInvocations(painterSpy);
 
-            verify(painterSpy).paintLine(0.0, 1.25, 0.0, -1.25);
-            verify(painterSpy).paintLine(0.0, -1.25, 0.625, -0.625);
-            verify(painterSpy).paintLine(0.0, -1.25, -0.625, -0.625);
+            gridValues[0][0] = Math.sqrt(5 * 5 + 6 * 6);
+            gridVxValues[0][0] = 5;
+            gridVyValues[0][0] = 6;
 
-            verify(painterSpy).paintLine(1.25, 5.0, 8.75, -5.0);
-            verify(painterSpy).paintLine(8.75, -5.0, 9.375, -0.625);
-            verify(painterSpy).paintLine(8.75, -5.0, 4.375, -4.375);
+            sut.paint(painterSpy, transformer);
+            clearInvocations(painterSpy);
+
+            sut.paint(painterSpy, transformer);
+            verify(painterSpy).paintLine(-1.7792013438759244, -2.135041612651109, 1.7792013438759244, 2.135041612651109);
+            verify(painterSpy).paintLine(1.7792013438759244, 2.135041612651109, -0.17792013438759235, 1.957121478263517);
+            verify(painterSpy).paintLine(1.7792013438759244, 2.135041612651109, 1.9571214782635167, 0.17792013438759224);
+
+            verify(painterSpy).paintLine(-0.06752080632555457, -1.4233610751007395, 2.067520806325555, 1.4233610751007395);
+            verify(painterSpy).paintLine(2.067520806325555, 1.4233610751007395, 0.8220798656124075, 1.2454409407131473);
+            verify(painterSpy).paintLine(2.067520806325555, 1.4233610751007395, 2.2454409407131473, 0.17792013438759235);
         }
+
     }
 
     public class BasicGridContext {
