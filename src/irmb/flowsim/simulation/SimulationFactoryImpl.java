@@ -1,11 +1,8 @@
 package irmb.flowsim.simulation;
 
 import irmb.flowsim.model.Point;
-import irmb.flowsim.presentation.factory.ColorFactoryImpl;
 import irmb.flowsim.simulation.jflowsim.adapters.JFlowSimNavierStokesGridAdapter;
 import irmb.flowsim.simulation.jflowsim.adapters.JFlowSimNavierStokesSolverAdapter;
-import irmb.flowsim.simulation.visualization.ArrowGridNodeStyle;
-import irmb.flowsim.simulation.visualization.ColorGridNodeStyle;
 import numerics.BoundaryCondition;
 import numerics.lbm.LBMNoSlipBC;
 import numerics.lbm.LBMPressureBC;
@@ -24,7 +21,7 @@ public class SimulationFactoryImpl implements SimulationFactory {
         JFlowSimNavierStokesGridAdapter gridAdapter = makeGrid();
         LBMNavierStokesSolver solver = new LBMNavierStokesSolver(gridAdapter.getJFlowSimGrid());
         JFlowSimNavierStokesSolverAdapter solverAdapter = new JFlowSimNavierStokesSolverAdapter(solver, gridAdapter.getJFlowSimGrid());
-        LBMChannelFlowSimulation lbmChannelFlowSimulation = new LBMChannelFlowSimulation(gridAdapter, solverAdapter, new ColorFactoryImpl());
+        LBMChannelFlowSimulation lbmChannelFlowSimulation = new LBMChannelFlowSimulation(gridAdapter, solverAdapter);
         return lbmChannelFlowSimulation;
     }
 

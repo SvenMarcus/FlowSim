@@ -119,7 +119,7 @@ public class LBMChannelFlowSimulationTest {
             for (int j = 0; j < horizontalNodes; j++) {
                 gridVxValues[i][j] = rnd.nextInt(10);
                 gridVyValues[i][j] = rnd.nextInt(10);
-                int value = (int)Math.sqrt(gridVxValues[i][j] * gridVxValues[i][j] + gridVyValues[i][j] * gridVyValues[i][j]);
+                int value = (int) Math.sqrt(gridVxValues[i][j] * gridVxValues[i][j] + gridVyValues[i][j] * gridVyValues[i][j]);
                 if (value > fMax)
                     fMax = value;
                 if (value < fMin)
@@ -140,7 +140,7 @@ public class LBMChannelFlowSimulationTest {
     @Test
     public void whenPainting_shouldOnlyPaintSimulationBoundaries() {
         gridSpy = mock(UniformGrid.class);
-        sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+        sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
         horizontalNodes = 3;
         verticalNodes = 2;
         setGridBehavior(makePoint(0, 0), 1);
@@ -155,7 +155,7 @@ public class LBMChannelFlowSimulationTest {
         horizontalNodes = 3;
         verticalNodes = 2;
         setGridBehavior(makePoint(0, 0), 1);
-        sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+        sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
         ColorGridNodeStyle gridNodeStyle = new ColorGridNodeStyle(colorFactory);
         sut.addPlotStyle(gridNodeStyle);
         sut.paint(painterSpy, transformer);
@@ -174,8 +174,9 @@ public class LBMChannelFlowSimulationTest {
             verticalNodes = 1;
             screenXOffset = 0;
             screenYOffset = 0;
+            screenLengthScale = 1;
             setGridBehavior(makePoint(0, 0), 1.);
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
         }
 
         @Test
@@ -183,17 +184,21 @@ public class LBMChannelFlowSimulationTest {
             gridValues[0][0] = 1;
             gridValues[0][1] = 1;
             sut.addPlotStyle(new ArrowGridNodeStyle(1));
+
             sut.paint(painterSpy, transformer);
+
             verify(painterSpy).paintRectangle(0 + screenXOffset, 0 + screenYOffset, 1 * screenLengthScale, 0 * screenLengthScale);
             verifyNoMoreInteractions(painterSpy);
         }
 
         @Test
         public void whenAddingArrowStyleThenPainting_shouldPaintVerticalArrow() {
-            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeVerticalArrowSetup();
+
             sut.addPlotStyle(new ArrowGridNodeStyle(1));
+
             sut.paint(painterSpy, transformer);
+
             verify(painterSpy).paintLine(0.0d, -0.25d, 0.0d, 0.25d);
             verify(painterSpy).paintLine(0.0, 0.25, -0.125, 0.125);
             verify(painterSpy).paintLine(0.0, 0.25, 0.125, 0.125);
@@ -202,7 +207,6 @@ public class LBMChannelFlowSimulationTest {
 
         @Test
         public void whenAddingArrowStyleThenPainting_shouldPaintHorizontalArrow() {
-            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeHorizontalArrowSetup();
 
             sut.addPlotStyle(new ArrowGridNodeStyle(1));
@@ -224,7 +228,6 @@ public class LBMChannelFlowSimulationTest {
 
         @Test
         public void whenAddingArrowStyleThenPainting_shouldPaintBothCells() {
-            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeHorizontalArrowSetup();
 
             sut.addPlotStyle(new ArrowGridNodeStyle(1));
@@ -241,7 +244,6 @@ public class LBMChannelFlowSimulationTest {
 
         @Test
         public void whenPaintingWithDifferentMinMaxValues_shoudPaintBothCells() {
-            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             gridValues[0][0] = 1;
             gridValues[0][1] = Math.sqrt(6 * 6 + 5 * 5);
             gridVxValues[0][0] = 1;
@@ -267,7 +269,6 @@ public class LBMChannelFlowSimulationTest {
             screenYOffset = 3;
 
             setGridBehavior(makePoint(4, 7), 1);
-            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeVerticalArrowSetup();
 
             sut.addPlotStyle(new ArrowGridNodeStyle(1));
@@ -286,7 +287,7 @@ public class LBMChannelFlowSimulationTest {
         public void whenPaintingWithOffset_shouldOnlyPaintTwoCellsDivisibleByOffset() {
             horizontalNodes = 3;
             setGridBehavior(makePoint(0, 0), 1);
-            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
+
             makeVerticalArrowSetup();
             gridValues[0][2] = Math.sqrt(5 * 5 + 4 * 4);
             gridVxValues[0][2] = 5;
@@ -306,6 +307,7 @@ public class LBMChannelFlowSimulationTest {
 
         @Test
         public void whenPaintingWithScreenScale_shouldPaintBothCells() {
+            screenLengthScale = 7;
             setGridBehavior(makePoint(0, 0), 1);
             makeVerticalArrowSetup();
 
@@ -323,8 +325,6 @@ public class LBMChannelFlowSimulationTest {
 
         @Test
         public void whenPaintingThreeTimesAndGridChanged_shouldUseMinMaxFromPreviousTimeStep() {
-            setGridBehavior(makePoint(0, 0), 1);
-            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
             makeVerticalArrowSetup();
 
             sut.addPlotStyle(new ArrowGridNodeStyle(1));
@@ -358,7 +358,7 @@ public class LBMChannelFlowSimulationTest {
             verticalNodes = 3;
             setGridBehavior(makePoint(0, 2), 1.);
 
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
         }
 
         @Test
@@ -380,14 +380,15 @@ public class LBMChannelFlowSimulationTest {
             gridValues[2][1] = 0;
             gridVxValues[2][1] = 0;
             gridVyValues[2][1] = 0;
-            gridValues[0][2] = Math.sqrt(20*20+20*20);
+            gridValues[0][2] = Math.sqrt(20 * 20 + 20 * 20);
             gridVxValues[0][2] = 20;
             gridVyValues[0][2] = 20;
             sut.paint(painterSpy, transformer);
             clearInvocations(painterSpy);
 
             fMin = 0;
-            fMax = Math.sqrt(20*20+20*20);;
+            fMax = Math.sqrt(20 * 20 + 20 * 20);
+            ;
             sut.paint(painterSpy, transformer);
 
             ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
@@ -496,43 +497,6 @@ public class LBMChannelFlowSimulationTest {
             verify(gridSpy).setSolid(3, 0);
         }
 
-//        @Test
-//        public void whenPaintingSolidNodes_shouldSetColorToBlack() {
-//            when(gridSpy.isSolid(1, 2)).thenReturn(true);
-//            when(gridSpy.isSolid(2, 1)).thenReturn(true);
-//            when(gridSpy.isSolid(3, 0)).thenReturn(true);
-//            sut.addPlotStyle(new ColorGridNodeStyle(colorFactory));
-//            sut.paint(painterSpy, transformer);
-//
-//            ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
-//
-//            InOrder inOrder = inOrder(painterSpy);
-//            double width = gridSpy.getDelta() * screenLengthScale;
-//            inOrder.verify(painterSpy).fillRectangle((0 * width + screenXOffset), (0 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).fillRectangle((1 * width + screenXOffset), (0 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).fillRectangle((2 * width + screenXOffset), (0 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).setColor(colorCaptor.capture());
-//            inOrder.verify(painterSpy).fillRectangle((3 * width + screenXOffset), (0 * width + screenYOffset), width, width);
-//
-//            inOrder.verify(painterSpy).fillRectangle((0 * width + screenXOffset), (1 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).fillRectangle((1 * width + screenXOffset), (1 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).setColor(colorCaptor.capture());
-//            inOrder.verify(painterSpy).fillRectangle((2 * width + screenXOffset), (1 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).fillRectangle((3 * width + screenXOffset), (1 * width + screenYOffset), width, width);
-//
-//            inOrder.verify(painterSpy).fillRectangle((0 * width + screenXOffset), (2 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).setColor(colorCaptor.capture());
-//            inOrder.verify(painterSpy).fillRectangle((1 * width + screenXOffset), (2 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).fillRectangle((2 * width + screenXOffset), (2 * width + screenYOffset), width, width);
-//            inOrder.verify(painterSpy).fillRectangle((3 * width + screenXOffset), (2 * width + screenYOffset), width, width);
-//
-//
-//            List<Color> capturedColors = colorCaptor.getAllValues();
-//            assertColorEquals(capturedColors.get(0), 0, 0, 0);
-//            assertColorEquals(capturedColors.get(1), 0, 0, 0);
-//            assertColorEquals(capturedColors.get(2), 0, 0, 0);
-//        }
-
     }
 
     public class GridWithOffsetContext {
@@ -544,7 +508,7 @@ public class LBMChannelFlowSimulationTest {
             verticalNodes = 8;
             setGridBehavior(makePoint(-1, 10), 1.);
 
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
         }
 
 
@@ -572,7 +536,7 @@ public class LBMChannelFlowSimulationTest {
             verticalNodes = 16;
             setGridBehavior(makePoint(-1, 10), .5);
 
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
         }
 
         @Test
@@ -909,14 +873,16 @@ public class LBMChannelFlowSimulationTest {
             screenLengthScale = 1;
             setGridBehavior(makePoint(0, 0), 1.);
             makeVerticalArrowSetup();
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
         }
 
         @Test
         public void whenAddingArrowAndColorStyles_shouldPaintWithBothStyles() {
             sut.addPlotStyle(new ArrowGridNodeStyle(1));
             sut.addPlotStyle(new ColorGridNodeStyle(colorFactory));
+
             sut.paint(painterSpy, transformer);
+
             ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
             InOrder inOrder = inOrder(painterSpy);
 

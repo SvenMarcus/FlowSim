@@ -1,6 +1,7 @@
 package irmb.test.presentation;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
+import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.CommandQueue;
 import irmb.flowsim.presentation.GraphicView;
@@ -10,7 +11,9 @@ import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
 import irmb.flowsim.presentation.strategy.StrategyEventArgs;
+import irmb.flowsim.simulation.Simulation;
 import irmb.flowsim.simulation.SimulationFactory;
+import irmb.flowsim.simulation.SimulationFactoryImpl;
 import irmb.flowsim.simulation.visualization.GridNodeStyle;
 import irmb.flowsim.simulation.visualization.PlotStyle;
 import irmb.flowsim.util.Observer;
@@ -45,11 +48,12 @@ public class SimulationGraphicViewPresenterTest {
     private Observer<StrategyEventArgs> mouseStrategyObserver;
     private Observer<String> commandQueueObserver;
     private CommandQueue commandQueue;
+    private MouseStrategyFactory mouseStrategyFactory;
 
     @Before
     public void setUp() {
         makeStrategyMock();
-        MouseStrategyFactory mouseStrategyFactory = makeMouseStrategyFactory();
+        mouseStrategyFactory = makeMouseStrategyFactory();
         makeCommandQueueMock();
         shapeList = new ArrayList<>();
         transformer = mock(CoordinateTransformer.class);
@@ -190,6 +194,7 @@ public class SimulationGraphicViewPresenterTest {
             sut.addSimulation();
             verify(simulationSpy, never()).addPlotStyle(any());
         }
+
     }
 
     public class SimulationAddedContext {
@@ -208,12 +213,18 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenCallingPauseSimulation_shouldPauseSimulation() {
+            sut.runSimulation();
+            clearInvocations(simulationSpy);
+
             sut.pauseSimulation();
             verify(simulationSpy, only()).pause();
         }
 
         @Test
-        public void whenCallingStopSimulation_shouldStopSimulation() {
+        public void whenCallingStopSimulationOnRunningSimulation_shouldStopSimulation() {
+            sut.runSimulation();
+            clearInvocations(simulationSpy);
+
             sut.pauseSimulation();
             verify(simulationSpy, only()).pause();
         }
@@ -278,6 +289,88 @@ public class SimulationGraphicViewPresenterTest {
 
             sut.addSimulation();
             verify(simulationSpy, never()).addPlotStyle(any());
+        }
+
+        @Test
+        public void whenCallingRemoveOnRunningSimulation_shouldStopAndRemoveSimulation() {
+            sut.runSimulation();
+            clearInvocations(simulationSpy);
+
+            sut.removeSimulation();
+            verify(simulationSpy).pause();
+            verify(graphicViewMock).update();
+            verifyNoMoreInteractions(simulationSpy);
+        }
+
+        @Test
+        public void whenCallingRunTwice_shouldOnlyStartSimulationOnce() {
+            sut.runSimulation();
+            sut.runSimulation();
+
+            verify(simulationSpy).run();
+        }
+
+        @Test
+        public void whenCallingRunAfterRunAndPause_shouldRunSimulationAgain() {
+            sut.runSimulation();
+            sut.pauseSimulation();
+            clearInvocations(simulationSpy);
+
+            sut.runSimulation();
+            verify(simulationSpy).run();
+        }
+
+        @Test
+        public void whenAddingPlotStyle_shouldUpdateGraphicView() {
+            sut.addPlotStyle(PlotStyle.Arrow);
+            verify(graphicViewMock).update();
+        }
+
+        @Test
+        public void whenAddingAndRunningNewSimulationAfterRunningThenRemovingLastSimulation_shouldRunNewSimulation() {
+            sut.runSimulation();
+            sut.removeSimulation();
+            clearInvocations(simulationSpy);
+
+            sut.addSimulation();
+            sut.runSimulation();
+            verify(simulationSpy).run();
+        }
+        
+        @Test
+        public void whenAddingNewSimulationOverRunningSimulation_shouldBeAbleToRunNewSimulation() {
+            sut.runSimulation();
+            clearInvocations(simulationSpy);
+
+            sut.addSimulation();
+            sut.runSimulation();
+            verify(simulationSpy).run();
+        }
+    }
+
+
+    public class IntegrationContext {
+        @Before
+        public void setUp() {
+            SimulationFactory simulationFactory = new SimulationFactoryImpl();
+            sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
+            sut.setGraphicView(graphicViewMock);
+
+            when(transformer.transformToPointOnScreen(any(Point.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
+            when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
+        }
+
+        @Test
+        public void whenCallingRemoveOnPausedSimulation_shouldRemoveSimulation() {
+            sut.addSimulation();
+            sut.pauseSimulation();
+            clearInvocations(painterSpy);
+            clearInvocations(graphicViewMock);
+
+            sut.removeSimulation();
+
+            verify(graphicViewMock).update();
+            verifyZeroInteractions(painterSpy);
         }
     }
 }

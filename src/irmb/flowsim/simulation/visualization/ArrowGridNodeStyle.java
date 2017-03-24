@@ -7,9 +7,6 @@ import irmb.flowsim.presentation.Painter;
  */
 public class ArrowGridNodeStyle extends GridNodeStyle {
 
-
-    private double min;
-    private double max;
     private int offset;
 
     public ArrowGridNodeStyle(int offset) {
@@ -17,11 +14,6 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
         this.offset = offset;
     }
 
-    @Override
-    public void setMinMax(double min, double max) {
-        this.min = min;
-        this.max = max;
-    }
 
     @Override
     public void paintGridNode(Painter painter, int xIndex, int yIndex, double min, double max, double vx, double vy, double viewX, double viewY, double viewDelta, double gridHeight) {
@@ -52,7 +44,7 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
     public boolean equals(Object o) {
         try {
             ArrowGridNodeStyle other = (ArrowGridNodeStyle) o;
-            return other.min == min && other.max == max && other.offset == offset;
+            return other.offset == offset;
         } catch (Exception e) {
             return false;
         }

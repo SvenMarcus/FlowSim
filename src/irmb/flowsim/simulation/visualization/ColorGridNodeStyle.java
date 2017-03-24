@@ -9,18 +9,12 @@ import irmb.flowsim.presentation.factory.ColorFactory;
 public class ColorGridNodeStyle extends GridNodeStyle {
 
     private ColorFactory colorFactory;
-    private double min;
-    private double max;
+
 
 
     public ColorGridNodeStyle(ColorFactory colorFactory) {
         super(0);
         this.colorFactory = colorFactory;
-    }
-
-    public void setMinMax(double min, double max) {
-        this.min = min;
-        this.max = max;
     }
 
     @Override

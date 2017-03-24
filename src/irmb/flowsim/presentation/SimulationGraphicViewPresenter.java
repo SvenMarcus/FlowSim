@@ -23,6 +23,7 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     private Simulation simulation;
     private GridNodeStyleFactory gridNodeStyleFactory = new GridNodeStyleFactory();
     private Map<PlotStyle, GridNodeStyle> plotStyleMap = new HashMap<>();
+    private boolean running;
 
     public SimulationGraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer, SimulationFactory simulationFactory) {
         super(strategyFactory, commandQueue, shapeList, transformer);
@@ -55,6 +56,7 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
         simulation = simulationFactory.makeSimulation();
         simulation.addObserver(args -> graphicView.update());
         simulation.setShapes(shapeList);
+        running = false;
         for (GridNodeStyle style : plotStyleMap.values())
             simulation.addPlotStyle(style);
         graphicView.update();
@@ -69,13 +71,17 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     }
 
     public void runSimulation() {
-        if (simulation != null)
+        if (simulation != null && !running) {
             simulation.run();
+            running = true;
+        }
     }
 
     public void pauseSimulation() {
-        if (simulation != null)
+        if (simulation != null && running) {
             simulation.pause();
+            running = false;
+        }
     }
 
     public void clearAll() {
@@ -89,11 +95,18 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
         if (simulation != null)
             simulation.addPlotStyle(gridNodeStyle);
         plotStyleMap.put(plotStyle, gridNodeStyle);
+        graphicView.update();
     }
 
     public void removePlotStyle(PlotStyle plotStyle) {
         if (simulation != null)
             simulation.removePlotStyle(plotStyleMap.get(plotStyle));
         plotStyleMap.remove(plotStyle);
+    }
+
+    public void removeSimulation() {
+        pauseSimulation();
+        simulation = null;
+        graphicView.update();
     }
 }

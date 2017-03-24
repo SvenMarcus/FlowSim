@@ -2,9 +2,7 @@ package irmb.flowsim.simulation;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
-import irmb.flowsim.presentation.factory.ColorFactory;
 import irmb.flowsim.simulation.visualization.GridNodeStyle;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -20,7 +18,6 @@ import java.util.List;
 public class LBMChannelFlowSimulation extends Simulation implements Observer<String> {
     private final UniformGrid grid;
     private final LBMSolver solver;
-    private ColorFactory colorFactory;
     private double min;
     private double max;
     private GridMapper gridMapper;
@@ -28,10 +25,9 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
 
     private List<GridNodeStyle> styleList = new ArrayList<>();
 
-    public LBMChannelFlowSimulation(UniformGrid grid, LBMSolver solver, ColorFactory colorFactory) {
+    public LBMChannelFlowSimulation(UniformGrid grid, LBMSolver solver) {
         this.grid = grid;
         this.solver = solver;
-//        this.colorFactory = colorFactory;
         solver.addObserver(this);
     }
 
@@ -48,15 +44,6 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
         double width = transformer.scaleToScreenLength(grid.getWidth());
         double height = transformer.scaleToScreenLength(grid.getHeight());
         painter.paintRectangle(topLeft.getX(), topLeft.getY(), width, height);
-
-//        for (int y = 0; y < grid.getVerticalNodes(); y++)
-//            for (int x = 0; x < grid.getHorizontalNodes(); x++) {
-//                adjustMinMax(x, y);
-//                for (GridNodeStyle style : styleList) {
-////                    style.setMinMax(currentMin, currentMax);
-//                    style.paintGridNode(painter, transformer, grid, x, y, currentMin, currentMax);
-//                }
-//            }
 
         int x, y;
         double vx, vy, viewDelta, viewX, viewY;

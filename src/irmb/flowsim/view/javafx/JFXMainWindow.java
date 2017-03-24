@@ -63,6 +63,7 @@ public class JFXMainWindow extends Application {
         Scene root = new Scene(rootLayout);
         primaryStage.setScene(root);
         primaryStage.show();
+        primaryStage.setTitle("JFlowSim");
     }
 
     private SimulationGraphicViewPresenter makePresenter() {
