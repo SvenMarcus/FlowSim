@@ -19,4 +19,6 @@ public abstract class Simulation extends ObservableImpl<String> implements Paint
     public abstract void setShapes(List<PaintableShape> shapeList);
 
     public abstract void addPlotStyle(GridNodeStyle gridNodeStyle);
+
+    public abstract void removePlotStyle(GridNodeStyle gridNodeStyle);
 }

@@ -25,8 +25,6 @@ public class SimulationFactoryImpl implements SimulationFactory {
         LBMNavierStokesSolver solver = new LBMNavierStokesSolver(gridAdapter.getJFlowSimGrid());
         JFlowSimNavierStokesSolverAdapter solverAdapter = new JFlowSimNavierStokesSolverAdapter(solver, gridAdapter.getJFlowSimGrid());
         LBMChannelFlowSimulation lbmChannelFlowSimulation = new LBMChannelFlowSimulation(gridAdapter, solverAdapter, new ColorFactoryImpl());
-        lbmChannelFlowSimulation.addPlotStyle(new ArrowGridNodeStyle(5));
-        lbmChannelFlowSimulation.addPlotStyle(new ColorGridNodeStyle(new ColorFactoryImpl()));
         return lbmChannelFlowSimulation;
     }
 

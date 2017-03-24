@@ -11,6 +11,8 @@ import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
 import irmb.flowsim.presentation.strategy.StrategyEventArgs;
 import irmb.flowsim.simulation.SimulationFactory;
+import irmb.flowsim.simulation.visualization.GridNodeStyle;
+import irmb.flowsim.simulation.visualization.PlotStyle;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -23,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
@@ -154,6 +158,28 @@ public class SimulationGraphicViewPresenterTest {
             sut.addSimulation();
             verify(simulationSpy).setShapes(shapeList);
         }
+
+        @Test
+        public void whenAddingColorPlotStyleThenAddingSimulation_shouldAddColorStyleToSimulation() {
+            sut.addPlotStyle(PlotStyle.Color);
+            sut.addSimulation();
+            assertTrue(simulationSpy.isColorStyleAdded());
+        }
+
+        @Test
+        public void whenAddingBothArrowAndColorPlotStyleThenAddingSimulation_shouldAddBothStylesToSimulation() {
+            sut.addPlotStyle(PlotStyle.Color);
+            sut.addPlotStyle(PlotStyle.Arrow);
+            sut.addSimulation();
+            assertTrue(simulationSpy.isColorStyleAdded());
+            assertTrue(simulationSpy.isArrowStyleAdded());
+        }
+
+        @Test
+        public void whenAddingSimulationWithNoStyles_shouldNotAddPlotStyle() {
+            sut.addSimulation();
+            verify(simulationSpy, never()).addPlotStyle(any());
+        }
     }
 
     public class SimulationAddedContext {
@@ -210,6 +236,29 @@ public class SimulationGraphicViewPresenterTest {
         public void whenCallingClearAll_shouldSetShapes() {
             sut.clearAll();
             verify(simulationSpy).setShapes(shapeList);
+        }
+
+        @Test
+        public void whenAddingColorPlot_shouldAddColorPlotStyleToSimulation() {
+            sut.addPlotStyle(PlotStyle.Color);
+            assertTrue(simulationSpy.isColorStyleAdded());
+        }
+
+        @Test
+        public void whenAddingArrowPlot_shouldAddArrowPlotStyleToSimulation() {
+            sut.addPlotStyle(PlotStyle.Arrow);
+            assertTrue(simulationSpy.isArrowStyleAdded());
+        }
+
+        @Test
+        public void whenRemovingColorPlot_shouldRemoveColorPlotFromSimulation() {
+            sut.addPlotStyle(PlotStyle.Color);
+            GridNodeStyle addedPlotStyle = simulationSpy.getAddedPlotStyle();
+            System.out.println(addedPlotStyle);
+
+            sut.removePlotStyle(PlotStyle.Color);
+            verify(simulationSpy).removePlotStyle(addedPlotStyle);
+            assertFalse(simulationSpy.isColorStyleAdded());
         }
     }
 }

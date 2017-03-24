@@ -101,4 +101,9 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
         styleList.add(gridNodeStyle);
         styleList.sort(Comparator.naturalOrder());
     }
+
+    @Override
+    public void removePlotStyle(GridNodeStyle gridNodeStyle) {
+
+    }
 }

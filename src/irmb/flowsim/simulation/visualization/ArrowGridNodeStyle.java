@@ -32,7 +32,7 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
             double vx = grid.getHorizontalVelocityAt(x, y);
             double vy = grid.getVerticalVelocityAt(x, y);
             double viewDelta = transformer.scaleToScreenLength(grid.getDelta());
-            double scale = 2 * viewDelta / (max - min);
+            double scale = viewDelta / (max - min);
             Point topLeft = transformer.transformToPointOnScreen(grid.getTopLeft());
             double x0 = topLeft.getX() + x * viewDelta - vx * scale;
             double y0 = topLeft.getY() + y * viewDelta - vy * scale;
@@ -55,4 +55,14 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
             painter.paintLine(x1, y1, xD, yD);
         }
     }
+
+    public boolean equals(Object o) {
+        try {
+            ArrowGridNodeStyle other = (ArrowGridNodeStyle) o;
+            return other.min == min && other.max == max && other.offset == offset;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

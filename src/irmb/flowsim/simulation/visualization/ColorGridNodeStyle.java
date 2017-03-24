@@ -40,4 +40,6 @@ public class ColorGridNodeStyle extends GridNodeStyle {
         }
         painter.fillRectangle(origin.getX() + x * dxScreen, origin.getY() - grid.getHeight() + y * dyScreen, Math.ceil(dxScreen), Math.ceil(dyScreen));
     }
+
+
 }

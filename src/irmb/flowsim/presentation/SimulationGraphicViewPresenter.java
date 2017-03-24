@@ -5,11 +5,14 @@ import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
 import irmb.flowsim.simulation.Simulation;
 import irmb.flowsim.simulation.SimulationFactory;
+import irmb.flowsim.simulation.visualization.*;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sven on 03.03.17.
@@ -18,6 +21,8 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
 
     private final SimulationFactory simulationFactory;
     private Simulation simulation;
+    private GridNodeStyleFactory gridNodeStyleFactory = new GridNodeStyleFactory();
+    private Map<PlotStyle, GridNodeStyle> plotStyleMap = new HashMap<>();
 
     public SimulationGraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer, SimulationFactory simulationFactory) {
         super(strategyFactory, commandQueue, shapeList, transformer);
@@ -50,6 +55,8 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
         simulation = simulationFactory.makeSimulation();
         simulation.addObserver(args -> graphicView.update());
         simulation.setShapes(shapeList);
+        for (GridNodeStyle style : plotStyleMap.values())
+            simulation.addPlotStyle(style);
         graphicView.update();
     }
 
@@ -75,5 +82,16 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
         super.clearAll();
         if (simulation != null)
             simulation.setShapes(shapeList);
+    }
+
+    public void addPlotStyle(PlotStyle plotStyle) {
+        GridNodeStyle gridNodeStyle = gridNodeStyleFactory.makeGridNodeStyle(plotStyle);
+        if (simulation != null)
+            simulation.addPlotStyle(gridNodeStyle);
+        plotStyleMap.put(plotStyle, gridNodeStyle);
+    }
+
+    public void removePlotStyle(PlotStyle plotStyle) {
+        simulation.removePlotStyle(plotStyleMap.get(plotStyle));
     }
 }
