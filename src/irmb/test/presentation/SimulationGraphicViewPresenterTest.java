@@ -180,6 +180,16 @@ public class SimulationGraphicViewPresenterTest {
             sut.addSimulation();
             verify(simulationSpy, never()).addPlotStyle(any());
         }
+
+        @Test
+        public void whenAddingThenRemovingPlotStyleThenAddingSimulation_shouldNotAddAnyPlotStyles() {
+            sut.addPlotStyle(PlotStyle.Color);
+            sut.removePlotStyle(PlotStyle.Color);
+            clearInvocations(simulationSpy);
+
+            sut.addSimulation();
+            verify(simulationSpy, never()).addPlotStyle(any());
+        }
     }
 
     public class SimulationAddedContext {
@@ -254,11 +264,20 @@ public class SimulationGraphicViewPresenterTest {
         public void whenRemovingColorPlot_shouldRemoveColorPlotFromSimulation() {
             sut.addPlotStyle(PlotStyle.Color);
             GridNodeStyle addedPlotStyle = simulationSpy.getAddedPlotStyle();
-            System.out.println(addedPlotStyle);
 
             sut.removePlotStyle(PlotStyle.Color);
             verify(simulationSpy).removePlotStyle(addedPlotStyle);
             assertFalse(simulationSpy.isColorStyleAdded());
+        }
+
+        @Test
+        public void whenRemovingPlotStyleThenAddingSimulation_shouldNotAddPlotStyleToNewSimulation() {
+            sut.addPlotStyle(PlotStyle.Color);
+            sut.removePlotStyle(PlotStyle.Color);
+            clearInvocations(simulationSpy);
+
+            sut.addSimulation();
+            verify(simulationSpy, never()).addPlotStyle(any());
         }
     }
 }

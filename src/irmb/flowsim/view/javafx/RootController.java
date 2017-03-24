@@ -5,6 +5,7 @@ import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
+import irmb.flowsim.simulation.visualization.PlotStyle;
 import irmb.flowsim.view.graphics.Paintable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -114,6 +116,22 @@ public class RootController implements GraphicView {
 
     public void onCloseClick(ActionEvent event) {
         System.exit(1);
+    }
+
+    public void onColorPlotChecked(ActionEvent event) {
+        CheckMenuItem item = (CheckMenuItem) event.getSource();
+        if (item.isSelected())
+            presenter.addPlotStyle(PlotStyle.Color);
+        else
+            presenter.removePlotStyle(PlotStyle.Color);
+    }
+
+    public void onArrowPlotChecked(ActionEvent event) {
+        CheckMenuItem item = (CheckMenuItem) event.getSource();
+        if (item.isSelected())
+            presenter.addPlotStyle(PlotStyle.Arrow);
+        else
+            presenter.removePlotStyle(PlotStyle.Arrow);
     }
 
     public void onMousePressed(MouseEvent event) {

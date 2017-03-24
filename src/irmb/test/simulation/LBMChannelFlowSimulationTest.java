@@ -142,6 +142,23 @@ public class LBMChannelFlowSimulationTest {
         verifyNoMoreInteractions(painterSpy);
     }
 
+    @Test
+    public void whenAddingPlotStyleThenRemoving_shouldNotPaintAnyGridNodes() {
+        gridSpy = mock(UniformGrid.class);
+        horizontalNodes = 3;
+        verticalNodes = 2;
+        setGridBehavior(makePoint(0, 0), 1);
+        sut = new LBMChannelFlowSimulation(gridSpy, solverSpy, colorFactory);
+        ColorGridNodeStyle gridNodeStyle = new ColorGridNodeStyle(colorFactory);
+        sut.addPlotStyle(gridNodeStyle);
+        sut.paint(painterSpy, transformer);
+        clearInvocations(painterSpy);
+
+        sut.removePlotStyle(gridNodeStyle);
+        sut.paint(painterSpy, transformer);
+        verify(painterSpy, never()).fillRectangle(anyDouble(), anyDouble(), anyDouble(), anyDouble());
+    }
+
     public class ArrowPlotStyleContext {
         @Before
         public void setUp() {

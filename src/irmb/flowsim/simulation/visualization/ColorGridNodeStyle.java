@@ -28,9 +28,8 @@ public class ColorGridNodeStyle extends GridNodeStyle {
     }
 
     @Override
-    public void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y) {
+    public void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y, double min, double max) {
         double dxScreen = transformer.scaleToScreenLength(grid.getDelta());
-        double dyScreen = transformer.scaleToScreenLength(grid.getDelta());
         Point origin = transformer.transformToPointOnScreen(grid.getTopLeft());
         if (grid.isSolid(x, y)) {
             painter.setColor(new Color(0, 0, 0));
@@ -38,7 +37,7 @@ public class ColorGridNodeStyle extends GridNodeStyle {
             double velocity = grid.getVelocityAt(x, y);
             painter.setColor(colorFactory.makeColorForValue(min, max, velocity));
         }
-        painter.fillRectangle(origin.getX() + x * dxScreen, origin.getY() - grid.getHeight() + y * dyScreen, Math.ceil(dxScreen), Math.ceil(dyScreen));
+        painter.fillRectangle(origin.getX() + x * dxScreen, origin.getY() - grid.getHeight() + y * dxScreen, Math.ceil(dxScreen), Math.ceil(dxScreen));
     }
 
 

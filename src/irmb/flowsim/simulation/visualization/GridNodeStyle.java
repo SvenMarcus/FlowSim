@@ -21,7 +21,7 @@ public abstract class GridNodeStyle implements Comparable<GridNodeStyle> {
         this.max = max;
     }
 
-    public abstract void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y);
+    public abstract void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y, double min, double max);
 
     public int compareTo(GridNodeStyle style) {
         return Integer.compare(priority, style.priority);

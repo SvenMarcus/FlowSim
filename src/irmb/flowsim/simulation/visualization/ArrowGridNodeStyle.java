@@ -27,7 +27,7 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
     }
 
     @Override
-    public void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y) {
+    public void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y, double min, double max) {
         if (max != min && x % offset == 0 && y % offset == 0) {
             double vx = grid.getHorizontalVelocityAt(x, y);
             double vy = grid.getVerticalVelocityAt(x, y);
