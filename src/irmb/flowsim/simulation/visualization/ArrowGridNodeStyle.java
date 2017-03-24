@@ -1,9 +1,6 @@
 package irmb.flowsim.simulation.visualization;
 
-import irmb.flowsim.model.Point;
-import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Painter;
-import irmb.flowsim.simulation.UniformGrid;
 
 /**
  * Created by sven on 23.03.17.
@@ -27,17 +24,13 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
     }
 
     @Override
-    public void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y, double min, double max) {
-        if (max != min && x % offset == 0 && y % offset == 0) {
-            double vx = grid.getHorizontalVelocityAt(x, y);
-            double vy = grid.getVerticalVelocityAt(x, y);
-            double viewDelta = transformer.scaleToScreenLength(grid.getDelta());
+    public void paintGridNode(Painter painter, int xIndex, int yIndex, double min, double max, double vx, double vy, double viewX, double viewY, double viewDelta, double gridHeight) {
+        if (max != min && xIndex % offset == 0 && yIndex % offset == 0) {
             double scale = viewDelta / (max - min);
-            Point topLeft = transformer.transformToPointOnScreen(grid.getTopLeft());
-            double x0 = topLeft.getX() + x * viewDelta - vx * scale;
-            double y0 = topLeft.getY() + y * viewDelta - vy * scale;
-            double x1 = topLeft.getX() + x * viewDelta + vx * scale;
-            double y1 = topLeft.getY() + y * viewDelta + vy * scale;
+            double x0 = viewX + xIndex * viewDelta - vx * scale;
+            double y0 = viewY + yIndex * viewDelta - vy * scale;
+            double x1 = viewX + xIndex * viewDelta + vx * scale;
+            double y1 = viewY + yIndex * viewDelta + vy * scale;
             double dx = x1 - x0;
             double dy = y1 - y0;
             double Xt1 = -dx * .25;

@@ -59,36 +59,19 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
 //            }
 
         int x, y;
+        double vx, vy, viewDelta, viewX, viewY;
+        viewDelta = transformer.scaleToScreenLength(grid.getDelta());
+        viewX = topLeft.getX();
+        viewY = topLeft.getY();
         for (int i = 0; i < grid.getHorizontalNodes() * grid.getVerticalNodes(); i++) {
             x = i % grid.getHorizontalNodes();
             y = i / grid.getHorizontalNodes();
             adjustMinMax(x, y);
+            vx = grid.getHorizontalVelocityAt(x, y);
+            vy = grid.getVerticalVelocityAt(x, y);
             for (GridNodeStyle style : styleList)
-                style.paintGridNode(painter, transformer, grid, x, y, currentMin, currentMax);
-//            double dxScreen = transformer.scaleToScreenLength(grid.getDelta());
-//            double dyScreen = transformer.scaleToScreenLength(grid.getDelta());
-//            Point origin = transformer.transformToPointOnScreen(grid.getTopLeft());
-//            if (grid.isSolid(x, y)) {
-//                painter.setColor(new Color(0, 0, 0));
-//            } else {
-//                double velocity = grid.getVelocityAt(x, y);
-//                painter.setColor(colorFactory.makeColorForValue(currentMin, currentMax, velocity));
-//            }
-//            painter.fillRectangle(origin.getX() + x * dxScreen, origin.getY() - grid.getHeight() + y * dyScreen, Math.ceil(dxScreen), Math.ceil(dyScreen));
+                style.paintGridNode(painter, x, y, currentMin, currentMax, vx, vy, viewX, viewY, viewDelta, grid.getHeight());
         }
-    }
-
-    public void paintGridNode(Painter painter, CoordinateTransformer transformer, int x, int y, double min, double max) {
-        double dxScreen = transformer.scaleToScreenLength(grid.getDelta());
-        double dyScreen = transformer.scaleToScreenLength(grid.getDelta());
-        Point origin = transformer.transformToPointOnScreen(grid.getTopLeft());
-        if (grid.isSolid(x, y)) {
-            painter.setColor(new Color(0, 0, 0));
-        } else {
-            double velocity = grid.getVelocityAt(x, y);
-            painter.setColor(colorFactory.makeColorForValue(min, max, velocity));
-        }
-        painter.fillRectangle(origin.getX() + x * dxScreen, origin.getY() - grid.getHeight() + y * dyScreen, Math.ceil(dxScreen), Math.ceil(dyScreen));
     }
 
     private void getInitialMinMax() {

@@ -1,11 +1,7 @@
 package irmb.flowsim.simulation.visualization;
 
-import irmb.flowsim.model.Point;
-import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.factory.ColorFactory;
-import irmb.flowsim.simulation.UniformGrid;
 
 /**
  * Created by sven on 23.03.17.
@@ -28,16 +24,11 @@ public class ColorGridNodeStyle extends GridNodeStyle {
     }
 
     @Override
-    public void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y, double min, double max) {
-        double dxScreen = transformer.scaleToScreenLength(grid.getDelta());
-        Point origin = transformer.transformToPointOnScreen(grid.getTopLeft());
-        if (grid.isSolid(x, y)) {
-            painter.setColor(new Color(0, 0, 0));
-        } else {
-            double velocity = grid.getVelocityAt(x, y);
-            painter.setColor(colorFactory.makeColorForValue(min, max, velocity));
-        }
-        painter.fillRectangle(origin.getX() + x * dxScreen, origin.getY() - grid.getHeight() + y * dxScreen, Math.ceil(dxScreen), Math.ceil(dxScreen));
+    public void paintGridNode(Painter painter, int xIndex, int yIndex, double min, double max, double vx, double vy, double viewX, double viewY, double viewDelta, double gridHeight) {
+        double velocity = Math.sqrt(vx * vx + vy * vy);
+        painter.setColor(colorFactory.makeColorForValue(min, max, velocity));
+
+        painter.fillRectangle(viewX + xIndex * viewDelta, viewY - gridHeight + yIndex * viewDelta, Math.ceil(viewDelta), Math.ceil(viewDelta));
     }
 
 
