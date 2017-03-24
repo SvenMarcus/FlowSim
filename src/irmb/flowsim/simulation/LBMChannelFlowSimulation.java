@@ -31,7 +31,7 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
     public LBMChannelFlowSimulation(UniformGrid grid, LBMSolver solver, ColorFactory colorFactory) {
         this.grid = grid;
         this.solver = solver;
-        this.colorFactory = colorFactory;
+//        this.colorFactory = colorFactory;
         solver.addObserver(this);
     }
 
