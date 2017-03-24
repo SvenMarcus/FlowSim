@@ -10,16 +10,16 @@ import irmb.flowsim.simulation.UniformGrid;
 /**
  * Created by sven on 23.03.17.
  */
-public class ColorGridNodeStyle implements GridNodeStyle {
+public class ColorGridNodeStyle extends GridNodeStyle {
 
     private ColorFactory colorFactory;
-    private UniformGrid grid;
     private double min;
     private double max;
 
-    public ColorGridNodeStyle(ColorFactory colorFactory, UniformGrid grid) {
+
+    public ColorGridNodeStyle(ColorFactory colorFactory) {
+        super(0);
         this.colorFactory = colorFactory;
-        this.grid = grid;
     }
 
     public void setMinMax(double min, double max) {
@@ -28,7 +28,7 @@ public class ColorGridNodeStyle implements GridNodeStyle {
     }
 
     @Override
-    public void paintGridNode(Painter painter, CoordinateTransformer transformer, int x, int y) {
+    public void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y) {
         double dxScreen = transformer.scaleToScreenLength(grid.getDelta());
         double dyScreen = transformer.scaleToScreenLength(grid.getDelta());
         Point origin = transformer.transformToPointOnScreen(grid.getTopLeft());

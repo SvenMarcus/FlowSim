@@ -3,6 +3,7 @@ package irmb.test.simulation;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.simulation.Simulation;
+import irmb.flowsim.simulation.visualization.GridNodeStyle;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public class SimulationMock extends Simulation {
     @Override
     public void setShapes(List<PaintableShape> shapeList) {
 
+    }
+
+    @Override
+    public void addPlotStyle(GridNodeStyle gridNodeStyle) {
+        
     }
 
     @Override

@@ -8,16 +8,15 @@ import irmb.flowsim.simulation.UniformGrid;
 /**
  * Created by sven on 23.03.17.
  */
-public class ArrowGridNodeStyle implements GridNodeStyle {
+public class ArrowGridNodeStyle extends GridNodeStyle {
 
 
     private double min;
     private double max;
-    private UniformGrid grid;
     private int offset;
 
-    public ArrowGridNodeStyle(UniformGrid grid, int offset) {
-        this.grid = grid;
+    public ArrowGridNodeStyle(int offset) {
+        super(1);
         this.offset = offset;
     }
 
@@ -28,12 +27,12 @@ public class ArrowGridNodeStyle implements GridNodeStyle {
     }
 
     @Override
-    public void paintGridNode(Painter painter, CoordinateTransformer transformer, int x, int y) {
+    public void paintGridNode(Painter painter, CoordinateTransformer transformer, UniformGrid grid, int x, int y) {
         if (max != min && x % offset == 0 && y % offset == 0) {
             double vx = grid.getHorizontalVelocityAt(x, y);
             double vy = grid.getVerticalVelocityAt(x, y);
             double viewDelta = transformer.scaleToScreenLength(grid.getDelta());
-            double scale = viewDelta / (max - min);
+            double scale = 2 * viewDelta / (max - min);
             Point topLeft = transformer.transformToPointOnScreen(grid.getTopLeft());
             double x0 = topLeft.getX() + x * viewDelta - vx * scale;
             double y0 = topLeft.getY() + y * viewDelta - vy * scale;

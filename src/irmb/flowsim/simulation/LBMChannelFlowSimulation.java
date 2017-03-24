@@ -1,15 +1,15 @@
 package irmb.flowsim.simulation;
 
-import irmb.flowsim.model.*;
+import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.factory.ColorFactory;
-import irmb.flowsim.simulation.visualization.ArrowGridNodeStyle;
-import irmb.flowsim.simulation.visualization.ColorGridNodeStyle;
+import irmb.flowsim.simulation.visualization.GridNodeStyle;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.PaintableShape;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -19,21 +19,17 @@ import java.util.List;
 public class LBMChannelFlowSimulation extends Simulation implements Observer<String> {
     private final UniformGrid grid;
     private final LBMSolver solver;
-    private final ColorFactory colorFactory;
     private double min;
     private double max;
     private GridMapper gridMapper;
     private boolean firstRun = true;
-    private String plotStyle = "";
-    private ColorGridNodeStyle colorGridNodeStyle;
-    private ArrowGridNodeStyle arrowGridNodeStyle;
+
+    private List<GridNodeStyle> styleList = new ArrayList<>();
 
     public LBMChannelFlowSimulation(UniformGrid grid, LBMSolver solver, ColorFactory colorFactory) {
         this.grid = grid;
         this.solver = solver;
         solver.addObserver(this);
-        this.colorFactory = colorFactory;
-        colorGridNodeStyle = new ColorGridNodeStyle(colorFactory, grid);
     }
 
     @Override
@@ -45,15 +41,17 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
         min = Double.MAX_VALUE;
         max = -Double.MAX_VALUE;
 
+        Point topLeft = transformer.transformToPointOnScreen(grid.getTopLeft());
+        double width = transformer.scaleToScreenLength(grid.getWidth());
+        double height = transformer.scaleToScreenLength(grid.getHeight());
+        painter.paintRectangle(topLeft.getX(), topLeft.getY(), width, height);
+
         for (int y = 0; y < grid.getVerticalNodes(); y++)
             for (int x = 0; x < grid.getHorizontalNodes(); x++) {
                 adjustMinMax(x, y);
-                if (!plotStyle.equals("Arrow")) {
-                    colorGridNodeStyle.setMinMax(currentMin, currentMax);
-                    colorGridNodeStyle.paintGridNode(painter, transformer, x, y);
-                } else {
-                    arrowGridNodeStyle.setMinMax(currentMin, currentMax);
-                    arrowGridNodeStyle.paintGridNode(painter, transformer, x, y);
+                for (GridNodeStyle style : styleList) {
+                    style.setMinMax(currentMin, currentMax);
+                    style.paintGridNode(painter, transformer, grid, x, y);
                 }
             }
     }
@@ -99,8 +97,8 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
         notifyObservers(null);
     }
 
-    public void addPlotStyle(String style, int offset) {
-        plotStyle = style;
-        arrowGridNodeStyle = new ArrowGridNodeStyle(grid, offset);
+    public void addPlotStyle(GridNodeStyle gridNodeStyle) {
+        styleList.add(gridNodeStyle);
+        styleList.sort(Comparator.naturalOrder());
     }
 }

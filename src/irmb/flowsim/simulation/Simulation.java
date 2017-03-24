@@ -1,5 +1,6 @@
 package irmb.flowsim.simulation;
 
+import irmb.flowsim.simulation.visualization.GridNodeStyle;
 import irmb.flowsim.util.ObservableImpl;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -16,4 +17,6 @@ public abstract class Simulation extends ObservableImpl<String> implements Paint
     public abstract void pause();
 
     public abstract void setShapes(List<PaintableShape> shapeList);
+
+    public abstract void addPlotStyle(GridNodeStyle gridNodeStyle);
 }
