@@ -5,6 +5,8 @@ package irmb.flowsim.presentation;
  */
 public class Color {
 
+    public static Color BLACK = new Color(0,0,0);
+
     public int r = 0;
     public int g = 0;
     public int b = 0;

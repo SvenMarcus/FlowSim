@@ -4,6 +4,7 @@ import irmb.flowsim.model.BezierCurve;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.Shape;
 import irmb.flowsim.model.util.CoordinateTransformer;
+import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class PaintableBezierCurve extends PaintableShape {
 
     @Override
     public void paint(Painter painter, CoordinateTransformer transformer) {
+        painter.setColor(Color.BLACK);
         recursivePaint(painter, transformer, bezierCurve.getPointList());
 
         for (Point point : bezierCurve.getPointList()) {

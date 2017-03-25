@@ -2,14 +2,15 @@ package irmb.test.presentation;
 
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
-import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicView;
-import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.presentation.Painter;
+import irmb.flowsim.presentation.*;
 import irmb.flowsim.presentation.factory.*;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
+import irmb.test.util.MockitoUtil;
 import org.junit.Before;
+import org.mockito.Mock;
+import org.mockito.invocation.Invocation;
+import org.mockito.invocation.InvocationOnMock;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,6 +37,10 @@ public class GraphicViewPresenterTest {
         transformer = new CoordinateTransformerImpl();
         setWorldAndViewBounds();
         painterSpy = mock(Painter.class);
+        doAnswer((InvocationOnMock invocationOnMock) -> {
+            MockitoUtil.removeInvocation(invocationOnMock);
+            return null;
+        }).when(painterSpy).setColor(any());
         ShapeFactory factory = spy(new ShapeFactoryImpl());
         shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory, new PaintableShapeFactoryImpl()));
         commandQueue = spy(new CommandQueue());

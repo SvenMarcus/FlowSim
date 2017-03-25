@@ -4,6 +4,7 @@ import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.model.Shape;
 import irmb.flowsim.model.util.CoordinateTransformer;
+import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class PaintablePolyLine extends PaintableShape {
 
     @Override
     public void paint(Painter painter, CoordinateTransformer transformer) {
+        painter.setColor(Color.BLACK);
         List<Point> pointList = polyLine.getPointList();
         for (int i = 0; i < pointList.size() - 1; i++) {
             Point current = transformer.transformToPointOnScreen(pointList.get(i));

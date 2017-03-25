@@ -1,5 +1,6 @@
 package irmb.flowsim.simulation.visualization;
 
+import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
 
 /**
@@ -18,6 +19,7 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
     @Override
     public void paintGridNode(Painter painter, int xIndex, int yIndex, double min, double max, double vx, double vy, double viewX, double viewY, double viewDelta, double gridHeight) {
         if (max != min && xIndex % offset == 0 && yIndex % offset == 0) {
+//            painter.setColor(Color.BLACK);
             double scale = viewDelta / (max - min);
             double x0 = viewX + xIndex * viewDelta - vx * scale;
             double y0 = viewY + yIndex * viewDelta - vy * scale;

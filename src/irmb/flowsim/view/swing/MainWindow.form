@@ -2,79 +2,121 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="irmb.flowsim.view.swing.MainWindow">
   <grid id="27dc6" binding="contentPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="1435" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <toolbar id="1af51" binding="mainToolBar">
-        <constraints border-constraint="North"/>
-        <properties>
-          <orientation value="0"/>
-        </properties>
-        <clientProperties>
-          <JToolBar.isRollover class="java.lang.Boolean" value="true"/>
-        </clientProperties>
-        <border type="none"/>
-        <children>
-          <component id="b0d81" class="javax.swing.JButton" binding="lineButton" default-binding="true">
-            <constraints/>
-            <properties>
-              <text value="Line"/>
-            </properties>
-          </component>
-          <component id="d3cdc" class="javax.swing.JButton" binding="rectangleButton" default-binding="true">
-            <constraints/>
-            <properties>
-              <text value="Rectangle"/>
-            </properties>
-          </component>
-          <component id="5add1" class="javax.swing.JButton" binding="polyLineButton" default-binding="true">
-            <constraints/>
-            <properties>
-              <text value="PolyLine"/>
-            </properties>
-          </component>
-          <component id="21d50" class="javax.swing.JButton" binding="bezierButton">
-            <constraints/>
-            <properties>
-              <text value="Bezier Curve"/>
-            </properties>
-          </component>
-          <component id="c64e0" class="javax.swing.JButton" binding="addSimulationButton">
-            <constraints/>
-            <properties>
-              <text value="Add Simulation"/>
-            </properties>
-          </component>
-          <component id="729fc" class="javax.swing.JToolBar$Separator">
-            <constraints/>
-            <properties>
-              <orientation value="1"/>
-            </properties>
-          </component>
-          <component id="2a9b8" class="javax.swing.JButton" binding="undoButton">
-            <constraints/>
-            <properties>
-              <text value="Undo"/>
-            </properties>
-          </component>
-          <component id="f2003" class="javax.swing.JButton" binding="redoButton">
-            <constraints/>
-            <properties>
-              <text value="Redo"/>
-            </properties>
-          </component>
-        </children>
-      </toolbar>
       <grid id="19efd" binding="drawArea" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="Center"/>
         <properties>
-          <background color="-10257778"/>
+          <background color="-1"/>
         </properties>
         <border type="none"/>
         <children/>
+      </grid>
+      <grid id="6af7e" binding="topPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <toolbar id="50cc1" binding="mainToolBar">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <orientation value="0"/>
+            </properties>
+            <clientProperties>
+              <JToolBar.isRollover class="java.lang.Boolean" value="true"/>
+            </clientProperties>
+            <border type="none"/>
+            <children>
+              <component id="936c" class="javax.swing.JButton" binding="lineButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/Line2D.gif"/>
+                  <text value="Line"/>
+                </properties>
+              </component>
+              <component id="d82e4" class="javax.swing.JButton" binding="rectangleButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/Rectangle2D.gif"/>
+                  <text value="Rectangle"/>
+                </properties>
+              </component>
+              <component id="89690" class="javax.swing.JButton" binding="polyLineButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/Polyline2D.gif"/>
+                  <text value="PolyLine"/>
+                </properties>
+              </component>
+              <component id="fc06d" class="javax.swing.JButton" binding="bezierButton">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/Bezier2D.gif"/>
+                  <text value="Bezier Curve"/>
+                </properties>
+              </component>
+              <component id="de267" class="javax.swing.JButton" binding="addSimulationButton">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/add-simulation.png"/>
+                  <text value="Add Simulation"/>
+                </properties>
+              </component>
+              <component id="eee1a" class="javax.swing.JToolBar$Separator">
+                <constraints/>
+                <properties>
+                  <orientation value="1"/>
+                </properties>
+              </component>
+              <component id="4d7a5" class="javax.swing.JButton" binding="runSimulationButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/continue.png"/>
+                  <text value="Run Simulation"/>
+                </properties>
+              </component>
+              <component id="43f45" class="javax.swing.JButton" binding="pauseSimulationButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/pause.png"/>
+                  <text value="Pause Simulation"/>
+                </properties>
+              </component>
+              <component id="f52d0" class="javax.swing.JButton" binding="removeSimulationButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/remove-simulation.png"/>
+                  <text value="Remove Simulation"/>
+                </properties>
+              </component>
+              <component id="beabd" class="javax.swing.JButton" binding="undoButton">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/edit-undo.png"/>
+                  <text value="Undo"/>
+                </properties>
+              </component>
+              <component id="909e3" class="javax.swing.JButton" binding="redoButton">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/edit-redo.png"/>
+                  <text value="Redo"/>
+                </properties>
+              </component>
+              <component id="8e975" class="javax.swing.JButton" binding="clearButton">
+                <constraints/>
+                <properties>
+                  <icon value="irmb/flowsim/view/resources/edit-clear.png"/>
+                  <text value="Clear"/>
+                </properties>
+              </component>
+            </children>
+          </toolbar>
+        </children>
       </grid>
     </children>
   </grid>
