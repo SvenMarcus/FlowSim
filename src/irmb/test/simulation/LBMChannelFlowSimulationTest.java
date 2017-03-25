@@ -12,6 +12,7 @@ import irmb.flowsim.simulation.visualization.ArrowGridNodeStyle;
 import irmb.flowsim.simulation.visualization.ColorGridNodeStyle;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.*;
+import irmb.test.util.MockitoUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
