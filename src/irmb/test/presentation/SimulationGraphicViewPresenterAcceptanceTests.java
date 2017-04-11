@@ -4,26 +4,46 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
+import irmb.flowsim.model.util.CoordinateTransformerImpl;
+import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.GraphicView;
+import irmb.flowsim.presentation.Painter;
+import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
+import irmb.flowsim.presentation.factory.*;
+import irmb.flowsim.simulation.SimulationFactory;
+import irmb.flowsim.view.graphics.Paintable;
+import irmb.test.util.MockitoUtil;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.invocation.InvocationOnMock;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
 import static irmb.mockito.verification.AtLeastThenForgetAll.atLeastThenForgetAll;
-import static test.irmb.flowsim.util.TestUtil.assertExpectedPointEqualsActual;
-import static test.irmb.flowsim.util.TestUtil.doubleOf;
-import static test.irmb.flowsim.util.TestUtil.makePoint;
+import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
+import static irmb.test.util.TestUtil.doubleOf;
+import static irmb.test.util.TestUtil.makePoint;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Sven on 15.12.2016.
+ * Created by sven on 11.04.17.
  */
 @RunWith(HierarchicalContextRunner.class)
-public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTest {
+public class SimulationGraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTest{
+
+
+    @Before
+    public void setUp() {
+        initializeTestSetup();
+        sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, mock(SimulationFactory.class));
+        sut.setGraphicView(graphicView);
+    }
 
     public class SimplePaintingContext {
         @Test
@@ -305,15 +325,13 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
 
-
+        sut.beginPaint("Line");
         sut.handleMiddleClick(10, 10);
         sut.handleMouseDrag(3, 2);
         sut.handleMouseRelease();
         verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
         verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
         verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
-
-
     }
 
     private void verifyUnchangedWorldCoordinates(Line line, PolyLine polyLine, Point lineStart, Point lineEnd, List<Point> pointList) {
@@ -355,16 +373,22 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
 
         List<Double> capturedArgs = doubleCaptor.getAllValues();
+
         verifyLineCoordinatesAfterZoomOut(capturedArgs);
         verifyPolyLineCoordinatesAfterZoomOut(capturedArgs);
 
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
 
         doubleCaptor = ArgumentCaptor.forClass(Double.class);
+
+        sut.beginPaint("Line");
         sut.handleScroll(15, 19, 1);
+
         verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
+
         verifyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
         verifyPolyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
+
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
     }
 

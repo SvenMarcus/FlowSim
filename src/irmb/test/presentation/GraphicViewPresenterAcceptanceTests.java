@@ -306,15 +306,13 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
 
-
+        sut.beginPaint("Line");
         sut.handleMiddleClick(10, 10);
         sut.handleMouseDrag(3, 2);
         sut.handleMouseRelease();
         verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
         verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
         verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
-
-
     }
 
     private void verifyUnchangedWorldCoordinates(Line line, PolyLine polyLine, Point lineStart, Point lineEnd, List<Point> pointList) {
@@ -356,16 +354,22 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
 
         List<Double> capturedArgs = doubleCaptor.getAllValues();
+
         verifyLineCoordinatesAfterZoomOut(capturedArgs);
         verifyPolyLineCoordinatesAfterZoomOut(capturedArgs);
 
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
 
         doubleCaptor = ArgumentCaptor.forClass(Double.class);
+
+        sut.beginPaint("Line");
         sut.handleScroll(15, 19, 1);
+
         verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
+
         verifyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
         verifyPolyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
+
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
     }
 

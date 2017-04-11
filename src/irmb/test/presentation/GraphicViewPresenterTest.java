@@ -30,10 +30,17 @@ public class GraphicViewPresenterTest {
     protected GraphicView graphicView;
     protected CoordinateTransformer transformer;
     protected GraphicViewPresenter sut;
+    protected MouseStrategyFactory mouseStrategyFactory;
 
 
     @Before
     public void setUp() throws Exception {
+        initializeTestSetup();
+        sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer);
+        sut.setGraphicView(graphicView);
+    }
+
+    protected void initializeTestSetup() {
         transformer = new CoordinateTransformerImpl();
         setWorldAndViewBounds();
         painterSpy = mock(Painter.class);
@@ -51,12 +58,10 @@ public class GraphicViewPresenterTest {
                 shape.paint(painterSpy, transformer);
             return null;
         }).when(graphicView).update();
-        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory, transformer);
-        sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer);
-        sut.setGraphicView(graphicView);
+        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory, transformer);
     }
 
-    private void setWorldAndViewBounds() {
+    protected void setWorldAndViewBounds() {
         transformer.setWorldBounds(makePoint(-15, 10), makePoint(10, -10));
         transformer.setViewBounds(makePoint(0, 0), makePoint(800, 600));
     }
