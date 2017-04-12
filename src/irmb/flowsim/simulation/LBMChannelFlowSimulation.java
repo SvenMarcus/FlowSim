@@ -33,32 +33,34 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
 
     @Override
     public void paint(Painter painter, CoordinateTransformer transformer) {
-        getInitialMinMax();
-        double currentMin = min;
-        double currentMax = max;
-
-        min = Double.MAX_VALUE;
-        max = -Double.MAX_VALUE;
+//        getInitialMinMax();
+//        double currentMin = min;
+//        double currentMax = max;
+//
+//        min = Double.MAX_VALUE;
+//        max = -Double.MAX_VALUE;
 
         Point topLeft = transformer.transformToPointOnScreen(grid.getTopLeft());
         double width = transformer.scaleToScreenLength(grid.getWidth());
         double height = transformer.scaleToScreenLength(grid.getHeight());
         painter.paintRectangle(topLeft.getX(), topLeft.getY(), width, height);
+        painter.paintString(String.valueOf(grid.getMNUPS()), 10, 10);
+//        int x, y;
+//        double vx, vy, viewDelta, viewX, viewY;
+//        viewDelta = transformer.scaleToScreenLength(grid.getDelta());
+//        viewX = topLeft.getX();
+//        viewY = topLeft.getY();
+//        for (int i = 0; i < grid.getHorizontalNodes() * grid.getVerticalNodes(); i++) {
+//            x = i % grid.getHorizontalNodes();
+//            y = i / grid.getHorizontalNodes();
+//            adjustMinMax(x, y);
+//            vx = grid.getHorizontalVelocityAt(x, y);
+//            vy = grid.getVerticalVelocityAt(x, y);
 
-        int x, y;
-        double vx, vy, viewDelta, viewX, viewY;
-        viewDelta = transformer.scaleToScreenLength(grid.getDelta());
-        viewX = topLeft.getX();
-        viewY = topLeft.getY();
-        for (int i = 0; i < grid.getHorizontalNodes() * grid.getVerticalNodes(); i++) {
-            x = i % grid.getHorizontalNodes();
-            y = i / grid.getHorizontalNodes();
-            adjustMinMax(x, y);
-            vx = grid.getHorizontalVelocityAt(x, y);
-            vy = grid.getVerticalVelocityAt(x, y);
             for (GridNodeStyle style : styleList)
-                style.paintGridNode(painter, x, y, currentMin, currentMax, vx, vy, viewX, viewY, viewDelta, grid.getHeight());
-        }
+//                style.paintGridNode(painter, x, y, currentMin, currentMax, vx, vy, viewX, viewY, viewDelta, grid.getHeight());
+                style.paintGridNode(painter, transformer);
+//        }
     }
 
     private void getInitialMinMax() {
@@ -105,6 +107,7 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
     public void addPlotStyle(GridNodeStyle gridNodeStyle) {
         styleList.add(gridNodeStyle);
         styleList.sort(Comparator.naturalOrder());
+        gridNodeStyle.setGrid(grid);
     }
 
     @Override

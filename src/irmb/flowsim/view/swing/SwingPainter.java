@@ -50,6 +50,11 @@ public class SwingPainter implements Painter {
         graphics.drawLine((int) x + 5, (int) y - 5, (int) x - 5, (int) y + 5);
     }
 
+    @Override
+    public void paintString(String s, double x, double y) {
+        graphics.drawString(s, (int) x, (int) y);
+    }
+
     public void setGraphics(Graphics graphics) {
         this.graphics = graphics;
     }

@@ -13,4 +13,6 @@ public interface Painter {
     void fillRectangle(double x, double y, double width, double height);
 
     void paintPoint(double x, double y);
+
+    void paintString(String s, double x, double y);
 }

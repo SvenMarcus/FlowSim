@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static irmb.test.util.TestUtil.DELTA;
 import static irmb.test.util.TestUtil.doubleOf;
 import static irmb.test.util.TestUtil.makePoint;
 import static org.junit.Assert.assertEquals;
@@ -113,14 +114,11 @@ public class LBMChannelFlowSimulationTest {
         gridVyValues = new double[verticalNodes][horizontalNodes];
         for (int i = 0; i < verticalNodes; i++)
             for (int j = 0; j < horizontalNodes; j++) {
-
-            }
-
-        for (int i = 0; i < verticalNodes; i++)
-            for (int j = 0; j < horizontalNodes; j++) {
-                gridVxValues[i][j] = rnd.nextInt(10);
-                gridVyValues[i][j] = rnd.nextInt(10);
-                int value = (int) Math.sqrt(gridVxValues[i][j] * gridVxValues[i][j] + gridVyValues[i][j] * gridVyValues[i][j]);
+//                gridVxValues[i][j] = (double)rnd.nextInt(10);
+//                gridVyValues[i][j] = (double)rnd.nextInt(10);
+                gridVxValues[i][j] = 2 * i + j;
+                gridVyValues[i][j] = i + 2 * j;
+                double value = Math.sqrt(gridVxValues[i][j] * gridVxValues[i][j] + gridVyValues[i][j] * gridVyValues[i][j]);
                 if (value > fMax)
                     fMax = value;
                 if (value < fMin)
@@ -366,6 +364,14 @@ public class LBMChannelFlowSimulationTest {
         public void whenCallingPaint_shouldSetCorrectColors() {
             sut.addPlotStyle(new ColorGridNodeStyle(colorFactory));
             sut.paint(painterSpy, transformer);
+            ArgumentCaptor<Double> doubleCaptor = ArgumentCaptor.forClass(Double.class);
+            verify(colorFactory, times(verticalNodes * horizontalNodes)).makeColorForValue(
+                    doubleCaptor.capture(),
+                    doubleCaptor.capture(),
+                    doubleCaptor.capture()
+            );
+            assertCorrectColorFactoryArgs(doubleCaptor.getAllValues());
+
             ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
             verify(painterSpy, times(verticalNodes * horizontalNodes)).setColor(colorCaptor.capture());
 
@@ -407,6 +413,17 @@ public class LBMChannelFlowSimulationTest {
                 }
         }
 
+        private void assertCorrectColorFactoryArgs(List<Double> capturedValues) {
+            int valueIndex = 0;
+            for (int i = 0; i < verticalNodes; i++)
+                for (int j = 0; j < horizontalNodes; j++) {
+                    assertEquals(fMin, capturedValues.get(valueIndex), DELTA);
+                    assertEquals(fMax, capturedValues.get(valueIndex + 1), DELTA);
+                    assertEquals(gridValues[i][j], capturedValues.get(valueIndex + 2), DELTA);
+                    valueIndex += 3;
+                }
+        }
+
         private void assertColorEquals(Color c, int r, int g, int b) {
             assertEquals(r, c.r);
             assertEquals(g, c.g);
@@ -419,17 +436,29 @@ public class LBMChannelFlowSimulationTest {
             sut.addPlotStyle(new ColorGridNodeStyle(colorFactory));
             sut.paint(painterSpy, transformer);
             ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
-            ArgumentCaptor<Double> doubleCaptor = ArgumentCaptor.forClass(Double.class);
+            ArgumentCaptor<Double> rectCaptor = ArgumentCaptor.forClass(Double.class);
+            ArgumentCaptor<Double> factoryArgsCaptor = ArgumentCaptor.forClass(Double.class);
             int minNumberOfInvocations = horizontalNodes * verticalNodes;
-            verify(painterSpy, atLeast(minNumberOfInvocations)).setColor(colorCaptor.capture());
-            verify(painterSpy, atLeast(minNumberOfInvocations)).fillRectangle(
-                    doubleCaptor.capture(),
-                    doubleCaptor.capture(),
-                    doubleCaptor.capture(),
-                    doubleCaptor.capture()
+
+
+            verify(colorFactory, times(minNumberOfInvocations)).makeColorForValue(
+                    factoryArgsCaptor.capture(),
+                    factoryArgsCaptor.capture(),
+                    factoryArgsCaptor.capture()
             );
+
+            verify(painterSpy, atLeast(minNumberOfInvocations)).setColor(colorCaptor.capture());
+
+            verify(painterSpy, atLeast(minNumberOfInvocations)).fillRectangle(
+                    rectCaptor.capture(),
+                    rectCaptor.capture(),
+                    rectCaptor.capture(),
+                    rectCaptor.capture()
+            );
+
+            assertCorrectColorFactoryArgs(factoryArgsCaptor.getAllValues());
             assertCorrectGridColors(colorCaptor.getAllValues());
-            assertCorrectRectangleValues(doubleCaptor.getAllValues());
+            assertCorrectRectangleValues(rectCaptor.getAllValues());
         }
 
         private void assertCorrectRectangleValues(List<Double> capturedDoubles) {
@@ -472,7 +501,6 @@ public class LBMChannelFlowSimulationTest {
             verify(gridSpy).resetSolidNodes();
             verifyNoMoreInteractions(gridSpy);
         }
-
 
         @Test
         public void whenCallingSetShapesWithLine_shouldMapToGrid() {

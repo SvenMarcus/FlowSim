@@ -118,6 +118,11 @@ public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
         return grid.getScalar(x, y, Scalar.V_Y);
     }
 
+    @Override
+    public double getMNUPS() {
+        return grid.mnups;
+    }
+
     public LBMNavierStokesGrid getJFlowSimGrid() {
         return grid;
     }

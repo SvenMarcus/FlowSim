@@ -54,6 +54,11 @@ public class JavaFXPainter implements Painter {
         graphicsContext.strokeLine(x + 5, y - 5, x - 5, y + 5);
     }
 
+    @Override
+    public void paintString(String s, double x, double y) {
+
+    }
+
     public void setGraphicsContext(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
     }

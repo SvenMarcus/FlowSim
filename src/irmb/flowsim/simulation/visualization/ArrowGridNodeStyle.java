@@ -1,5 +1,6 @@
 package irmb.flowsim.simulation.visualization;
 
+import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.Color;
 import irmb.flowsim.presentation.Painter;
 
@@ -41,6 +42,11 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
             painter.paintLine(x1, y1, xC, yC);
             painter.paintLine(x1, y1, xD, yD);
         }
+    }
+
+    @Override
+    public void paintGridNode(Painter painter, CoordinateTransformer transformer) {
+
     }
 
     public boolean equals(Object o) {
