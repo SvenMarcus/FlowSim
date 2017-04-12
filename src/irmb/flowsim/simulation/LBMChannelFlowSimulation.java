@@ -33,34 +33,18 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
 
     @Override
     public void paint(Painter painter, CoordinateTransformer transformer) {
-//        getInitialMinMax();
-//        double currentMin = min;
-//        double currentMax = max;
-//
-//        min = Double.MAX_VALUE;
-//        max = -Double.MAX_VALUE;
+        paintSurroundingRectangle(painter, transformer);
+        painter.paintString(String.valueOf(grid.getMNUPS()), 10, 10);
+        for (GridNodeStyle style : styleList)
+            style.paintGridNode(painter, transformer);
+    }
 
+    private void paintSurroundingRectangle(Painter painter, CoordinateTransformer transformer) {
         Point topLeft = transformer.transformToPointOnScreen(grid.getTopLeft());
         double width = transformer.scaleToScreenLength(grid.getWidth());
         double height = transformer.scaleToScreenLength(grid.getHeight());
         painter.paintRectangle(topLeft.getX(), topLeft.getY(), width, height);
-        painter.paintString(String.valueOf(grid.getMNUPS()), 10, 10);
-//        int x, y;
-//        double vx, vy, viewDelta, viewX, viewY;
-//        viewDelta = transformer.scaleToScreenLength(grid.getDelta());
-//        viewX = topLeft.getX();
-//        viewY = topLeft.getY();
-//        for (int i = 0; i < grid.getHorizontalNodes() * grid.getVerticalNodes(); i++) {
-//            x = i % grid.getHorizontalNodes();
-//            y = i / grid.getHorizontalNodes();
-//            adjustMinMax(x, y);
-//            vx = grid.getHorizontalVelocityAt(x, y);
-//            vy = grid.getVerticalVelocityAt(x, y);
 
-            for (GridNodeStyle style : styleList)
-//                style.paintGridNode(painter, x, y, currentMin, currentMax, vx, vy, viewX, viewY, viewDelta, grid.getHeight());
-                style.paintGridNode(painter, transformer);
-//        }
     }
 
     private void getInitialMinMax() {

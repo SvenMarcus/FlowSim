@@ -24,13 +24,6 @@ public class ColorGridNodeStyle extends GridNodeStyle {
     }
 
     @Override
-    public void paintGridNode(Painter painter, int xIndex, int yIndex, double min, double max, double vx, double vy, double viewX, double viewY, double viewDelta, double gridHeight) {
-        double velocity = Math.sqrt(vx * vx + vy * vy);
-        painter.setColor(colorFactory.makeColorForValue(min, max, velocity));
-        painter.fillRectangle(viewX + xIndex * viewDelta, viewY - gridHeight + yIndex * viewDelta, Math.ceil(viewDelta), Math.ceil(viewDelta));
-    }
-
-    @Override
     public void paintGridNode(Painter painter, CoordinateTransformer transformer) {
         double viewDelta, viewX, viewY;
         viewDelta = transformer.scaleToScreenLength(grid.getDelta());
@@ -39,16 +32,17 @@ public class ColorGridNodeStyle extends GridNodeStyle {
         viewY = topLeft.getY();
 
         getInitialMinMax();
-        currentMin = min;
-        currentMax = max;
+        double currentMin = min;
+        double currentMax = max;
 
         min = Double.MAX_VALUE;
-        max = Double.MIN_VALUE;
+        max = -Double.MAX_VALUE;
 
-        for (int x = 0; x < grid.getHorizontalNodes(); x++)
-            for (int y = 0; y < grid.getVerticalNodes(); y++) {
+        for (int y = 0; y < grid.getVerticalNodes(); y++)
+            for (int x = 0; x < grid.getHorizontalNodes(); x++) {
                 adjustMinMax(x, y);
-                painter.setColor(colorFactory.makeColorForValue(currentMin, currentMax, grid.getVelocityAt(x, y)));
+                double velocity = grid.getVelocityAt(x, y);
+                painter.setColor(colorFactory.makeColorForValue(currentMin, currentMax, velocity));
                 painter.fillRectangle(viewX + x * viewDelta, viewY - grid.getHeight() + y * viewDelta, Math.ceil(viewDelta), Math.ceil(viewDelta));
             }
     }

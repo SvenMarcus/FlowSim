@@ -9,7 +9,6 @@ import irmb.flowsim.simulation.UniformGrid;
  */
 public abstract class GridNodeStyle implements Comparable<GridNodeStyle> {
     protected final int priority;
-
     protected UniformGrid grid;
 
     protected GridNodeStyle(int priority) {
@@ -19,8 +18,6 @@ public abstract class GridNodeStyle implements Comparable<GridNodeStyle> {
     public void setGrid(UniformGrid grid) {
         this.grid = grid;
     }
-
-    public abstract void paintGridNode(Painter painter, int xIndex, int yIndex, double min, double max, double vx, double vy, double viewX, double viewY, double viewDelta, double gridHeight);
 
     public abstract void paintGridNode(Painter painter, CoordinateTransformer transformer);
 

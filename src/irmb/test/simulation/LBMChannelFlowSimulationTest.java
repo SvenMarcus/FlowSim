@@ -12,7 +12,6 @@ import irmb.flowsim.simulation.visualization.ArrowGridNodeStyle;
 import irmb.flowsim.simulation.visualization.ColorGridNodeStyle;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.*;
-import irmb.test.util.MockitoUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,8 +20,8 @@ import org.mockito.InOrder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+import static irmb.test.util.MockitoUtil.removeInvocation;
 import static irmb.test.util.TestUtil.DELTA;
 import static irmb.test.util.TestUtil.doubleOf;
 import static irmb.test.util.TestUtil.makePoint;
@@ -40,7 +39,7 @@ public class LBMChannelFlowSimulationTest {
     private int screenLengthScale = 7;
     private int screenXOffset = 1;
     private int screenYOffset = 5;
-    private UniformGrid gridSpy;
+    private UniformGrid gridStub;
     private LBMChannelFlowSimulation sut;
     private Painter painterSpy;
     private CoordinateTransformer transformer;
@@ -71,6 +70,14 @@ public class LBMChannelFlowSimulationTest {
             return p;
         });
         when(transformer.scaleToScreenLength(anyDouble())).thenAnswer(invocationOnMock -> (double) invocationOnMock.getArgument(0) * screenLengthScale);
+        ignorePaintStringCalls();
+    }
+
+    private void ignorePaintStringCalls() {
+        doAnswer(invocationOnMock -> {
+            removeInvocation(invocationOnMock);
+            return null;
+        }).when(painterSpy).paintString(anyString(), anyDouble(), anyDouble());
     }
 
     private void setColorFactoryBehavior(ColorFactory colorFactory) {
@@ -84,38 +91,35 @@ public class LBMChannelFlowSimulationTest {
 
     private void setGridBehavior(Point origin, double gridDelta) {
         initGridValues();
-        when(gridSpy.getTopLeft()).thenReturn(origin);
+        when(gridStub.getTopLeft()).thenReturn(origin);
         double width = (horizontalNodes - 1) * gridDelta;
-        when(gridSpy.getWidth()).thenReturn(width);
+        when(gridStub.getWidth()).thenReturn(width);
         double height = (verticalNodes - 1) * gridDelta;
-        when(gridSpy.getHeight()).thenReturn(height);
-        when(gridSpy.getHorizontalNodes()).thenReturn(horizontalNodes);
-        when(gridSpy.getVerticalNodes()).thenReturn(verticalNodes);
-        when(gridSpy.getDelta()).thenReturn(gridDelta);
-        when(gridSpy.getVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
+        when(gridStub.getHeight()).thenReturn(height);
+        when(gridStub.getHorizontalNodes()).thenReturn(horizontalNodes);
+        when(gridStub.getVerticalNodes()).thenReturn(verticalNodes);
+        when(gridStub.getDelta()).thenReturn(gridDelta);
+        when(gridStub.getVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
             return gridValues[(int) invocationOnMock.getArgument(1)][(int) invocationOnMock.getArgument(0)];
         });
-        when(gridSpy.getHorizontalVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
+        when(gridStub.getHorizontalVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
             return gridVxValues[(int) invocationOnMock.getArgument(1)][(int) invocationOnMock.getArgument(0)];
         });
-        when(gridSpy.getVerticalVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
+        when(gridStub.getVerticalVelocityAt(anyInt(), anyInt())).thenAnswer(invocationOnMock -> {
             return gridVyValues[(int) invocationOnMock.getArgument(1)][(int) invocationOnMock.getArgument(0)];
         });
-        when(gridSpy.isPointInside(any(Point.class))).thenAnswer(invocationOnMock -> {
+        when(gridStub.isPointInside(any(Point.class))).thenAnswer(invocationOnMock -> {
             Point point = invocationOnMock.getArgument(0);
             return !(point.getX() < origin.getX() || point.getX() > origin.getX() + width || point.getY() < origin.getY() - height || point.getY() > origin.getY());
         });
     }
 
     private void initGridValues() {
-        Random rnd = new Random();
         gridValues = new double[verticalNodes][horizontalNodes];
         gridVxValues = new double[verticalNodes][horizontalNodes];
         gridVyValues = new double[verticalNodes][horizontalNodes];
         for (int i = 0; i < verticalNodes; i++)
             for (int j = 0; j < horizontalNodes; j++) {
-//                gridVxValues[i][j] = (double)rnd.nextInt(10);
-//                gridVyValues[i][j] = (double)rnd.nextInt(10);
                 gridVxValues[i][j] = 2 * i + j;
                 gridVyValues[i][j] = i + 2 * j;
                 double value = Math.sqrt(gridVxValues[i][j] * gridVxValues[i][j] + gridVyValues[i][j] * gridVyValues[i][j]);
@@ -138,8 +142,8 @@ public class LBMChannelFlowSimulationTest {
 
     @Test
     public void whenPainting_shouldOnlyPaintSimulationBoundaries() {
-        gridSpy = mock(UniformGrid.class);
-        sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
+        gridStub = mock(UniformGrid.class);
+        sut = new LBMChannelFlowSimulation(gridStub, solverSpy);
         horizontalNodes = 3;
         verticalNodes = 2;
         setGridBehavior(makePoint(0, 0), 1);
@@ -150,11 +154,11 @@ public class LBMChannelFlowSimulationTest {
 
     @Test
     public void whenAddingPlotStyleThenRemoving_shouldNotPaintAnyGridNodes() {
-        gridSpy = mock(UniformGrid.class);
+        gridStub = mock(UniformGrid.class);
         horizontalNodes = 3;
         verticalNodes = 2;
         setGridBehavior(makePoint(0, 0), 1);
-        sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
+        sut = new LBMChannelFlowSimulation(gridStub, solverSpy);
         ColorGridNodeStyle gridNodeStyle = new ColorGridNodeStyle(colorFactory);
         sut.addPlotStyle(gridNodeStyle);
         sut.paint(painterSpy, transformer);
@@ -168,14 +172,22 @@ public class LBMChannelFlowSimulationTest {
     public class ArrowPlotStyleContext {
         @Before
         public void setUp() {
-            gridSpy = mock(UniformGrid.class);
+            gridStub = mock(UniformGrid.class);
             horizontalNodes = 2;
             verticalNodes = 1;
             screenXOffset = 0;
             screenYOffset = 0;
             screenLengthScale = 1;
             setGridBehavior(makePoint(0, 0), 1.);
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
+            ignoreSetColor();
+            sut = new LBMChannelFlowSimulation(gridStub, solverSpy);
+        }
+
+        private void ignoreSetColor() {
+            doAnswer(invocationOnMock -> {
+                removeInvocation(invocationOnMock);
+                return null;
+            }).when(painterSpy).setColor(any());
         }
 
         @Test
@@ -352,18 +364,18 @@ public class LBMChannelFlowSimulationTest {
     public class BasicGridContext {
         @Before
         public void setUp() {
-            gridSpy = mock(UniformGrid.class);
+            gridStub = mock(UniformGrid.class);
             horizontalNodes = 4;
             verticalNodes = 3;
             setGridBehavior(makePoint(0, 2), 1.);
-
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
+            sut = new LBMChannelFlowSimulation(gridStub, solverSpy);
         }
 
         @Test
         public void whenCallingPaint_shouldSetCorrectColors() {
             sut.addPlotStyle(new ColorGridNodeStyle(colorFactory));
             sut.paint(painterSpy, transformer);
+
             ArgumentCaptor<Double> doubleCaptor = ArgumentCaptor.forClass(Double.class);
             verify(colorFactory, times(verticalNodes * horizontalNodes)).makeColorForValue(
                     doubleCaptor.capture(),
@@ -395,7 +407,7 @@ public class LBMChannelFlowSimulationTest {
 
             fMin = 0;
             fMax = Math.sqrt(20 * 20 + 20 * 20);
-            ;
+
             sut.paint(painterSpy, transformer);
 
             ArgumentCaptor<Color> colorCaptor = ArgumentCaptor.forClass(Color.class);
@@ -417,10 +429,9 @@ public class LBMChannelFlowSimulationTest {
             int valueIndex = 0;
             for (int i = 0; i < verticalNodes; i++)
                 for (int j = 0; j < horizontalNodes; j++) {
-                    assertEquals(fMin, capturedValues.get(valueIndex), DELTA);
-                    assertEquals(fMax, capturedValues.get(valueIndex + 1), DELTA);
-                    assertEquals(gridValues[i][j], capturedValues.get(valueIndex + 2), DELTA);
-                    valueIndex += 3;
+                    assertEquals(fMin, capturedValues.get(valueIndex++), DELTA);
+                    assertEquals(fMax, capturedValues.get(valueIndex++), DELTA);
+                    assertEquals(gridValues[i][j], capturedValues.get(valueIndex++), DELTA);
                 }
         }
 
@@ -428,7 +439,6 @@ public class LBMChannelFlowSimulationTest {
             assertEquals(r, c.r);
             assertEquals(g, c.g);
             assertEquals(b, c.b);
-
         }
 
         @Test
@@ -498,8 +508,8 @@ public class LBMChannelFlowSimulationTest {
         public void whenCallingSetShapesWithEmptyList_shouldOnlyResetGrid() {
             List<PaintableShape> shapeList = new ArrayList<>();
             sut.setShapes(shapeList);
-            verify(gridSpy).resetSolidNodes();
-            verifyNoMoreInteractions(gridSpy);
+            verify(gridStub).resetSolidNodes();
+            verifyNoMoreInteractions(gridStub);
         }
 
         @Test
@@ -508,22 +518,22 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy).setSolid(0, 2);
-            verify(gridSpy).setSolid(1, 1);
-            verify(gridSpy).setSolid(2, 1);
-            verify(gridSpy).setSolid(3, 0);
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub).setSolid(0, 2);
+            verify(gridStub).setSolid(1, 1);
+            verify(gridStub).setSolid(2, 1);
+            verify(gridStub).setSolid(3, 0);
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             shapeList = getPaintableShapeListWithLine(makePoint(1, 0), makePoint(3, 2));
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy).setSolid(1, 2);
-            verify(gridSpy).setSolid(2, 1);
-            verify(gridSpy).setSolid(3, 0);
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub).setSolid(1, 2);
+            verify(gridStub).setSolid(2, 1);
+            verify(gridStub).setSolid(3, 0);
         }
 
     }
@@ -532,12 +542,12 @@ public class LBMChannelFlowSimulationTest {
 
         @Before
         public void setUp() {
-            gridSpy = mock(UniformGrid.class);
+            gridStub = mock(UniformGrid.class);
             horizontalNodes = 5;
             verticalNodes = 8;
             setGridBehavior(makePoint(-1, 10), 1.);
 
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
+            sut = new LBMChannelFlowSimulation(gridStub, solverSpy);
         }
 
 
@@ -548,11 +558,11 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy).setSolid(1, 7);
-            verify(gridSpy).setSolid(2, 6);
-            verify(gridSpy).setSolid(3, 6);
-            verify(gridSpy).setSolid(4, 5);
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub).setSolid(1, 7);
+            verify(gridStub).setSolid(2, 6);
+            verify(gridStub).setSolid(3, 6);
+            verify(gridStub).setSolid(4, 5);
         }
     }
 
@@ -560,12 +570,12 @@ public class LBMChannelFlowSimulationTest {
 
         @Before
         public void setUp() {
-            gridSpy = mock(UniformGrid.class);
+            gridStub = mock(UniformGrid.class);
             horizontalNodes = 11;
             verticalNodes = 16;
             setGridBehavior(makePoint(-1, 10), .5);
 
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
+            sut = new LBMChannelFlowSimulation(gridStub, solverSpy);
         }
 
         @Test
@@ -574,14 +584,14 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy).setSolid(2, 14);
-            verify(gridSpy).setSolid(3, 13);
-            verify(gridSpy).setSolid(4, 13);
-            verify(gridSpy).setSolid(5, 12);
-            verify(gridSpy).setSolid(6, 11);
-            verify(gridSpy).setSolid(7, 11);
-            verify(gridSpy).setSolid(8, 10);
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub).setSolid(2, 14);
+            verify(gridStub).setSolid(3, 13);
+            verify(gridStub).setSolid(4, 13);
+            verify(gridStub).setSolid(5, 12);
+            verify(gridStub).setSolid(6, 11);
+            verify(gridStub).setSolid(7, 11);
+            verify(gridStub).setSolid(8, 10);
         }
 
         @Test
@@ -590,35 +600,35 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             shapeList = getPaintableShapeListWithLine(makePoint(4.1, 5), makePoint(0, 3));
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             shapeList = getPaintableShapeListWithLine(makePoint(2, 2), makePoint(0, 3));
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             shapeList = getPaintableShapeListWithLine(makePoint(2, 4), makePoint(0, 11));
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
         }
 
         @Test
@@ -631,34 +641,34 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, atLeastOnce()).setSolid(2, 14);
-            verify(gridSpy).setSolid(3, 14);
-            verify(gridSpy).setSolid(4, 14);
-            verify(gridSpy).setSolid(5, 14);
-            verify(gridSpy).setSolid(6, 14);
-            verify(gridSpy).setSolid(7, 14);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 14);
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, atLeastOnce()).setSolid(2, 14);
+            verify(gridStub).setSolid(3, 14);
+            verify(gridStub).setSolid(4, 14);
+            verify(gridStub).setSolid(5, 14);
+            verify(gridStub).setSolid(6, 14);
+            verify(gridStub).setSolid(7, 14);
+            verify(gridStub, atLeastOnce()).setSolid(8, 14);
 
-            verify(gridSpy, atLeastOnce()).setSolid(2, 10);
-            verify(gridSpy).setSolid(3, 10);
-            verify(gridSpy).setSolid(4, 10);
-            verify(gridSpy).setSolid(5, 10);
-            verify(gridSpy).setSolid(6, 10);
-            verify(gridSpy).setSolid(7, 10);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+            verify(gridStub, atLeastOnce()).setSolid(2, 10);
+            verify(gridStub).setSolid(3, 10);
+            verify(gridStub).setSolid(4, 10);
+            verify(gridStub).setSolid(5, 10);
+            verify(gridStub).setSolid(6, 10);
+            verify(gridStub).setSolid(7, 10);
+            verify(gridStub, atLeastOnce()).setSolid(8, 10);
 
-            verify(gridSpy, atLeastOnce()).setSolid(2, 14);
-            verify(gridSpy).setSolid(2, 13);
-            verify(gridSpy).setSolid(2, 12);
-            verify(gridSpy).setSolid(2, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(2, 10);
+            verify(gridStub, atLeastOnce()).setSolid(2, 14);
+            verify(gridStub).setSolid(2, 13);
+            verify(gridStub).setSolid(2, 12);
+            verify(gridStub).setSolid(2, 11);
+            verify(gridStub, atLeastOnce()).setSolid(2, 10);
 
-            verify(gridSpy, atLeastOnce()).setSolid(8, 14);
-            verify(gridSpy).setSolid(8, 13);
-            verify(gridSpy).setSolid(8, 12);
-            verify(gridSpy).setSolid(8, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+            verify(gridStub, atLeastOnce()).setSolid(8, 14);
+            verify(gridStub).setSolid(8, 13);
+            verify(gridStub).setSolid(8, 12);
+            verify(gridStub).setSolid(8, 11);
+            verify(gridStub, atLeastOnce()).setSolid(8, 10);
 
         }
 
@@ -672,10 +682,10 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             rectangle.setFirst(makePoint(1, 4));
             rectangle.setSecond(makePoint(9, 11));
@@ -684,8 +694,8 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
         }
 
         @Test
@@ -700,34 +710,34 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy).setSolid(2, 14);
-            verify(gridSpy).setSolid(3, 13);
-            verify(gridSpy).setSolid(4, 13);
-            verify(gridSpy).setSolid(5, 12);
-            verify(gridSpy).setSolid(6, 11);
-            verify(gridSpy).setSolid(7, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub).setSolid(2, 14);
+            verify(gridStub).setSolid(3, 13);
+            verify(gridStub).setSolid(4, 13);
+            verify(gridStub).setSolid(5, 12);
+            verify(gridStub).setSolid(6, 11);
+            verify(gridStub).setSolid(7, 11);
+            verify(gridStub, atLeastOnce()).setSolid(8, 10);
 
-            verify(gridSpy).setSolid(8, 9);
-            verify(gridSpy).setSolid(8, 8);
-            verify(gridSpy).setSolid(8, 7);
-            verify(gridSpy).setSolid(8, 6);
-            verify(gridSpy).setSolid(8, 5);
-            verify(gridSpy).setSolid(8, 4);
-            verify(gridSpy).setSolid(8, 3);
-            verify(gridSpy).setSolid(8, 2);
-            verify(gridSpy).setSolid(8, 1);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 0);
+            verify(gridStub).setSolid(8, 9);
+            verify(gridStub).setSolid(8, 8);
+            verify(gridStub).setSolid(8, 7);
+            verify(gridStub).setSolid(8, 6);
+            verify(gridStub).setSolid(8, 5);
+            verify(gridStub).setSolid(8, 4);
+            verify(gridStub).setSolid(8, 3);
+            verify(gridStub).setSolid(8, 2);
+            verify(gridStub).setSolid(8, 1);
+            verify(gridStub, atLeastOnce()).setSolid(8, 0);
 
-            verify(gridSpy).setSolid(7, 0);
-            verify(gridSpy).setSolid(6, 0);
-            verify(gridSpy).setSolid(5, 0);
-            verify(gridSpy).setSolid(4, 0);
-            verify(gridSpy).setSolid(3, 0);
-            verify(gridSpy).setSolid(2, 0);
-            verify(gridSpy).setSolid(1, 0);
-            verify(gridSpy).setSolid(0, 0);
+            verify(gridStub).setSolid(7, 0);
+            verify(gridStub).setSolid(6, 0);
+            verify(gridStub).setSolid(5, 0);
+            verify(gridStub).setSolid(4, 0);
+            verify(gridStub).setSolid(3, 0);
+            verify(gridStub).setSolid(2, 0);
+            verify(gridStub).setSolid(1, 0);
+            verify(gridStub).setSolid(0, 0);
         }
 
         @Test
@@ -741,10 +751,10 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             polyLine = new PolyLine();
             polyLine.addPoint(makePoint(0, 3));
@@ -755,10 +765,10 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             polyLine = new PolyLine();
             polyLine.addPoint(makePoint(0, 3));
@@ -769,8 +779,8 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
         }
 
         @Test
@@ -783,40 +793,40 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy).resetSolidNodes();
-            verify(gridSpy).setSolid(0, 6);
-            verify(gridSpy).setSolid(1, 6);
-            verify(gridSpy).setSolid(2, 5);
-            verify(gridSpy).setSolid(3, 5);
-            verify(gridSpy).setSolid(4, 4);
+            verify(gridStub).resetSolidNodes();
+            verify(gridStub).setSolid(0, 6);
+            verify(gridStub).setSolid(1, 6);
+            verify(gridStub).setSolid(2, 5);
+            verify(gridStub).setSolid(3, 5);
+            verify(gridStub).setSolid(4, 4);
 
-            verify(gridSpy, atLeastOnce()).setSolid(2, 14);
-            verify(gridSpy).setSolid(3, 14);
-            verify(gridSpy).setSolid(4, 14);
-            verify(gridSpy).setSolid(5, 14);
-            verify(gridSpy).setSolid(6, 14);
-            verify(gridSpy).setSolid(7, 14);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 14);
+            verify(gridStub, atLeastOnce()).setSolid(2, 14);
+            verify(gridStub).setSolid(3, 14);
+            verify(gridStub).setSolid(4, 14);
+            verify(gridStub).setSolid(5, 14);
+            verify(gridStub).setSolid(6, 14);
+            verify(gridStub).setSolid(7, 14);
+            verify(gridStub, atLeastOnce()).setSolid(8, 14);
 
-            verify(gridSpy, atLeastOnce()).setSolid(2, 10);
-            verify(gridSpy).setSolid(3, 10);
-            verify(gridSpy).setSolid(4, 10);
-            verify(gridSpy).setSolid(5, 10);
-            verify(gridSpy).setSolid(6, 10);
-            verify(gridSpy).setSolid(7, 10);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+            verify(gridStub, atLeastOnce()).setSolid(2, 10);
+            verify(gridStub).setSolid(3, 10);
+            verify(gridStub).setSolid(4, 10);
+            verify(gridStub).setSolid(5, 10);
+            verify(gridStub).setSolid(6, 10);
+            verify(gridStub).setSolid(7, 10);
+            verify(gridStub, atLeastOnce()).setSolid(8, 10);
 
-            verify(gridSpy, atLeastOnce()).setSolid(2, 14);
-            verify(gridSpy).setSolid(2, 13);
-            verify(gridSpy).setSolid(2, 12);
-            verify(gridSpy).setSolid(2, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(2, 10);
+            verify(gridStub, atLeastOnce()).setSolid(2, 14);
+            verify(gridStub).setSolid(2, 13);
+            verify(gridStub).setSolid(2, 12);
+            verify(gridStub).setSolid(2, 11);
+            verify(gridStub, atLeastOnce()).setSolid(2, 10);
 
-            verify(gridSpy, atLeastOnce()).setSolid(8, 14);
-            verify(gridSpy).setSolid(8, 13);
-            verify(gridSpy).setSolid(8, 12);
-            verify(gridSpy).setSolid(8, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 10);
+            verify(gridStub, atLeastOnce()).setSolid(8, 14);
+            verify(gridStub).setSolid(8, 13);
+            verify(gridStub).setSolid(8, 12);
+            verify(gridStub).setSolid(8, 11);
+            verify(gridStub, atLeastOnce()).setSolid(8, 10);
 
         }
 
@@ -833,27 +843,27 @@ public class LBMChannelFlowSimulationTest {
 
             sut.setShapes(shapeList);
 
-            verify(gridSpy, atLeastOnce()).setSolid(0, 14);
-            verify(gridSpy, atLeastOnce()).setSolid(0, 13);
-            verify(gridSpy, atLeastOnce()).setSolid(1, 13);
-            verify(gridSpy, atLeastOnce()).setSolid(1, 12);
-            verify(gridSpy, atLeastOnce()).setSolid(2, 12);
-            verify(gridSpy, atLeastOnce()).setSolid(2, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(3, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(4, 11);
-            verify(gridSpy, atLeastOnce()).setSolid(4, 10);
-            verify(gridSpy, atLeastOnce()).setSolid(5, 10);
-            verify(gridSpy, atLeastOnce()).setSolid(5, 9);
-            verify(gridSpy, atLeastOnce()).setSolid(6, 9);
-            verify(gridSpy, atLeastOnce()).setSolid(6, 8);
-            verify(gridSpy, atLeastOnce()).setSolid(7, 8);
-            verify(gridSpy, atLeastOnce()).setSolid(7, 7);
-            verify(gridSpy, atLeastOnce()).setSolid(7, 6);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 6);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 5);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 4);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 3);
-            verify(gridSpy, atLeastOnce()).setSolid(8, 2);
+            verify(gridStub, atLeastOnce()).setSolid(0, 14);
+            verify(gridStub, atLeastOnce()).setSolid(0, 13);
+            verify(gridStub, atLeastOnce()).setSolid(1, 13);
+            verify(gridStub, atLeastOnce()).setSolid(1, 12);
+            verify(gridStub, atLeastOnce()).setSolid(2, 12);
+            verify(gridStub, atLeastOnce()).setSolid(2, 11);
+            verify(gridStub, atLeastOnce()).setSolid(3, 11);
+            verify(gridStub, atLeastOnce()).setSolid(4, 11);
+            verify(gridStub, atLeastOnce()).setSolid(4, 10);
+            verify(gridStub, atLeastOnce()).setSolid(5, 10);
+            verify(gridStub, atLeastOnce()).setSolid(5, 9);
+            verify(gridStub, atLeastOnce()).setSolid(6, 9);
+            verify(gridStub, atLeastOnce()).setSolid(6, 8);
+            verify(gridStub, atLeastOnce()).setSolid(7, 8);
+            verify(gridStub, atLeastOnce()).setSolid(7, 7);
+            verify(gridStub, atLeastOnce()).setSolid(7, 6);
+            verify(gridStub, atLeastOnce()).setSolid(8, 6);
+            verify(gridStub, atLeastOnce()).setSolid(8, 5);
+            verify(gridStub, atLeastOnce()).setSolid(8, 4);
+            verify(gridStub, atLeastOnce()).setSolid(8, 3);
+            verify(gridStub, atLeastOnce()).setSolid(8, 2);
         }
 
         @Test
@@ -870,31 +880,31 @@ public class LBMChannelFlowSimulationTest {
             shapeList.add(paintableBezierCurve);
 
             sut.setShapes(shapeList);
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             first.setX(-1);
             second.setY(2);
 
             sut.setShapes(shapeList);
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
 
-            clearInvocations(gridSpy);
+            clearInvocations(gridStub);
 
             second.setY(3);
             third.setX(4);
             third.setY(10.1);
 
             sut.setShapes(shapeList);
-            verify(gridSpy, never()).setSolid(anyInt(), anyInt());
+            verify(gridStub, never()).setSolid(anyInt(), anyInt());
         }
     }
 
     public class ArrowAndColorStyleContext {
         @Before
         public void setUp() {
-            gridSpy = mock(UniformGrid.class);
+            gridStub = mock(UniformGrid.class);
             horizontalNodes = 2;
             verticalNodes = 1;
             screenXOffset = 0;
@@ -902,7 +912,7 @@ public class LBMChannelFlowSimulationTest {
             screenLengthScale = 1;
             setGridBehavior(makePoint(0, 0), 1.);
             makeVerticalArrowSetup();
-            sut = new LBMChannelFlowSimulation(gridSpy, solverSpy);
+            sut = new LBMChannelFlowSimulation(gridStub, solverSpy);
         }
 
         @Test
