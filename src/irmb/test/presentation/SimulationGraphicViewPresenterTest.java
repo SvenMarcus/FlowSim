@@ -11,7 +11,6 @@ import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
 import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
 import irmb.flowsim.presentation.strategy.StrategyEventArgs;
-import irmb.flowsim.simulation.Simulation;
 import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.simulation.SimulationFactoryImpl;
 import irmb.flowsim.simulation.visualization.GridNodeStyle;
@@ -165,15 +164,15 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenAddingColorPlotStyleThenAddingSimulation_shouldAddColorStyleToSimulation() {
-            sut.addPlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
             sut.addSimulation();
             assertTrue(simulationSpy.isColorStyleAdded());
         }
 
         @Test
         public void whenAddingBothArrowAndColorPlotStyleThenAddingSimulation_shouldAddBothStylesToSimulation() {
-            sut.addPlotStyle(PlotStyle.Color);
-            sut.addPlotStyle(PlotStyle.Arrow);
+            sut.togglePlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Arrow);
             sut.addSimulation();
             assertTrue(simulationSpy.isColorStyleAdded());
             assertTrue(simulationSpy.isArrowStyleAdded());
@@ -187,8 +186,8 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenAddingThenRemovingPlotStyleThenAddingSimulation_shouldNotAddAnyPlotStyles() {
-            sut.addPlotStyle(PlotStyle.Color);
-            sut.removePlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
             clearInvocations(simulationSpy);
 
             sut.addSimulation();
@@ -261,30 +260,30 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenAddingColorPlot_shouldAddColorPlotStyleToSimulation() {
-            sut.addPlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
             assertTrue(simulationSpy.isColorStyleAdded());
         }
 
         @Test
         public void whenAddingArrowPlot_shouldAddArrowPlotStyleToSimulation() {
-            sut.addPlotStyle(PlotStyle.Arrow);
+            sut.togglePlotStyle(PlotStyle.Arrow);
             assertTrue(simulationSpy.isArrowStyleAdded());
         }
 
         @Test
         public void whenRemovingColorPlot_shouldRemoveColorPlotFromSimulation() {
-            sut.addPlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
             GridNodeStyle addedPlotStyle = simulationSpy.getAddedPlotStyle();
 
-            sut.removePlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
             verify(simulationSpy).removePlotStyle(addedPlotStyle);
             assertFalse(simulationSpy.isColorStyleAdded());
         }
 
         @Test
         public void whenRemovingPlotStyleThenAddingSimulation_shouldNotAddPlotStyleToNewSimulation() {
-            sut.addPlotStyle(PlotStyle.Color);
-            sut.removePlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
             clearInvocations(simulationSpy);
 
             sut.addSimulation();
@@ -322,7 +321,7 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenAddingPlotStyle_shouldUpdateGraphicView() {
-            sut.addPlotStyle(PlotStyle.Arrow);
+            sut.togglePlotStyle(PlotStyle.Arrow);
             verify(graphicViewMock).update();
         }
 

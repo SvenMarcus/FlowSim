@@ -14,8 +14,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -95,42 +93,6 @@ public class RootController implements GraphicView {
             }
             graphicsContext2D.restore();
         };
-
-//        Image lineImage = new Image(getClass().getResource("../resources/Line2D.gif").toExternalForm(), 16, 16, true, true);
-//        ImageView lineImageView = new ImageView(lineImage);
-//        lineButton.setGraphic(lineImageView);
-//
-//        Image rectangleImage = new Image(getClass().getResource("../resources/Rectangle2D.gif").toExternalForm(), 16, 16, true, true);
-//        ImageView rectangleImageView = new ImageView(rectangleImage);
-//        rectangleButton.setGraphic(rectangleImageView);
-//
-//        Image polyLineImage = new Image(getClass().getResource("../resources/Polyline2D.gif").toExternalForm(), 16, 16, true, true);
-//        ImageView polyLineImageView = new ImageView(polyLineImage);
-//        polyLineButton.setGraphic(polyLineImageView);
-//
-//        Image bezierImage = new Image(getClass().getResource("../resources/Bezier2D.gif").toExternalForm(), 16, 16, true, true);
-//        ImageView bezierImageView = new ImageView(bezierImage);
-//        bezierButton.setGraphic(bezierImageView);
-//
-//        Image runSimulationImage = new Image(getClass().getResource("../resources/continue.png").toExternalForm(), 16, 16, true, true);
-//        ImageView runSimulationImageView = new ImageView(runSimulationImage);
-//        runSimulationButton.setGraphic(runSimulationImageView);
-//
-//        Image pauseSimulationImage = new Image(getClass().getResource("../resources/pause.png").toExternalForm(), 16, 16, true, true);
-//        ImageView pauseSimulationImageView = new ImageView(pauseSimulationImage);
-//        pauseSimulationButton.setGraphic(pauseSimulationImageView);
-//
-//        Image undoImage = new Image(getClass().getResource("../resources/edit-undo.png").toExternalForm(), 16, 16, true, true);
-//        ImageView undoImageView = new ImageView(undoImage);
-//        undoButton.setGraphic(undoImageView);
-//
-//        Image redoImage = new Image(getClass().getResource("../resources/edit-redo.png").toExternalForm(), 16, 16, true, true);
-//        ImageView redoImageView = new ImageView(redoImage);
-//        redoButton.setGraphic(redoImageView);
-//
-//        Image clearImage = new Image(getClass().getResource("../resources/edit-clear.png").toExternalForm(), 16, 16, true, true);
-//        ImageView clearImageView = new ImageView(clearImage);
-//        clearButton.setGraphic(clearImageView);
     }
 
     public void onLineButtonClick(ActionEvent event) {
@@ -174,19 +136,11 @@ public class RootController implements GraphicView {
     }
 
     public void onColorPlotChecked(ActionEvent event) {
-        CheckMenuItem item = (CheckMenuItem) event.getSource();
-        if (item.isSelected())
-            presenter.addPlotStyle(PlotStyle.Color);
-        else
-            presenter.removePlotStyle(PlotStyle.Color);
+        presenter.togglePlotStyle(PlotStyle.Color);
     }
 
     public void onArrowPlotChecked(ActionEvent event) {
-        CheckMenuItem item = (CheckMenuItem) event.getSource();
-        if (item.isSelected())
-            presenter.addPlotStyle(PlotStyle.Arrow);
-        else
-            presenter.removePlotStyle(PlotStyle.Arrow);
+        presenter.togglePlotStyle(PlotStyle.Arrow);
     }
 
     public void onMousePressed(MouseEvent event) {

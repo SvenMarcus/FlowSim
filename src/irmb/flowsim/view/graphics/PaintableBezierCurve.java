@@ -61,15 +61,19 @@ public class PaintableBezierCurve extends PaintableShape {
             t2 = (i + 1) / (double) (numPoints - 1);
             first = bezierCurve.calculatePointWithBernstein(t1);
             second = bezierCurve.calculatePointWithBernstein(t2);
-            double minX = first.getX() < second.getX() ? first.getX() : second.getX();
-            double maxX = first.getX() > second.getX() ? first.getX() : second.getX();
-            if (point.getX() >= minX && point.getX() <= maxX) {
+            if (isInXBounds(point)) {
                 double distanceToLine = getDistanceToLine(first, second, point);
                 if (distanceToLine <= radius)
                     return true;
             }
         }
         return false;
+    }
+
+    private boolean isInXBounds(Point point) {
+        double minX = first.getX() < second.getX() ? first.getX() : second.getX();
+        double maxX = first.getX() > second.getX() ? first.getX() : second.getX();
+        return point.getX() >= minX && point.getX() <= maxX;
     }
 
     @Override

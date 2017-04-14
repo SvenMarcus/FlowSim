@@ -79,28 +79,15 @@ public class MainWindow extends JFrame {
 
         JMenu visualizationMenu = new JMenu("Visualization");
         JCheckBoxMenuItem colorPlotItem = new JCheckBoxMenuItem("Color Plot");
-        colorPlotItem.addActionListener(e -> {
-            JCheckBoxMenuItem item = (JCheckBoxMenuItem) e.getSource();
-            if (item.isSelected())
-                presenter.addPlotStyle(PlotStyle.Color);
-            else
-                presenter.removePlotStyle(PlotStyle.Color);
-        });
+        colorPlotItem.addActionListener(e -> presenter.togglePlotStyle(PlotStyle.Color));
         JCheckBoxMenuItem arrowPlotItem = new JCheckBoxMenuItem("Arrow Plot");
-        arrowPlotItem.addActionListener(e -> {
-            JCheckBoxMenuItem item = (JCheckBoxMenuItem) e.getSource();
-            if (item.isSelected())
-                presenter.addPlotStyle(PlotStyle.Arrow);
-            else
-                presenter.removePlotStyle(PlotStyle.Arrow);
-        });
+        arrowPlotItem.addActionListener(e -> presenter.togglePlotStyle(PlotStyle.Arrow));
         visualizationMenu.add(colorPlotItem);
         visualizationMenu.add(arrowPlotItem);
         menuBar.add(visualizationMenu);
 
 
         topPanel.add(menuBar, BorderLayout.NORTH);
-//        topPanel.add(mainToolBar);
         initListeners();
         scaleButtonIcons();
     }

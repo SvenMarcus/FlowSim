@@ -38,8 +38,12 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
 
     private void updateGraphicViewAndSimulation() {
         graphicView.update();
-        if (simulation != null)
+        if (hasSimulation())
             simulation.setShapes(shapeList);
+    }
+
+    private boolean hasSimulation() {
+        return simulation != null;
     }
 
     protected void addStrategyObserver() {
@@ -65,20 +69,20 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     @Override
     public List<Paintable> getPaintableList() {
         ArrayList<Paintable> paintables = new ArrayList<>(shapeList);
-        if (simulation != null)
+        if (hasSimulation())
             paintables.add(0, simulation);
         return paintables;
     }
 
     public void runSimulation() {
-        if (simulation != null && !running) {
+        if (hasSimulation() && !running) {
             simulation.run();
             running = true;
         }
     }
 
     public void pauseSimulation() {
-        if (simulation != null && running) {
+        if (hasSimulation() && running) {
             simulation.pause();
             running = false;
         }
@@ -86,20 +90,32 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
 
     public void clearAll() {
         super.clearAll();
-        if (simulation != null)
+        if (hasSimulation())
             simulation.setShapes(shapeList);
     }
 
-    public void addPlotStyle(PlotStyle plotStyle) {
-        GridNodeStyle gridNodeStyle = gridNodeStyleFactory.makeGridNodeStyle(plotStyle);
-        if (simulation != null)
-            simulation.addPlotStyle(gridNodeStyle);
-        plotStyleMap.put(plotStyle, gridNodeStyle);
-        graphicView.update();
+    public void togglePlotStyle(PlotStyle plotStyle) {
+        if (isPlotStyleActive(plotStyle))
+            addPlotStyle(plotStyle);
+        else
+            removePlotStyle(plotStyle);
     }
 
-    public void removePlotStyle(PlotStyle plotStyle) {
-        if (simulation != null)
+    private boolean isPlotStyleActive(PlotStyle plotStyle) {
+        return !plotStyleMap.containsKey(plotStyle);
+    }
+
+    private void addPlotStyle(PlotStyle plotStyle) {
+        GridNodeStyle gridNodeStyle = gridNodeStyleFactory.makeGridNodeStyle(plotStyle);
+        plotStyleMap.put(plotStyle, gridNodeStyle);
+        if (hasSimulation()) {
+            simulation.addPlotStyle(gridNodeStyle);
+            graphicView.update();
+        }
+    }
+
+    private void removePlotStyle(PlotStyle plotStyle) {
+        if (hasSimulation())
             simulation.removePlotStyle(plotStyleMap.get(plotStyle));
         plotStyleMap.remove(plotStyle);
     }
