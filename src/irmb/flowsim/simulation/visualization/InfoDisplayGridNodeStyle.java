@@ -14,6 +14,7 @@ public class InfoDisplayGridNodeStyle extends GridNodeStyle {
     private static int horizontalMargin = 10;
     private static int verticalMargin = 20;
     private static DecimalFormat exponentialFormat = new DecimalFormat("0.00E0");
+    private static DecimalFormat secondsFormat = new DecimalFormat("0.0000");
 
     protected InfoDisplayGridNodeStyle() {
         super(2);
@@ -59,7 +60,7 @@ public class InfoDisplayGridNodeStyle extends GridNodeStyle {
     }
 
     private String realTime() {
-        return "real time: " + String.format("%1$.3f", grid.getRealTime()) + " [s]" + newLine();
+        return "real time: " + secondsFormat.format(grid.getRealTime()) + " [s]" + newLine();
     }
 
     private String dof() {

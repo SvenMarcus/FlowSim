@@ -43,169 +43,7 @@
     <favorites_list name="FlowSim2" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ColorGridNodeStyle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/ColorGridNodeStyle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JavaFXPainter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JavaFXPainter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
-              <folding>
-                <element signature="e#1753#1754#0" expanded="true" />
-                <element signature="e#1804#1805#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimulationGraphicViewPresenterTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="360" column="60" lean-forward="false" selection-start-line="360" selection-start-column="60" selection-end-line="360" selection-end-column="60" />
-              <folding>
-                <element signature="docComment;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#setUp#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#makeMouseStrategyFactory#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#makeStrategyMock#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="e#3262#3444#0" expanded="false" />
-                <element signature="method#makeCommandQueueMock#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="e#3741#3911#0" expanded="false" />
-                <element signature="method#setGraphicViewMockBehavior#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="e#4028#4197#0" expanded="false" />
-                <element signature="method#whenCallingAddSimulation_shouldPaintSimulation#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingRunSimulation_shouldDoNothing#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingPauseSimulation_shouldDoNothing#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenReceivingUpdateFromCommandQueue_shouldNotMapToSimulation#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingClearAll_shouldNotMapToSimulation#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#setUp#0;class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingSimulation_shouldPaintShapeAndSimulation#0;class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenPaintingBeforeAddingSimulation_shouldDoNothing#0;class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingSimulation_shouldMapShapesToGrid#0;class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingColorPlotStyleThenAddingSimulation_shouldAddColorStyleToSimulation#0;class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingBothArrowAndColorPlotStyleThenAddingSimulation_shouldAddBothStylesToSimulation#0;class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingSimulationWithNoStyles_shouldNotAddPlotStyle#0;class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingThenRemovingPlotStyleThenAddingSimulation_shouldNotAddAnyPlotStyles#0;class#ShapeAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#setUp#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingRunSimulation_shouldRunSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingPauseSimulation_shouldPauseSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingStopSimulationOnRunningSimulation_shouldStopSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenReceivingUpdateFromSimulation_shouldUpdateGraphicView#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenReceivingUpdateFromStrategy_shouldMapShapesToGrid#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenReceivingUpdateFromCommandQueue_shouldMapShapesToGrid#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingClearAll_shouldSetShapes#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingColorPlot_shouldAddColorPlotStyleToSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingArrowPlot_shouldAddArrowPlotStyleToSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenRemovingColorPlot_shouldRemoveColorPlotFromSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenRemovingPlotStyleThenAddingSimulation_shouldNotAddPlotStyleToNewSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingInfoDisplayPlot_shouldAddInfoDisplayPlotStyleToSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingRemoveOnRunningSimulation_shouldStopAndRemoveSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingRunTwice_shouldOnlyStartSimulationOnce#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingRunAfterRunAndPause_shouldRunSimulationAgain#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingPlotStyle_shouldUpdateGraphicView#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingAndRunningNewSimulationAfterRunningThenRemovingLastSimulation_shouldRunNewSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenAddingNewSimulationOverRunningSimulation_shouldBeAbleToRunNewSimulation#0;class#SimulationAddedContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="class#IntegrationContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#setUp#0;class#IntegrationContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-                <element signature="method#whenCallingRemoveOnPausedSimulation_shouldRemoveSimulation#0;class#IntegrationContext#0;class#SimulationGraphicViewPresenterTest#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JFlowSimNavierStokesGridAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/jflowsim/adapters/JFlowSimNavierStokesGridAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
-              <caret line="146" column="25" lean-forward="false" selection-start-line="146" selection-start-column="25" selection-end-line="146" selection-end-column="25" />
-              <folding>
-                <element signature="e#1668#1669#0" expanded="true" />
-                <element signature="e#1699#1700#0" expanded="true" />
-                <element signature="e#2957#2958#0" expanded="true" />
-                <element signature="e#2994#2995#0" expanded="true" />
-                <element signature="e#3044#3045#0" expanded="true" />
-                <element signature="e#3081#3082#0" expanded="true" />
-                <element signature="e#3137#3138#0" expanded="true" />
-                <element signature="e#3173#3174#0" expanded="true" />
-                <element signature="e#3231#3232#0" expanded="true" />
-                <element signature="e#3267#3268#0" expanded="true" />
-                <element signature="e#3313#3314#0" expanded="true" />
-                <element signature="e#3349#3350#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimulationSpy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/SimulationSpy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2164#2165#0" expanded="true" />
-                <element signature="e#2208#2209#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimulationGraphicViewPresenter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1751">
-              <caret line="119" column="33" lean-forward="false" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RootController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="79" column="8" lean-forward="false" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
-              <folding>
-                <element signature="docComment;class#RootController#0" expanded="false" />
-                <element signature="method#RootController#0;class#RootController#0" expanded="false" />
-                <element signature="e#1988#2026#0" expanded="false" />
-                <element signature="e#2075#2113#0" expanded="false" />
-                <element signature="e#2146#2255#0" expanded="false" />
-                <element signature="method#onMousePressed#0;class#RootController#0" expanded="false" />
-                <element signature="method#setCoordinateTransformer#0;class#RootController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1487">
-              <caret line="48" column="19" lean-forward="false" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainWindow.form" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -278,7 +116,6 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/GridNodeStyleFactory.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/ColorGridNodeStyle.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/ArrowGridNodeStyle.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/InfoDisplayGridNodeStyle.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/simulation/SimulationMock.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/simulation/SimulationSpy.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/SimulationGraphicViewPresenterTest.java" />
@@ -287,6 +124,7 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.form" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/InfoDisplayGridNodeStyle.java" />
       </list>
     </option>
   </component>
@@ -363,156 +201,6 @@
               <option name="myItemId" value="irmb" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visualization" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flowsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="swing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MainWindow" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flowsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="swing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlowSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irmb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flowsim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -584,7 +272,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
+              <option name="myItemId" value="presentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="strategy" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1331,7 +1023,7 @@
       <workItem from="1492006115842" duration="6663000" />
       <workItem from="1492028383400" duration="5586000" />
       <workItem from="1492173915921" duration="5842000" />
-      <workItem from="1492261938193" duration="9784000" />
+      <workItem from="1492261938193" duration="12426000" />
     </task>
     <servers />
   </component>
@@ -1368,7 +1060,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="742478000" />
+    <option name="totallyTimeSpent" value="745120000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1380,8 +1072,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="26" width="1920" height="1054" extended-state="7" />
-    <editor active="true" />
+    <frame x="1920" y="26" width="1920" height="1054" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1393,12 +1084,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22403258" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25605902" sideWeight="0.49791667" order="5" side_tool="false" content_ui="tabs" x="1928" y="618" width="1876" height="263" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25605902" sideWeight="0.49791667" order="5" side_tool="false" content_ui="tabs" x="1928" y="618" width="1876" height="263" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19322917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19322917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32969433" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1512,13 +1203,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="49" column="15" lean-forward="false" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MouseStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1772,19 +1456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1641">
-          <caret line="115" column="25" lean-forward="true" selection-start-line="115" selection-start-column="25" selection-end-line="115" selection-end-column="25" />
-          <folding>
-            <element signature="e#3914#3915#0" expanded="true" />
-            <element signature="e#3975#3976#0" expanded="true" />
-            <element signature="e#4030#4031#0" expanded="true" />
-            <element signature="e#4100#4101#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/BuildObjectMouseStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -1833,20 +1504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/InfoDisplayGridNodeStyle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="23" column="27" lean-forward="false" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding>
-            <element signature="docComment;class#InfoDisplayGridNodeStyle#0" expanded="false" />
-            <element signature="method#gravity#0;class#InfoDisplayGridNodeStyle#0" expanded="false" />
-            <element signature="method#viscosity#0;class#InfoDisplayGridNodeStyle#0" expanded="false" />
-            <element signature="method#realTime#0;class#InfoDisplayGridNodeStyle#0" expanded="false" />
-            <element signature="method#dof#0;class#InfoDisplayGridNodeStyle#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/ArrowGridNodeStyle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1877,45 +1534,6 @@
             <element signature="e#3267#3268#0" expanded="true" />
             <element signature="e#3313#3314#0" expanded="true" />
             <element signature="e#3349#3350#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/SimulationSpy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2164#2165#0" expanded="true" />
-            <element signature="e#2208#2209#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="119" column="33" lean-forward="false" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/ColorGridNodeStyle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JavaFXPainter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
-          <folding>
-            <element signature="e#1753#1754#0" expanded="true" />
-            <element signature="e#1804#1805#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1974,6 +1592,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JavaFXPainter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+          <folding>
+            <element signature="e#1753#1754#0" expanded="true" />
+            <element signature="e#1804#1805#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/ColorGridNodeStyle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/test/simulation/SimulationSpy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2164#2165#0" expanded="true" />
+            <element signature="e#2208#2209#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/SimulationGraphicViewPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="119" column="33" lean-forward="false" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1990,15 +1647,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="160" column="36" lean-forward="false" selection-start-line="160" selection-start-column="36" selection-end-line="160" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/MainWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/simulation/visualization/InfoDisplayGridNodeStyle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1487">
-          <caret line="48" column="19" lean-forward="false" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+        <state relative-caret-position="346">
+          <caret line="62" column="52" lean-forward="false" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
+          <folding>
+            <element signature="docComment;class#InfoDisplayGridNodeStyle#0" expanded="false" />
+            <element signature="method#paintGridNode#0;class#InfoDisplayGridNodeStyle#0" expanded="false" />
+            <element signature="method#gravity#0;class#InfoDisplayGridNodeStyle#0" expanded="false" />
+            <element signature="method#viscosity#0;class#InfoDisplayGridNodeStyle#0" expanded="false" />
+            <element signature="method#dof#0;class#InfoDisplayGridNodeStyle#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MouseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="91" column="45" lean-forward="true" selection-start-line="91" selection-start-column="45" selection-end-line="91" selection-end-column="45" />
           <folding />
         </state>
       </provider>
