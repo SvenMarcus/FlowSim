@@ -46,7 +46,7 @@ public class MainWindow extends JFrame {
     public MainWindow(CoordinateTransformer transformer) {
         this.transformer = transformer;
         $$$setupUI$$$();
-        setSize(800, 600);
+        setSize(1150, 800);
         add(contentPanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,6 +193,9 @@ public class MainWindow extends JFrame {
         createUIComponents();
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout(0, 0));
+        contentPanel.setMinimumSize(new Dimension(1600, 1024));
+        contentPanel.setPreferredSize(new Dimension(1600, 1024));
+        contentPanel.setRequestFocusEnabled(true);
         drawArea.setBackground(new Color(-1));
         contentPanel.add(drawArea, BorderLayout.CENTER);
         topPanel = new JPanel();
