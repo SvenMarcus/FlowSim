@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by sven on 04.03.17.
  */
-public class SimulationMock extends Simulation {
+public class SimulationSpy extends Simulation {
 
     private boolean colorStyleAdded;
     private boolean arrowStyleAdded;
@@ -47,6 +47,7 @@ public class SimulationMock extends Simulation {
         } else if (gridNodeStyle instanceof ArrowGridNodeStyle) {
             arrowStyleAdded = true;
         } else if (gridNodeStyle instanceof InfoDisplayGridNodeStyle)
+            infoDisplayStyleAdded = true;
         addedPlotStyle = gridNodeStyle;
     }
 
@@ -56,7 +57,8 @@ public class SimulationMock extends Simulation {
             colorStyleAdded = false;
         } else if (gridNodeStyle instanceof ArrowGridNodeStyle) {
             arrowStyleAdded = false;
-        }
+        } else if (gridNodeStyle instanceof InfoDisplayGridNodeStyle)
+            infoDisplayStyleAdded = false;
     }
 
     @Override
@@ -72,11 +74,17 @@ public class SimulationMock extends Simulation {
         return arrowStyleAdded;
     }
 
+    public boolean isInfoDisplayStyleAdded() {
+        return infoDisplayStyleAdded;
+    }
+
     public GridNodeStyle getAddedPlotStyle() {
         return addedPlotStyle;
     }
 
-    public boolean isInfoDisplayStyleAdded() {
-        return infoDisplayStyleAdded;
+    public void reset() {
+        colorStyleAdded = infoDisplayStyleAdded = arrowStyleAdded = false;
+        addedPlotStyle = null;
     }
+
 }

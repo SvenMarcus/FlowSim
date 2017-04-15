@@ -56,7 +56,7 @@ public class JavaFXPainter implements Painter {
 
     @Override
     public void paintString(String s, double x, double y) {
-
+        graphicsContext.strokeText(s, x, y);
     }
 
     public void setGraphicsContext(GraphicsContext graphicsContext) {

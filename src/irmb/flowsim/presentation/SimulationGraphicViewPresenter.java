@@ -115,8 +115,10 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     }
 
     private void removePlotStyle(PlotStyle plotStyle) {
-        if (hasSimulation())
+        if (hasSimulation()) {
             simulation.removePlotStyle(plotStyleMap.get(plotStyle));
+            graphicView.update();
+        }
         plotStyleMap.remove(plotStyle);
     }
 

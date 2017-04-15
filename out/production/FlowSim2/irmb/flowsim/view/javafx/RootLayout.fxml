@@ -63,6 +63,7 @@
                <items>
                   <CheckMenuItem mnemonicParsing="false" onAction="#onColorPlotChecked" text="Color Plot" />
                   <CheckMenuItem mnemonicParsing="false" onAction="#onArrowPlotChecked" text="Arrow Plot" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#onInfoPlotChecked" text="Information Display" />
                </items>
             </Menu>
         </menus>

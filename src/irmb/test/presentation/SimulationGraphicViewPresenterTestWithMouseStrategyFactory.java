@@ -18,7 +18,7 @@ import irmb.flowsim.presentation.factory.ShapeFactory;
 import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
-import irmb.test.simulation.SimulationMock;
+import irmb.test.simulation.SimulationSpy;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +38,7 @@ public class SimulationGraphicViewPresenterTestWithMouseStrategyFactory {
     private GraphicView graphicViewMock;
     private SimulationGraphicViewPresenter sut;
     private CoordinateTransformer transformer;
-    private SimulationMock simulationSpy;
+    private SimulationSpy simulationSpy;
     private List<PaintableShape> shapeList;
     private Line line;
     private MouseStrategyFactory mouseStrategyFactory;
@@ -52,7 +52,7 @@ public class SimulationGraphicViewPresenterTestWithMouseStrategyFactory {
         makeTransformerMock();
 
         makeMouseStrategyFactory(commandQueue);
-        simulationSpy = spy(new SimulationMock());
+        simulationSpy = spy(new SimulationSpy());
         SimulationFactory simulationFactory = makeSimulationFactory();
         sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
         painterSpy = mock(Painter.class);

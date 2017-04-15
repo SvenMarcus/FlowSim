@@ -77,8 +77,7 @@ public class RootController implements GraphicView {
         drawPanel.setOnScroll(event -> {
             presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
         });
-
-
+        
         runnable = () -> {
             graphicsContext2D = drawPanel.getGraphicsContext2D();
             if (painter == null)
@@ -86,8 +85,6 @@ public class RootController implements GraphicView {
             painter.setGraphicsContext(graphicsContext2D);
             graphicsContext2D.clearRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
             graphicsContext2D.save();
-            graphicsContext2D.setFill(Color.WHITE);
-            graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
             for (Paintable p : presenter.getPaintableList()) {
                 p.paint(painter, transformer);
             }
@@ -141,6 +138,10 @@ public class RootController implements GraphicView {
 
     public void onArrowPlotChecked(ActionEvent event) {
         presenter.togglePlotStyle(PlotStyle.Arrow);
+    }
+
+    public void onInfoPlotChecked(ActionEvent event) {
+        presenter.togglePlotStyle(PlotStyle.Info);
     }
 
     public void onMousePressed(MouseEvent event) {

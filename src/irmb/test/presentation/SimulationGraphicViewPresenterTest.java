@@ -18,7 +18,7 @@ import irmb.flowsim.simulation.visualization.PlotStyle;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
-import irmb.test.simulation.SimulationMock;
+import irmb.test.simulation.SimulationSpy;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +41,7 @@ public class SimulationGraphicViewPresenterTest {
     private GraphicView graphicViewMock;
     private SimulationGraphicViewPresenter sut;
     private CoordinateTransformer transformer;
-    private SimulationMock simulationSpy;
+    private SimulationSpy simulationSpy;
     private List<PaintableShape> shapeList;
     private MouseStrategy mouseStrategyMock;
     private Observer<StrategyEventArgs> mouseStrategyObserver;
@@ -56,7 +56,7 @@ public class SimulationGraphicViewPresenterTest {
         makeCommandQueueMock();
         shapeList = new ArrayList<>();
         transformer = mock(CoordinateTransformer.class);
-        simulationSpy = spy(new SimulationMock());
+        simulationSpy = spy(new SimulationSpy());
         SimulationFactory simulationFactory = mock(SimulationFactory.class);
         when(simulationFactory.makeSimulation()).thenReturn(simulationSpy);
         sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
@@ -282,7 +282,12 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenRemovingPlotStyleThenAddingSimulation_shouldNotAddPlotStyleToNewSimulation() {
+            sut.togglePlotStyle(PlotStyle.Color);
+            sut.togglePlotStyle(PlotStyle.Color);
+            simulationSpy.reset();
 
+            sut.addSimulation();
+            assertFalse(simulationSpy.isColorStyleAdded());
         }
 
         @Test
@@ -345,6 +350,15 @@ public class SimulationGraphicViewPresenterTest {
             sut.addSimulation();
             sut.runSimulation();
             verify(simulationSpy).run();
+        }
+
+        @Test
+        public void whenRemovingPlotStyle_shouldUpdateGraphicView() {
+            sut.togglePlotStyle(PlotStyle.Arrow);
+            clearInvocations(graphicViewMock);
+
+            sut.togglePlotStyle(PlotStyle.Arrow);
+            verify(graphicViewMock, atLeastOnce()).update();
         }
     }
 
