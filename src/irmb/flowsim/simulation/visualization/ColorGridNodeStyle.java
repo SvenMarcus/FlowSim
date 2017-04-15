@@ -14,8 +14,6 @@ public class ColorGridNodeStyle extends GridNodeStyle {
     private boolean firstRun = true;
     private double min;
     private double max;
-    private double currentMin;
-    private double currentMax;
 
 
     public ColorGridNodeStyle(ColorFactory colorFactory) {

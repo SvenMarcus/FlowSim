@@ -9,7 +9,7 @@ import numerics.utilities.Scalar;
 /**
  * Created by sven on 09.03.17.
  */
-public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
+public class JFlowSimNavierStokesGridAdapter implements UniformGrid {
     private LBMNavierStokesGrid grid;
     private Point topLeft;
 
@@ -121,6 +121,31 @@ public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
     @Override
     public double getMNUPS() {
         return grid.mnups;
+    }
+
+    @Override
+    public double getRealTime() {
+        return grid.real_time;
+    }
+
+    @Override
+    public double getViscosity() {
+        return grid.viscosity;
+    }
+
+    @Override
+    public double getVerticalGravity() {
+        return grid.gravityY;
+    }
+
+    @Override
+    public double getHorizontalGravity() {
+        return grid.gravityX;
+    }
+
+    @Override
+    public int getTimeStep() {
+        return grid.timestep;
     }
 
     public LBMNavierStokesGrid getJFlowSimGrid() {

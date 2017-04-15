@@ -31,4 +31,10 @@ public class GridNodeStyleFactoryTest {
         assertThat(gridNodeStyle, is(instanceOf(ArrowGridNodeStyle.class)));
         assertEquals(new ArrowGridNodeStyle(5), gridNodeStyle);
     }
+
+    @Test
+    public void testMakeInfoDiplayPlot() {
+        GridNodeStyle gridNodeStyle = sut.makeGridNodeStyle(PlotStyle.Info);
+        assertThat(gridNodeStyle, is(instanceOf(InfoDisplayGridNodeStyle.class)));
+    }
 }

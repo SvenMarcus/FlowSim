@@ -82,8 +82,11 @@ public class MainWindow extends JFrame {
         colorPlotItem.addActionListener(e -> presenter.togglePlotStyle(PlotStyle.Color));
         JCheckBoxMenuItem arrowPlotItem = new JCheckBoxMenuItem("Arrow Plot");
         arrowPlotItem.addActionListener(e -> presenter.togglePlotStyle(PlotStyle.Arrow));
+        JCheckBoxMenuItem infoPlotItem = new JCheckBoxMenuItem("Information Display");
+        infoPlotItem.addActionListener(e -> presenter.togglePlotStyle(PlotStyle.Info));
         visualizationMenu.add(colorPlotItem);
         visualizationMenu.add(arrowPlotItem);
+        visualizationMenu.add(infoPlotItem);
         menuBar.add(visualizationMenu);
 
 

@@ -6,6 +6,7 @@ import irmb.flowsim.simulation.Simulation;
 import irmb.flowsim.simulation.visualization.ArrowGridNodeStyle;
 import irmb.flowsim.simulation.visualization.ColorGridNodeStyle;
 import irmb.flowsim.simulation.visualization.GridNodeStyle;
+import irmb.flowsim.simulation.visualization.InfoDisplayGridNodeStyle;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class SimulationMock extends Simulation {
     private boolean colorStyleAdded;
     private boolean arrowStyleAdded;
     private GridNodeStyle addedPlotStyle;
+    private boolean infoDisplayStyleAdded;
 
     @Override
     public void paint(Painter painter, CoordinateTransformer transformer) {
@@ -44,7 +46,7 @@ public class SimulationMock extends Simulation {
             colorStyleAdded = true;
         } else if (gridNodeStyle instanceof ArrowGridNodeStyle) {
             arrowStyleAdded = true;
-        }
+        } else if (gridNodeStyle instanceof InfoDisplayGridNodeStyle)
         addedPlotStyle = gridNodeStyle;
     }
 
@@ -72,5 +74,9 @@ public class SimulationMock extends Simulation {
 
     public GridNodeStyle getAddedPlotStyle() {
         return addedPlotStyle;
+    }
+
+    public boolean isInfoDisplayStyleAdded() {
+        return infoDisplayStyleAdded;
     }
 }

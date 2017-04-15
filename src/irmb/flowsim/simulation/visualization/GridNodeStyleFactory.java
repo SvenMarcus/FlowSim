@@ -12,6 +12,8 @@ public class GridNodeStyleFactory {
                 return new ColorGridNodeStyle(new ColorFactoryImpl());
             case Arrow:
                 return new ArrowGridNodeStyle(5);
+            case Info:
+                return new InfoDisplayGridNodeStyle();
             default:
                 return null;
         }

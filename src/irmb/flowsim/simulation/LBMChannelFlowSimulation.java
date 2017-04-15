@@ -34,7 +34,6 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
     @Override
     public void paint(Painter painter, CoordinateTransformer transformer) {
         paintSurroundingRectangle(painter, transformer);
-        painter.paintString(String.valueOf(grid.getMNUPS()), 10, 10);
         for (GridNodeStyle style : styleList)
             style.paintGridNode(painter, transformer);
     }
@@ -45,25 +44,6 @@ public class LBMChannelFlowSimulation extends Simulation implements Observer<Str
         double height = transformer.scaleToScreenLength(grid.getHeight());
         painter.paintRectangle(topLeft.getX(), topLeft.getY(), width, height);
 
-    }
-
-    private void getInitialMinMax() {
-        if (firstRun) {
-            min = grid.getVelocityAt(0, 0);
-            max = grid.getVelocityAt(0, 0);
-            for (int y = 0; y < grid.getVerticalNodes(); y++)
-                for (int x = 0; x < grid.getHorizontalNodes(); x++)
-                    adjustMinMax(x, y);
-            firstRun = false;
-        }
-    }
-
-    private void adjustMinMax(int x, int y) {
-        double v = grid.getVelocityAt(x, y);
-        if (v < min)
-            min = v;
-        if (v > max)
-            max = v;
     }
 
     @Override

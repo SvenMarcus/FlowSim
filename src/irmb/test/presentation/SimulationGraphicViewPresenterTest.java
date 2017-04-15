@@ -282,12 +282,13 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenRemovingPlotStyleThenAddingSimulation_shouldNotAddPlotStyleToNewSimulation() {
-            sut.togglePlotStyle(PlotStyle.Color);
-            sut.togglePlotStyle(PlotStyle.Color);
-            clearInvocations(simulationSpy);
 
-            sut.addSimulation();
-            verify(simulationSpy, never()).addPlotStyle(any());
+        }
+
+        @Test
+        public void whenAddingInfoDisplayPlot_shouldAddInfoDisplayPlotStyleToSimulation() {
+            sut.togglePlotStyle(PlotStyle.Info);
+            assertTrue(simulationSpy.isInfoDisplayStyleAdded());
         }
 
         @Test
@@ -335,7 +336,7 @@ public class SimulationGraphicViewPresenterTest {
             sut.runSimulation();
             verify(simulationSpy).run();
         }
-        
+
         @Test
         public void whenAddingNewSimulationOverRunningSimulation_shouldBeAbleToRunNewSimulation() {
             sut.runSimulation();
@@ -346,7 +347,6 @@ public class SimulationGraphicViewPresenterTest {
             verify(simulationSpy).run();
         }
     }
-
 
     public class IntegrationContext {
         @Before
