@@ -95,14 +95,14 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     }
 
     public void togglePlotStyle(PlotStyle plotStyle) {
-        if (isPlotStyleActive(plotStyle))
+        if (!isPlotStyleActive(plotStyle))
             addPlotStyle(plotStyle);
         else
             removePlotStyle(plotStyle);
     }
 
     private boolean isPlotStyleActive(PlotStyle plotStyle) {
-        return !plotStyleMap.containsKey(plotStyle);
+        return plotStyleMap.containsKey(plotStyle);
     }
 
     private void addPlotStyle(PlotStyle plotStyle) {
