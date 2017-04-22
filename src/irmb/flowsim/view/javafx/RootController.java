@@ -6,18 +6,16 @@ import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
 import irmb.flowsim.simulation.visualization.PlotStyle;
 import irmb.flowsim.view.graphics.Paintable;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.CacheHint;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 /**
  * Created by Sven on 22.12.2016.
@@ -54,6 +52,7 @@ public class RootController implements GraphicView {
     private volatile CoordinateTransformer transformer;
     private GraphicsContext graphicsContext2D;
     private Runnable runnable;
+    private JavaFXRepaintScheduler repaintScheduler;
 
 
     public RootController() {
@@ -77,7 +76,8 @@ public class RootController implements GraphicView {
         drawPanel.setOnScroll(event -> {
             presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
         });
-        
+        drawPanel.setCache(true);
+        drawPanel.setCacheHint(CacheHint.SPEED);
         runnable = () -> {
             graphicsContext2D = drawPanel.getGraphicsContext2D();
             if (painter == null)
@@ -90,6 +90,9 @@ public class RootController implements GraphicView {
             }
             graphicsContext2D.restore();
         };
+        repaintScheduler = new JavaFXRepaintScheduler(runnable);
+        repaintScheduler.setFPS(30);
+        repaintScheduler.start();
     }
 
     public void onLineButtonClick(ActionEvent event) {
@@ -176,7 +179,7 @@ public class RootController implements GraphicView {
 
     @Override
     public void update() {
-        Platform.runLater(runnable);
+        repaintScheduler.needsUpdate(true);
     }
 
     @Override

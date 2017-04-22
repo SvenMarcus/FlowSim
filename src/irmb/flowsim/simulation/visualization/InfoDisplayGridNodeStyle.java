@@ -15,6 +15,9 @@ public class InfoDisplayGridNodeStyle extends GridNodeStyle {
     private static int verticalMargin = 20;
     private static DecimalFormat exponentialFormat = new DecimalFormat("0.00E0");
     private static DecimalFormat secondsFormat = new DecimalFormat("0.0000");
+    private int tempFps;
+    private long lastTime;
+    private int fps;
 
     protected InfoDisplayGridNodeStyle() {
         super(2);
@@ -41,6 +44,19 @@ public class InfoDisplayGridNodeStyle extends GridNodeStyle {
         painter.paintString(gravity(), horizontalMargin, verticalPosition);
         verticalPosition += 20;
         painter.paintString(timestep(), horizontalMargin, verticalPosition);
+        verticalPosition += 20;
+        updateFPS();
+        painter.paintString("FPS: " + fps, horizontalMargin, verticalPosition);
+    }
+
+    private void updateFPS() {
+        tempFps++;
+        long currentTime = System.nanoTime();
+        if (currentTime > lastTime + 1000000000) {
+            lastTime = currentTime;
+            fps = tempFps;
+            tempFps = 0;
+        }
     }
 
     private String timestep() {
