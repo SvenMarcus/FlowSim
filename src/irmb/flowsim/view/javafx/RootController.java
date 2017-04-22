@@ -16,6 +16,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  * Created by Sven on 22.12.2016.
@@ -67,15 +68,9 @@ public class RootController implements GraphicView {
     public void initialize() {
         drawPanel.heightProperty().bind(rootPane.heightProperty());
         drawPanel.widthProperty().bind(rootPane.widthProperty());
-        drawPanel.heightProperty().addListener(o -> {
-            update();
-        });
-        drawPanel.widthProperty().addListener(o -> {
-            update();
-        });
-        drawPanel.setOnScroll(event -> {
-            presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
-        });
+        drawPanel.heightProperty().addListener(o -> update());
+        drawPanel.widthProperty().addListener(o -> update());
+        drawPanel.setOnScroll(event -> presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY()));
         drawPanel.setCache(true);
         drawPanel.setCacheHint(CacheHint.SPEED);
         runnable = () -> {
@@ -84,6 +79,8 @@ public class RootController implements GraphicView {
                 painter = new JavaFXPainter();
             painter.setGraphicsContext(graphicsContext2D);
             graphicsContext2D.clearRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
+            graphicsContext2D.setFill(Color.WHITE);
+            graphicsContext2D.fillRect(0,0,drawPanel.getWidth(), drawPanel.getHeight());
             graphicsContext2D.save();
             for (Paintable p : presenter.getPaintableList()) {
                 p.paint(painter, transformer);
@@ -91,7 +88,7 @@ public class RootController implements GraphicView {
             graphicsContext2D.restore();
         };
         repaintScheduler = new JavaFXRepaintScheduler(runnable);
-        repaintScheduler.setFPS(30);
+        repaintScheduler.setDelay(25);
         repaintScheduler.start();
     }
 

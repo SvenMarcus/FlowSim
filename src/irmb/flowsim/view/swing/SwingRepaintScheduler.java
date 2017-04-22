@@ -3,7 +3,6 @@ package irmb.flowsim.view.swing;
 import irmb.flowsim.view.RepaintScheduler;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 /**
  * Created by sven on 22.04.17.
@@ -28,8 +27,7 @@ public class SwingRepaintScheduler extends RepaintScheduler {
     }
 
     @Override
-    public void setFPS(int fps) {
-        super.setFPS(fps);
-        timer.setDelay(1000 / fps);
+    public void setDelay(int delay) {
+        timer.setDelay(delay);
     }
 }

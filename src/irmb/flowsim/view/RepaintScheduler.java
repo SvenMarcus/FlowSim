@@ -7,7 +7,7 @@ public abstract class RepaintScheduler {
 
     protected Runnable runnable;
     protected boolean needsUpdate;
-    protected int wantedFPS;
+    protected int delay;
 
     public RepaintScheduler(Runnable runnable) {
         this.runnable = runnable;
@@ -28,7 +28,7 @@ public abstract class RepaintScheduler {
 
     public abstract void stop();
 
-    public void setFPS(int fps) {
-        wantedFPS = fps;
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 }

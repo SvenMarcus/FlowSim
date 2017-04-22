@@ -16,8 +16,7 @@ public class JavaFXRepaintScheduler extends RepaintScheduler {
         animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                long delay = Math.round(1_000_000_000 / (double) wantedFPS);
-                if (now - lastUpdate < delay)
+                if (now - lastUpdate < delay * 1000_000)
                     return;
                 performRepaintAction();
                 lastUpdate = now;
