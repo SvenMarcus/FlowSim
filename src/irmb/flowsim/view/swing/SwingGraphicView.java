@@ -29,7 +29,7 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
         painter = new SwingPainter();
         Runnable runnable = () -> repaint();
         repaintScheduler = new SwingRepaintScheduler(runnable);
-        repaintScheduler.setDelay(25);
+        repaintScheduler.setDelay(16);
         repaintScheduler.start();
     }
 

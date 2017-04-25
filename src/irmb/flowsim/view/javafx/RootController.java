@@ -88,7 +88,7 @@ public class RootController implements GraphicView {
             graphicsContext2D.restore();
         };
         repaintScheduler = new JavaFXRepaintScheduler(runnable);
-        repaintScheduler.setDelay(25);
+        repaintScheduler.setDelay(16);
         repaintScheduler.start();
     }
 
