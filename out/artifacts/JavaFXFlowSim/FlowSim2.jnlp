@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="FlowSim2.jnlp">
+  <information>
+    <title>JavaFX FlowSim</title>
+    <vendor>Unknown</vendor>
+    <description>JavaFXFlowSim</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="FlowSim2.jar" size="306625" download="eager" />
+    <jar href="LBMExtraction.jar" size="131087" download="eager" />
+    <jar href="MockitoExtension.jar" size="3692959" download="eager" />
+    <jar href="gov.nist.math.jama-1.1.1.jar" size="41462" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="600" height="400" main-class="irmb.flowsim.view.javafx.JFXMainWindow"  name="JavaFXFlowSim" />
+  <update check="background"/>
+</jnlp>
