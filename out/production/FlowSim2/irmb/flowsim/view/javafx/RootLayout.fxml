@@ -1,34 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <ButtonBar fx:id="buttonBar" prefHeight="40.0" prefWidth="200.0">
-        <buttons>
-          <Button fx:id="lineButton" mnemonicParsing="false" onAction="#onLineButtonClick" text="Line" />
-            <Button fx:id="rectangleButton" mnemonicParsing="false" onAction="#onRectangleButtonClick" text="Rectangle" />
-            <Button fx:id="polyLineButton" mnemonicParsing="false" onAction="#onPolyLineButtonClick" text="PolyLine" />
-            <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onUndoButtonClick" text="Undo" />
-            <Button fx:id="redoButton" mnemonicParsing="false" onAction="#onRedoButtonClick" text="Redo" />
-            <Button fx:id="addSimulationButton" mnemonicParsing="false" onAction="#onAddSimulationButtonClick" text="Add Simulation" />
-            <Button mnemonicParsing="false" onAction="#onRunSimulationClick" text="Run Simulation" />
-        </buttons>
-         <padding>
-            <Insets right="10.0" />
-         </padding>
-      </ButtonBar>
-   </top>
-   <center>
-      <Pane fx:id="rootPane" BorderPane.alignment="CENTER">
-         <children>
-            <Canvas fx:id="drawPanel" height="600.0" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" width="800.0" />
-         </children>
-      </Pane>
-   </center>
-</BorderPane>
+<VBox prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onCloseClick" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onUndoButtonClick" text="Undo">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onRedoButtonClick" text="Redo">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onClearClick" text="Clear" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Shapes">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onLineButtonClick" text="Line">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onRectangleButtonClick" text="Rectangle">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onPolyLineButtonClick" text="PolyLine">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onBezierButtonClick" text="Bezier">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Visualization">
+               <items>
+                  <CheckMenuItem mnemonicParsing="false" onAction="#onColorPlotChecked" text="Color Plot" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#onArrowPlotChecked" text="Arrow Plot" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#onInfoPlotChecked" text="Information Display" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+         <top>
+            <ToolBar>
+               <items>
+                <Button fx:id="lineButton" mnemonicParsing="false" onAction="#onLineButtonClick" text="Line">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/Line2D.gif" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="rectangleButton" mnemonicParsing="false" onAction="#onRectangleButtonClick" text="Rectangle">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/Rectangle2D.gif" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="polyLineButton" mnemonicParsing="false" onAction="#onPolyLineButtonClick" text="PolyLine">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/Polyline2D.gif" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="bezierButton" layoutX="137.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBezierButtonClick" text="Bezier Curve">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/Bezier2D.gif" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Separator orientation="VERTICAL" />
+                  <Button fx:id="addSimulationButton" mnemonicParsing="false" onAction="#onAddSimulationButtonClick" text="Add Simulation">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/add-simulation.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="runSimulationButton" mnemonicParsing="false" onAction="#onRunSimulationClick" text="Run Simulation">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/continue.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="pauseSimulationButton" layoutX="425.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPauseSimulationClick" text="Pause Simulation">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/pause.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="removeSimulationButton" layoutX="536.0" layoutY="10.0" mnemonicParsing="false" onAction="#onRemoveSimulationClick" text="Remove Simulation">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/remove-simulation.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator orientation="VERTICAL" />
+                  <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onUndoButtonClick" text="Undo">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/edit-undo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="redoButton" mnemonicParsing="false" onAction="#onRedoButtonClick" text="Redo">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/edit-redo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Separator layoutX="536.0" layoutY="10.0" orientation="VERTICAL" />
+                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClearClick" text="Clear">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/edit-clear.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </items>
+            </ToolBar>
+         </top>
+         <center>
+            <Pane fx:id="rootPane" BorderPane.alignment="CENTER">
+               <children>
+                  <Canvas fx:id="drawPanel" height="600.0" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" width="1024.0" />
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</VBox>

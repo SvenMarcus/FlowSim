@@ -31,7 +31,6 @@ public class CommandQueue extends ObservableImpl<String> {
             commandList.get(currentIndex--).undo();
             notifyObservers("undo");
         }
-
     }
 
     public void redo() {
@@ -40,6 +39,5 @@ public class CommandQueue extends ObservableImpl<String> {
             commandList.get(++currentIndex).redo();
             notifyObservers("redo");
         }
-
     }
 }

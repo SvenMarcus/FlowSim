@@ -3,12 +3,12 @@ package irmb.flowsim.view.javafx;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
-import irmb.flowsim.presentation.GraphicViewPresenter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
+import irmb.flowsim.simulation.visualization.PlotStyle;
 import irmb.flowsim.view.graphics.Paintable;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.CacheHint;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -34,6 +34,18 @@ public class RootController implements GraphicView {
     @FXML
     private Button polyLineButton;
     @FXML
+    private Button bezierButton;
+    @FXML
+    private Button runSimulationButton;
+    @FXML
+    private Button pauseSimulationButton;
+    @FXML
+    private Button undoButton;
+    @FXML
+    private Button redoButton;
+    @FXML
+    private Button clearButton;
+    @FXML
     private Canvas drawPanel;
 
     private SimulationGraphicViewPresenter presenter;
@@ -41,8 +53,11 @@ public class RootController implements GraphicView {
     private volatile CoordinateTransformer transformer;
     private GraphicsContext graphicsContext2D;
     private Runnable runnable;
+    private JavaFXRepaintScheduler repaintScheduler;
+
 
     public RootController() {
+
     }
 
     public void setPresenter(SimulationGraphicViewPresenter presenter) {
@@ -53,29 +68,28 @@ public class RootController implements GraphicView {
     public void initialize() {
         drawPanel.heightProperty().bind(rootPane.heightProperty());
         drawPanel.widthProperty().bind(rootPane.widthProperty());
-        drawPanel.heightProperty().addListener(o -> {
-            update();
-        });
-        drawPanel.widthProperty().addListener(o -> {
-            update();
-        });
-        drawPanel.setOnScroll(event -> {
-            presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY());
-        });
-
+        drawPanel.heightProperty().addListener(o -> update());
+        drawPanel.widthProperty().addListener(o -> update());
+        drawPanel.setOnScroll(event -> presenter.handleScroll(event.getX(), event.getY(), (int) event.getDeltaY()));
+        drawPanel.setCache(true);
+        drawPanel.setCacheHint(CacheHint.SPEED);
         runnable = () -> {
-            if (graphicsContext2D == null)
-                graphicsContext2D = drawPanel.getGraphicsContext2D();
+            graphicsContext2D = drawPanel.getGraphicsContext2D();
             if (painter == null)
                 painter = new JavaFXPainter();
             painter.setGraphicsContext(graphicsContext2D);
             graphicsContext2D.clearRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
-//            graphicsContext2D.setFill(Color.STEELBLUE);
-//            graphicsContext2D.fillRect(0, 0, drawPanel.getWidth(), drawPanel.getHeight());
+            graphicsContext2D.setFill(Color.WHITE);
+            graphicsContext2D.fillRect(0,0,drawPanel.getWidth(), drawPanel.getHeight());
+            graphicsContext2D.save();
             for (Paintable p : presenter.getPaintableList()) {
                 p.paint(painter, transformer);
             }
+            graphicsContext2D.restore();
         };
+        repaintScheduler = new JavaFXRepaintScheduler(runnable);
+        repaintScheduler.setDelay(16);
+        repaintScheduler.start();
     }
 
     public void onLineButtonClick(ActionEvent event) {
@@ -88,6 +102,46 @@ public class RootController implements GraphicView {
 
     public void onPolyLineButtonClick(ActionEvent event) {
         presenter.beginPaint("PolyLine");
+    }
+
+    public void onBezierButtonClick(ActionEvent event) {
+        presenter.beginPaint("Bezier");
+    }
+
+    public void onAddSimulationButtonClick(ActionEvent event) {
+        presenter.addSimulation();
+    }
+
+    public void onRunSimulationClick(ActionEvent event) {
+        presenter.runSimulation();
+    }
+
+    public void onPauseSimulationClick(ActionEvent event) {
+        presenter.pauseSimulation();
+    }
+
+    public void onRemoveSimulationClick(ActionEvent event) {
+        presenter.removeSimulation();
+    }
+
+    public void onClearClick(ActionEvent event) {
+        presenter.clearAll();
+    }
+
+    public void onCloseClick(ActionEvent event) {
+        System.exit(1);
+    }
+
+    public void onColorPlotChecked(ActionEvent event) {
+        presenter.togglePlotStyle(PlotStyle.Color);
+    }
+
+    public void onArrowPlotChecked(ActionEvent event) {
+        presenter.togglePlotStyle(PlotStyle.Arrow);
+    }
+
+    public void onInfoPlotChecked(ActionEvent event) {
+        presenter.togglePlotStyle(PlotStyle.Info);
     }
 
     public void onMousePressed(MouseEvent event) {
@@ -119,17 +173,10 @@ public class RootController implements GraphicView {
         presenter.redo();
     }
 
-    public void onAddSimulationButtonClick(ActionEvent event) {
-        presenter.addSimulation();
-    }
-
-    public void onRunSimulationClick(ActionEvent event) {
-        presenter.runSimulation();
-    }
 
     @Override
     public void update() {
-        Platform.runLater(runnable);
+        repaintScheduler.needsUpdate(true);
     }
 
     @Override

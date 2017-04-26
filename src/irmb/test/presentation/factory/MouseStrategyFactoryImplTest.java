@@ -49,6 +49,8 @@ public class MouseStrategyFactoryImplTest {
         assertThat(strategy, is(instanceOf(BuildObjectMouseStrategy.class)));
         strategy = sut.makeStrategy("PolyLine");
         assertThat(strategy, is(instanceOf(BuildObjectMouseStrategy.class)));
+        strategy = sut.makeStrategy("Bezier");
+        assertThat(strategy, is(instanceOf(BuildObjectMouseStrategy.class)));
     }
 
     @Test

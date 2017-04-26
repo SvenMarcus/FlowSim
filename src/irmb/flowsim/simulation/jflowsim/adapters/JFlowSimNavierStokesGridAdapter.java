@@ -9,11 +9,13 @@ import numerics.utilities.Scalar;
 /**
  * Created by sven on 09.03.17.
  */
-public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
+public class JFlowSimNavierStokesGridAdapter implements UniformGrid {
     private LBMNavierStokesGrid grid;
+    private Point topLeft;
 
     public JFlowSimNavierStokesGridAdapter(LBMNavierStokesGrid grid) {
         this.grid = grid;
+        topLeft = new Point(grid.getMinX(), grid.getMaxY());
     }
 
     @Override
@@ -61,9 +63,13 @@ public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
         return grid.getScalar(x, y, Scalar.V);
     }
 
+    public void setTopLeft(Point point) {
+        this.topLeft = point;
+    }
+
     @Override
     public Point getTopLeft() {
-        return new Point(grid.getMinX(), grid.getMaxY());
+        return topLeft;
     }
 
     @Override
@@ -74,16 +80,6 @@ public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
     @Override
     public double getDelta() {
         return grid.dx;
-    }
-
-    @Override
-    public double getDeltaY() {
-        return grid.dx;
-    }
-
-    @Override
-    public void setDeltaY(double deltaY) {
-        grid.dx = deltaY;
     }
 
     @Override
@@ -104,12 +100,52 @@ public class JFlowSimNavierStokesGridAdapter extends UniformGrid {
 
     @Override
     public boolean isPointInside(Point point) {
-        return !(point.getX() < grid.getMinX() || point.getX() > grid.getMaxX() || point.getY() < grid.getMinY() || point.getY() > grid.getMaxY());
+        return !(point.getX() < topLeft.getX() || point.getX() > topLeft.getX() + grid.getLength() || point.getY() < topLeft.getY() - grid.getWidth() || point.getY() > topLeft.getY());
     }
 
     @Override
     public boolean isSolid(int x, int y) {
         return grid.getType(x, y) == GridNodeType.SOLID;
+    }
+
+    @Override
+    public double getHorizontalVelocityAt(int x, int y) {
+        return grid.getScalar(x, y, Scalar.V_X);
+    }
+
+    @Override
+    public double getVerticalVelocityAt(int x, int y) {
+        return grid.getScalar(x, y, Scalar.V_Y);
+    }
+
+    @Override
+    public double getMNUPS() {
+        return grid.mnups;
+    }
+
+    @Override
+    public double getRealTime() {
+        return grid.real_time;
+    }
+
+    @Override
+    public double getViscosity() {
+        return grid.viscosity;
+    }
+
+    @Override
+    public double getVerticalGravity() {
+        return grid.gravityY;
+    }
+
+    @Override
+    public double getHorizontalGravity() {
+        return grid.gravityX;
+    }
+
+    @Override
+    public int getTimeStep() {
+        return grid.timestep;
     }
 
     public LBMNavierStokesGrid getJFlowSimGrid() {

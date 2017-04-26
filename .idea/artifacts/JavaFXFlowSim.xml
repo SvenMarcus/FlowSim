@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="JavaFXFlowSim">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaFXFlowSim</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="irmb.flowsim.view.javafx.JFXMainWindow" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="JavaFX FlowSim" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="FlowSim2.jar">
+        <element id="module-output" name="FlowSim2" />
+      </element>
+      <element id="library" level="project" name="Jama" />
+      <element id="library" level="module" name="JFlowSimLBMKernel" module-name="FlowSim2" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/MockitoExtension.jar" />
+    </root>
+  </artifact>
+</component>

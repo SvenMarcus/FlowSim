@@ -10,6 +10,7 @@ import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.simulation.SimulationFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 
+import javax.swing.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,8 +19,9 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
+        setLookAndFeel();
         ShapeFactoryImpl paintableFactory = new ShapeFactoryImpl();
-        PaintableShapeBuilderFactory builderFactory = new PaintableShapeBuilderFactoryImpl(paintableFactory);
+        PaintableShapeBuilderFactory builderFactory = new PaintableShapeBuilderFactoryImpl(paintableFactory, new PaintableShapeFactoryImpl());
         CommandQueue commandQueue = new CommandQueue();
         List<PaintableShape> shapeList = new LinkedList<>();
         CoordinateTransformer transformer = new CoordinateTransformerImpl();
@@ -36,5 +38,20 @@ public class Main {
         window.setPresenter(presenter);
         presenter.setGraphicView(window.getGraphicView());
         window.setVisible(true);
+    }
+
+    private static void setLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        } catch (ClassNotFoundException e) {
+            // handle exception
+        } catch (InstantiationException e) {
+            // handle exception
+        } catch (IllegalAccessException e) {
+            // handle exception
+        }
     }
 }

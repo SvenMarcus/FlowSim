@@ -1,9 +1,9 @@
 package irmb.flowsim.view.swing;
 
-import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.GraphicViewPresenter;
+import irmb.flowsim.view.RepaintScheduler;
 import irmb.flowsim.view.graphics.Paintable;
 
 import javax.swing.*;
@@ -19,6 +19,7 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
     protected GraphicViewPresenter presenter;
     protected SwingPainter painter;
     protected CoordinateTransformer transformer;
+    private final RepaintScheduler repaintScheduler;
 
     public SwingGraphicView(CoordinateTransformer transformer) {
         this.transformer = transformer;
@@ -26,6 +27,10 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
         addMouseMotionListener(this);
         addMouseWheelListener(this);
         painter = new SwingPainter();
+        Runnable runnable = () -> repaint();
+        repaintScheduler = new SwingRepaintScheduler(runnable);
+        repaintScheduler.setDelay(16);
+        repaintScheduler.start();
     }
 
     public void setPresenter(GraphicViewPresenter presenter) {
@@ -34,13 +39,12 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
 
     @Override
     public void update() {
-        repaint();
+        repaintScheduler.needsUpdate(true);
     }
 
     @Override
     public void setCoordinateTransformer(CoordinateTransformer transformer) {
         this.transformer = transformer;
-//        transformer.setViewBounds(new Point(0, 0), new Point(getWidth(), getHeight()));
     }
 
     public void paintComponent(Graphics g) {
@@ -95,6 +99,6 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        presenter.handleScroll(e.getX(), e.getY(), e.getWheelRotation());
+        presenter.handleScroll(e.getX(), e.getY(), -e.getWheelRotation());
     }
 }

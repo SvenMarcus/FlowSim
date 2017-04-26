@@ -1,5 +1,6 @@
 package irmb.test.presentation.factory;
 
+import irmb.flowsim.model.BezierCurve;
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.model.Rectangle;
@@ -38,6 +39,11 @@ public class ShapeFactoryImplTest {
     @Test
     public void testMakePolyLine() {
         assertThat(sut.makeShape("PolyLine"), is(instanceOf(PolyLine.class)));
+    }
+
+    @Test
+    public void testMakeBezierCurve() {
+        assertThat(sut.makeShape("Bezier"), is(instanceOf(BezierCurve.class)));
     }
 
     @Test

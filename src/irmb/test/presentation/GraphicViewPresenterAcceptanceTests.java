@@ -15,6 +15,7 @@ import java.util.List;
 import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
 import static irmb.mockito.verification.AtLeastThenForgetAll.atLeastThenForgetAll;
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
+import static irmb.test.util.TestUtil.doubleOf;
 import static irmb.test.util.TestUtil.makePoint;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
@@ -67,6 +68,20 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
             verify(painterSpy, times(2)).paintLine(13, 15, 18, 19);
             verify(painterSpy, times(1)).paintLine(18, 19, 36, 12);
         }
+
+        @Test
+        public void buildBezierCurveAcceptanceTest() {
+            sut.beginPaint("Bezier");
+            sut.handleLeftClick(14, 13);
+
+            sut.handleLeftClick(18, 16);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(16));
+
+            sut.handleLeftClick(22, 12);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(14.25));
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(18), doubleOf(14.25), doubleOf(22), doubleOf(12));
+
+        }
     }
 
     public class LivePaintingContext {
@@ -107,7 +122,7 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         }
 
         @Test
-        public void livePaintingPolyLineAcceptanceTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        public void livePaintingPolyLineAcceptanceTest() {
             sut.beginPaint("PolyLine");
 
             sut.handleLeftClick(13, 15);
@@ -143,6 +158,39 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
             sut.handleLeftClick(35, 84);
             verify(painterSpy, never()).paintLine(43, 22, 35, 84);
         }
+
+        @Test
+        public void livePaintingBezierCurveAcceptanceTest() {
+            sut.beginPaint("Bezier");
+
+            sut.handleLeftClick(14, 13);
+
+            sut.handleMouseMove(18, 16);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(16));
+
+            sut.handleLeftClick(18, 16);
+
+            sut.handleMouseMove(22, 12);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(14.25));
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(18), doubleOf(14.25), doubleOf(22), doubleOf(12));
+
+            sut.handleLeftClick(22, 12);
+
+            sut.handleMouseMove(42, 18);
+            clearInvocations(painterSpy);
+
+            sut.handleRightClick(42, 18);
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(14), doubleOf(13), doubleOf(18), doubleOf(14.25));
+            verify(painterSpy, atLeastOnce()).paintLine(doubleOf(18), doubleOf(14.25), doubleOf(22), doubleOf(12));
+
+            verify(painterSpy, atLeastOnce()).paintPoint(doubleOf(14), doubleOf(13));
+            verify(painterSpy, atLeastOnce()).paintPoint(doubleOf(18), doubleOf(16));
+            verify(painterSpy, atLeastOnce()).paintPoint(doubleOf(22), doubleOf(12));
+
+            sut.handleMouseMove(42, 18);
+            verifyNoMoreInteractions(painterSpy);
+        }
+
     }
 
     @Test
@@ -258,15 +306,13 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
 
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
 
-
+        sut.beginPaint("Line");
         sut.handleMiddleClick(10, 10);
         sut.handleMouseDrag(3, 2);
         sut.handleMouseRelease();
         verify(painterSpy, atLeastThenForget(1)).paintLine(12, 12, 17, 16);
         verify(painterSpy, atLeastThenForget(1)).paintLine(34, 37, 9, 51);
         verify(painterSpy, atLeastThenForget(1)).paintLine(9, 51, 64, 71);
-
-
     }
 
     private void verifyUnchangedWorldCoordinates(Line line, PolyLine polyLine, Point lineStart, Point lineEnd, List<Point> pointList) {
@@ -308,16 +354,22 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
 
         List<Double> capturedArgs = doubleCaptor.getAllValues();
+
         verifyLineCoordinatesAfterZoomOut(capturedArgs);
         verifyPolyLineCoordinatesAfterZoomOut(capturedArgs);
 
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
 
         doubleCaptor = ArgumentCaptor.forClass(Double.class);
+
+        sut.beginPaint("Line");
         sut.handleScroll(15, 19, 1);
+
         verify(painterSpy, atLeastThenForget(1)).paintLine(doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture(), doubleCaptor.capture());
+
         verifyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
         verifyPolyLineCoordinatesAfterZoomIn(doubleCaptor.getAllValues());
+
         verifyUnchangedWorldCoordinates(line, polyLine, lineStart, lineEnd, pointList);
     }
 
@@ -367,6 +419,13 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleRightClick(pointOnLine.getX(), pointOnLine.getY());
         verify(graphicView, atLeastOnce()).update();
         verifyZeroInteractions(painterSpy);
+
+        buildLine(52, 66, 474, 523);
+
+        clearInvocations(painterSpy);
+
+        sut.handleRightClick(0, 0);
+        verifyZeroInteractions(painterSpy);
     }
 
     @Test
@@ -411,5 +470,31 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleMouseDrag(65, 12);
         sut.handleMouseRelease();
         verify(painterSpy, atLeastThenForget(1)).paintLine(65, 12, 474, 523);
+    }
+
+    @Test
+    public void clearAllAcceptanceTest() {
+        buildRectangle(15, 14, 80, 20);
+        buildLine(74, 18, 65, 10);
+        clearInvocations(painterSpy);
+        clearInvocations(graphicView);
+
+        sut.clearAll();
+        verify(graphicView).update();
+        verifyZeroInteractions(painterSpy);
+
+        clearInvocations(graphicView);
+        clearInvocations(painterSpy);
+
+        sut.undo();
+        verify(painterSpy, atLeastOnce()).paintLine(74, 18, 65, 10);
+        verify(painterSpy, atLeastOnce()).paintRectangle(15, 14, 65, 6);
+
+        clearInvocations(graphicView);
+        clearInvocations(painterSpy);
+
+        sut.redo();
+        verify(graphicView).update();
+        verifyZeroInteractions(painterSpy);
     }
 }

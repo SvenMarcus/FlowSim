@@ -2,14 +2,15 @@ package irmb.test.presentation;
 
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
-import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicView;
-import irmb.flowsim.presentation.GraphicViewPresenter;
-import irmb.flowsim.presentation.Painter;
+import irmb.flowsim.presentation.*;
 import irmb.flowsim.presentation.factory.*;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
+import irmb.test.util.MockitoUtil;
 import org.junit.Before;
+import org.mockito.Mock;
+import org.mockito.invocation.Invocation;
+import org.mockito.invocation.InvocationOnMock;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -29,15 +30,26 @@ public class GraphicViewPresenterTest {
     protected GraphicView graphicView;
     protected CoordinateTransformer transformer;
     protected GraphicViewPresenter sut;
+    protected MouseStrategyFactory mouseStrategyFactory;
 
 
     @Before
     public void setUp() throws Exception {
+        initializeTestSetup();
+        sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer);
+        sut.setGraphicView(graphicView);
+    }
+
+    protected void initializeTestSetup() {
         transformer = new CoordinateTransformerImpl();
         setWorldAndViewBounds();
         painterSpy = mock(Painter.class);
+        doAnswer((InvocationOnMock invocationOnMock) -> {
+            MockitoUtil.removeInvocation(invocationOnMock);
+            return null;
+        }).when(painterSpy).setColor(any());
         ShapeFactory factory = spy(new ShapeFactoryImpl());
-        shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory));
+        shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory, new PaintableShapeFactoryImpl()));
         commandQueue = spy(new CommandQueue());
         shapeList = new LinkedList<>();
         graphicView = mock(GraphicView.class);
@@ -46,12 +58,10 @@ public class GraphicViewPresenterTest {
                 shape.paint(painterSpy, transformer);
             return null;
         }).when(graphicView).update();
-        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory, transformer);
-        sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer);
-        sut.setGraphicView(graphicView);
+        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory, transformer);
     }
 
-    private void setWorldAndViewBounds() {
+    protected void setWorldAndViewBounds() {
         transformer.setWorldBounds(makePoint(-15, 10), makePoint(10, -10));
         transformer.setViewBounds(makePoint(0, 0), makePoint(800, 600));
     }

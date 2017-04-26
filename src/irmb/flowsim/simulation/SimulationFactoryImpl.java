@@ -1,6 +1,6 @@
 package irmb.flowsim.simulation;
 
-import irmb.flowsim.presentation.factory.ColorFactoryImpl;
+import irmb.flowsim.model.Point;
 import irmb.flowsim.simulation.jflowsim.adapters.JFlowSimNavierStokesGridAdapter;
 import irmb.flowsim.simulation.jflowsim.adapters.JFlowSimNavierStokesSolverAdapter;
 import numerics.BoundaryCondition;
@@ -20,8 +20,9 @@ public class SimulationFactoryImpl implements SimulationFactory {
     public Simulation makeSimulation() {
         JFlowSimNavierStokesGridAdapter gridAdapter = makeGrid();
         LBMNavierStokesSolver solver = new LBMNavierStokesSolver(gridAdapter.getJFlowSimGrid());
-        JFlowSimNavierStokesSolverAdapter solverAdapter = new JFlowSimNavierStokesSolverAdapter(solver);
-        return new LBMChannelFlowSimulation(gridAdapter, solverAdapter, new ColorFactoryImpl());
+        JFlowSimNavierStokesSolverAdapter solverAdapter = new JFlowSimNavierStokesSolverAdapter(solver, gridAdapter.getJFlowSimGrid());
+        LBMChannelFlowSimulation lbmChannelFlowSimulation = new LBMChannelFlowSimulation(gridAdapter, solverAdapter);
+        return lbmChannelFlowSimulation;
     }
 
     private JFlowSimNavierStokesGridAdapter makeGrid() {
@@ -49,6 +50,7 @@ public class SimulationFactoryImpl implements SimulationFactory {
 
 
         JFlowSimNavierStokesGridAdapter gridAdapter = new JFlowSimNavierStokesGridAdapter(grid);
+        gridAdapter.setTopLeft(new Point(0.25, 0.35));
         System.out.println(gridAdapter.getTopLeft());
         return gridAdapter;
     }

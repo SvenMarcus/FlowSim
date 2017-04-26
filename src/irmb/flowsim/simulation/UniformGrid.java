@@ -5,40 +5,52 @@ import irmb.flowsim.model.Point;
 /**
  * Created by sven on 04.03.17.
  */
-public abstract class UniformGrid {
-    public abstract void setHeight(double length);
+public interface UniformGrid {
+    void setHeight(double length);
 
-    public abstract double getHeight();
+    double getHeight();
 
-    public abstract void setWidth(double width);
+    void setWidth(double width);
 
-    public abstract double getWidth();
+    double getWidth();
 
-    public abstract void setHorizontalNodes(int horizontalNodes);
+    void setHorizontalNodes(int horizontalNodes);
 
-    public abstract int getHorizontalNodes();
+    int getHorizontalNodes();
 
-    public abstract void setVerticalNodes(int verticalNodes);
+    void setVerticalNodes(int verticalNodes);
 
-    public abstract int getVerticalNodes();
+    int getVerticalNodes();
 
-    public abstract double getVelocityAt(int x, int y);
+    double getVelocityAt(int x, int y);
 
-    public abstract Point getTopLeft();
+    Point getTopLeft();
 
-    public abstract void setDelta(double deltaX);
+    void setDelta(double deltaX);
 
-    public abstract double getDelta();
+    double getDelta();
 
-    public abstract double getDeltaY();
+    void resetSolidNodes();
 
-    public abstract void setDeltaY(double deltaY);
+    void setSolid(int x, int y);
 
-    public abstract void resetSolidNodes();
+    boolean isPointInside(Point point);
 
-    public abstract void setSolid(int x, int y);
+    boolean isSolid(int x, int y);
 
-    public abstract boolean isPointInside(Point point);
+    double getHorizontalVelocityAt(int x, int y);
 
-    public abstract boolean isSolid(int x, int y);
+    double getVerticalVelocityAt(int x, int y);
+
+    double getMNUPS();
+
+    double getRealTime();
+
+    double getViscosity();
+
+    double getVerticalGravity();
+
+    double getHorizontalGravity();
+
+    int getTimeStep();
 }

@@ -9,7 +9,10 @@ import irmb.flowsim.view.graphics.PaintableShape;
  */
 public abstract class PaintableShapeBuilder {
 
-    protected final ShapeFactory factory;
+    protected ShapeFactory factory;
+
+    public PaintableShapeBuilder() {
+    }
 
     public PaintableShapeBuilder(ShapeFactory factory) {
         this.factory = factory;

@@ -1,6 +1,7 @@
 package irmb.flowsim.presentation.strategy;
 
 import irmb.flowsim.model.Point;
+import irmb.flowsim.model.Shape;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.command.MoveShapeCommand;
 import irmb.flowsim.presentation.command.RemovePaintableShapeCommand;
@@ -14,7 +15,7 @@ import java.util.List;
 public class MoveMouseStrategy extends MouseStrategy {
 
 
-    private final int radius = 3;
+    private int radius = 3;
     private MoveShapeCommand moveShapeCommand;
     private Point clickedPoint;
     private List<PaintableShape> shapeList;
@@ -31,16 +32,44 @@ public class MoveMouseStrategy extends MouseStrategy {
     public void onLeftClick(double x, double y) {
         super.onLeftClick(x, y);
         clickedPoint = new Point(x, y);
-        Point worldPoint = transformer.transformToWorldPoint(clickedPoint);
-        PaintableShape paintableShape = getPaintableShapeAt(worldPoint);
+        prepareShapeMove(getPaintableShapeAt(x, y));
+    }
+
+    private void prepareShapeMove(PaintableShape paintableShape) {
         if (paintableShape != null) {
-            double tolerance = transformer.scaleToWorldLength(radius);
+            double tolerance = getWorldLength(radius);
+            Point worldPoint = getWorldPoint(clickedPoint);
             Point definedPoint = paintableShape.getDefinedPoint(worldPoint, tolerance);
-            if (definedPoint != null)
-                moveShapeCommand = new MoveShapeCommand(definedPoint);
-            else
-                moveShapeCommand = new MoveShapeCommand(paintableShape.getShape());
+            makeMoveShapeCommand(paintableShape, definedPoint);
         }
+    }
+
+    private void makeMoveShapeCommand(PaintableShape paintableShape, Point definedPoint) {
+        Shape shape = definedPoint != null ? definedPoint : paintableShape.getShape();
+        moveShapeCommand = new MoveShapeCommand(shape);
+    }
+
+    @Override
+    public void onRightClick(double x, double y) {
+        PaintableShape shape = getPaintableShapeAt(x, y);
+        if (shape != null)
+            deleteShape(shape);
+    }
+
+    private void deleteShape(PaintableShape shape) {
+        RemovePaintableShapeCommand command = makeRemoveCommand(shape);
+        command.execute();
+        notifyWithRemoveCommand(command);
+    }
+
+    private void notifyWithRemoveCommand(RemovePaintableShapeCommand command) {
+        StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
+        args.setCommand(command);
+        notifyObservers(args);
+    }
+
+    private RemovePaintableShapeCommand makeRemoveCommand(PaintableShape shape) {
+        return new RemovePaintableShapeCommand(shapeList, shape);
     }
 
     @Override
@@ -60,32 +89,13 @@ public class MoveMouseStrategy extends MouseStrategy {
         double dx = x - clickedPoint.getX();
         double dy = y - clickedPoint.getY();
 
-        double worldDx = transformer.scaleToWorldLength(dx);
-        double worldDy = -transformer.scaleToWorldLength(dy);
+        double worldDx = getWorldLength(dx);
+        double worldDy = -getWorldLength(dy);
         moveShapeCommand.setDelta(worldDx, worldDy);
         moveShapeCommand.execute();
 
         clickedPoint.setX(x);
         clickedPoint.setY(y);
-    }
-
-    @Override
-    public void onRightClick(double x, double y) {
-        Point worldPoint = transformer.transformToWorldPoint(new Point(x, y));
-        PaintableShape shape = getPaintableShapeAt(worldPoint);
-        StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
-        RemovePaintableShapeCommand command = new RemovePaintableShapeCommand(shapeList, shape);
-        command.execute();
-        args.setCommand(command);
-        notifyObservers(args);
-    }
-
-    private PaintableShape getPaintableShapeAt(Point worldPoint) {
-        double tolerance = transformer.scaleToWorldLength(radius);
-        for (PaintableShape p : shapeList)
-            if (p.isPointOnBoundary(worldPoint, tolerance))
-                return p;
-        return null;
     }
 
     @Override
@@ -97,5 +107,26 @@ public class MoveMouseStrategy extends MouseStrategy {
             notifyObservers(args);
         }
         moveShapeCommand = null;
+    }
+
+    private PaintableShape getPaintableShapeAt(double x, double y) {
+        Point worldPoint = getWorldPoint(new Point(x, y));
+        double tolerance = transformer.scaleToWorldLength(radius);
+        for (PaintableShape p : shapeList)
+            if (p.isPointOnBoundary(worldPoint, tolerance))
+                return p;
+        return null;
+    }
+
+    private double getWorldLength(double radius) {
+        return transformer.scaleToWorldLength(radius);
+    }
+
+    private Point getWorldPoint(Point clickedPoint) {
+        return transformer.transformToWorldPoint(clickedPoint);
+    }
+
+    public void setToleranceRadius(int radius) {
+        this.radius = radius;
     }
 }

@@ -44,6 +44,17 @@ public class SwingPainter implements Painter {
         graphics.fillRect((int) x, (int) y, (int) width, (int) height);
     }
 
+    @Override
+    public void paintPoint(double x, double y) {
+        graphics.drawLine((int) x - 5, (int) y - 5, (int) x + 5, (int) y + 5);
+        graphics.drawLine((int) x + 5, (int) y - 5, (int) x - 5, (int) y + 5);
+    }
+
+    @Override
+    public void paintString(String s, double x, double y) {
+        graphics.drawString(s, (int) x, (int) y);
+    }
+
     public void setGraphics(Graphics graphics) {
         this.graphics = graphics;
     }

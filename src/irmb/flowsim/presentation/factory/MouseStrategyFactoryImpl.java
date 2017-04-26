@@ -21,7 +21,7 @@ public class MouseStrategyFactoryImpl implements MouseStrategyFactory {
     private final GraphicView graphicView;
     private final PaintableShapeBuilderFactory factory;
     private final CoordinateTransformer transformer;
-
+    private int toleranceRadius = 3;
 
     public MouseStrategyFactoryImpl(List<PaintableShape> shapeList, CommandQueue commandQueue, GraphicView graphicView, PaintableShapeBuilderFactory factory, CoordinateTransformer transformer) {
         this.shapeList = shapeList;
@@ -40,15 +40,27 @@ public class MouseStrategyFactoryImpl implements MouseStrategyFactory {
                 return makeBuildObjectMouseStrategy(type);
             case "PolyLine":
                 return makeBuildObjectMouseStrategy(type);
+            case "Bezier":
+                return makeBuildObjectMouseStrategy(type);
             case "Move":
-                return new MoveMouseStrategy(shapeList, transformer);
+                return makeMoveMouseStrategy();
             default:
-                return new MoveMouseStrategy(shapeList, transformer);
+                return makeMoveMouseStrategy();
         }
+    }
+
+    private MouseStrategy makeMoveMouseStrategy() {
+        MoveMouseStrategy moveMouseStrategy = new MoveMouseStrategy(shapeList, transformer);
+        moveMouseStrategy.setToleranceRadius(toleranceRadius);
+        return moveMouseStrategy;
     }
 
     private BuildObjectMouseStrategy makeBuildObjectMouseStrategy(String type) {
         PaintableShapeBuilder builder = factory.makeShapeBuilder(type);
         return new BuildObjectMouseStrategy(shapeList, transformer, builder);
+    }
+
+    public void setMoveStrategyToleranceRadius(int toleranceRadius) {
+        this.toleranceRadius = toleranceRadius;
     }
 }

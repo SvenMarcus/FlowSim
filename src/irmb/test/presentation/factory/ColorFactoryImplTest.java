@@ -38,12 +38,12 @@ public class ColorFactoryImplTest {
         result = sut.makeColorForValue(10, 20, 15);
         assertEquals(0, result.r);
         assertEquals(255, result.g);
-        assertEquals(255, result.b);
+        assertEquals(0, result.b);
 
         result = sut.makeColorForValue(10, 20, 13);
         assertEquals(0, result.r);
         assertEquals(255, result.g);
-        assertEquals(51, result.b);
+        assertEquals(204, result.b);
 
         result = sut.makeColorForValue(10, 20, 16);
         assertEquals(102, result.r);
