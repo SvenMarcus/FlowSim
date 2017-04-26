@@ -30,7 +30,7 @@ public class Main {
         transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
 
         MainWindow window = new MainWindow(transformer);
-        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, window.getGraphicView(), builderFactory, transformer);
+        MouseStrategyFactory mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, builderFactory, transformer);
         SimulationFactory simulationFactory = new SimulationFactoryImpl();
 
 

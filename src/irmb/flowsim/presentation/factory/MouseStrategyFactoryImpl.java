@@ -1,8 +1,6 @@
 package irmb.flowsim.presentation.factory;
 
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.strategy.BuildObjectMouseStrategy;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
@@ -17,16 +15,12 @@ import java.util.List;
 public class MouseStrategyFactoryImpl implements MouseStrategyFactory {
 
     private final List<PaintableShape> shapeList;
-    private final CommandQueue commandQueue;
-    private final GraphicView graphicView;
     private final PaintableShapeBuilderFactory factory;
     private final CoordinateTransformer transformer;
     private int toleranceRadius = 3;
 
-    public MouseStrategyFactoryImpl(List<PaintableShape> shapeList, CommandQueue commandQueue, GraphicView graphicView, PaintableShapeBuilderFactory factory, CoordinateTransformer transformer) {
+    public MouseStrategyFactoryImpl(List<PaintableShape> shapeList, PaintableShapeBuilderFactory factory, CoordinateTransformer transformer) {
         this.shapeList = shapeList;
-        this.commandQueue = commandQueue;
-        this.graphicView = graphicView;
         this.factory = factory;
         this.transformer = transformer;
     }

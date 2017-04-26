@@ -38,7 +38,7 @@ public class MouseStrategyFactoryImplTest {
         commandQueue = mock(CommandQueue.class);
         graphicView = mock(GraphicView.class);
         factory = mock(PaintableShapeBuilderFactory.class);
-        sut = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, factory, null);
+        sut = new MouseStrategyFactoryImpl(shapeList, factory, null);
     }
 
     @Test

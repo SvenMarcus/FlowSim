@@ -8,8 +8,6 @@ import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 import irmb.test.util.MockitoUtil;
 import org.junit.Before;
-import org.mockito.Mock;
-import org.mockito.invocation.Invocation;
 import org.mockito.invocation.InvocationOnMock;
 
 import java.util.LinkedList;
@@ -58,7 +56,7 @@ public class GraphicViewPresenterTest {
                 shape.paint(painterSpy, transformer);
             return null;
         }).when(graphicView).update();
-        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicView, shapeBuilderFactory, transformer);
+        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, shapeBuilderFactory, transformer);
     }
 
     protected void setWorldAndViewBounds() {

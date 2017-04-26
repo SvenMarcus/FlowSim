@@ -12,7 +12,6 @@ import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.simulation.SimulationFactoryImpl;
 import irmb.flowsim.view.graphics.PaintableShape;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -48,7 +47,7 @@ public class JFXMainWindow extends Application {
 
         RootController rootController = new RootController();
 
-        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, rootController, builderFactory, transformer);
+        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, builderFactory, transformer);
         mouseStrategyFactory.setMoveStrategyToleranceRadius(5);
 
         SimulationGraphicViewPresenter presenter = makePresenter();

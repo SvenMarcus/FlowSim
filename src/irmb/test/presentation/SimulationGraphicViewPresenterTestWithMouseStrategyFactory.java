@@ -68,7 +68,7 @@ public class SimulationGraphicViewPresenterTestWithMouseStrategyFactory {
 
     private void makeMouseStrategyFactory(CommandQueue commandQueue) {
         PaintableShapeBuilderFactory shapeBuilderFactory = makeShapeBuilderFactory();
-        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, commandQueue, graphicViewMock, shapeBuilderFactory, transformer);
+        mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, shapeBuilderFactory, transformer);
     }
 
     private void makeTransformerMock() {
