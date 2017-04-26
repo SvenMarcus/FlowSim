@@ -99,6 +99,6 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        presenter.handleScroll(e.getX(), e.getY(), e.getWheelRotation());
+        presenter.handleScroll(e.getX(), e.getY(), -e.getWheelRotation());
     }
 }

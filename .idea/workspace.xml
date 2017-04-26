@@ -43,7 +43,22 @@
     <favorites_list name="FlowSim2" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="SwingGraphicView.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/SwingGraphicView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="79">
+              <caret line="80" column="0" lean-forward="true" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+              <folding>
+                <element signature="e#1200#1201#0" expanded="true" />
+                <element signature="e#1242#1243#0" expanded="true" />
+                <marker date="1493170635858" expanded="true" signature="1467:1474" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -119,12 +134,12 @@
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/RepaintScheduler.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/SwingRepaintScheduler.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/JavaFXRepaintScheduler.java" />
-        <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/SwingGraphicView.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/view/javafx/RootController.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MouseStrategy.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterWindowOperationsTest.java" />
         <option value="$PROJECT_DIR$/src/irmb/flowsim/presentation/strategy/MoveMouseStrategy.java" />
         <option value="$PROJECT_DIR$/src/irmb/test/presentation/GraphicViewPresenterAcceptanceTests.java" />
+        <option value="$PROJECT_DIR$/src/irmb/flowsim/view/swing/SwingGraphicView.java" />
       </list>
     </option>
   </component>
@@ -155,9 +170,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -172,6 +186,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -923,6 +938,7 @@
       <workItem from="1493128949082" duration="16000" />
       <workItem from="1493169218435" duration="52000" />
       <workItem from="1493169293762" duration="1276000" />
+      <workItem from="1493170613006" duration="120000" />
     </task>
     <servers />
   </component>
@@ -959,7 +975,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="762319000" />
+    <option name="totallyTimeSpent" value="762439000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -983,12 +999,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22403258" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2966457" sideWeight="0.49791667" order="5" side_tool="false" content_ui="tabs" x="1928" y="618" width="1876" height="263" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2966457" sideWeight="0.49791667" order="5" side_tool="false" content_ui="tabs" x="1928" y="618" width="1876" height="263" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18123667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18283582" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32969433" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1254,7 +1270,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-105">
           <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1262,7 +1277,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1270,21 +1284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <marker date="1493169165513" expanded="true" signature="2161:2251" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/SwingGraphicView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="36" column="35" lean-forward="false" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-          <folding>
-            <element signature="e#1200#1201#0" expanded="true" />
-            <element signature="e#1242#1243#0" expanded="true" />
-            <marker date="1493169165515" expanded="true" signature="1467:1474" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1292,7 +1291,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="64" column="36" lean-forward="false" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1311,18 +1309,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="35" column="11" lean-forward="true" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
-          <folding>
-            <element signature="docComment;class#GraphicViewPresenterTest#0" expanded="false" />
-            <element signature="method#setUp#0;class#GraphicViewPresenterTest#0" expanded="false" />
-            <element signature="method#initializeTestSetup#0;class#GraphicViewPresenterTest#0" expanded="false" />
-            <element signature="e#1515#1650#0" expanded="false" />
-            <element signature="e#2013#2182#0" expanded="false" />
-            <element signature="method#setWorldAndViewBounds#0;class#GraphicViewPresenterTest#0" expanded="false" />
-            <element signature="method#performMove#0;class#GraphicViewPresenterTest#0" expanded="false" />
-            <element signature="method#buildLine#0;class#GraphicViewPresenterTest#0" expanded="false" />
-            <element signature="method#buildRectangle#0;class#GraphicViewPresenterTest#0" expanded="false" />
-            <element signature="method#buildPolyLine#0;class#GraphicViewPresenterTest#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1330,7 +1316,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3919">
           <caret line="424" column="21" lean-forward="false" selection-start-line="424" selection-start-column="21" selection-end-line="424" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1338,7 +1323,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="54" column="25" lean-forward="false" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1346,7 +1330,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-309">
           <caret line="37" column="36" lean-forward="false" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irmb/flowsim/view/swing/SwingGraphicView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="80" column="0" lean-forward="true" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding>
+            <element signature="e#1200#1201#0" expanded="true" />
+            <element signature="e#1242#1243#0" expanded="true" />
+            <marker date="1493170635858" expanded="true" signature="1467:1474" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
