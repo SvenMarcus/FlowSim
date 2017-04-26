@@ -2,7 +2,7 @@ package irmb.flowsim.presentation;
 
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
-import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.presentation.strategy.StrategyState;
 import irmb.flowsim.simulation.Simulation;
 import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.simulation.visualization.*;
@@ -48,7 +48,7 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
 
     protected void addStrategyObserver() {
         strategy.addObserver((arg) -> {
-            if (arg.getState() == STRATEGY_STATE.FINISHED)
+            if (arg.getState() == StrategyState.FINISHED)
                 makeStrategy("Move");
             if (arg.getCommand() != null)
                 commandQueue.add(arg.getCommand());

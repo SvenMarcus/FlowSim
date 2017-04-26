@@ -9,7 +9,7 @@ import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
-import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.presentation.strategy.StrategyState;
 import irmb.flowsim.presentation.strategy.StrategyEventArgs;
 import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.simulation.SimulationFactoryImpl;
@@ -236,7 +236,7 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenReceivingUpdateFromStrategy_shouldMapShapesToGrid() {
-            mouseStrategyMock.notifyObservers(new StrategyEventArgs(STRATEGY_STATE.UPDATE));
+            mouseStrategyMock.notifyObservers(new StrategyEventArgs(StrategyState.UPDATE));
             verify(simulationSpy).setShapes(shapeList);
         }
 

@@ -9,6 +9,8 @@ import irmb.flowsim.view.graphics.PaintableShape;
 
 import java.util.List;
 
+import static irmb.flowsim.presentation.strategy.StrategyState.UPDATE;
+
 /**
  * Created by Sven on 05.01.2017.
  */
@@ -63,7 +65,7 @@ public class MoveMouseStrategy extends MouseStrategy {
     }
 
     private void notifyWithRemoveCommand(RemovePaintableShapeCommand command) {
-        StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
+        StrategyEventArgs args = new StrategyEventArgs(UPDATE);
         args.setCommand(command);
         notifyObservers(args);
     }
@@ -81,7 +83,7 @@ public class MoveMouseStrategy extends MouseStrategy {
         super.onMouseDrag(x, y);
         if (moveShapeCommand != null) {
             moveShape(x, y);
-            notifyObservers(new StrategyEventArgs(STRATEGY_STATE.UPDATE));
+            notifyObservers(new StrategyEventArgs(UPDATE));
         }
     }
 
@@ -102,7 +104,7 @@ public class MoveMouseStrategy extends MouseStrategy {
     public void onMouseRelease() {
         super.onMouseRelease();
         if (moveShapeCommand != null) {
-            StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
+            StrategyEventArgs args = new StrategyEventArgs(UPDATE);
             args.setCommand(moveShapeCommand);
             notifyObservers(args);
         }

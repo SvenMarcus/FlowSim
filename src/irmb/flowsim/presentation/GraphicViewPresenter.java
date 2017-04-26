@@ -5,7 +5,7 @@ import irmb.flowsim.presentation.command.ClearAllCommand;
 import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
 import irmb.flowsim.presentation.strategy.MouseStrategy;
-import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.presentation.strategy.StrategyState;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 
@@ -92,7 +92,7 @@ public class GraphicViewPresenter {
 
     protected void addStrategyObserver() {
         strategy.addObserver((arg) -> {
-            if (arg.getState() == STRATEGY_STATE.FINISHED)
+            if (arg.getState() == StrategyState.FINISHED)
                 makeStrategy("Move");
             if (arg.getCommand() != null)
                 commandQueue.add(arg.getCommand());

@@ -1,6 +1,5 @@
 package irmb.flowsim.presentation.strategy;
 
-import irmb.flowsim.presentation.command.AddPaintableShapeCommand;
 import irmb.flowsim.presentation.command.Command;
 
 /**
@@ -8,21 +7,21 @@ import irmb.flowsim.presentation.command.Command;
  */
 public class StrategyEventArgs {
 
-    private STRATEGY_STATE state;
+    private StrategyState state;
     private Command command;
 
     public StrategyEventArgs() {
     }
 
-    public StrategyEventArgs(STRATEGY_STATE state) {
+    public StrategyEventArgs(StrategyState state) {
         this.state = state;
     }
 
-    public void setState(STRATEGY_STATE state) {
+    public void setState(StrategyState state) {
         this.state = state;
     }
 
-    public STRATEGY_STATE getState() {
+    public StrategyState getState() {
         return state;
     }
 

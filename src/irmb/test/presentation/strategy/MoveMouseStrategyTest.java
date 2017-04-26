@@ -9,7 +9,7 @@ import irmb.flowsim.presentation.command.MoveShapeCommand;
 import irmb.flowsim.presentation.command.PanWindowCommand;
 import irmb.flowsim.presentation.command.RemovePaintableShapeCommand;
 import irmb.flowsim.presentation.strategy.MoveMouseStrategy;
-import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.presentation.strategy.StrategyState;
 import irmb.flowsim.presentation.strategy.StrategyEventArgs;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -94,7 +94,7 @@ public class MoveMouseStrategyTest {
     public void whenDraggingMouseAfterClickingOnShape_shouldNotifyObserverWithUpdate() {
         sut.onLeftClick(10, 10);
         sut.onMouseDrag(15, 21);
-        verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.UPDATE));
+        verify(observer).update(argThat(args -> args.getState() == StrategyState.UPDATE));
         assertNull(receivedCommand);
     }
 
@@ -104,7 +104,7 @@ public class MoveMouseStrategyTest {
         sut.onMouseDrag(15, 21);
         InOrder inOrder = inOrder(shape, observer);
         inOrder.verify(shape).moveBy(anyDouble(), anyDouble());
-        inOrder.verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.UPDATE));
+        inOrder.verify(observer).update(argThat(args -> args.getState() == StrategyState.UPDATE));
     }
 
     @Test
@@ -122,7 +122,7 @@ public class MoveMouseStrategyTest {
 
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer, atLeast(2)).update(captor.capture());
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertThat(captor.getValue().getCommand(), is(instanceOf(MoveShapeCommand.class)));
     }
 
@@ -148,7 +148,7 @@ public class MoveMouseStrategyTest {
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer).update(captor.capture());
         assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertNull(captor.getValue().getCommand());
     }
 
@@ -161,7 +161,7 @@ public class MoveMouseStrategyTest {
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer, atLeast(2)).update(captor.capture());
         assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertThat(captor.getValue().getCommand(), is(instanceOf(PanWindowCommand.class)));
     }
 
@@ -173,7 +173,7 @@ public class MoveMouseStrategyTest {
 
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer).update(captor.capture());
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertThat(captor.getValue().getCommand(), is(instanceOf(RemovePaintableShapeCommand.class)));
     }
 

@@ -47,7 +47,7 @@ public abstract class MouseStrategy extends ObservableImpl<StrategyEventArgs> {
             panWindowCommand = new PanWindowCommand(transformer);
         panWindowCommand.setDelta(dx, dy);
         panWindowCommand.execute();
-        notifyObservers(new StrategyEventArgs(STRATEGY_STATE.UPDATE));
+        notifyObservers(new StrategyEventArgs(StrategyState.UPDATE));
 
         clickedPoint.setX(x);
         clickedPoint.setY(y);
@@ -62,7 +62,7 @@ public abstract class MouseStrategy extends ObservableImpl<StrategyEventArgs> {
 
     public void onMouseRelease() {
         if (panWindowCommand != null) {
-            StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
+            StrategyEventArgs args = new StrategyEventArgs(StrategyState.UPDATE);
             args.setCommand(panWindowCommand);
             notifyObservers(args);
         }
@@ -77,7 +77,7 @@ public abstract class MouseStrategy extends ObservableImpl<StrategyEventArgs> {
         command.setZoomFactor(0.05 * zoom.direction());
         command.setZoomPoint(worldPoint.getX(), worldPoint.getY());
         command.execute();
-        StrategyEventArgs args = new StrategyEventArgs(STRATEGY_STATE.UPDATE);
+        StrategyEventArgs args = new StrategyEventArgs(StrategyState.UPDATE);
         args.setCommand(command);
         notifyObservers(args);
     }

@@ -10,7 +10,7 @@ import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.presentation.command.PanWindowCommand;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
 import irmb.flowsim.presentation.strategy.BuildObjectMouseStrategy;
-import irmb.flowsim.presentation.strategy.STRATEGY_STATE;
+import irmb.flowsim.presentation.strategy.StrategyState;
 import irmb.flowsim.presentation.strategy.StrategyEventArgs;
 import irmb.flowsim.util.Observer;
 import irmb.flowsim.view.graphics.PaintableShape;
@@ -126,7 +126,7 @@ public class BuildObjectMouseStrategyTest {
 
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer).update(captor.capture());
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertNull(receivedCommand);
     }
 
@@ -140,12 +140,12 @@ public class BuildObjectMouseStrategyTest {
 
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer, times(2)).update(captor.capture());
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertNull(receivedCommand);
     }
 
     private void assertThatObserverWasNotifiedWithFinishedAndCommand() {
-        verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+        verify(observer).update(argThat(args -> args.getState() == StrategyState.FINISHED));
         assertThat(receivedCommand, is(instanceOf(AddPaintableShapeCommand.class)));
     }
 
@@ -155,7 +155,7 @@ public class BuildObjectMouseStrategyTest {
 
         sut.onRightClick(0, 0);
 
-        verify(observer).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+        verify(observer).update(argThat(args -> args.getState() == StrategyState.FINISHED));
     }
 
     @Test
@@ -191,21 +191,21 @@ public class BuildObjectMouseStrategyTest {
 
         sut.onLeftClick(5, 6);
         verify(observer, atLeastThenForget(1)).update(captor.capture());
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertNull(captor.getValue().getCommand());
 
         sut.onLeftClick(7, 8);
         verify(observer, atLeastThenForget(1)).update(captor.capture());
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertNull(captor.getValue().getCommand());
 
         sut.onLeftClick(9, 10);
         verify(observer, atLeastThenForget(1)).update(captor.capture());
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertNull(captor.getValue().getCommand());
 
         sut.onRightClick(0, 0);
-        verify(observer, atLeastThenForget(1)).update(argThat(args -> args.getState() == STRATEGY_STATE.FINISHED));
+        verify(observer, atLeastThenForget(1)).update(argThat(args -> args.getState() == StrategyState.FINISHED));
     }
 
     @Test
@@ -227,7 +227,7 @@ public class BuildObjectMouseStrategyTest {
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer).update(captor.capture());
         assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertNull(captor.getValue().getCommand());
     }
 
@@ -242,7 +242,7 @@ public class BuildObjectMouseStrategyTest {
         ArgumentCaptor<StrategyEventArgs> captor = ArgumentCaptor.forClass(StrategyEventArgs.class);
         verify(observer, atLeast(2)).update(captor.capture());
         assertThat(captor.getValue(), is(instanceOf(StrategyEventArgs.class)));
-        assertEquals(STRATEGY_STATE.UPDATE, captor.getValue().getState());
+        assertEquals(StrategyState.UPDATE, captor.getValue().getState());
         assertThat(captor.getValue().getCommand(), is(instanceOf(PanWindowCommand.class)));
     }
 }
