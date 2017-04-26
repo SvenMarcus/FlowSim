@@ -52,7 +52,8 @@ public class MoveMouseStrategy extends MouseStrategy {
     @Override
     public void onRightClick(double x, double y) {
         PaintableShape shape = getPaintableShapeAt(x, y);
-        deleteShape(shape);
+        if (shape != null)
+            deleteShape(shape);
     }
 
     private void deleteShape(PaintableShape shape) {

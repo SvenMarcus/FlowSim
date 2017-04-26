@@ -67,6 +67,7 @@ public abstract class MouseStrategy extends ObservableImpl<StrategyEventArgs> {
             notifyObservers(args);
         }
         panWindowCommand = null;
+        mouseButton = null;
     }
 
     public void onScroll(double x, double y, double delta) {

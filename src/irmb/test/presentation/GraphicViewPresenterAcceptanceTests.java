@@ -419,6 +419,13 @@ public class GraphicViewPresenterAcceptanceTests extends GraphicViewPresenterTes
         sut.handleRightClick(pointOnLine.getX(), pointOnLine.getY());
         verify(graphicView, atLeastOnce()).update();
         verifyZeroInteractions(painterSpy);
+        
+        buildLine(52, 66, 474, 523);
+
+        clearInvocations(painterSpy);
+
+        sut.handleRightClick(0, 0);
+        verifyZeroInteractions(painterSpy);
     }
 
     @Test

@@ -9,6 +9,7 @@ import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
 import static irmb.test.util.TestUtil.makePoint;
 import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 /**
  * Created by sven on 19.01.17.
@@ -53,6 +54,17 @@ public class GraphicViewPresenterWindowOperationsTest extends GraphicViewPresent
 
         sut.handleMouseDrag(8, 12);
         verify(painterSpy, atLeastThenForget(1)).paintLine(21, 16, 63, 50);
+    }
+
+    @Test
+    public void whenPerformingDragWithRightClickAfterPan_shouldNotPanWindow() {
+        buildLine(23, 14, 65, 48);
+        performPan(10, 10, 15, 17);
+
+        clearInvocations(painterSpy);
+        sut.handleRightClick(-10, -10);
+        sut.handleMouseDrag(150, -200);
+        verifyZeroInteractions(painterSpy);
     }
 
     private void performPan(double x1, double y1, double x2, double y2) {
