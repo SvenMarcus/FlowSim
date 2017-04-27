@@ -4,19 +4,18 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
+import irmb.flowsim.model.Shape;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.CommandStack;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
-import irmb.flowsim.presentation.builder.PaintableLineBuilder;
-import irmb.flowsim.presentation.builder.PaintablePolyLineBuilder;
-import irmb.flowsim.presentation.factory.MouseStrategyFactory;
-import irmb.flowsim.presentation.factory.MouseStrategyFactoryImpl;
-import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
-import irmb.flowsim.presentation.factory.ShapeFactory;
+import irmb.flowsim.presentation.builder.*;
+import irmb.flowsim.presentation.factory.*;
 import irmb.flowsim.simulation.SimulationFactory;
 import irmb.flowsim.view.graphics.Paintable;
+import irmb.flowsim.view.graphics.PaintableLine;
+import irmb.flowsim.view.graphics.PaintablePolyLine;
 import irmb.flowsim.view.graphics.PaintableShape;
 import irmb.test.simulation.SimulationSpy;
 import org.junit.Before;
@@ -43,9 +42,13 @@ public class SimulationGraphicViewPresenterTestWithMouseStrategyFactory {
     private Line line;
     private MouseStrategyFactory mouseStrategyFactory;
     private PolyLine polyLine;
+    private int pointsAdded;
+    private List<Point> addedPoints;
 
     @Before
     public void setUp() {
+        pointsAdded = 0;
+        addedPoints = new ArrayList<>();
         graphicViewMock = mock(GraphicView.class);
         CommandStack commandStack = mock(CommandStack.class);
         shapeList = new ArrayList<>();
@@ -80,12 +83,19 @@ public class SimulationGraphicViewPresenterTestWithMouseStrategyFactory {
     private PaintableShapeBuilderFactory makeShapeBuilderFactory() {
         line = new Line();
         polyLine = new PolyLine();
-        ShapeFactory shapeFactory = mock(ShapeFactory.class);
-        when(shapeFactory.makeShape("Line")).thenReturn(line);
-        when(shapeFactory.makeShape("PolyLine")).thenReturn(polyLine);
+        PaintableLine paintableLine = new PaintableLine(line);
+        PaintablePolyLine paintablePolyLine = new PaintablePolyLine(polyLine);
+
+
         PaintableShapeBuilderFactory shapeBuilderFactory = mock(PaintableShapeBuilderFactory.class);
-        PaintableLineBuilder lineBuilder = new PaintableLineBuilder(shapeFactory);
-        PaintablePolyLineBuilder polyLineBuilder = new PaintablePolyLineBuilder(shapeFactory);
+        PaintableShapeFactory paintableShapeFactory = mock(PaintableShapeFactory.class);
+        when(paintableShapeFactory.makePaintableShape(any(Shape.class))).thenAnswer(invocationOnMock -> {
+            Shape shape = invocationOnMock.getArgument(0);
+            return shape instanceof Line ? paintableLine : paintablePolyLine;
+        });
+
+        TwoPointShapeBuilder lineBuilder = new TwoPointShapeBuilder(line, paintableShapeFactory);
+        MultiPointShapeBuilder polyLineBuilder = new MultiPointShapeBuilder(polyLine, paintableShapeFactory);
         when(shapeBuilderFactory.makeShapeBuilder("Line")).thenReturn(lineBuilder);
         when(shapeBuilderFactory.makeShapeBuilder("PolyLine")).thenReturn(polyLineBuilder);
         return shapeBuilderFactory;
@@ -184,7 +194,6 @@ public class SimulationGraphicViewPresenterTestWithMouseStrategyFactory {
 
             verify(simulationSpy, atLeast(4)).setShapes(shapeList);
         }
-
 
 
     }

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Sven on 14.12.2016.
  */
-public class PolyLine implements Shape {
+public class PolyLine implements MultiPointShape {
 
     private List<Point> pointList = new LinkedList<>();
 

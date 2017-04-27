@@ -1,9 +1,8 @@
 package irmb.flowsim.presentation.builder;
 
 import irmb.flowsim.model.Point;
-import irmb.flowsim.model.PolyLine;
+import irmb.flowsim.model.MultiPointShape;
 import irmb.flowsim.presentation.factory.PaintableShapeFactory;
-import irmb.flowsim.view.graphics.PaintablePolyLine;
 import irmb.flowsim.view.graphics.PaintableShape;
 
 /**
@@ -12,24 +11,24 @@ import irmb.flowsim.view.graphics.PaintableShape;
 public class MultiPointShapeBuilder extends PaintableShapeBuilder {
 
 
-    private final PolyLine polyLine;
+    private final MultiPointShape shape;
     private final PaintableShapeFactory paintableShapeFactory;
     private PaintableShape paintable;
 
-    public MultiPointShapeBuilder(PolyLine polyLine, PaintableShapeFactory paintableShapeFactory) {
-        this.polyLine = polyLine;
+    public MultiPointShapeBuilder(MultiPointShape shape, PaintableShapeFactory paintableShapeFactory) {
+        this.shape = shape;
         this.paintableShapeFactory = paintableShapeFactory;
     }
 
     @Override
     public void addPoint(Point point) {
-        polyLine.addPoint(point);
+        shape.addPoint(point);
     }
 
     @Override
     public PaintableShape getShape() {
         if (paintable == null)
-            paintable = paintableShapeFactory.makePaintableShape(polyLine);
+            paintable = paintableShapeFactory.makePaintableShape(shape);
         return paintable;
     }
 
@@ -40,11 +39,11 @@ public class MultiPointShapeBuilder extends PaintableShapeBuilder {
 
     @Override
     public void setLastPoint(Point point) {
-        polyLine.setLastPoint(point);
+        shape.setLastPoint(point);
     }
 
     @Override
     public void removeLastPoint() {
-        polyLine.removeLastPoint();
+        shape.removeLastPoint();
     }
 }

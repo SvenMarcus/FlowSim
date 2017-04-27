@@ -14,17 +14,9 @@ public class TwoPointShapeBuilder extends PaintableShapeBuilder {
 
 
     private final TwoPointShape shape;
-    private String type;
     private final PaintableShapeFactory paintableShapeFactory;
     private int pointsAdded;
     private PaintableShape paintableShape;
-
-    public TwoPointShapeBuilder(ShapeFactory factory, String type, PaintableShapeFactory paintableShapeFactory) {
-        super(factory);
-        this.type = type;
-        this.paintableShapeFactory = paintableShapeFactory;
-        this.shape = (TwoPointShape) factory.makeShape(type);
-    }
 
     public TwoPointShapeBuilder(TwoPointShape shape, PaintableShapeFactory paintableShapeFactory) {
         this.shape = shape;

@@ -1,8 +1,7 @@
 package irmb.flowsim.presentation.factory;
 
-import irmb.flowsim.model.PolyLine;
-import irmb.flowsim.model.Shape;
 import irmb.flowsim.model.TwoPointShape;
+import irmb.flowsim.model.MultiPointShape;
 import irmb.flowsim.presentation.builder.*;
 
 /**
@@ -25,9 +24,9 @@ public class PaintableShapeBuilderFactoryImpl implements PaintableShapeBuilderFa
             case "Rectangle":
                 return new TwoPointShapeBuilder((TwoPointShape) factory.makeShape(type), paintableShapeFactory);
             case "PolyLine":
-                return new MultiPointShapeBuilder((PolyLine) factory.makeShape(type), paintableShapeFactory);
+                return new MultiPointShapeBuilder((MultiPointShape) factory.makeShape(type), paintableShapeFactory);
             case "Bezier":
-                return new MultiPointShapeBuilder((PolyLine) factory.makeShape(type), paintableShapeFactory);
+                return new MultiPointShapeBuilder((MultiPointShape) factory.makeShape(type), paintableShapeFactory);
             default:
                 return null;
         }
