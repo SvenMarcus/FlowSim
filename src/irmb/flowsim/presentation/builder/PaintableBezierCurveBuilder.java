@@ -45,4 +45,9 @@ public class PaintableBezierCurveBuilder extends PaintableShapeBuilder {
         bezierCurve.removeLastPoint();
     }
 
+    @Override
+    public boolean isObjectPaintable() {
+        return false;
+    }
+
 }

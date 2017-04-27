@@ -45,7 +45,7 @@ public class JFXMainWindow extends Application {
         transformer.setWorldBounds(new Point(0, 0.5), new Point(1, 0));
         transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
 
-        RootController rootController = new RootController();
+        RootController rootController = new RootController(transformer);
 
         mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, builderFactory, transformer);
         mouseStrategyFactory.setMoveStrategyToleranceRadius(5);

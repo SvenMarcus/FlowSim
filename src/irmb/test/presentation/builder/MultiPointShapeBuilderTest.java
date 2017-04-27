@@ -12,8 +12,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static irmb.test.util.TestUtil.assertExpectedPointEqualsActual;
+import static irmb.test.util.TestUtil.makePoint;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -60,6 +62,10 @@ public class MultiPointShapeBuilderTest extends PolyLine {
         assertEquals(0, getPointList().size());
     }
 
+    @Test
+    public void onCreation_isObjectPaintableShouldBeFalse() {
+        assertFalse(sut.isObjectPaintable());
+    }
 
     public class OnePointAddedContext {
 
@@ -101,6 +107,18 @@ public class MultiPointShapeBuilderTest extends PolyLine {
                 assertEquals(2, getPointList().size());
                 assertEquals(first, getPointList().get(0));
                 assertEquals(third, getPointList().get(1));
+            }
+
+            @Test
+            public void isObjectPaintable_shouldBeTrue() {
+                assertTrue(sut.isObjectPaintable());
+            }
+
+            @Test
+            public void whenAddingMorePoints_isObjectPaintableShouldBeTrue() {
+                sut.addPoint(makePoint(10, 11));
+
+                assertTrue(sut.isObjectPaintable());
             }
         }
     }

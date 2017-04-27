@@ -72,6 +72,11 @@ public class TwoPointShapeBuilderTest {
             assertExpectedPointEqualsActual(makePoint(4, 6), pointCaptor.getAllValues().get(0));
         }
 
+        @Test
+        public void onCreation_isObjectPaintableShouldBeFalse() {
+            assertFalse(sut.isObjectPaintable());
+        }
+
         public class OnePointAddedContext {
             @Before
             public void setUp() {
@@ -185,6 +190,18 @@ public class TwoPointShapeBuilderTest {
                     sut.addPoint(makePoint(1, 8));
 
                     assertTrue(sut.isObjectFinished());
+                }
+
+                @Test
+                public void isObjectPaintable_shouldBeTrue() {
+                    assertTrue(sut.isObjectPaintable());
+                }
+
+                @Test
+                public void whenAddingMorePointsToShape_isObjectPaintableShouldBeTrue() {
+                    sut.addPoint(makePoint(1, 8));
+
+                    assertTrue(sut.isObjectPaintable());
                 }
             }
         }

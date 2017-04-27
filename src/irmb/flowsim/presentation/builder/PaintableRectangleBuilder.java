@@ -51,4 +51,9 @@ public class PaintableRectangleBuilder extends PaintableShapeBuilder {
     public void removeLastPoint() {
 
     }
+
+    @Override
+    public boolean isObjectPaintable() {
+        return false;
+    }
 }

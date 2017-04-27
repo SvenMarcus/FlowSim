@@ -27,4 +27,6 @@ public abstract class PaintableShapeBuilder {
     public abstract void setLastPoint(Point lastPoint);
 
     public abstract void removeLastPoint();
+
+    public abstract boolean isObjectPaintable();
 }

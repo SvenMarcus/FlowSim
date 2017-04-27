@@ -46,4 +46,9 @@ public class MultiPointShapeBuilder extends PaintableShapeBuilder {
     public void removeLastPoint() {
         shape.removeLastPoint();
     }
+
+    @Override
+    public boolean isObjectPaintable() {
+        return shape.getPointList().size() >= 2;
+    }
 }

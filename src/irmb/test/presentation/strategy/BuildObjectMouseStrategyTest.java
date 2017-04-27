@@ -45,6 +45,7 @@ public class BuildObjectMouseStrategyTest {
     private CoordinateTransformer transformer;
 
     private Command receivedCommand;
+    private PaintableShapeBuilder polyLineBuilderMock;
 
     @Before
     public void setUp() throws Exception {
@@ -59,6 +60,8 @@ public class BuildObjectMouseStrategyTest {
         setTransformerMockBehavior();
         lineBuilderMock = mock(PaintableShapeBuilder.class);
         setLineBuilderMockBehavior();
+        polyLineBuilderMock = mock(PaintableShapeBuilder.class);
+        setPolyLineBuilderMockBehavior();
         factory = mock(PaintableShapeBuilderFactory.class);
         setFactoryMockBehavior();
     }
@@ -72,7 +75,6 @@ public class BuildObjectMouseStrategyTest {
 
     private void setFactoryMockBehavior() {
         when(factory.makeShapeBuilder("Line")).thenReturn(lineBuilderMock);
-        PaintableShapeBuilder polyLineBuilderMock = mock(PaintableShapeBuilder.class);
         when(polyLineBuilderMock.isObjectFinished()).thenAnswer(invocationOnMock -> false);
         when(factory.makeShapeBuilder("PolyLine")).thenReturn(polyLineBuilderMock);
     }
@@ -87,6 +89,16 @@ public class BuildObjectMouseStrategyTest {
             return null;
         }).when(lineBuilderMock).addPoint(any());
         when(lineBuilderMock.isObjectFinished()).thenAnswer(invocationOnMock -> pointsAdded >= 2);
+        when(lineBuilderMock.isObjectPaintable()).thenAnswer(invocationOnMock -> pointsAdded >= 2);
+    }
+
+    private void setPolyLineBuilderMockBehavior() {
+        doAnswer(invocationOnMock -> {
+            incrementPointsAdded();
+            return null;
+        }).when(polyLineBuilderMock).addPoint(any());
+        when(polyLineBuilderMock.isObjectFinished()).thenAnswer(invocationOnMock -> false);
+        when(polyLineBuilderMock.isObjectPaintable()).thenAnswer(invocationOnMock -> pointsAdded >= 2);
     }
 
     private void incrementPointsAdded() {
