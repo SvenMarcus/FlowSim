@@ -1,7 +1,7 @@
 package irmb.test.presentation;
 
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
-import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.CommandStack;
 import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.util.Observer;
 import org.junit.Before;
@@ -16,15 +16,15 @@ import static org.mockito.Mockito.*;
  * Created by Sven on 12.12.2016.
  */
 @RunWith(HierarchicalContextRunner.class)
-public class CommandQueueTest extends CommandQueue {
+public class CommandStackTest extends CommandStack {
 
-    private CommandQueueTest sut;
+    private CommandStackTest sut;
     private Observer<String> observer;
 
     @Before
     public void setUp() throws Exception {
         observer = mock(Observer.class);
-        sut = new CommandQueueTest();
+        sut = new CommandStackTest();
         sut.addObserver(observer);
     }
 

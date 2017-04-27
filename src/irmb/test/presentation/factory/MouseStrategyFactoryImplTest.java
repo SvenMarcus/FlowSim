@@ -1,6 +1,6 @@
 package irmb.test.presentation.factory;
 
-import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.CommandStack;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.factory.MouseStrategyFactoryImpl;
 import irmb.flowsim.presentation.factory.PaintableShapeBuilderFactory;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.verify;
 public class MouseStrategyFactoryImplTest {
 
     private List<PaintableShape> shapeList;
-    private CommandQueue commandQueue;
+    private CommandStack commandStack;
     private GraphicView graphicView;
     private PaintableShapeBuilderFactory factory;
     private MouseStrategyFactoryImpl sut;
@@ -35,7 +35,7 @@ public class MouseStrategyFactoryImplTest {
     @Before
     public void setUp() throws Exception {
         shapeList = mock(List.class);
-        commandQueue = mock(CommandQueue.class);
+        commandStack = mock(CommandStack.class);
         graphicView = mock(GraphicView.class);
         factory = mock(PaintableShapeBuilderFactory.class);
         sut = new MouseStrategyFactoryImpl(shapeList, factory, null);

@@ -5,7 +5,7 @@ import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.CommandStack;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
@@ -47,14 +47,14 @@ public class SimulationGraphicViewPresenterTestWithMouseStrategyFactory {
     @Before
     public void setUp() {
         graphicViewMock = mock(GraphicView.class);
-        CommandQueue commandQueue = mock(CommandQueue.class);
+        CommandStack commandStack = mock(CommandStack.class);
         shapeList = new ArrayList<>();
         makeTransformerMock();
 
-        makeMouseStrategyFactory(commandQueue);
+        makeMouseStrategyFactory(commandStack);
         simulationSpy = spy(new SimulationSpy());
         SimulationFactory simulationFactory = makeSimulationFactory();
-        sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
+        sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandStack, shapeList, transformer, simulationFactory);
         painterSpy = mock(Painter.class);
         setGraphicViewMockBehavior();
         sut.setGraphicView(graphicViewMock);
@@ -66,7 +66,7 @@ public class SimulationGraphicViewPresenterTestWithMouseStrategyFactory {
         return simulationFactory;
     }
 
-    private void makeMouseStrategyFactory(CommandQueue commandQueue) {
+    private void makeMouseStrategyFactory(CommandStack commandStack) {
         PaintableShapeBuilderFactory shapeBuilderFactory = makeShapeBuilderFactory();
         mouseStrategyFactory = new MouseStrategyFactoryImpl(shapeList, shapeBuilderFactory, transformer);
     }

@@ -4,23 +4,14 @@ import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Line;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.PolyLine;
-import irmb.flowsim.model.util.CoordinateTransformerImpl;
-import irmb.flowsim.presentation.CommandQueue;
-import irmb.flowsim.presentation.GraphicView;
-import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
-import irmb.flowsim.presentation.factory.*;
 import irmb.flowsim.simulation.SimulationFactory;
-import irmb.flowsim.view.graphics.Paintable;
-import irmb.test.util.MockitoUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.invocation.InvocationOnMock;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static irmb.mockito.verification.AtLeastThenForget.atLeastThenForget;
@@ -41,7 +32,7 @@ public class SimulationGraphicViewPresenterAcceptanceTests extends GraphicViewPr
     @Before
     public void setUp() {
         initializeTestSetup();
-        sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, mock(SimulationFactory.class));
+        sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandStack, shapeList, transformer, mock(SimulationFactory.class));
         sut.setGraphicView(graphicView);
     }
 

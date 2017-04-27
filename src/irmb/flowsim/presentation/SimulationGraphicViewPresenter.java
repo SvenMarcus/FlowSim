@@ -25,13 +25,13 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     private Map<PlotStyle, GridNodeStyle> plotStyleMap = new HashMap<>();
     private boolean running;
 
-    public SimulationGraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer, SimulationFactory simulationFactory) {
-        super(strategyFactory, commandQueue, shapeList, transformer);
+    public SimulationGraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandStack commandStack, List<PaintableShape> shapeList, CoordinateTransformer transformer, SimulationFactory simulationFactory) {
+        super(strategyFactory, commandStack, shapeList);
         this.simulationFactory = simulationFactory;
     }
 
-    protected void attachObserverToCommandQueue() {
-        commandQueue.addObserver(args -> {
+    protected void attachObserverToCommandStack() {
+        commandStack.addObserver(args -> {
             updateGraphicViewAndSimulation();
         });
     }
@@ -51,7 +51,7 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
             if (arg.getState() == StrategyState.FINISHED)
                 makeStrategy("Move");
             if (arg.getCommand() != null)
-                commandQueue.add(arg.getCommand());
+                commandStack.add(arg.getCommand());
             updateGraphicViewAndSimulation();
         });
     }

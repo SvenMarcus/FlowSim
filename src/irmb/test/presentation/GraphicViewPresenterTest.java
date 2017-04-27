@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
  */
 public class GraphicViewPresenterTest {
 
-    protected CommandQueue commandQueue;
+    protected CommandStack commandStack;
     protected List<PaintableShape> shapeList;
     protected PaintableShapeBuilderFactory shapeBuilderFactory;
     protected Painter painterSpy;
@@ -34,7 +34,7 @@ public class GraphicViewPresenterTest {
     @Before
     public void setUp() throws Exception {
         initializeTestSetup();
-        sut = new GraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer);
+        sut = new GraphicViewPresenter(mouseStrategyFactory, commandStack, shapeList);
         sut.setGraphicView(graphicView);
     }
 
@@ -48,7 +48,7 @@ public class GraphicViewPresenterTest {
         }).when(painterSpy).setColor(any());
         ShapeFactory factory = spy(new ShapeFactoryImpl());
         shapeBuilderFactory = spy(new PaintableShapeBuilderFactoryImpl(factory, new PaintableShapeFactoryImpl()));
-        commandQueue = spy(new CommandQueue());
+        commandStack = spy(new CommandStack());
         shapeList = new LinkedList<>();
         graphicView = mock(GraphicView.class);
         doAnswer(invocationOnMock -> {

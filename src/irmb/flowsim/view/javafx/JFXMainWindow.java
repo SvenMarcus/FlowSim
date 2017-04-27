@@ -5,7 +5,7 @@ package irmb.flowsim.view.javafx;/**
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
-import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.CommandStack;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
 import irmb.flowsim.presentation.factory.*;
 import irmb.flowsim.simulation.SimulationFactory;
@@ -26,7 +26,7 @@ public class JFXMainWindow extends Application {
 
     private PaintableShapeBuilderFactory builderFactory;
     private List<PaintableShape> shapeList;
-    private CommandQueue commandQueue;
+    private CommandStack commandStack;
     private CoordinateTransformer transformer;
     private MouseStrategyFactoryImpl mouseStrategyFactory;
 
@@ -39,7 +39,7 @@ public class JFXMainWindow extends Application {
 
         builderFactory = makePaintableShapeBuilderFactory();
         shapeList = new LinkedList<>();
-        commandQueue = new CommandQueue();
+        commandStack = new CommandStack();
 
         transformer = new CoordinateTransformerImpl();
         transformer.setWorldBounds(new Point(0, 0.5), new Point(1, 0));
@@ -67,7 +67,7 @@ public class JFXMainWindow extends Application {
 
     private SimulationGraphicViewPresenter makePresenter() {
         SimulationFactory simulationFactory = new SimulationFactoryImpl();
-        return new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
+        return new SimulationGraphicViewPresenter(mouseStrategyFactory, commandStack, shapeList, transformer, simulationFactory);
     }
 
     private PaintableShapeBuilderFactory makePaintableShapeBuilderFactory() {

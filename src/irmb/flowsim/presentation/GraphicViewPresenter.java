@@ -1,6 +1,5 @@
 package irmb.flowsim.presentation;
 
-import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.presentation.command.ClearAllCommand;
 import irmb.flowsim.presentation.command.Command;
 import irmb.flowsim.presentation.factory.MouseStrategyFactory;
@@ -18,31 +17,32 @@ import java.util.List;
 public class GraphicViewPresenter {
 
     protected GraphicView graphicView;
+
     private MouseStrategyFactory factory;
+    protected MouseStrategy strategy;
 
     protected List<PaintableShape> shapeList;
-    protected CommandQueue commandQueue;
+    protected CommandStack commandStack;
 
 
-    protected MouseStrategy strategy;
-    private CoordinateTransformer transformer;
-
-    public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandQueue commandQueue, List<PaintableShape> shapeList, CoordinateTransformer transformer) {
+    public GraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandStack commandStack, List<PaintableShape> shapeList) {
         this.factory = strategyFactory;
-        this.commandQueue = commandQueue;
+        this.commandStack = commandStack;
         this.shapeList = shapeList;
-        attachObserverToCommandQueue();
+        attachObserverToCommandStack();
         makeStrategy("Move");
-        this.transformer = transformer;
     }
 
-    protected void attachObserverToCommandQueue() {
-        this.commandQueue.addObserver((args) -> graphicView.update());
+    protected void attachObserverToCommandStack() {
+        this.commandStack.addObserver((args) -> graphicView.update());
     }
 
     public void setGraphicView(GraphicView graphicView) {
         this.graphicView = graphicView;
-        graphicView.setCoordinateTransformer(transformer);
+    }
+
+    public void beginPaint(String objectType) {
+        makeStrategy(objectType);
     }
 
     public void handleLeftClick(double x, double y) {
@@ -74,15 +74,18 @@ public class GraphicViewPresenter {
     }
 
     public void undo() {
-        commandQueue.undo();
+        commandStack.undo();
     }
 
     public void redo() {
-        commandQueue.redo();
+        commandStack.redo();
     }
 
-    public void beginPaint(String objectType) {
-        makeStrategy(objectType);
+    public void clearAll() {
+        Command clearAllCommand = new ClearAllCommand(shapeList);
+        clearAllCommand.execute();
+        commandStack.add(clearAllCommand);
+        graphicView.update();
     }
 
     protected void makeStrategy(String objectType) {
@@ -95,7 +98,7 @@ public class GraphicViewPresenter {
             if (arg.getState() == StrategyState.FINISHED)
                 makeStrategy("Move");
             if (arg.getCommand() != null)
-                commandQueue.add(arg.getCommand());
+                commandStack.add(arg.getCommand());
             graphicView.update();
         });
     }
@@ -104,10 +107,5 @@ public class GraphicViewPresenter {
         return new ArrayList<>(shapeList);
     }
 
-    public void clearAll() {
-        Command clearAllCommand = new ClearAllCommand(shapeList);
-        clearAllCommand.execute();
-        commandQueue.add(clearAllCommand);
-        graphicView.update();
-    }
+
 }

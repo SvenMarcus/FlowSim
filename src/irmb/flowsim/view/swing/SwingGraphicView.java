@@ -42,11 +42,6 @@ public class SwingGraphicView extends JPanel implements GraphicView, MouseListen
         repaintScheduler.needsUpdate(true);
     }
 
-    @Override
-    public void setCoordinateTransformer(CoordinateTransformer transformer) {
-        this.transformer = transformer;
-    }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (presenter != null) {

@@ -3,7 +3,7 @@ package irmb.flowsim.view.swing;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
 import irmb.flowsim.model.util.CoordinateTransformerImpl;
-import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.CommandStack;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
 import irmb.flowsim.presentation.factory.*;
 import irmb.flowsim.simulation.SimulationFactory;
@@ -22,7 +22,7 @@ public class Main {
         setLookAndFeel();
         ShapeFactoryImpl paintableFactory = new ShapeFactoryImpl();
         PaintableShapeBuilderFactory builderFactory = new PaintableShapeBuilderFactoryImpl(paintableFactory, new PaintableShapeFactoryImpl());
-        CommandQueue commandQueue = new CommandQueue();
+        CommandStack commandStack = new CommandStack();
         List<PaintableShape> shapeList = new LinkedList<>();
         CoordinateTransformer transformer = new CoordinateTransformerImpl();
 
@@ -34,7 +34,7 @@ public class Main {
         SimulationFactory simulationFactory = new SimulationFactoryImpl();
 
 
-        SimulationGraphicViewPresenter presenter = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
+        SimulationGraphicViewPresenter presenter = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandStack, shapeList, transformer, simulationFactory);
         window.setPresenter(presenter);
         presenter.setGraphicView(window.getGraphicView());
         window.setVisible(true);

@@ -36,6 +36,17 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
         }
     }
 
+    private void addPointToShape(Point point) {
+        shapeBuilder.addPoint(point);
+        pointsAdded++;
+    }
+
+    private void addShapeToList() {
+        shapeAdded = true;
+        addPaintableShapeCommand = new AddPaintableShapeCommand(shapeBuilder.getShape(), shapeList);
+        addPaintableShapeCommand.execute();
+    }
+
     private void notifyObserverWithMatchingArgs() {
         StrategyState state = shapeBuilder.isObjectFinished() ? FINISHED : UPDATE;
         StrategyEventArgs args = makeStrategyEventArgs(state);
@@ -88,16 +99,7 @@ public class BuildObjectMouseStrategy extends MouseStrategy {
         return new StrategyEventArgs(state);
     }
 
-    private void addShapeToList() {
-        shapeAdded = true;
-        addPaintableShapeCommand = new AddPaintableShapeCommand(shapeBuilder.getShape(), shapeList);
-        addPaintableShapeCommand.execute();
-    }
 
-    private void addPointToShape(Point point) {
-        shapeBuilder.addPoint(point);
-        pointsAdded++;
-    }
 
 
 }

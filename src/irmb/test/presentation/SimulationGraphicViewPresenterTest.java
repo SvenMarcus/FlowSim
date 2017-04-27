@@ -3,7 +3,7 @@ package irmb.test.presentation;
 import de.bechte.junit.runners.context.HierarchicalContextRunner;
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.CommandStack;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.Painter;
 import irmb.flowsim.presentation.SimulationGraphicViewPresenter;
@@ -46,7 +46,7 @@ public class SimulationGraphicViewPresenterTest {
     private MouseStrategy mouseStrategyMock;
     private Observer<StrategyEventArgs> mouseStrategyObserver;
     private Observer<String> commandQueueObserver;
-    private CommandQueue commandQueue;
+    private CommandStack commandStack;
     private MouseStrategyFactory mouseStrategyFactory;
 
     @Before
@@ -59,7 +59,7 @@ public class SimulationGraphicViewPresenterTest {
         simulationSpy = spy(new SimulationSpy());
         SimulationFactory simulationFactory = mock(SimulationFactory.class);
         when(simulationFactory.makeSimulation()).thenReturn(simulationSpy);
-        sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
+        sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandStack, shapeList, transformer, simulationFactory);
         painterSpy = mock(Painter.class);
         graphicViewMock = mock(GraphicView.class);
         setGraphicViewMockBehavior();
@@ -83,13 +83,13 @@ public class SimulationGraphicViewPresenterTest {
     }
 
     private void makeCommandQueueMock() {
-        commandQueue = mock(CommandQueue.class);
-        doAnswer(invocationOnMock -> commandQueueObserver = invocationOnMock.getArgument(0)).when(commandQueue).addObserver(any());
+        commandStack = mock(CommandStack.class);
+        doAnswer(invocationOnMock -> commandQueueObserver = invocationOnMock.getArgument(0)).when(commandStack).addObserver(any());
         doAnswer(invocationOnMock -> {
             String argument = invocationOnMock.getArgument(0);
             commandQueueObserver.update(argument);
             return null;
-        }).when(commandQueue).notifyObservers(any());
+        }).when(commandStack).notifyObservers(any());
     }
 
     private void setGraphicViewMockBehavior() {
@@ -121,7 +121,7 @@ public class SimulationGraphicViewPresenterTest {
 
     @Test
     public void whenReceivingUpdateFromCommandQueue_shouldNotMapToSimulation() {
-        commandQueue.notifyObservers("undo");
+        commandStack.notifyObservers("undo");
         verifyZeroInteractions(simulationSpy);
     }
 
@@ -242,13 +242,13 @@ public class SimulationGraphicViewPresenterTest {
 
         @Test
         public void whenReceivingUpdateFromCommandQueue_shouldMapShapesToGrid() {
-            commandQueue.notifyObservers("undo");
+            commandStack.notifyObservers("undo");
             verify(simulationSpy).setShapes(shapeList);
 
             clearInvocations(simulationSpy);
-            clearInvocations(commandQueue);
+            clearInvocations(commandStack);
 
-            commandQueue.notifyObservers("redo");
+            commandStack.notifyObservers("redo");
             verify(simulationSpy).setShapes(shapeList);
         }
 
@@ -366,7 +366,7 @@ public class SimulationGraphicViewPresenterTest {
         @Before
         public void setUp() {
             SimulationFactory simulationFactory = new SimulationFactoryImpl();
-            sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandQueue, shapeList, transformer, simulationFactory);
+            sut = new SimulationGraphicViewPresenter(mouseStrategyFactory, commandStack, shapeList, transformer, simulationFactory);
             sut.setGraphicView(graphicViewMock);
 
             when(transformer.transformToPointOnScreen(any(Point.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));

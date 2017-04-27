@@ -12,7 +12,7 @@ import static org.mockito.Mockito.*;
  * Created by Sven on 22.12.2016.
  */
 @RunWith(HierarchicalContextRunner.class)
-public class GraphicViewPresenterCommandQueueTest extends GraphicViewPresenterTest {
+public class GraphicViewPresenterCommandStackTest extends GraphicViewPresenterTest {
 
     @Test
     public void whenBuildingShapeThenCallingUndo_shouldRemoveShape() {

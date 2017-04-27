@@ -7,6 +7,4 @@ import irmb.flowsim.model.util.CoordinateTransformer;
  */
 public interface GraphicView {
     void update();
-
-    void setCoordinateTransformer(CoordinateTransformer transformer);
 }

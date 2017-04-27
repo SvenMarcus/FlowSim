@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Created by Sven on 12.12.2016.
  */
-public class CommandQueue extends ObservableImpl<String> {
+public class CommandStack extends ObservableImpl<String> {
 
     protected List<Command> commandList;
     private int currentIndex = -1;
 
-    public CommandQueue() {
+    public CommandStack() {
         commandList = new LinkedList<>();
     }
 

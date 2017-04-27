@@ -2,7 +2,7 @@ package irmb.test.presentation.strategy;
 
 import irmb.flowsim.model.Point;
 import irmb.flowsim.model.util.CoordinateTransformer;
-import irmb.flowsim.presentation.CommandQueue;
+import irmb.flowsim.presentation.CommandStack;
 import irmb.flowsim.presentation.GraphicView;
 import irmb.flowsim.presentation.builder.PaintableShapeBuilder;
 import irmb.flowsim.presentation.command.AddPaintableShapeCommand;
@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
  */
 public class BuildObjectMouseStrategyTest {
 
-    private CommandQueue commandQueue;
+    private CommandStack commandStack;
     private PaintableShapeBuilderFactory factory;
     private GraphicView graphicView;
     private List<PaintableShape> shapeList;
@@ -50,7 +50,7 @@ public class BuildObjectMouseStrategyTest {
     public void setUp() throws Exception {
         pointsAdded = 0;
         receivedCommand = null;
-        commandQueue = mock(CommandQueue.class);
+        commandStack = mock(CommandStack.class);
         graphicView = mock(GraphicView.class);
         shapeList = mock(List.class);
         observer = mock(Observer.class);

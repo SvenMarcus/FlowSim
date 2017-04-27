@@ -179,9 +179,4 @@ public class RootController implements GraphicView {
         repaintScheduler.needsUpdate(true);
     }
 
-    @Override
-    public void setCoordinateTransformer(CoordinateTransformer transformer) {
-        this.transformer = transformer;
-        transformer.setViewBounds(new Point(0, 0), new Point(800, 600));
-    }
 }
