@@ -9,10 +9,8 @@ import irmb.flowsim.simulation.visualization.*;
 import irmb.flowsim.view.graphics.Paintable;
 import irmb.flowsim.view.graphics.PaintableShape;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.ref.WeakReference;
+import java.util.*;
 
 /**
  * Created by sven on 03.03.17.
@@ -20,9 +18,12 @@ import java.util.Map;
 public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
 
     private final SimulationFactory simulationFactory;
-    private Simulation simulation;
+    private WeakReference<Simulation> simulationWeakReference;
     private GridNodeStyleFactory gridNodeStyleFactory = new GridNodeStyleFactory();
     private Map<PlotStyle, GridNodeStyle> plotStyleMap = new HashMap<>();
+
+    private ArrayList<Paintable> paintables = new ArrayList<>();
+    private boolean needsUpdate;
     private boolean running;
 
     public SimulationGraphicViewPresenter(MouseStrategyFactory strategyFactory, CommandStack commandStack, List<PaintableShape> shapeList, CoordinateTransformer transformer, SimulationFactory simulationFactory) {
@@ -37,13 +38,14 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     }
 
     private void updateGraphicViewAndSimulation() {
+        needsUpdate = true;
         graphicView.update();
         if (hasSimulation())
-            simulation.setShapes(shapeList);
+            simulationWeakReference.get().setShapes(shapeList);
     }
 
     private boolean hasSimulation() {
-        return simulation != null;
+        return simulationWeakReference != null && simulationWeakReference.get() != null;
     }
 
     protected void addStrategyObserver() {
@@ -57,7 +59,9 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     }
 
     public void addSimulation() {
-        simulation = simulationFactory.makeSimulation();
+        needsUpdate = true;
+        Simulation simulation = simulationFactory.makeSimulation();
+        simulationWeakReference = new WeakReference<>(simulation);
         simulation.addObserver(args -> graphicView.update());
         simulation.setShapes(shapeList);
         running = false;
@@ -68,22 +72,24 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
 
     @Override
     public List<Paintable> getPaintableList() {
-        ArrayList<Paintable> paintables = new ArrayList<>(shapeList);
-        if (hasSimulation())
-            paintables.add(0, simulation);
+        if (needsUpdate) {
+            paintables = new ArrayList<>(shapeList);
+            if (hasSimulation())
+                paintables.add(0, simulationWeakReference.get());
+        }
         return paintables;
     }
 
     public void runSimulation() {
         if (hasSimulation() && !running) {
-            simulation.run();
+            simulationWeakReference.get().run();
             running = true;
         }
     }
 
     public void pauseSimulation() {
         if (hasSimulation() && running) {
-            simulation.pause();
+            simulationWeakReference.get().pause();
             running = false;
         }
     }
@@ -91,7 +97,7 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
     public void clearAll() {
         super.clearAll();
         if (hasSimulation())
-            simulation.setShapes(shapeList);
+            simulationWeakReference.get().setShapes(shapeList);
     }
 
     public void togglePlotStyle(PlotStyle plotStyle) {
@@ -109,14 +115,14 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
         GridNodeStyle gridNodeStyle = gridNodeStyleFactory.makeGridNodeStyle(plotStyle);
         plotStyleMap.put(plotStyle, gridNodeStyle);
         if (hasSimulation()) {
-            simulation.addPlotStyle(gridNodeStyle);
+            simulationWeakReference.get().addPlotStyle(gridNodeStyle);
             graphicView.update();
         }
     }
 
     private void removePlotStyle(PlotStyle plotStyle) {
         if (hasSimulation()) {
-            simulation.removePlotStyle(plotStyleMap.get(plotStyle));
+            simulationWeakReference.get().removePlotStyle(plotStyleMap.get(plotStyle));
             graphicView.update();
         }
         plotStyleMap.remove(plotStyle);
@@ -124,7 +130,7 @@ public class SimulationGraphicViewPresenter extends GraphicViewPresenter {
 
     public void removeSimulation() {
         pauseSimulation();
-        simulation = null;
+        simulationWeakReference.clear();
         graphicView.update();
     }
 }
