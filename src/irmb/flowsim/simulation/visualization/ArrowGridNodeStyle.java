@@ -38,8 +38,6 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
         min = Double.MAX_VALUE;
         max = Double.MIN_VALUE;
 
-//        for (int x = 0; x < grid.getHorizontalNodes(); x++)
-//            for (int y = 0; y < grid.getVerticalNodes(); y++) {
         int size = grid.getHorizontalNodes() * grid.getVerticalNodes();
         int x, y;
         for (int i = 0; i < size; i++) {
@@ -71,9 +69,6 @@ public class ArrowGridNodeStyle extends GridNodeStyle {
                 painter.paintLine(x1, y1, xC, yC);
                 painter.paintLine(x1, y1, xD, yD);
             }
-//        }
-
-
     }
 
 }

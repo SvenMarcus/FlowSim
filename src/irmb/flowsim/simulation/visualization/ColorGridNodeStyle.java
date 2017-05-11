@@ -36,8 +36,6 @@ public class ColorGridNodeStyle extends GridNodeStyle {
         min = Double.MAX_VALUE;
         max = -Double.MAX_VALUE;
 
-//        for (int y = 0; y < grid.getVerticalNodes(); y++)
-//            for (int x = 0; x < grid.getHorizontalNodes(); x++) {
         int size = grid.getHorizontalNodes() * grid.getVerticalNodes();
         int x, y;
         for (int i = 0; i < size; i++) {
