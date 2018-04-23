@@ -12,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -46,6 +47,8 @@ public class RootController implements GraphicView {
     private Button clearButton;
     @FXML
     private Canvas drawPanel;
+    @FXML
+    private MenuBar menuBar;
 
     private SimulationGraphicViewPresenter presenter;
     private JavaFXPainter painter;
@@ -65,6 +68,8 @@ public class RootController implements GraphicView {
 
     @FXML
     public void initialize() {
+        menuBar.useSystemMenuBarProperty().set(true);
+
         drawPanel.heightProperty().bind(rootPane.heightProperty());
         drawPanel.widthProperty().bind(rootPane.widthProperty());
         drawPanel.heightProperty().addListener(o -> update());
@@ -89,6 +94,7 @@ public class RootController implements GraphicView {
         repaintScheduler = new JavaFXRepaintScheduler(runnable);
         repaintScheduler.setDelay(16);
         repaintScheduler.start();
+
     }
 
     public void onLineButtonClick(ActionEvent event) {

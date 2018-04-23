@@ -1,8 +1,5 @@
 package irmb.flowsim.model;
 
-import irmb.flowsim.model.Point;
-import irmb.flowsim.model.Shape;
-
 import java.util.List;
 
 /**
@@ -10,7 +7,10 @@ import java.util.List;
  */
 public interface MultiPointShape extends Shape {
     void addPoint(Point point);
+
     void setLastPoint(Point point);
+
     void removeLastPoint();
+
     List<Point> getPointList();
 }

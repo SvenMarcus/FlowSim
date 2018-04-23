@@ -19,6 +19,7 @@ public class JavaFXRepaintScheduler extends RepaintScheduler {
                 if (now - lastUpdate < delay * 1000_000)
                     return;
                 performRepaintAction();
+                needsUpdate = true;
                 lastUpdate = now;
             }
         };

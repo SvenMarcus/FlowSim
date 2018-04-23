@@ -31,13 +31,13 @@ public class MainWindow extends JFrame {
     private JPanel topPanel;
     private JToolBar mainToolBar;
 
-    private final JMenuItem lineMenuItem;
-    private final JMenuItem rectangleMenuItem;
-    private final JMenuItem polyLineMenuItem;
-    private final JMenuItem bezierMenuItem;
-    private final JMenuItem undo;
-    private final JMenuItem redo;
-    private final JMenuItem clear;
+    private JMenuItem lineMenuItem;
+    private JMenuItem rectangleMenuItem;
+    private JMenuItem polyLineMenuItem;
+    private JMenuItem bezierMenuItem;
+    private JMenuItem undo;
+    private JMenuItem redo;
+    private JMenuItem clear;
 
     private SimulationGraphicViewPresenter presenter;
     private CoordinateTransformer transformer;
@@ -46,10 +46,19 @@ public class MainWindow extends JFrame {
     public MainWindow(CoordinateTransformer transformer) {
         this.transformer = transformer;
         $$$setupUI$$$();
+        setTitle("FlowSim 2.0");
         setSize(1150, 800);
         add(contentPanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        JMenuBar menuBar = createMenuBar();
+
+        topPanel.add(menuBar, BorderLayout.NORTH);
+        initListeners();
+        scaleButtonIcons();
+    }
+
+    private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenuItem close = new JMenuItem("Close");
@@ -88,11 +97,7 @@ public class MainWindow extends JFrame {
         visualizationMenu.add(arrowPlotItem);
         visualizationMenu.add(infoPlotItem);
         menuBar.add(visualizationMenu);
-
-
-        topPanel.add(menuBar, BorderLayout.NORTH);
-        initListeners();
-        scaleButtonIcons();
+        return menuBar;
     }
 
     private void scaleButtonIcons() {

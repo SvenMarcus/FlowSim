@@ -41,7 +41,10 @@ public class Main {
     }
 
     private static void setLookAndFeel() {
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
         try {
+//            System.setProperty("apple.laf.useScreenMenuBar", "true");
+//            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
         } catch (UnsupportedLookAndFeelException e) {
