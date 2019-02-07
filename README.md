@@ -9,7 +9,7 @@ FlowSim was developed as a Bachelor thesis to study test driven development.
 ## Structure
 
 The following image represents a simplified overview over FlowSim's internal structure
-![Overview][overview.png]
+![][overview.png]
 
 
 
